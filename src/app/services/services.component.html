@@ -1,0 +1,229 @@
+
+<div style="margin-left: 10px; margin-right: 10px; margin-top: 5px;">
+  <tabset #staticTabs>
+    <tab customClass="tab-shng" heading="{{ 'SERVICES.SERVICES'|translate }}">
+      <div style="margin-left: 10px; margin-right: 10px;">
+        <p></p>
+        <p>
+          Services works!
+        </p>
+      </div>
+    </tab>
+
+    <tab customClass="tab-shng" heading="{{ 'SERVICES.EVAL CHECKER'|translate }}">
+      <div class="container-fluid navBorder"></div>
+      <form name="input" action="eval_syntax_checker.html" method="POST" enctype="multipart/form-data">
+        <div class="container-fluid" style="width: 100%;">
+          <div style="width: 100%; float: left; margin-bottom: 10px; margin-right: 5px;">
+            <div title="{{ 'Hier den Ausdruck eingeben, der ausgewertet werden soll. Items können mit absolutem Pfad oder relativem Pfad angegeben werden.'|translate }}">
+              <div style="font-weight: bold; padding-left: 5px;">{{ 'Ausdruck (Eingabe im Python Eval-Format)'|translate }}</div>
+              <textarea id="eval_code" name="eval_code">{{ 'eval_code' }}</textarea>
+            </div>
+            <div title="{{ 'Um relative Itempfade aufzulösen, hier das Item eingeben, zu dem die Pfade relativ sind.'|translate }}">
+              <div style="font-weight: bold; padding-left: 5px;">{{ 'Relativ zu (Eingabe des Item-Path)'|translate }}</div>
+              <input type="text" style="width: 599px;" name="relative_to" value="{{ 'relative_to' }}"/>
+            </div>
+
+            <div title="{{ 'Hier wird der Ausdruck angezeigt, nachdem die relativen Itempfade aufgelöst wurden.'|translate }}">
+              <div style="font-weight: bold; padding-left: 5px; border-bottom: 0px solid #ccc;">&nbsp;</div>
+              <div style="font-weight: bold; padding-left: 5px; border-bottom: 1px solid #ccc;">{{ 'Expandierter Ausdruck'|translate }}</div>
+              <div style="padding-left: 5px; border-bottom: 0px solid #ccc;">{{ 'expanded_code' }}&nbsp;</div>
+            </div>
+            <div title="{{ 'Hier wird das Ergebnis Ausdruck angezeigt.'|translate }}">
+              <div style="font-weight: bold; padding-left: 5px; border-bottom: 0px solid #ccc;">&nbsp;</div>
+              <div style="font-weight: bold; padding-left: 5px; border-bottom: 1px solid #ccc;">{{ 'Ergebnis'|translate }}</div>
+              <div style="padding-left: 5px; border-bottom: 1px solid #ccc;">{{ 'check_result' }}&nbsp;</div>
+            </div>
+          </div>
+        </div>
+        <br>
+        <div class="container-fluid" style="width: 100%;">
+<!--
+          <input name="check" value="{{ 'Prüfen','button'|translate }}" type="submit" class="btn btn-dark">
+-->
+        </div>
+      </form>
+    </tab>
+
+    <tab customClass="tab-shng" heading="{{ 'SERVICES.YAML CHECKER'|translate }}">
+      <div class="container-fluid navBorder"></div>
+      <form name="input" action="yaml_syntax_checker.html" method="POST" enctype="multipart/form-data">
+        <div class="container-fluid" style="width: 100%;">
+          <div style="width: 48%; float: left; margin-bottom: 10px; margin-right: 5px;">
+            <div title="{{ 'Hier den YAML Code eingeben, der geprüft werden soll.'|translate }}">
+              <div style="font-weight: bold; padding-left: 5px;">{{ 'Eingabe im .YAML Format'|translate }}</div>
+              <textarea id="yaml_code" name="yaml_code">{{ 'yaml_code' }}</textarea>
+            </div>
+          </div>
+          <div style="width: 48%; float: left; margin-bottom: 10px;">
+            <div title="{{ 'Hier wird das Ergebnis Ausdruck angezeigt.'|translate }}">
+<!--
+              {% if output_format == 'python' %}
+              <div style="font-weight: bold; padding-left: 5px;">{{ 'Ergebnis: Aufbereitet als Python Source Code'|translate }}</div>
+              <!--
+              {% else %}
+-->
+              <div style="font-weight: bold; padding-left: 5px;">{{ 'Ergebnis: Aufbereitetes .YAML Format'|translate }}</div>
+              <!--
+                            {% endif %}
+              -->
+              <textarea id="check_result" autocomplete="off" name="check_result">{{ 'check_result' }}</textarea>
+            </div>
+          </div>
+        </div>
+        <div class="container-fluid" style="width: 100%;">
+<!--
+          <input name="check" value="{{ 'button.Prüfen'|translate }}" type="submit" class="btn btn-dark">
+          {% if develop %}
+          <input name="check2" value="{{ 'button.Prüfen'|translate }} ({{ 'Python Code Ausgabe'|translate }})" type="submit" class="btn btn-dark">
+          {% endif %}
+-->
+        </div>
+      </form>
+    </tab>
+
+    <tab customClass="tab-shng" heading="{{ 'SERVICES.CONF TO YAML'|translate }}">
+      <div style="margin-left: 10px; margin-right: 10px;">
+        <p>
+          ConfToYaml works!
+        </p>
+      </div>
+    </tab>
+
+  </tabset>
+</div>
+
+
+
+<!--
+
+{% block content %}
+<div class="container-fluid navBorder"></div>
+<form name="input" action="eval_syntax_checker.html" method="POST" enctype="multipart/form-data">
+	<div class="container-fluid" style="width: 100%;">
+		<div style="width: 100%; float: left; margin-bottom: 10px; margin-right: 5px;">
+			<div title="{{ _('Hier den Ausdruck eingeben, der ausgewertet werden soll. Items können mit absolutem Pfad oder relativem Pfad angegeben werden.') }}">
+				<div style="font-weight: bold; padding-left: 5px;">{{ _('Ausdruck (Eingabe im Python Eval-Format)') }}</div>
+				<textarea id="eval_code" name="eval_code">{{ eval_code }}</textarea>
+			</div>
+			<div title="{{ _('Um relative Itempfade aufzulösen, hier das Item eingeben, zu dem die Pfade relativ sind.') }}">
+				<div style="font-weight: bold; padding-left: 5px;">{{ _('Relativ zu (Eingabe des Item-Path)') }}</div>
+				<input type="text" style="width: 599px;" name="relative_to" value="{{ relative_to }}"/>
+			</div>
+
+			<div title="{{ _('Hier wird der Ausdruck angezeigt, nachdem die relativen Itempfade aufgelöst wurden.') }}">
+				<div style="font-weight: bold; padding-left: 5px; border-bottom: 0px solid #ccc;">&nbsp;</div>
+				<div style="font-weight: bold; padding-left: 5px; border-bottom: 1px solid #ccc;">{{ _('Expandierter Ausdruck') }}</div>
+				<div style="padding-left: 5px; border-bottom: 0px solid #ccc;">{{ expanded_code }}&nbsp;</div>
+			</div>
+			<div title="{{ _('Hier wird das Ergebnis Ausdruck angezeigt.') }}">
+				<div style="font-weight: bold; padding-left: 5px; border-bottom: 0px solid #ccc;">&nbsp;</div>
+				<div style="font-weight: bold; padding-left: 5px; border-bottom: 1px solid #ccc;">{{ _('Ergebnis') }}</div>
+				<div style="padding-left: 5px; border-bottom: 1px solid #ccc;">{{ check_result }}&nbsp;</div>
+			</div>
+		</div>
+	</div>
+    <br>
+	<div class="container-fluid" style="width: 100%;">
+		<input name="check" value="{{ _('Prüfen','button') }}" type="submit" class="btn btn-dark">
+    </div>
+</form>
+<script>
+     var rulers = [];
+     for (var i = 1; i <= 100; i++) {
+        rulers.push({color: '#eee', column: i * 4, lineStyle: "dashed"});
+     }
+
+     var myCodeMirrorEval = CodeMirror.fromTextArea(document.getElementById("eval_code"), {
+        lineNumbers: true,
+        lineSeparator: '\n',
+        indentUnit: 4,
+        rulers: rulers,
+        lineWrapping: true,
+        indentWithTabs: false,
+        mode: "python"
+     });
+
+	 window.addEventListener("resize", function(){resizeCodeMirror(myCodeMirrorEval, 300)}, false);
+     resizeCodeMirror(myCodeMirrorEval, 300);
+</script>
+{% endblock %}
+
+-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+
+{% block content %}
+<div class="container-fluid navBorder"></div>
+<form name="input" action="yaml_syntax_checker.html" method="POST" enctype="multipart/form-data">
+    <div class="container-fluid" style="width: 100%;">
+		<div style="width: 48%; float: left; margin-bottom: 10px; margin-right: 5px;">
+			<div title="{{ _('Hier den YAML Code eingeben, der geprüft werden soll.') }}">
+    		    <div style="font-weight: bold; padding-left: 5px;">{{ _('Eingabe im .YAML Format') }}</div>
+				<textarea id="yaml_code" name="yaml_code">{{ yaml_code }}</textarea>
+			</div>
+		</div>
+    	<div style="width: 48%; float: left; margin-bottom: 10px;">
+			<div title="{{ _('Hier wird das Ergebnis Ausdruck angezeigt.') }}">
+				{% if output_format == 'python' %}
+	        		<div style="font-weight: bold; padding-left: 5px;">{{ _('Ergebnis: Aufbereitet als Python Source Code') }}</div>
+				{% else %}
+	        		<div style="font-weight: bold; padding-left: 5px;">{{ _('Ergebnis: Aufbereitetes .YAML Format') }}</div>
+				{% endif %}
+    		    <textarea id="check_result" autocomplete="off" name="check_result">{{ check_result }}</textarea>
+		    </div>
+	    </div>
+    </div>
+    <div class="container-fluid" style="width: 100%;">
+	    <input name="check" value="{{ _('Prüfen','button') }}" type="submit" class="btn btn-dark">
+		{% if develop %}
+		    <input name="check2" value="{{ _('Prüfen','button') }} ({{ _('Python Code Ausgabe') }})" type="submit" class="btn btn-dark">
+		{% endif %}
+    </div>
+</form>
+<script>
+     var rulers = [];
+     for (var i = 1; i <= 100; i++) {
+        rulers.push({color: '#eee', column: i * 4, lineStyle: "dashed"});
+     }
+
+     var myCodeMirrorConf = CodeMirror.fromTextArea(document.getElementById("yaml_code"), {
+        lineNumbers: true,
+        lineSeparator: '\n',
+        indentUnit: 4,
+        rulers: rulers,
+        lineWrapping: false,
+        indentWithTabs: false,
+        mode: "yaml"
+     });
+     var myCodeMirrorYaml = CodeMirror.fromTextArea(document.getElementById("check_result"), {
+        lineNumbers: true,
+        lineSeparator: '\n',
+        indentUnit: 4,
+        rulers: rulers,
+        lineWrapping: false,
+        indentWithTabs: false,
+        readOnly: true,
+        mode: "{{ output_format }}"
+     });
+
+     window.addEventListener("resize", function(){resizeCodeMirror(myCodeMirrorConf, 60)}, false);
+     resizeCodeMirror(myCodeMirrorConf, 60);
+     window.addEventListener("resize", function(){resizeCodeMirror(myCodeMirrorYaml, 60)}, false);
+     resizeCodeMirror(myCodeMirrorYaml, 60);
+</script>
+{% endblock %}
+
+-->

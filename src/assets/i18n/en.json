@@ -1,0 +1,152 @@
+{
+  "MENU": {
+    "SYSTEM": "System",
+    "SERVICES": "Services",
+    "ITEMS": "Items",
+    "LOGICS": "Logics",
+    "SCHEDULERS": "Schedulers",
+    "PLUGINS": "Plugins",
+    "SCENES": "Scenes",
+    "THREADS": "Threads",
+    "LOGS": "Logs",
+    "DISCLOSURES": "Disclosures"
+  },
+  "SYSTEM": {
+    "SYSTEMINFO": "Systeminfo",
+    "PYPI CHECK": "PyPI Check",
+    "DISCLOSURES": "Disclosures",
+    "SHNG_VERSION": "SmartHomeNG Version",
+    "IN": "in",
+    "SHNG_PLG_VERSION": "SmartHomeNG Plugins Version",
+    "HOST": "Host",
+    "OS": "Operating System",
+    "ARCHITECTURE": "Architecture",
+    "USER": "User",
+    "PYTHON VERSION": "Python Version",
+    "FREE DISC SPACE": "Free disk space",
+    "DATE": "Date",
+    "TIME": "Time",
+    "UPTIME": "Uptime",
+    "PROPERTY": "Property",
+    "STATE": "State",
+
+    "PACKAGE": "Package",
+    "INSTALLED VERSION": "Installed Version",
+    "REQUIREMENTS": "Requirements",
+    "NEWEST VERSION": "Newest Version",
+    "PACKAGES_REQ_DOCUMENTATION": "Packages for building the documentation",
+    "PACKAGES_REQ_TESTSUITE": "Packages for the Testsuite",
+    "PACKAGES_WO_REQ": "Packages without requirements"
+  },
+  "SERVICES": {
+    "SERVICES": "Services",
+    "EVAL CHECKER": "eval Syntax Checker",
+    "YAML CHECKER": "YAML Syntax Checker",
+    "CONF TO YAML": "CONF-YAML Converter"
+  },
+  "ITEMS": {
+    "ITEMS": "Items",
+    "TOTAL": "Total",
+    "MONITORED ITEMS": "Monitored Items",
+
+    "SEARCH ITEMPATH": "Search itempath",
+    "RESET": "Reset",
+    "EXPAND ALL": "Expand All",
+    "REDUCE ALL": "Reduce All",
+    "RELOAD": "Reload",
+    "ITEM DETAILS": "Item Details",
+    "CHOOSE ITEM IN TREE": "Choose item in tree to see details!",
+
+    "ATTRIBUTE": "Attribute",
+    "VALUE": "Value",
+
+    "PATH": "Item Path",
+    "NAME": "Item Name",
+    "TYPE": "Datatype",
+    "UPDATE INFORMATION": "Update Information",
+    "LAST CHANGE": "Last change",
+    "LAST UPDATE": "Last update",
+    "UPDATE AGE": "Time since last update",
+    "CHANGE AGE": "Time since last change",
+    "UPDATE BY": "Updated by",
+    "CHANGE BY": "Changed by",
+    "PREVIOUS VALUE": "Previous value",
+    "PREVIOUS UPDATE": "Previous update",
+    "PREVIOUS CHANGE": "Previous change",
+    "PREVIOUS UPDATE AGE": "Time since previous update",
+    "PREVIOUS CHANGE AGE": "Time since previous change",
+    "EVALUATION AND TRIGGER": "Evaluation and triggers",
+    "PLUGIN SPECIFIC CONFIGURATION": "Plugin specific configuration",
+    "CONNECTED LOGICS": "Connected logics",
+    "CONNECTED TRIGGERS": "Connected triggers",
+
+    "DEFINED IN": "Defined in file",
+    "ALERT": {
+      "NOT NUMERIC": "ERROR: The entered value is not numeric!",
+      "INVALID SCENE NUMBER": "ERROR: Scene numbers have to be between 0 and 63!"
+    }
+  },
+  "LOGICS": {
+    "USERLOGICS": "User Logics",
+    "SYSTEMLOGICS": "System Logics"
+  },
+  "SCHEDULERS": {
+    "ITEM SCHEDULERS": "Item Schedulers",
+    "LOGIC SCHEDULERS": "Logic Schedulers",
+    "PLUGIN SCHEDULERS": "Plugin Schedulers",
+    "OTHER SCHEDULERS": "Other Schedulers",
+    "SCHEDULER": "Scheduler",
+    "NEXT EXECUTION": "Next Execution",
+    "CYCLE": "Cycle",
+    "CRONTAB": "Crontab"
+  },
+  "PLUGIN": {
+    "TYPE": "Type",
+    "CONFIGNAME": "Configname",
+    "PLUGINNAME": "Plugin",
+    "INSTANCE": "Instance",
+    "VERSION": "Version",
+    "MULTI INSTANCE": "Multi-Instance",
+    "WEBIF": "Web Interface",
+
+    "DETAILS OF CONFIGURATION": "Details of plugin configuration section '{{configname}}' --- (for plugin '{{pluginname}}')",
+    "PARAMETERS": "Parameters",
+    "ITEM ATTRIBUTES": "Item Attributes",
+    "UPDATES TRIGGERED BY": "Plugin updates are triggered by {{count}} items",
+    "PLUGIN METADATA": "Plugin Metadata",
+    "DESCRIPTION": "Description",
+    "KEYWORDS": "Keywords",
+    "MAINTAINER": "Maintainer",
+    "TESTER": "Tester",
+    "SUPPORT": "Support",
+    "DOCUMENTATION": "Documentation"
+  },
+  "SCENES": {
+    "SCENE": "Scene",
+    "LEARN": "Learn",
+    "ITEM": "Item",
+    "VALUE": "Value"
+  },
+  "THREADS": {
+    "THREAD": "Thread",
+    "TOTAL": "total",
+    "THREAD-ID": "Thread-Id",
+    "ACTIVE": "Active"
+  },
+
+  "CLOSE": "Close",
+
+  "YES": "Yes",
+  "NO": "No",
+  "DAY": "day",
+  "DAYS": "days",
+  "HOUR": "hour",
+  "HOURS": "hours",
+  "MINUTE": "minute",
+  "MINUTES": "minutes",
+  "SECOND": "second",
+  "SECONDS": "seconds",
+
+  "True": "True",
+  "False": "False"
+}

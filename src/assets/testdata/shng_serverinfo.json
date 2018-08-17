@@ -1,0 +1,8 @@
+{
+  "default_language": "de",
+  "client_ip": "1.2.3.4",
+  "itemtree_fullpath": false,
+  "itemtree_searchstart": 2,
+  "tz": "Europe/Berlin",
+  "tzname": "CEST"
+}

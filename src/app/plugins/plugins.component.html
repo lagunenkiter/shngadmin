@@ -1,0 +1,255 @@
+
+<div style="margin-left: 10px; margin-right: 10px;">
+  <table id="1" class="table table-striped table-hover">
+    <thead>
+    <tr class="shng_heading">
+      <th style="width: 30px; border-top: 0"></th>
+      <th style="width: 30px; border-top: 0"></th>
+      <th style="width: 150px; border-top: 0">{{ 'PLUGIN.TYPE'|translate }}</th>
+      <th style="width: 200px; border-top: 0">{{ 'PLUGIN.CONFIGNAME'|translate }}</th>
+      <th style="width: 260px; border-top: 0">{{ 'PLUGIN.PLUGINNAME'|translate }}</th>
+      <th style="width: 170px; border-top: 0">{{ 'PLUGIN.INSTANCE'|translate }}</th>
+      <th style="width: 150px; border-top: 0">{{ 'PLUGIN.VERSION'|translate }}</th>
+      <th style="width: 130px; border-top: 0">{{ 'PLUGIN.MULTI  INSTANCE'|translate }}</th>
+      <th style="width: 130px; border-top: 0">{{ 'PLUGIN.WEBIF'|translate }}</th>
+    </tr>
+    </thead>
+    <tbody>
+
+      <ng-container *ngFor="let plugin of plugininfo">
+        <tr>
+          <td class="py-1">
+            <ng-container *ngIf="plugin.stopped === true">
+              <fa-icon style="color: red" [icon]="faPauseCircle"></fa-icon>
+            </ng-container>
+            <ng-container *ngIf="plugin.stopped !== true">
+              <fa-icon style="color: green" [icon]="faPlayCircle"></fa-icon>
+            </ng-container>
+          </td>
+
+          <td class="py-1" (click)="details.show()">
+            <ng-container *ngIf="['web','protocol','interface','gateway','system'].includes(plugin.metadata.type)">
+              <img src="assets/img/plugin_{{ plugin.metadata.type }}.svg" style="width: 25px; cursor: pointer;"/>
+            </ng-container>
+            <ng-container *ngIf="!['web','protocol','interface','gateway','system'].includes(plugin.metadata.type)">
+              -
+            </ng-container>
+          </td>
+
+          <td class="py-1" (click)="details.show()">
+            <ng-container *ngIf="plugin.smartplugin === true">
+              SmartPlugin
+            </ng-container>
+            <ng-container *ngIf="plugin.smartplugin !== true">
+             Classic
+            </ng-container>
+          </td>
+
+      <td class="py-1" (click)="details.show()">{{ plugin.configname }}</td>
+          <td class="py-1" (click)="details.show()">{{ plugin.pluginname }}
+          </td>
+          <td class="py-1" (click)="details.show()">{{ plugin.instancename }}</td>
+          <td class="py-1" (click)="details.show()">{{ plugin.version }}</td>
+          <td class="py-1" (click)="details.show()">
+            <ng-container *ngIf="plugin.multiinstance">
+              {{ 'YES'|translate }}
+            </ng-container>
+            <ng-container *ngIf="!plugin.multiinstance">
+              {{ 'NO'|translate }}
+            </ng-container>
+          </td>
+          <td class="py-1">
+            <ng-container *ngIf="plugin.webif_url !== ''">
+              <a href="{{ plugin.webif_url }}" target="_blank">
+                <img src="assets/img/html.svg" style="width: 25px; cursor: pointer;"/>
+              </a>
+            </ng-container>
+          </td>
+        </tr>
+
+
+        <!------------------------------------------>
+        <!--   Modal dialog with plugin details   -->
+        <!------------------------------------------>
+
+        <div bsModal #details="bs-modal" class="modal fade" tabindex="1" role="dialog" aria-labelledby="dialog-sizes-name2">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+<!--
+                <h5 id="dialog-sizes-name2" class="modal-title pull-left">{{'PLUGIN.DETAILS OF CONFIGURATION'|translate}} '<strong>{{ plugin.configname }}</strong>' ({{'PLUGIN.PLUGIN'|translate}} '<strong>{{ plugin.pluginname }}</strong>')</h5>
+-->
+                <h5 id="dialog-sizes-name2" class="modal-title pull-left">
+                  <p [translate]="'PLUGIN.DETAILS OF CONFIGURATION'" [translateParams]="{configname: plugin.configname, pluginname: plugin.pluginname }"></p>
+                </h5>
+<!--
+                <p style="padding-top: 0px; padding-left: 2px;" [translate]="'PLUGIN.UPDATES TRIGGERED BY'" [translateParams]="{count: 42}"></p>
+-->
+                <button type="button" class="close pull-right" aria-label="Close" (click)="details.hide()">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <ng-container *ngIf="plugin.parameters && plugin.parameters.length !== 0">
+                  <table class="table" style="padding: 0px;">
+                  <tr>
+                    <td style="width: 50%; padding:0px; background-color: #ffffff; border:0;"><strong>{{'PLUGIN.PARAMETERS'|translate}}:</strong></td>
+                    <td style="width: 50%; padding:0px; background-color: #ffffff; border:0;"></td>
+                  </tr>
+                  <tr>
+                    <!-- Parameters: left column -->
+                    <td style="padding-left:5px; padding-right:5px; padding-bottom:0px;">
+                      <table class="table">
+                        <tbody>
+                        <ng-container *ngFor="let param of plugin.parameters; index as i">
+                          <tr *ngIf="i+1 <= parameterLines(plugin.parameters.length)">
+                            <td style="padding:0px;">{{param.name}} ( {{param.type}} ):&nbsp;</td>
+                            <td style="padding:0px;">
+                              <strong>{{param.value}}</strong>
+                              <ng-container *ngIf="param.value === param.default">&nbsp;[default]</ng-container>
+                            </td>
+                          </tr>
+                        </ng-container>
+                        </tbody>
+                      </table>
+                    </td>
+                    <!-- Parameters: right column -->
+                    <td style="padding-left:5px; padding-right:5px; padding-bottom:0px;">
+                      <table class="table">
+                        <tbody>
+                        <ng-container *ngFor="let param of plugin.parameters; index as i">
+                          <tr *ngIf="i+1 > parameterLines(plugin.parameters.length)">
+                            <td style="padding:0px;">{{param.name}} ( {{param.type}} ):&nbsp;</td>
+                            <td style="padding:0px;">
+                              <strong>{{param.value}}</strong>
+                              <ng-container *ngIf="param.value === param.default">&nbsp;[default]</ng-container>
+                            </td>
+                          </tr>
+                        </ng-container>
+                        </tbody>
+                      </table>
+                    </td>
+                  </tr>
+                  </table>
+                </ng-container>
+
+                <ng-container *ngIf="plugin.attributes && plugin.attributes.length !== 0">
+                  <table class="table">
+                    <tr>
+                      <td style="width: 33%; padding:0px; background-color: #ffffff; border:0;"><strong>{{'PLUGIN.ITEM ATTRIBUTES'|translate}}:</strong></td>
+                      <td style="width: 33%; padding:0px; background-color: #ffffff; border:0;"></td>
+                      <td style="width: 33%; padding:0px; background-color: #ffffff; border:0;"></td>
+                    </tr>
+                    <tr>
+                      <!-- Item Attributes: left column -->
+                      <td style="padding-left:5px; padding-right:5px; padding-bottom:0px;">
+                      <table class="table">
+                        <tbody>
+                        <ng-container *ngFor="let attr of plugin.attributes; index as i">
+                          <tr *ngIf="i+1 <= attributeLines(plugin.attributes.length)">
+                            <td style="padding:0px;">{{attr.name}}:&nbsp;</td>
+                            <td style="padding:0px;"><strong>{{attr.type}}</strong></td>
+                          </tr>
+                        </ng-container>
+                        </tbody>
+                      </table>
+                      </td>
+                      <!-- Item Attributes: middle column -->
+                      <td style="padding-left:5px; padding-right:5px; padding-bottom:0px;">
+                        <table class="table">
+                          <tbody>
+                          <ng-container *ngFor="let attr of plugin.attributes; index as i">
+                            <tr *ngIf="i+1 > attributeLines(plugin.attributes.length) && i+1 <= 2*attributeLines(plugin.attributes.length)">
+                              <td style="padding:0px;">{{attr.name}}:&nbsp;</td>
+                              <td style="padding:0px;"><strong>{{attr.type}}</strong></td>
+                            </tr>
+                          </ng-container>
+                          </tbody>
+                        </table>
+                      </td>
+                      <!-- Item Attributes: right column -->
+                      <td style="padding-left:5px; padding-right:5px; padding-bottom:0px;">
+                        <table class="table">
+                          <tbody>
+                          <ng-container *ngFor="let attr of plugin.attributes; index as i">
+                            <tr *ngIf="i+1 > 2*attributeLines(plugin.attributes.length)">
+                              <td style="padding:0px;">{{attr.name}}:&nbsp;</td>
+                              <td style="padding:0px;"><strong>{{attr.type}}</strong></td>
+                            </tr>
+                          </ng-container>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+                </ng-container>
+
+                <ng-container *ngIf="plugin.triggers && plugin.triggers.length !== 0">
+                  <p style="padding-top: 0px; padding-left: 2px;" [translate]="'PLUGIN.UPDATES TRIGGERED BY'" [translateParams]="{count: plugin.triggers.length}"></p>
+                </ng-container>
+
+                <strong>{{'PLUGIN.PLUGIN METADATA'|translate}}:</strong>
+                <table class="table">
+                  <tr>
+                    <td style="padding:0px; width:25%;">{{'PLUGIN.DESCRIPTION'|translate}}:&nbsp;</td>
+                    <ng-container *ngIf="plugin.metadata.description_long !==''">
+                      <td style="padding:0px; width:75%;">
+                        <div *ngFor="let s of plugin.metadata.description_long.split('\n')">
+                          {{s}} <br/>
+                        </div>
+                      </td>
+                    </ng-container>
+                    <ng-container *ngIf="plugin.metadata.description_long ===''">
+                      <td style="padding:0px; width:75%;">{{plugin.metadata.description}}</td>
+                    </ng-container>
+                  </tr>
+                  <tr>
+                    <td style="padding:0px;">{{'PLUGIN.KEYWORDS'|translate}}:&nbsp;</td>
+                    <td style="padding:0px;">{{plugin.metadata.keywords}}</td>
+                  </tr>
+                  <tr>
+                    <td style="padding:0px;">{{'PLUGIN.MAINTAINER'|translate}}:&nbsp;</td>
+                    <td style="padding:0px;">{{plugin.metadata.maintainer}}</td>
+                  </tr>
+                  <tr>
+                    <td style="padding:0px;">{{'PLUGIN.TESTER'|translate}}:&nbsp;</td>
+                    <td style="padding:0px;">{{plugin.metadata.tester}}</td>
+                  </tr>
+                  <tr>
+                    <td style="padding:0px;">{{'PLUGIN.SUPPORT'|translate}}:&nbsp;</td>
+                    <td style="padding:0px;">
+                      <ng-container *ngIf="plugin.metadata.support && plugin.metadata.support.startsWith('http')">
+                        <a href="{{plugin.metadata.support}}" target="_blank">{{plugin.metadata.support}}</a>
+                      </ng-container>
+                      <ng-container *ngIf="plugin.metadata.support && !plugin.metadata.support.startsWith('http')">
+                        {{plugin.metadata.support}}
+                      </ng-container>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding:0px;">{{'PLUGIN.DOCUMENTATION'|translate}}:&nbsp;</td>
+                    <td style="padding:0px;">
+                      <ng-container *ngIf="plugin.metadata.documentation && plugin.metadata.documentation.startsWith('http')">
+                        <a href="{{plugin.metadata.documentation}}" target="_blank">{{plugin.metadata.documentation}}</a>
+                      </ng-container>
+                      <ng-container *ngIf="plugin.metadata.documentation && !plugin.metadata.documentation.startsWith('http')">
+                        {{plugin.metadata.documentation}}
+                      </ng-container>
+                    </td>
+                  </tr>
+                </table>
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" tabindex="1" autofocus="autofocus" class="btn btn-primary btn-sm btn-shng" (click)="details.hide()">{{'CLOSE'|translate}}</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </ng-container>
+
+    </tbody>
+  </table>
+</div>
+

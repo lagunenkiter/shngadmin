@@ -1,0 +1,137 @@
+
+[
+  {
+    "name": "cherrypy",
+    "vers_installed": "14.2.0",
+    "is_required": true,
+    "is_required_for_testsuite": false,
+    "is_required_for_docbuild": false,
+    "vers_req_min": "8.1.2",
+    "vers_req_max": "",
+    "vers_req_msg": "",
+    "vers_req_source": ">=8.1.2 >=8.1.2 (blockly)",
+    "vers_ok": true,
+    "vers_recent": false, "pypi_version": "17.0.0",
+    "pypi_version_ok": true,
+    "pypi_version_not_available_msg": "",
+    "pypi_doc_url": "https://pypi.org/pypi/CherryPy", "sort": "1cherrypy"
+  },
+
+  {
+    "name": "ephem",
+    "vers_installed": "3.7.6.0",
+    "is_required": true,
+    "is_required_for_testsuite": false,
+    "is_required_for_docbuild": false,
+    "vers_req_min": "3.7",
+    "vers_req_max": "",
+    "vers_req_msg": "",
+    "vers_req_source": ">=3.7",
+    "vers_ok": true,
+    "vers_recent": true,
+    "pypi_version": "3.7.6.0",
+    "pypi_version_ok": true,
+    "pypi_version_not_available_msg": "",
+    "pypi_doc_url": "https://pypi.org/pypi/ephem",
+    "sort": "1ephem"
+  },
+
+  {
+    "name": "jinja2",
+    "vers_installed": "2.10",
+    "is_required": true,
+    "is_required_for_testsuite": false,
+    "is_required_for_docbuild": false,
+    "vers_req_min": "",
+    "vers_req_max": "",
+    "vers_req_msg": [["core", ">=2.8", ""], ["backend", ">=2.9", ""], ["blockly", ">=2.9", ""]],
+    "vers_req_source": ">=2.8 >=2.9 (backend) >=2.9 (blockly)",
+    "vers_ok": true,
+    "vers_recent": true,
+    "pypi_version": "2.10",
+    "pypi_version_ok": true,
+    "pypi_version_not_available_msg": "",
+    "pypi_doc_url": "https://pypi.org/pypi/Jinja2",
+    "sort": "1jinja2"
+  },
+
+  {
+    "name": "paho-mqtt",
+    "vers_installed": "1.3.1",
+    "is_required": true,
+    "is_required_for_testsuite": false,
+    "is_required_for_docbuild": false,
+    "vers_req_min": "1.2.2",
+    "vers_req_max": "",
+    "vers_req_msg": "",
+    "vers_req_source": ">=1.2.2 (mqtt)",
+    "vers_ok": true,
+    "vers_recent": true,
+    "pypi_version": "1.3.1",
+    "pypi_version_ok": true,
+    "pypi_version_not_available_msg": "",
+    "pypi_doc_url": "https://pypi.org/pypi/paho-mqtt",
+    "sort": "1paho-mqtt"
+  },
+
+
+
+  {
+    "name": "sphinx",
+    "vers_installed": "1.7.4",
+    "is_required": false,
+    "is_required_for_testsuite": false,
+    "is_required_for_docbuild": true,
+    "vers_req_min": "",
+    "vers_req_max": "",
+    "vers_req_msg": "",
+    "vers_req_source": "==*",
+    "vers_ok": true,
+    "vers_recent": false,
+    "pypi_version": "1.7.6",
+    "pypi_version_ok": true,
+    "pypi_version_not_available_msg": "",
+    "pypi_doc_url": "https://pypi.org/pypi/Sphinx",
+    "sort": "3sphinx"
+  },
+
+
+
+  {
+    "name": "pip",
+    "vers_installed": "10.0.1",
+    "is_required": false,
+    "is_required_for_testsuite": false,
+    "is_required_for_docbuild": false,
+    "vers_req_min": "",
+    "vers_req_max": "",
+    "vers_req_msg": "",
+    "vers_req_source": "",
+    "vers_ok": false,
+    "vers_recent": false,
+    "pypi_version": "18.0",
+    "pypi_version_ok": true,
+    "pypi_version_not_available_msg": "",
+    "pypi_doc_url": "https://pypi.org/pypi/pip",
+    "sort": "4pip"
+  },
+
+  {
+    "name": "babel",
+    "vers_installed": "2.5.3",
+    "is_required": false,
+    "is_required_for_testsuite": false,
+    "is_required_for_docbuild": false,
+    "vers_req_min": "",
+    "vers_req_max": "",
+    "vers_req_msg": "",
+    "vers_req_source": "",
+    "vers_ok": false,
+    "vers_recent": false,
+    "pypi_version": "2.6.0",
+    "pypi_version_ok": true,
+    "pypi_version_not_available_msg": "",
+    "pypi_doc_url": "https://pypi.org/pypi/babel",
+    "sort": "4pip"
+  }
+]

@@ -1,0 +1,52 @@
+::ng-deep .tab-shng > a{
+  border-bottom: none !important;
+  outline: 0 !important;
+  color:rgb(160, 160, 160);
+}
+
+
+
+.tree-node-leafX {
+  background: green !important;
+  color: black !important;
+}
+
+
+.tree-node-active {
+  background: #709cc2 !important;
+  color: blue !important;
+}
+
+.tree-node-focusedX {
+  background: blue !important;
+  color: red !important;
+}
+
+.node-content-wrapper-focused {
+  background: white !important;
+}
+
+.node-content-wrapper-active {
+  background: green !important;
+}
+
+.tree-node-wrapper::selection {
+  background: white !important;
+}
+
+
+.tree-children::after {
+  background: goldenrod!important;
+  color: black !important;
+}
+
+
+tree-node:last-child > .tree-node > .tree-children::after {
+  background: white;
+}
+
+
+.mytree2 .node-content-wrapper-active.node-content-wrapper-focused {
+  background: red !important;
+}
+

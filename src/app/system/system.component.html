@@ -1,0 +1,460 @@
+
+
+<div style="margin-left: 10px; margin-right: 10px; margin-top: 5px;">
+<div style="margin-left: 10px; margin-right: 10px; margin-top: 5px;">
+  <tabset #staticTabs>
+    <tab customClass="tab-shng" heading="{{ 'SYSTEM.SYSTEMINFO'|translate }}">
+      <table class="table table-striped table-hover">
+        <thead>
+        <tr class="shng_heading">
+          <th scope="col" style="width: 100px; border-top: 0"></th>
+          <th scope="col" style="width: 280px; border-top: 0" translate>SYSTEM.PROPERTY</th>
+          <th scope="col" style="border-top: 0" translate>SYSTEM.STATE</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td class="py-1"><img src="assets/img/logo_small_76x76.png" style="width: 36px; height: 36px; margin-left: 40px;"></td>
+          <td class="py-1" style="vertical-align: middle;">{{'SYSTEM.SHNG_VERSION'|translate}}:</td>
+          <td class="py-1" style="vertical-align: middle;">{{ systeminfo.sh_vers }}&nbsp;{{ 'SYSTEM.IN'|translate }}&nbsp;{{ systeminfo.sh_dir }}&nbsp;&nbsp;-&nbsp;&nbsp; {{ systeminfo.sh_desc }}</td>
+        </tr>
+
+        <tr>
+          <td class="py-1"><img src="assets/img/logo_small_76x76.png" style="width: 36px; height: 36px; margin-left: 40px;"></td>
+          <td class="py-1" style="vertical-align: middle;">{{'SYSTEM.SHNG_PLG_VERSION'|translate}}:</td>
+          <td class="py-1" style="vertical-align: middle;">{{ systeminfo.plg_vers }}&nbsp;{{ 'SYSTEM.IN'|translate }}&nbsp;{{ systeminfo.sh_dir }}/plugins&nbsp;&nbsp;-&nbsp;&nbsp; {{ systeminfo.plg_desc }}
+          </td>
+        </tr>
+
+        <tr>
+          <td class="py-1"><img src="assets/img/terminal-server.svg" style="width: 36px; height: 36px; margin-left: 40px;"></td>
+          <td class="py-1" style="vertical-align: middle;">{{ 'SYSTEM.HOST'|translate }}:</td>
+          <td class="py-1" style="vertical-align: middle;">{{ systeminfo.node }}&nbsp;&nbsp;-&nbsp;&nbsp;IPv4: {{ systeminfo.ip }}
+            <!--
+                      {% if ipv6 != '::1' %}&nbsp;&nbsp;-&nbsp;&nbsp;IPv6: {{ ipv6 }}{% endif %}
+            -->
+          </td>
+        </tr>
+
+        <tr>
+          <td class="py-1"><img src="assets/img/tux_hdd.svg" style="width: 36px; height: 36px; margin-left: 40px;"></td>
+          <td class="py-1" style="vertical-align: middle;">{{ 'SYSTEM.OS'|translate }}:</td>
+          <td class="py-1" style="vertical-align: middle;">{{ systeminfo.system }} {{ systeminfo.vers }}&nbsp;&nbsp;-&nbsp;&nbsp;{{ 'SYSTEM.ARCHITECTURE'|translate }}:&nbsp;{{ systeminfo.arch }}</td>
+        </tr>
+
+        <tr>
+          <td class="py-1"><img src="assets/img/user.svg" style="width: 36px; height: 36px; margin-left: 40px;"></td>
+          <td class="py-1" style="vertical-align: middle;">{{'SYSTEM.USER'|translate}}:</td>
+          <td class="py-1" style="vertical-align: middle;">{{ systeminfo.user }}</td>
+        </tr>
+
+        <tr>
+          <td class="py-1"><img src="assets/img/python.png" style="width: 36px; height: 36px; margin-left: 40px;"></td>
+          <td class="py-1" style="vertical-align: middle;">{{ 'SYSTEM.PYTHON VERSION'|translate }}:</td>
+          <td class="py-1" style="vertical-align: middle;">{{ systeminfo.pyversion }}</td>
+        </tr>
+
+        <tr>
+          <td class="py-1"><img src="assets/img/hd.svg" style="width: 36px; height: 36px; margin-left: 40px;"></td>
+          <td class="py-1" style="vertical-align: middle;">{{ 'SYSTEM.FREE DISC SPACE'|translate }}:</td>
+          <td class="py-1" style="vertical-align: middle;">{{ (systeminfo.freespace)|number:'1.0-0' }} MByte</td>
+        </tr>
+        <tr>
+          <td class="py-1"><img src="assets/img/clock.svg" style="width: 36px; height: 36px; margin-left: 40px;"></td>
+          <td class="py-1" style="vertical-align: middle;">{{ 'SYSTEM.DATE'|translate }} / {{ 'SYSTEM.TIME'|translate }}:</td>
+          <td class="py-1" style="vertical-align: middle;">{{ shared.displayDateTime(systeminfo.now) }}</td>
+        </tr>
+        <tr>
+          <td class="py-1"><img src="assets/img/terminal-server.svg" style="width: 36px; height: 36px; margin-left: 40px;"></td>
+          <td class="py-1" style="vertical-align: middle;">{{ 'SYSTEM.UPTIME'|translate }} {{ 'SYSTEM.HOST'|translate }}:</td>
+          <td class="py-1" style="vertical-align: middle;">{{ os_uptime }}</td>
+        </tr>
+        <tr>
+          <td class="py-1"><img src="assets/img/logo_small_76x76.png" style="width: 36px; height: 36px; margin-left: 40px;"></td>
+          <td class="py-1" style="vertical-align: middle;">{{ 'SYSTEM.UPTIME'|translate }} smartHomeNG:</td>
+          <td class="py-1" style="vertical-align: middle;">{{ sh_uptime }}</td>
+        </tr>
+
+        </tbody>
+      </table>
+    </tab>
+
+    <tab customClass="tab-shng" heading="{{ 'SYSTEM.PYPI CHECK'|translate }}">
+      <table id="package_check" class="table table-hover">
+        <thead>
+        <tr class="shng_heading">
+          <th scope="col" style="width: 25%; border-top: 0">Python {{ 'SYSTEM.PACKAGE'|translate }}</th>
+          <th scope="col" style="width: 25%; border-top: 0">{{ 'SYSTEM.INSTALLED VERSION'|translate }}</th>
+          <th scope="col" style="width: 25%; border-top: 0">{{ 'SYSTEM.REQUIREMENTS'|translate }}</th>
+          <th scope="col" style="width: 25%; border-top: 0">{{ 'SYSTEM.NEWEST VERSION'|translate }} (PyPI)</th>
+        </tr>
+        </thead>
+        <tbody>
+        <ng-container  *ngFor="let pypipackage of pypiinfo">
+          <tr *ngIf="pypipackage.is_required === true">
+            <ng-container *ngIf="pypipackage.pypi_doc_url === ''">
+              <td class="py-1">{{ pypipackage.name }}</td>
+            </ng-container>
+            <ng-container *ngIf="pypipackage.pypi_doc_url !== ''">
+              <td class="py-1"><a target="_blank" class="text-shng-bold pypi_link" href="{{ pypipackage.pypi_doc_url }}">{{ pypipackage.name }}</a></td>
+            </ng-container>
+            <td class="py-1">{{ pypipackage.vers_installed }}</td>
+            <td class="py-1">{{ reqinfodisplay[pypipackage.name] }}</td>
+            <td class="py-1">{{ pypipackage.pypi_version }}</td>
+          </tr>
+        </ng-container>
+        </tbody>
+
+<!--
+        /* Link package PyPi URL */
+        var packageName = element['name'];
+        if (element['pypi_doc_url'] != '') {
+        packageName = "<a target=\"_blank\" class=\"text-shng pypi_link\" href=\""+element['pypi_doc_url']+"\">"+packageName+"</a>";
+        }
+-->
+
+        <ng-container *ngIf="documentationcount > 0">
+          <thead>
+            <tr class="shng_heading">
+              <th class="py-1" style="background:#eee;" colspan="5">{{ 'SYSTEM.PACKAGES_REQ_DOCUMENTATION'|translate }}</th>
+            </tr>
+          </thead>
+          <tbody>
+          <ng-container  *ngFor="let pypipackage of pypiinfo">
+            <tr *ngIf="pypipackage.is_required_for_docbuild === true">
+              <ng-container *ngIf="pypipackage.pypi_doc_url === ''">
+                <td class="py-1">{{ pypipackage.name }}</td>
+              </ng-container>
+              <ng-container *ngIf="pypipackage.pypi_doc_url !== ''">
+                <td class="py-1"><a target="_blank" class="text-shng pypi_link" href="{{ pypipackage.pypi_doc_url }}">{{ pypipackage.name }}</a></td>
+              </ng-container>
+              <td class="py-1">{{ pypipackage.vers_installed }}</td>
+              <td class="py-1">{{ reqinfodisplay[pypipackage.name] }}</td>
+              <td class="py-1">{{ pypipackage.pypi_version }}</td>
+            </tr>
+        </ng-container>
+        </tbody>
+        </ng-container>
+
+        <ng-container *ngIf="testsuitecount > 0">
+          <thead>
+          <tr class="shng_heading">
+            <th class="py-1" style="background:#eee;" colspan="5">{{ 'SYSTEM.PACKAGES_REQ_TESTSUITE'|translate }}</th>
+          </tr>
+          </thead>
+          <tbody>
+            <ng-container  *ngFor="let pypipackage of pypiinfo">
+              <tr *ngIf="pypipackage.is_required_for_testsuite === true">
+                <ng-container *ngIf="pypipackage.pypi_doc_url === ''">
+                  <td class="py-1">{{ pypipackage.name }}</td>
+                </ng-container>
+                <ng-container *ngIf="pypipackage.pypi_doc_url !== ''">
+                  <td class="py-1"><a target="_blank" class="text-shng pypi_link" href="{{ pypipackage.pypi_doc_url }}">{{ pypipackage.name }}</a></td>
+                </ng-container>
+                <td class="py-1">{{ pypipackage.vers_installed }}</td>
+                <td class="py-1">{{ reqinfodisplay[pypipackage.name] }}</td>
+                <td class="py-1">{{ pypipackage.pypi_version }}</td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </ng-container>
+
+        <ng-container *ngIf="norequirementcount > 0">
+          <thead>
+          <tr class="shng_heading">
+            <th class="py-1" style="background:#eee;" colspan="5">{{ 'SYSTEM.PACKAGES_WO_REQ'|translate }}</th>
+          </tr>
+          </thead>
+          <tbody>
+          <ng-container  *ngFor="let pypipackage of pypiinfo">
+            <tr *ngIf="pypipackage.is_required === false && pypipackage.is_required_for_docbuild === false && pypipackage.is_required_for_testsuite === false">
+              <ng-container *ngIf="pypipackage.pypi_doc_url === ''">
+                <td class="py-1">{{ pypipackage.name }}</td>
+              </ng-container>
+              <ng-container *ngIf="pypipackage.pypi_doc_url !== ''">
+                <td class="py-1"><a target="_blank" class="text-shng pypi_link" href="{{ pypipackage.pypi_doc_url }}">{{ pypipackage.name }}</a></td>
+              </ng-container>
+              <td class="py-1">{{ pypipackage.vers_installed }}</td>
+              <td class="py-1">-</td>
+              <td class="py-1">{{ pypipackage.pypi_version }}</td>
+            </tr>
+          </ng-container>
+          </tbody>
+        </ng-container>
+      </table>
+
+      <!--
+            if (element['is_required_for_testsuite']) {
+            <tr class=\"shng_heading\"><td class=\"py-1\" style=\"background:#eee;\" colspan=\"5\">{{ _('Pakete für die Testsuite') }}</td></tr>");
+            } else if (element['is_required_for_docbuild']) {
+            <tr class=\"shng_heading\"><td class=\"py-1\" style=\"background:#eee;\" colspan=\"5\">{{ _('Pakete für den Bau der Dokumentation') }}</td></tr>");
+            } else {
+            <tr class=\"shng_heading\"><td class=\"py-1\" style=\"background:#eee;\" colspan=\"5\">{{ _('Pakete ohne Requirements') }}</td></tr>");
+            }
+      -->
+    </tab>
+
+    <tab customClass="tab-shng" heading="{{ 'SYSTEM.DISCLOSURES'|translate }}">
+      <div class="container-fluid navBorder" style="overflow: hidden; border-top: 0;">
+
+        <div class="row">
+          <div class="col" style="max-width: 100%;">
+            <div class="card">
+              <div class="card-body p-1">
+                <div id="disclosuretext" style="overflow-y: scroll; white-space: pre-wrap;">
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </tab>
+  </tabset>
+</div>
+
+
+<!--
+<div class="container-fluid navBorder" style="margin-top: 5px;">
+  <ul id="system_tabs" class="nav nav-tabs">
+    <li class="nav-item"><a class="text-dark nav-link active" data-toggle="tab" href="system/systemproperties" translate>SYSTEM.SYSTEMINFO</a></li>
+    <li id="tab_pypi" class="nav-item">
+      <a id="tab_pypi_link" class="nav-link disabled" data-toggle="tab" href="#pypi">
+        {{'SYSTEM.PYPI CHECK'|translate}}
+        <i id="spinner" class="fas fa-circle-notch fa-spin fa-fw"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+-->
+<!--
+<!DOCTYPE html>
+{% with active_page="system" %}
+
+{% block title %}
+{{ _('Systeminfo', 'menu') }} - SmartHomeNG
+{% endblock title %}
+
+{% block content %}
+<div class="container-fluid navBorder">
+  <ul id="system_tabs" class="nav nav-tabs">
+    <li class="nav-item"><a class="text-dark nav-link active" data-toggle="tab" href="#systemproperties">{{ _('Systemeigenschaften') }}</a></li>
+    <li id="tab_pypi" class="nav-item">
+      <a id="tab_pypi_link" class="nav-link disabled" data-toggle="tab" href="#pypi">
+        {{ _('PyPI Check') }}
+        <i id="spinner" class="fas fa-circle-notch fa-spin fa-fw"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+<div style="margin-left: 10px; margin-right: 10px;" class="tab-content">
+  <div id="pypi" class="tab-pane" role="tabpanel">
+    <div class="table-responsive" >
+      <table id="package_check" class="table table-hover">
+        <thead>
+        <tr class="shng_heading">
+          <th scope="col" style="width: 25%;">Python Package</th>
+          <th scope="col" style="width: 25%;">{{ _('installierte Version') }}</th>
+          <th scope="col" style="width: 25%;">{{ _('Anforderungen') }}</th>
+          <th scope="col" style="width: 25%;">{{ _('Neuste Version') }} (PyPI)</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<script>
+  $(".disabled").click(function (e) {
+    e.preventDefault();
+    return false;
+  });
+
+  function activateTab(selector) {
+    $(selector).on('click.twbstab',function() { $(this).tab('show'); })
+      .closest('.disabled').removeClass('disabled');
+  }
+
+  $.getJSON('pypi.json', function(result) {
+    $.each(result, function(index, element) {
+      if (index == 0) {
+        oldSort = element['sort'].substr(0,1);
+        newSort = element['sort'].substr(0,1);
+      } else {
+        oldSort = newSort;
+        newSort = newSort = element['sort'].substr(0,1);
+      }
+      if (oldSort != newSort) {
+        if (element['is_required_for_testsuite']) {
+          $('#package_check').find("tbody").append("<tr class=\"shng_heading\"><td class=\"py-1\" style=\"background:#eee;\" colspan=\"5\">{{ _('Pakete für die Testsuite') }}</td></tr>");
+        } else if (element['is_required_for_docbuild']) {
+          $('#package_check').find("tbody").append("<tr class=\"shng_heading\"><td class=\"py-1\" style=\"background:#eee;\" colspan=\"5\">{{ _('Pakete für den Bau der Dokumentation') }}</td></tr>");
+        } else {
+          $('#package_check').find("tbody").append("<tr class=\"shng_heading\"><td class=\"py-1\" style=\"background:#eee;\" colspan=\"5\">{{ _('Pakete ohne Requirements') }}</td></tr>");
+        }
+      }
+
+
+      fontWeight = '';
+      if (element['is_required']) {
+        fontWeight = "font-weight: bold;";
+      }
+
+      var fontColorPyPi = "black";
+      var fontColorInstalled = "";
+      var versionInstalledIcon = "";
+      var versionInstalledText = "{{ _('Version nicht zulässig!') }}";
+
+      /* color codes and icons */
+      if (element['is_required'] || element['is_required_for_docbuild'] || element['is_required_for_testsuite'] ) {
+        if (element['vers_ok']) {
+          versionInstalledIcon = "fa-check-square";
+          versionInstalledText = "{{ _('Version unterstützt!') }}";
+          if (element['vers_recent']) {
+            fontColorInstalled = "green";
+            if (element['pypi_version_ok']) {
+              fontColorPyPi = "black";
+            } else {
+              fontColorPyPi = "red";
+            }
+          } else {
+            fontColorInstalled = "black";
+            fontColorPyPi = "green";
+          }
+        } else {
+          fontColorInstalled = "red";
+          if (!element['pypi_version_ok']) {
+            fontColorPyPi = "red";
+          }
+          var versionInstalledIcon = "fa-times-circle";
+        }
+      } else {
+        fontColorPyPi = "black";
+        if (element['vers_recent']) {
+          fontColorInstalled = "green";
+        } else {
+          fontColorInstalled = "black";
+        }
+      }
+
+      /* Build String for requirements column */
+      var reqString = '';
+      var reqTextString = '';
+      /* MIN and MAX filled, MIN != MAX */
+      if (element['is_required'] || element['is_required_for_docbuild'] || element['is_required_for_testsuite'] ) {
+        if (element['vers_req_min'] != '' && element['vers_req_max'] != '' && (element['vers_req_min'] != element['vers_req_max'])) {
+          reqString += element['vers_req_min']+" <= <i class=\"far "+versionInstalledIcon+"\" title=\"{{ _('installierte Version') }}\"></i>"
+          if (reqString == "") {
+            reqString += "<i class=\"far "+versionInstalledIcon+"\" title=\""+versionInstalledText+"\" style=\"color: "+fontColorInstalled+"\"></i>";
+          }
+          reqString += " <= "+element['vers_req_max'];
+        }
+        /* ELSE: MIN and MAX filled, MIN == MAX */
+        else if (element['vers_req_min'] != '' && element['vers_req_max'] != '' && (element['vers_req_min'] == element['vers_req_max'])) {
+          reqString += "<i class=\"far "+versionInstalledIcon+"\" title=\""+versionInstalledText+"\"></i> == "+element['vers_req_min'];
+        }
+        /* ELSE: MIN or MAX filled */
+        else {
+          if (element['vers_req_min'] != '') {
+            reqString += "<i class=\"far "+versionInstalledIcon+"\" title=\""+versionInstalledText+"\"></i> "+" >= "+element['vers_req_min'];
+          } else if (element['vers_req_max'] != '') {
+            reqString += "<i class=\"far "+versionInstalledIcon+"\" title=\""+versionInstalledText+"\"></i> "+"<= "+element['vers_req_max'];
+          }
+        }
+        /* Element required due to Doku, Testsuite or SmartHomeNG in general, but no MIN and MAX version -> all versions valid */
+        if (reqString == '') {
+          reqString = "<i class=\"far "+versionInstalledIcon+"\" title=\""+versionInstalledText+"\"></i> == *";
+        }
+        if (element['vers_req_source'] != '') {
+          reqTextString = element['vers_req_source'];
+        } else {
+          reqTextString = "";
+        }
+      }
+      /* Element not required, requirements unclear, set "-" */
+      else {
+        reqString = "-"
+      }
+
+      /* If there is detailed content, set folding layout */
+      var foldingElement = '';
+      var foldingStyle = '';
+      if (reqTextString != '') {
+        foldingStyle = "cursor: pointer;";
+      }
+
+      /* Link package PyPi URL */
+      var packageName = element['name'];
+      if (element['pypi_doc_url'] != '') {
+        packageName = "<a target=\"_blank\" class=\"text-shng pypi_link\" href=\""+element['pypi_doc_url']+"\">"+packageName+"</a>";
+      }
+
+      /* Build row for normal content */
+      var table_row = '';
+      table_row =  "<tr style=\""+foldingStyle+"\" id=\""+index+"_unfold"+"\">"+
+        "<td class=\"py-1\" style=\""+fontWeight+"\">"+packageName+"</td>"+
+        "<td class=\"py-1\" style=\"color: "+fontColorInstalled+"\">"+element['vers_installed']+"</td>"+
+        "<td class=\"py-1\">"+reqString+"</td>"+
+        "<td class=\"py-1\" style=\"color: "+fontColorPyPi+"\">"+element['pypi_version'];
+
+      /* Checks for icon next to PyPi Version */
+      if (element['vers_recent'] != true && element['pypi_version_ok']) {
+        if ((element['pypi_version'] != '') && (element['pypi_version'] != element['vers_installed'])) {
+          /* Element not required? Don't set that the PyPi version is supported */
+          if (!element['is_required'] && !element['is_required_for_docbuild'] && !element['is_required_for_testsuite'] ) {
+            table_row += "&nbsp;<i class=\"fas fa-info-circle\" title=\"{{ _('Neuste Version!') }}\"></i>";
+          } else {
+            table_row += "&nbsp;<i class=\"fas fa-check-circle\" title=\"{{ _('Version unterstützt!') }}\"></i>";
+          }
+        }
+      } else if (element['pypi_version'] != '-' && !element['pypi_version_ok']) {
+        table_row += "&nbsp;<i class=\"fas fa-exclamation-circle\" title=\"{{ _('Version nicht zulässig!') }}\"></i>";
+      }
+
+      /* Close table row */
+      table_row += "</td></tr>"
+
+      /* Build row for foldable content */
+      var table_row_requirements_detail = '';
+      if (reqTextString != '') {
+        table_row_requirements_detail =
+          "<tr id=\""+index+"_requirements_detail\" "+
+          "style=\"display: none; "+foldingStyle+"\">";
+        table_row_requirements_detail +=
+          "<td class=\"py-1\" colspan=\"4\">";
+        table_row_requirements_detail +=
+          "<div class=\"panel panel-default\" style=\"margin-bottom: 5px;\">"+
+          "<div class=\"panel-heading\">{{ _('Anforderungen') }} (requirements.txt)</div>"+
+          "<div class=\"panel-body\">"+reqTextString+"</div></div>";
+        table_row_requirements_detail +=
+          "</td></tr>";
+      }
+
+      /* Append assembled content */
+      $('#package_check').find("tbody").append(table_row + table_row_requirements_detail);
+
+      /* If foldable content: add onclick for table row, stop unfolding when clicking pypi link inside. */
+      if (reqTextString != '') {
+        $('#'+index+'_unfold').click(function(){
+          $('#'+index+'_requirements_detail').toggle();
+        });
+        $('#'+index+'_requirements_detail').click(function(){
+          $('#'+index+'_requirements_detail').toggle();
+        });
+        $('#'+index+'_unfold .pypi_link').click(function(e){
+          e.stopPropagation();
+        });
+      }
+    });
+
+    /* Hide spinner, activate tab, show DIV with content */
+    $('#spinner').hide();
+    $('#tab_pypi_link').addClass("text-dark");
+    $('#tab_pypi').removeClass("disabled");
+    activateTab('#system_tabs a[href="#pypi"]');
+  });
+</script>
+{% endblock %}
+-->
