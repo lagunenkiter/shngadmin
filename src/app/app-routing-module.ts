@@ -12,8 +12,8 @@ import { ThreadsComponent } from './threads/threads.component';
 import { LogsComponent } from './logs/logs.component';
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: '/system', pathMatch: 'full'},
-//  { path: '', component: SystemComponent, pathMatch: 'full' },
+//  { path: '', redirectTo: '/system', pathMatch: 'full'},
+  { path: '', component: SystemComponent, pathMatch: 'full' },
   { path: 'system', component: SystemComponent },
   { path: 'system/systemproperties', component: SystemComponent },
   { path: 'services', component: ServicesComponent },

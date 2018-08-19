@@ -5,9 +5,11 @@ import { HttpClient } from '@angular/common/http';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { TranslateService } from '@ngx-translate/core';
-import { faSearch, faCircleNotch, faFolder, faFolderOpen, faCoffee, faSync } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faCircleNotch, faFolder, faFolderOpen, faCoffee, faSync, faList } from '@fortawesome/free-solid-svg-icons';
 import * as $ from 'jquery';
-import { TreeModel, ITreeOptions, TREE_ACTIONS, IActionMapping } from 'angular-tree-component';
+import { TreeNode } from 'primeng/api';
+
+import { cloneDeep } from 'lodash';
 
 import { AppComponent } from '../app.component';
 import { DataService } from '../data.service';
@@ -28,11 +30,18 @@ export class ItemsComponent implements OnInit {
   faFolder = faFolder;
   faFolderOpen = faFolderOpen;
   faSync = faSync;
+  faList = faList;
 
   itemcount = 0;
   itemtree: ItemtreeType;
   itemdetails: ItemDetailsType = <ItemDetailsType>{};
   itemdetailsloaded = false;
+
+  filesTree0: {}[];
+  filteredTree: {}[];
+  searchStart_param = {};
+  treeIsFiltered = false;
+  selectedFile: TreeNode;
 
   item_val: any;
   alertText = '';
@@ -41,23 +50,6 @@ export class ItemsComponent implements OnInit {
   JSON = JSON;
 
   selectedNode;
-
-
-
-  options: ITreeOptions = {
-    useCheckbox: false,
-    useTriState: false,
-    childrenField: 'nodes',
-    displayField: 'path'
-  };
-
-
-  actionMapping: IActionMapping = {
-    mouse: {
-      dblClick: (tree, node, $event) => // Open a modal with node content,
-        $('#tree_detail').text('XXX'),
-    },
-  };
 
 
   update_age = '';
@@ -96,28 +88,25 @@ export class ItemsComponent implements OnInit {
   ngOnInit() {
     console.log('ngOnInit ItemsComponent:');
 
-
     this.dataService.getItemtree()
       .subscribe(
         (response: [number, ItemtreeType]) => {
           console.log('ItemsComponent:');
           console.log(response);
-          if (!this.dataService.getconfigItemtreeFullpath()) {
-            this.options.displayField = 'nodename';
-          }
           this.itemcount = response[0];
-          this.itemtree = response[1];
+          this.filesTree0 = <any> response[1];
+          this.filterNodes('');
           // this.plugininfo.sort(function (a, b) {return (a.pluginname > b.pluginname) ? 1 : ((b.pluginname > a.pluginname) ? -1 : 0)});
+          this.searchStart_param = {'number': this.dataService.getconfigItemtreeSearchstart()};
         },
         (error) => {
           console.log('ERROR: ItemsComponent: dataService.getItemtree():');
-          console.log(error)
+          console.log(error);
         }
       );
 
     window.addEventListener('resize', ItemsComponent.resizeItemTree, false);
     ItemsComponent.resizeItemTree();
-
   }
 
 
@@ -207,30 +196,123 @@ export class ItemsComponent implements OnInit {
     } else {
       this.itemdetails = <ItemDetailsType>{};
       this.itemdetails.config = {};
-//      this.itemdetails.path = path;
-//      this.itemdetails.name = event.node.data.name;
+      this.update_age = this.shared.ageToString(0);
+      this.change_age = this.shared.ageToString(0);
+      this.previous_update_age = this.shared.ageToString(0);
+      this.previous_change_age = this.shared.ageToString(0);
       this.itemdetailsloaded = true;
     }
 
   }
 
 
+
+/* ----------------------------------------------
+  * For PrimeNG Tree:
+*/
+
   filterTree(treeModel, value) {
-    if (value.length >= this.dataService.getconfigItemtreeSearchstart() || value.length === 0) {
-      treeModel.filterNodes(value);
+    if (value.length >= this.dataService.getconfigItemtreeSearchstart()) {
+      this.filterNodes(value);
+    } else {
+      this.filterNodes('');
+    }
+  }
+
+  filterNodes(value) {
+    console.log('filterTree: >' + value + '<')
+    this.filteredTree = cloneDeep(this.filesTree0);
+    this.treeIsFiltered = false;
+    if (value && value !== '') {
+      this.treeIsFiltered = true;
+      this.prune(this.filteredTree, value);
+      this.expandAll();
     }
   }
 
 
-  clearFilter(treeModel, filter) {
-    treeModel.clearFilter();
+  clearFilter(event, filter) {
     filter.value = '';
+    this.filterTree(event, filter.value);
   }
-/*
-  filterFn(value: string, treeModel: TreeModel) {
-    treeModel.filterNodes((node: TreeNode) => fuzzysearch(value, node.data.name));
+
+  prune(array, filter) {
+    for (let i = array.length - 1; i >= 0; i--) {
+      const obj = array[i];
+      if (obj.children) {
+        if (this.prune(obj.children, filter)) {
+          if (obj.children.length === 0) {
+            array.splice(i, 1);
+          }
+          return true;
+        }
+      }
+      if (obj.label.indexOf(filter) === -1) {
+        if (obj.children.length === 0) {
+          array.splice(i, 1);
+        }
+      }
+    }
   }
-*/
+
+
+  filterTreeY(event, value) {
+    console.log('filterTree: >' + value + '<')
+    this.filteredTree = cloneDeep(this.filesTree0);
+    if (value && value !== '') {
+      this.filteredTree.forEach( node => {
+        this.filterRecursive(node, value, 0);
+      } );
+
+    }
+  }
+
+  private filterRecursive(node: TreeNode, filter: string, index: number) {
+    if (node.children) {
+      node.children.forEach((childNode, index) => {
+        this.filterRecursive(childNode, filter, index);
+        if (!childNode) {
+          console.log({index});
+        }
+      });
+    }
+    if (node.label.indexOf(filter) === -1) {
+      console.log('filtered node: ' + node.label + ', index: ' + index  + ', children: ' + node.children)
+//      node.label = '( ' + node.label + ' )';
+      node.label = '';
+    } else {
+      console.log('active node: ' + node.label + ', index: ' + index  + ', children: ' + node.children)
+
+    }
+  }
+
+
+  nodeSelect(event) {
+    console.log('Node Selected: ' + event.node.label);
+    this.getDetails(event.node.path);
+
+    }
+
+  expandAll() {
+    this.filteredTree.forEach( node => {
+      this.expandRecursive(node, true);
+    } );
+  }
+
+  collapseAll(){
+    this.filteredTree.forEach( node => {
+      this.expandRecursive(node, false);
+    } );
+  }
+
+  private expandRecursive(node: TreeNode, isExpand: boolean) {
+    node.expanded = isExpand;
+    if (node.children) {
+      node.children.forEach( childNode => {
+        this.expandRecursive(childNode, isExpand);
+      } );
+    }
+  }
 
 }
 
@@ -261,112 +343,4 @@ function fuzzysearch (needle: string, haystack: string) {
   }
   return true;
 }
-
-
-/*
-
-
-function reload(item_path) {
-    if (item_path) {
-        $('#refresh-element').addClass('fa-spin');
-        $('#reload-element').addClass('fa-spin');
-        $('#cardOverlay').show();
-        $.getJSON('item_detail_json.html?item_path='+item_path, function(result) {
-            getDetailInfo(result);
-            window.setTimeout(function(){
-                $('#refresh-element').removeClass('fa-spin');
-                $('#reload-element').removeClass('fa-spin');
-                $('#cardOverlay').hide();
-            }, 300);
-
-        });
-    }
-}
-
-var selectedNode;
-
-function getTree() {
-    var item_tree = [];
-
-    $.getJSON('items-v1.json?mode=tree', function(result) {
-        $.each(result, function(index, element) {
-            item_tree.push(build_item_subtree_recursive(element));
-        });
-
-        $('#tree').treeview({
-            data: item_tree,
-			levels: 1,
-			expandIcon: 'plusIcon',
-		    collapseIcon: 'minusIcon',
-			selectedBackColor: '#709cc2',
-            showTags: true,
-            onNodeSelected: function(event, node) {
-                selectedNode = node;
-                reload(node.text);
-            }
-        });
-
-        function clearSearch() {
-            $('#btn-clear-search').on('click', function (e) {
-                $('#tree').treeview('clearSearch');
-                $('#tree').treeview('collapseAll', { silent: false });
-                $('#input-search').val('');
-                $('#search-output').html('');
-                results = [];
-                $('#search-results').html('');
-            });
-        };
-
-        var search = function(e) {
-            results = [];
-            var pattern = $('#input-search').val();
-            var options = {
-                ignoreCase: true,
-                exactMatch: false,
-                revealResults: true
-            };
-            var results = $('#tree').treeview('search', [ pattern, options ]);
-            if ($('#input-search').val() != "") {
-                $('#search-results').html(' - Treffer: '+results.length);
-            }
-            clearSearch();
-        }
-
-        var searchExact = function(e) {
-            results = [];
-            var pattern = $('#input-search').val();
-            var options = {
-                ignoreCase: true,
-                exactMatch: true,
-                revealResults: true
-            };
-            var results = $('#tree').treeview('search', [ pattern, options ]);
-            if ($('#input-search').val() != "") {
-                $('#search-results').html(' - Treffer: '+results.length);
-            }
-            clearSearch();
-        }
-
-        $('#btn-search').on('click', search);
-        $("#input-search").keypress(function(event){
-            if(event.keyCode == 13){
-                $("#btn-search").click();
-            }
-        });
-
-        // Expand/collapse all
-        $('#btn-expand-all').on('click', function (e) {
-          $('#tree').treeview('expandAll', { silent: false });
-        });
-        $('#btn-collapse-all').on('click', function (e) {
-          $('#tree').treeview('collapseAll', { silent: false });
-        });
-
-        if ($("#input-search").val() != "") {
-            searchExact();
-        }
-    });
-}
-
- */
 

@@ -3,11 +3,12 @@
   <tabset #staticTabs>
     <tab customClass="tab-shng" heading="{{ 'ITEMS.ITEMS'|translate }} ({{ 'ITEMS.TOTAL'|translate }}: {{itemcount}})">
 
-<!--
-      <bs-alert *ngIf="alertText !== ''" type="warning"  [dismissible]="true" >
-        <strong>Warning!</strong> Better check yourself, you're not looking too good.
-      </bs-alert>
--->
+
+      <!--
+            <bs-alert *ngIf="alertText !== ''" type="warning"  [dismissible]="true" >
+              <strong>Warning!</strong> Better check yourself, you're not looking too good.
+            </bs-alert>
+      -->
 
       <!------------------------------------------>
       <!--   Modal dialog with plugin details   -->
@@ -48,17 +49,15 @@
               <div class="col shng_headline">
 
                   <div class="form-group">
-                    <input type="input" class="form-control" id="filter" #filter (keyup)="filterTree(tree.treeModel, filter.value)" placeholder="{{ 'ITEMS.SEARCH ITEMPATH'|translate }}..." value="{{ '' }}"/>
+
+                    <input type="input" pTooltip="{{'ITEMS.TOOLTIP SEARCH'|translate:searchStart_param}}" tooltipPosition="top" class="form-control" id="filter" #filter (keyup)="filterTree($event, filter.value)" placeholder="{{ 'ITEMS.SEARCH ITEMPATH'|translate }}..." value="{{ '' }}"/>
+
                   </div>
               </div>
               <div class="col shng_headline">
-                <button
-                  tooltip="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."
-                  triggers="mouseenter:mouseleave"
-
-                  type="button" class="btn btn-shng btn-sm" style="margin-right: 5px" id="btn-clear-search" (click)="clearFilter(tree.treeModel, filter)"><fa-icon [icon]="faCircleNotch"></fa-icon> {{ 'ITEMS.RESET'|translate }}</button>
-                <button type="button" class="btn btn-shng btn-sm" style="margin-right: 5px" id="btn-expand-all" (click)="tree.treeModel.expandAll()"><fa-icon [icon]="faFolderOpen"></fa-icon>&nbsp;{{ 'ITEMS.EXPAND ALL'|translate }}</button>
-                <button type="button" class="btn btn-shng btn-sm" style="margin-right: 5px" id="btn-collapse-all" (click)="tree.treeModel.collapseAll()"><fa-icon [icon]="faFolder"></fa-icon> {{ 'ITEMS.REDUCE ALL'|translate }}</button>
+                <button type="button" class="btn btn-shng btn-sm" style="margin-right: 5px" id="btn-clear-search" [disabled]="!treeIsFiltered" (click)="clearFilter($event, filter)"><fa-icon [icon]="faCircleNotch"></fa-icon> {{ 'ITEMS.RESET'|translate }}</button>
+                <button type="button" class="btn btn-shng btn-sm" style="margin-right: 5px" id="btn-expand-all" (click)="expandAll()"><fa-icon [icon]="faFolderOpen"></fa-icon>&nbsp;{{ 'ITEMS.EXPAND ALL'|translate }}</button>
+                <button type="button" class="btn btn-shng btn-sm" style="margin-right: 5px" id="btn-collapse-all" (click)="collapseAll()"><fa-icon [icon]="faFolder"></fa-icon> {{ 'ITEMS.REDUCE ALL'|translate }}</button>
               </div>
             </div>
           </div>
@@ -69,49 +68,27 @@
                 <div class="card-body p-1">
                   <div id="tree" style="overflow-y: scroll;">
                     <div class="col-sm-12">
-                      <div class="form-group">
 
-                        <tree-root #tree
-                          [ngStyle]="tree"
-                          class="tree"
-                          id="tree1"
-                          [nodes]="itemtree"
-                          [options]="options"
-                          (activate)="getDetails($event.node.data.path)">
-
-                          <ng-template #treeNodeFullTemplate
-                                       let-node="node"
-                                       let-index="index"
-                                       let-templates="templates">
-                            <div
-                              [class]="node.getClass()"
-                              [class.tree-node]="true"
-                              [class.tree-node-expanded]="node.isExpanded && node.hasChildren"
-                              [class.tree-node-collapsed]="node.isCollapsed && node.hasChildren"
-                              [class.tree-node-leaf]="node.isLeaf"
-                              [class.tree-node-active]="node.isActive"
-                              [class.tree-node-focused]="node.isFocused">
-
-                              <tree-node-drop-slot
-                                *ngIf="index === 0"
-                                [dropIndex]="node.index"
-                                [node]="node.parent">
-                              </tree-node-drop-slot>
-
-                              <tree-node-wrapper [node]="node" [index]="index" [templates]="templates">
-                              </tree-node-wrapper>
-                              <tree-node-children [node]="node" [templates]="templates">
-                              </tree-node-children>
-
-                              <tree-node-drop-slot [dropIndex]="node.index + 1" [node]="node.parent">
-                              </tree-node-drop-slot>
-                            </div>
-
+                        <p-tree [value]="filteredTree"
+                                (onNodeSelect)="nodeSelect($event)"
+                                selectionMode="single"
+                                [(selection)]="selectedFile"
+                                emptyMessage="{{'ITEMS.NO ITEMS'|translate}}">
+                          <ng-template let-node  pTemplate="default">
+                            <ng-container *ngIf="node.tags[0] > 0 && !this.treeIsFiltered">
+                              {{node.label}} &nbsp;
+                              <span style="background:#dadada;">
+                                &nbsp; {{node.tags[0]}} &nbsp;
+                              </span>
+                            </ng-container>
+                            <ng-container *ngIf="node.tags[0] === 0 || this.treeIsFiltered">
+                              <span style="float: left;">{{node.label}}</span>
+                            </ng-container>
                           </ng-template>
 
-                        </tree-root>
 
-                      </div>
+                        </p-tree>
+
                     </div>
 
                   </div>
@@ -121,7 +98,8 @@
             <div class="col" style="max-width: 50%;">
               <div class="card" >
                 <div class="card-header p-1 shng_heading">
-                  <button type="button" class="float-sm-right" id="btn-reload" (click)="getDetails(itemdetails.path);"><fa-icon [icon]="faSync"></fa-icon> {{ 'ITEMS.RELOAD'|translate }}</button>
+                  <button type="button" class="float-sm-right btn-shng" style="margin-left: 5px" id="btn-reload" (click)="getDetails(itemdetails.path);"><fa-icon [icon]="faSync"></fa-icon> {{ 'ITEMS.RELOAD'|translate }}</button>
+                  <button type="button" class="float-sm-right btn-shng" style="margin-left: 5px" id="btn-monitor" [disabled]="true" (click)="getDetails(itemdetails.path);"><fa-icon [icon]="faList"></fa-icon> {{ 'ITEMS.MONITOR'|translate }}</button>
                   <strong>{{ 'ITEMS.ITEM DETAILS'|translate }}</strong>
                 </div>
                 <div class="card-body p-1" style="position: relative;">

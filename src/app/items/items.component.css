@@ -5,48 +5,37 @@
 }
 
 
+/*
+    Styling for PrimeNG <p-tee>
+*/
 
-.tree-node-leafX {
-  background: green !important;
-  color: black !important;
+:host ::ng-deep .ui-tree {
+  border: none;
+  width: auto;
+}
+
+:host ::ng-deep .ui-treenode-content-selected {
+  background-color: #709cc2;
 }
 
 
-.tree-node-active {
-  background: #709cc2 !important;
-  color: blue !important;
-}
-
-.tree-node-focusedX {
-  background: blue !important;
-  color: red !important;
-}
-
-.node-content-wrapper-focused {
-  background: white !important;
-}
-
-.node-content-wrapper-active {
-  background: green !important;
-}
-
-.tree-node-wrapper::selection {
-  background: white !important;
+:host ::ng-deep .ui-tree-container {
+  background: #ffffff;
+  overflow: visible;
 }
 
 
-.tree-children::after {
-  background: goldenrod!important;
-  color: black !important;
+:host ::ng-deep .ui-state-highlight {
+  border-color: #709cc2;
+  background-color: #709cc2;
+  color: #ffffff;
 }
 
 
-tree-node:last-child > .tree-node > .tree-children::after {
-  background: white;
+/*
+:host ::ng-deep .ui-treenode-content {
+  color: blue;
 }
+*/
 
-
-.mytree2 .node-content-wrapper-active.node-content-wrapper-focused {
-  background: red !important;
-}
 

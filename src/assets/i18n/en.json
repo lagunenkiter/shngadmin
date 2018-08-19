@@ -45,6 +45,8 @@
     "CONF TO YAML": "CONF-YAML Converter"
   },
   "ITEMS": {
+    "TOOLTIP SEARCH": "Search starts after entering a minimum of {{number}} characters",
+    "NO ITEMS": "No items defined",
     "ITEMS": "Items",
     "TOTAL": "Total",
     "MONITORED ITEMS": "Monitored Items",
@@ -53,6 +55,7 @@
     "RESET": "Reset",
     "EXPAND ALL": "Expand All",
     "REDUCE ALL": "Reduce All",
+    "MONITOR": "Monitor",
     "RELOAD": "Reload",
     "ITEM DETAILS": "Item Details",
     "CHOOSE ITEM IN TREE": "Choose item in tree to see details!",

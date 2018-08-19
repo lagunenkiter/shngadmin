@@ -11,11 +11,12 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
-import { TreeModule } from 'angular-tree-component';
+import { TreeNode } from 'primeng/api';
+import { TreeModule } from 'primeng/tree';
 import { TableModule } from 'primeng/table';
 import { TreeTableModule } from 'primeng/treetable';
-import { TreeNode } from 'primeng/api';
 import { AccordionModule } from 'primeng/accordion';
+import { TooltipModule } from 'primeng/tooltip';
 
 import { AppComponent } from './app.component';
 import { HttpLoaderFactory } from './app.component';
@@ -57,16 +58,17 @@ export function translateHttpLoaderFactory(http: HttpClient) {
     HttpClientModule,
     BrowserAnimationsModule,
 
+    TreeModule,
     TableModule,
     TreeTableModule,
     AccordionModule,
+    TooltipModule,
 
     TabsModule.forRoot(),
     AlertModule.forRoot(),
     ModalModule.forRoot(),
 
     FontAwesomeModule,
-    TreeModule.forRoot(),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
