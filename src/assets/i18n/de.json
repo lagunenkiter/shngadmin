@@ -1,18 +1,24 @@
 {
   "MENU": {
     "SYSTEM": "System",
+    "SYSTEM_PROPERTIES": "System Eigenschaften",
     "SERVICES": "Dienste",
     "ITEMS": "Items",
     "LOGICS": "Logiken",
     "SCHEDULERS": "Scheduler",
     "PLUGINS": "Plugins",
+    "PLUGINS_LIST": "Liste der Plugins",
     "SCENES": "Szenen",
     "THREADS": "Threads",
     "LOGS": "Logs",
-    "DISCLOSURES": "Urheberrechtshinweise"
+    "LOGS_DISPLAY": "Logs Anzeigen",
+    "LOGGER_LIST": "Liste der Logger",
+    "CONFIGURATION": "Konfiguration",
+    "LOGIN": "Login"
   },
   "SYSTEM": {
     "SYSTEMINFO": "Systemeigenschaften",
+    "CHARTS": "Ressource Graphen",
     "PYPI CHECK": "PyPI Check",
     "DISCLOSURES": "Urheberrechtshinweise",
     "SHNG_VERSION": "SmartHomeNG Version",
@@ -21,7 +27,7 @@
     "HOST": "Host",
     "OS": "Betriebssystem",
     "ARCHITECTURE": "Architektur",
-    "USER": "Benutzer",
+    "USER": "BS Benutzer",
     "PYTHON VERSION": "Python Version",
     "FREE DISC SPACE": "Freier Speicher",
     "DATE": "Datum",
@@ -32,11 +38,33 @@
 
     "PACKAGE": "Paket",
     "INSTALLED VERSION": "Installierte Version",
+    "MINIMUM VERSION": "Minimale Version",
+    "MAXIMUM VERSION": "Maximale Version",
     "REQUIREMENTS": "Anforderungen",
     "NEWEST VERSION": "Neueste Version",
+    "PACKAGES_REQ_PLUGINS": "Pakete die von Plugins benötigt werden",
     "PACKAGES_REQ_DOCUMENTATION": "Pakete für den Bau der Dokumentation",
     "PACKAGES_REQ_TESTSUITE": "Pakete für die Testsuite",
-    "PACKAGES_WO_REQ": "Pakete ohne Requirements"
+    "PACKAGES_WO_REQ": "Pakete ohne Requirements",
+    "MISSING": "fehlt",
+    "UNKNOWN": "unbekannt",
+
+    "CONFIGURATION": "Konfiguration",
+    "COMMON_SETTINGS": "Allgemein",
+    "HTTP_SETTINGS": "Http Modul",
+    "ADMIN_SETTINGS": "Admin Modul",
+    "ADVANCED_SETTINGS": "Advanced",
+
+    "SET_PASSWORD": "Passwort setzen",
+    "CHANGE_PASSWORD": "Password ändern",
+    "OLDPWD_EMPTY": "Altes Passwort darf nicht leer sein",
+    "OLDPWD_WRONG": "Altes Passwort ist falsch",
+    "NEWPWDS_DIFFER": "Versionen des neuen Passworts differieren",
+    "OLD_PASSWORD": "Altes Passwort",
+    "NEW_PASSWORD": "Neues Passwort",
+    "NEW_PASSWORD_REPEAT": "Neues Passwort (Wiederholung)",
+    "SHOW_PASSWORDS": "Passworte anzeigen",
+    "REMEMBER TO SAVE CHANGES": "Daran denken die Änderungen zu speichern, nachdem ein neues Passwort gesetzt wurde"
   },
   "SERVICES": {
     "SERVICES": "Dienste",
@@ -62,6 +90,7 @@
 
     "ATTRIBUTE": "Attribut",
     "VALUE": "Wert",
+    "ACTIONS": "Aktionen",
 
     "PATH": "Item Pfad",
     "NAME": "Item Name",
@@ -111,10 +140,13 @@
     "INSTANCE": "Instanz",
     "VERSION": "Version",
     "MULTI INSTANCE": "Multi-Instance",
-    "WEBIF": "Web Interface",
+    "WEBIF": "Web IF",
+    "HELP": "Hilfe",
 
     "DETAILS OF CONFIGURATION": "Details des Plugin Konfigurations-Abschnitts '{{configname}}' --- (für Plugin '{{pluginname}}')",
     "PARAMETERS": "Parameter",
+    "PARAMETER": "Parameter",
+    "VALUE": "Wert",
     "ITEM ATTRIBUTES": "Item Attribute",
     "UPDATES TRIGGERED BY": "Plugin Updates werden durch {{count}} Items getriggered",
     "PLUGIN METADATA": "Plugin Metadata",
@@ -123,7 +155,18 @@
     "MAINTAINER": "Wartung",
     "TESTER": "Tester",
     "SUPPORT": "Support",
-    "DOCUMENTATION": "Dokumentation"
+    "DOCUMENTATION": "Dokumentation",
+    "PLUGIN_CONFIGURATION": "Plugin Konfiguration",
+    "PLUGIN_DISABLED": "Plugin wird bei Neustart nicht geladen!",
+
+    "CONFIGURATION_ERRORS": "Konfigurationsfehler",
+    "DEFINED_MIN": "Definierter Minimalwert ist",
+    "DEFINED_MAX": "Definierter Maximalwert ist",
+    "ACTUAL_VALUE": "der aktuelle Wert ist",
+    "MANDATORY_VALUE": "Die Angabe dieses Parameters ist zwingend erforderlich und er darf nicht leer gelassen werden",
+    "INVALID_KNX_ADDRESS": "ist keine gültige KNX Gruppenadresse",
+    "INVALID_MAC_ADDRESS": "ist keine gültige MAC Adresse",
+    "INVALID_IP_ADDRESS": "ist keine gültige IP Adresse"
   },
   "SCENES": {
     "SCENE": "Szene",
@@ -138,7 +181,47 @@
     "ACTIVE": "Aktiv"
   },
 
-  "CLOSE": "Schließen",
+  "LOGS": {
+    "LOGFILE": "Log",
+    "FILTER": "Filter",
+
+    "LOGGER_NAME": "Logger Name",
+    "DISABLED": "Disabled",
+    "LEVEL": "Level",
+    "FILTERS": "Filter(s)",
+    "HANDLERS": "Handler(s)",
+    "LOGFILES": "Logile(s)",
+    "SELECT_LOG": "Log auswählen",
+    "TIMEFRAME": "Zeitrahmen",
+    "SELECT_FILE": "Datei auswählen",
+    "ACTUAL": "aktuell"
+  },
+
+  "BUTTON": {
+    "CLOSE": "Schließen",
+    "CHANGE": "Ändern",
+    "SAVE": "Sichern",
+    "ABORT": "Abbrechen",
+    "LOGOUT": "Abmelden",
+    "ADD_PLUGIN": "Plugin hinzufügen",
+    "RELOAD_LOG": "Log aktualisieren",
+    "RESTART_SHNG": "Core neu starten",
+    "SAVE_SETTINGS": "Einstellungen sichern"
+  },
+
+  "ERROR": {
+    "ERROR": "Fehler",
+    "PAGE_NOT_FOUND": "Seite nicht gefunden"
+  },
+
+  "LOGIN": {
+    "PLEASE_SIGN_IN": "Bitte anmelden",
+    "USERNAME": "Benutzername",
+    "PASSWORD": "Passwort",
+    "INVALID_SIGNIN": "Ungültiger Benutzername und/oder Passwort",
+    "EXPIRED_SIGNIN": "Das bisherige Login ist abgelaufen",
+    "SIGN_IN": "Anmelden"
+  },
 
   "YES": "Ja",
   "NO": "Nein",
@@ -152,5 +235,8 @@
   "SECONDS": "Sekunden",
 
   "True": "Ja",
-  "False": "Nein"
+  "False": "Nein",
+
+  "CONFIGURATION": "Konfiguration",
+  "RESTART FOR CHANGES": "Änderungen werden erst nach einem Neustart von SmartHomeNG wirksam"
 }

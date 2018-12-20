@@ -19,6 +19,13 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
+--> ng build --prod --aot --base-href /admin/
+
+afterwards copy the content (files and subdirectories) of dist/shngadmin to the admin module of SmartHomeNG. Clear all existing files and 
+folders within modules/admin/webif/static and copy the files that were just created by ng build to the modules/admin/webif/static folder.
+
+Afterwards commint and push the changes you just made to the admin module to the smarthome repository.
+
 ## Running unit tests
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).

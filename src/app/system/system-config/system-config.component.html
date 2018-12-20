@@ -1,0 +1,195 @@
+
+<div style="margin-left: 10px; margin-right: 10px; margin-top: 55px;">
+  <h3 style="color: #707070; margin-left: 5px;">
+    {{'SYSTEM.CONFIGURATION'|translate}}
+  </h3>
+
+  <tabset #staticTabs>
+    <tab customClass="tab-shng" heading="{{ 'SYSTEM.COMMON_SETTINGS'|translate }}">
+
+      <p-table [columns]="common_parameter_cols" [value]="common_parameters" selectionMode="single">
+        <ng-template pTemplate="header" let-columns>
+          <tr>
+            <th *ngFor="let col of columns" [pSortableColumn]="col.field" [ngStyle]="{'width': col.width}">
+              {{col.header|translate}}
+              <p-sortIcon *ngIf="col.sfield !== ''" [field]="col.field" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-columns="columns">
+          <tr>
+            <td *ngFor="let col of columns">
+
+              <ng-container *ngIf="dialog_readonly === false && col.field === 'value'">
+                <ng-container *ngIf="rowData.valid_list.length > 0">
+                  <p-dropdown [options]="rowData.valid_list" [showClear]="true" placeholder="{{rowData.default}}" [(ngModel)]="rowData[col.field]" (ngModelChange)="rowData[col.field] = $event; check_values()"></p-dropdown>
+                </ng-container>
+
+                <ng-container *ngIf="(['int','num','float','scene'].indexOf(rowData.type) > -1) && rowData.valid_list.length === 0">
+                  <input [(ngModel)]="rowData[col.field]" type="number" (ngModelChange)="check_values()" min="{{rowData.valid_min}}" max="{{rowData.valid_max}}" pInputText placeholder="{{rowData.default}}" pInputText name="{{col.field}}" [ngStyle]="{'width': col.iwidth}"/>
+                </ng-container>
+
+                <ng-container *ngIf="rowData.type !== 'bool' && ['int','num','float','scene'].indexOf(rowData.type) === -1 && rowData.valid_list.length === 0">
+                  <input [(ngModel)]="rowData[col.field]" type="text" (ngModelChange)="check_values()" pInputText placeholder="{{rowData.default}}" name="{{col.field}}" [ngStyle]="{'width': col.iwidth}"/>
+                </ng-container>
+              </ng-container>
+              <ng-container *ngIf="dialog_readonly === true || col.field !== 'value'">
+                {{rowData[col.field]}}
+              </ng-container>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </tab>
+
+
+
+    <tab customClass="tab-shng" heading="{{ 'SYSTEM.HTTP_SETTINGS'|translate }}">
+
+      <p-table [columns]="http_parameter_cols" [value]="http_parameters" selectionMode="single">
+        <ng-template pTemplate="header" let-columns>
+          <tr>
+            <th *ngFor="let col of columns" [pSortableColumn]="col.field" [ngStyle]="{'width': col.width}">
+              {{col.header|translate}}
+              <p-sortIcon *ngIf="col.sfield !== ''" [field]="col.field" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-columns="columns">
+          <tr>
+            <td *ngFor="let col of columns">
+
+              <ng-container *ngIf="dialog_readonly === false && col.field === 'value'">
+                <ng-container *ngIf="rowData.valid_list.length > 0">
+                  <p-dropdown [options]="rowData.valid_list" [showClear]="true" placeholder="{{rowData.default}}" [(ngModel)]="rowData[col.field]" (ngModelChange)="rowData[col.field] = $event; check_values()"></p-dropdown>
+                </ng-container>
+
+                <ng-container *ngIf="(['int','num','float','scene'].indexOf(rowData.type) > -1) && rowData.valid_list.length === 0">
+                  <input [(ngModel)]="rowData[col.field]" (ngModelChange)="check_values()" type="number" min="{{rowData.valid_min}}" max="{{rowData.valid_max}}" pInputText placeholder="{{rowData.default}}" pInputText name="{{col.field}}" [ngStyle]="{'width': col.iwidth}"/>
+                </ng-container>
+
+                <ng-container *ngIf="rowData.type !== 'bool' && ['int','num','float','scene', 'password'].indexOf(rowData.type) === -1 && rowData.valid_list.length === 0">
+                  <input [(ngModel)]="rowData[col.field]"(ngModelChange)="check_values()"  type="text" pInputText placeholder="{{rowData.default}}" name="{{col.field}}" [ngStyle]="{'width': col.iwidth}"/>
+                </ng-container>
+
+                <ng-container *ngIf="rowData.type === 'password' && rowData[col.field] === null">
+                  <button pButton type="button" class="float-sm-left btn-shng btn btn-sm ui-button-secondary" (click)="change_password_dialog($event, rowData, col.field)" style="margin-left: 5px;" label="{{ 'SYSTEM.SET_PASSWORD'|translate }}"></button>
+                </ng-container>
+                <ng-container *ngIf="rowData.type === 'password' && rowData[col.field] !== null">
+                  <button pButton type="button" class="float-sm-left btn-shng btn btn-sm ui-button-secondary" (click)="change_password_dialog($event, rowData, col.field)" style="margin-left: 5px;" label="{{ 'SYSTEM.CHANGE_PASSWORD'|translate }}"></button>
+                </ng-container>
+
+              </ng-container>
+              <ng-container *ngIf="dialog_readonly === true || col.field !== 'value'">
+                {{rowData[col.field]}}
+              </ng-container>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </tab>
+
+
+
+    <tab customClass="tab-shng" heading="{{ 'SYSTEM.ADMIN_SETTINGS'|translate }}">
+
+      <p-table [columns]="admin_parameter_cols" [value]="admin_parameters" selectionMode="single">
+        <ng-template pTemplate="header" let-columns>
+          <tr>
+            <th *ngFor="let col of columns" [pSortableColumn]="col.field" [ngStyle]="{'width': col.width}">
+              {{col.header|translate}}
+              <p-sortIcon *ngIf="col.sfield !== ''" [field]="col.field" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-columns="columns">
+          <tr>
+            <td *ngFor="let col of columns">
+
+              <ng-container *ngIf="dialog_readonly === false && col.field === 'value'">
+                <ng-container *ngIf="rowData.valid_list.length > 0">
+                  <p-dropdown [options]="rowData.valid_list" [showClear]="true" placeholder="{{rowData.default}}" [(ngModel)]="rowData[col.field]" (ngModelChange)="rowData[col.field] = $event; check_values()"></p-dropdown>
+                </ng-container>
+
+                <ng-container *ngIf="(['int','num','float','scene'].indexOf(rowData.type) > -1) && rowData.valid_list.length === 0">
+                  <input [(ngModel)]="rowData[col.field]" (ngModelChange)="check_values()" type="number" min="{{rowData.valid_min}}" max="{{rowData.valid_max}}" pInputText placeholder="{{rowData.default}}" pInputText name="{{col.field}}" [ngStyle]="{'width': col.iwidth}"/>
+                </ng-container>
+
+                <ng-container *ngIf="rowData.type !== 'bool' && ['int','num','float','scene'].indexOf(rowData.type) === -1 && rowData.valid_list.length === 0">
+                  <input [(ngModel)]="rowData[col.field]" (ngModelChange)="check_values()" type="text" pInputText placeholder="{{rowData.default}}" name="{{col.field}}" [ngStyle]="{'width': col.iwidth}"/>
+                </ng-container>
+              </ng-container>
+              <ng-container *ngIf="dialog_readonly === true || col.field !== 'value'">
+                {{rowData[col.field]}}
+              </ng-container>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </tab>
+
+  </tabset>
+
+  <ng-container *ngIf="dialog_readonly === false && restart_core_button">
+    <a style="font-size: small">{{ 'RESTART FOR CHANGES'|translate }}</a>
+  </ng-container>
+  <ng-container *ngIf="dialog_readonly === false && !restart_core_button">
+    <a style="font-size: small">&nbsp;</a>
+  </ng-container>
+  <br>
+  <button pButton type="button" class="float-sm-right btn-shng btn btn-sm" style="float: left; margin-left: 0px; margin-top: 5px; margin-bottom: 10px; font-size: medium;" [disabled]="!restart_core_button" (click)="restartShng()" icon="fa fa-circle-notch" label="{{'BUTTON.RESTART_SHNG'|translate}}" class="ui-button-success"></button>
+  <button pbutton type="button" tabindex="1" autofocus="autofocus" class="btn btn-primary btn-sm btn-shng" style="float: right;" [disabled]="!this.data_changed" (click)="saveSettings()"><i class="fas fa-check"></i> {{'BUTTON.SAVE_SETTINGS'|translate}}</button>
+
+</div>
+
+
+
+
+<!--
+  -- Password change dialog, showing information about the error, if from validation fails
+  -->
+
+<p-dialog header="" [(visible)]="pwd_change_dialog_display" [modal]="true" blockScroll="true">
+  <p-header>
+    <ng-container *ngIf="pwd_hash_old === null">
+      {{'SYSTEM.SET_PASSWORD'|translate}}
+    </ng-container>
+    <ng-container *ngIf="pwd_hash_old !== null">
+      {{'SYSTEM.CHANGE_PASSWORD'|translate}}
+    </ng-container>
+  </p-header>
+
+  <div *ngIf="pwd_old_is_empty" class="alert alert-warning">{{ 'SYSTEM.OLDPWD_EMPTY'|translate }}</div>
+  <div *ngIf="pwd_old_is_wrong" class="alert alert-danger">{{ 'SYSTEM.OLDPWD_WRONG'|translate }}</div>
+  <div *ngIf="pwd_new_not_identical" class="alert alert-danger">{{ 'SYSTEM.NEWPWDS_DIFFER'|translate }}</div>
+
+  <table>
+    <ng-container *ngIf="pwd_hash_old !== null">
+      <tr>
+        <td style="padding-right: 10px">{{'SYSTEM.OLD_PASSWORD'|translate}}</td>
+        <td><input [(ngModel)]="pwd_old" tabindex="1" autofocus style="width: 250px" [type]="pwd_show ? 'text' : 'password'" pInputText name="pwd_old"/></td>
+      </tr>
+      <tr><td>&nbsp;</td></tr>
+    </ng-container>
+    <tr>
+      <td style="padding-right: 10px">{{'SYSTEM.NEW_PASSWORD'|translate}}</td>
+      <td><input [(ngModel)]="pwd_new1" tabindex="2" style="width: 250px" [type]="pwd_show ? 'text' : 'password'" pInputText name="pwd_new1"/></td>
+    </tr>
+    <tr>
+      <td style="padding-right: 10px">{{'SYSTEM.NEW_PASSWORD_REPEAT'|translate}}</td>
+      <td><input [(ngModel)]="pwd_new2" tabindex="3" style="width: 250px" [type]="pwd_show ? 'text' : 'password'" pInputText name="pwd_new2"/></td>
+    </tr>
+    <tr>
+      <td style="padding-right: 10px"></td>
+      <td><input [(ngModel)]="pwd_show" type="checkbox" style="font-size: small" id="showtext">{{'SYSTEM.SHOW_PASSWORDS'|translate}}</td>
+    </tr>
+  </table>
+
+
+  <p-footer>
+    <p style="text-align: left; font-size: small">{{ 'SYSTEM.REMEMBER TO SAVE CHANGES'|translate }}</p>
+    <button pButton type="button" icon="pi pi-times" (click)="pwd_change_dialog_display=false" label="{{'BUTTON.ABORT'|translate}}" class="ui-button-secondary"></button>
+    <button pButton type="button" tabindex="4" icon="pi pi-check" (click)="change_password($event)" label="{{'BUTTON.CHANGE'|translate}}" class="ui-button-success"></button>
+  </p-footer>
+</p-dialog>
+

@@ -1,4 +1,5 @@
 
+<!--
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="navbar-header">
     <a routerLink="/system" class="navbar-brand"><img src="assets/img/logo_long.png" alt="SmartHomeNG"></a>
@@ -17,4 +18,12 @@
     </ul>
   </div>
 </nav>
+-->
 
+<!--
+<p-menubar [model]="items">
+-->
+<p-menubar class="fixednavbar" [model]="getMenuItems()">
+  <img id="logo" routerLink="/system" src="assets/img/logo_long.png"/>
+  <button pButton label="{{'BUTTON.LOGOUT'|translate}}" (click)="logout()" [disabled]="!(authService.isLoggedIn() && authService.loginRequired())" icon="fa fa-sign-out-alt" style="margin-left:.25em" class="ui-button-success"></button>
+</p-menubar>

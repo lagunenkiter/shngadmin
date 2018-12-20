@@ -1,7 +1,6 @@
 
 
-<div style="margin-left: 10px; margin-right: 10px; margin-top: 5px;">
-<div style="margin-left: 10px; margin-right: 10px; margin-top: 5px;">
+<div style="margin-left: 10px; margin-right: 10px; margin-top: 55px;">
   <tabset #staticTabs>
     <tab customClass="tab-shng" heading="{{ 'SYSTEM.SYSTEMINFO'|translate }}">
       <table class="table table-striped table-hover">
@@ -79,17 +78,66 @@
       </table>
     </tab>
 
+    <tab customClass="tab-shng" heading="{{ 'SYSTEM.CHARTS'|translate }}">
+        <table align="center" style="margin-top: 20px;" margin>
+          <tr>
+            <td>
+              <p-chart type="line" width="400px" height="250px" (click)="updateSystemloadData(chartSystemload)" #chartSystemload id="chartSystemload" [data]="chartdataLoad"></p-chart>
+            </td>
+            <td width="20px">
+            </td>
+            <td>
+              <p-chart type="line" width="400px" height="250px" (click)="updateThreadsData(chartThreads)" #chartThreads [data]="chartdataThreads" [options]="chartoptions1"></p-chart>
+              <!--
+                          <p-chart type="line" width="450px" height="250px" [data]="chartdata1" [options]="chartoptions1"></p-chart>
+              -->
+            </td>
+          </tr>
+          <tr><td>&nbsp;</td></tr>
+          <tr>
+            <td>
+              <p-chart type="line" width="400px" height="250px" (click)="updateMemoryData(chartMemory)" #chartMemory [data]="chartdataMemory"></p-chart>
+            </td>
+            <td width="20px">
+            </td>
+            <td>
+              <p-chart type="line" width="400px" height="250px" (click)="updateDiskData(chartDisk)" #chartDisk [data]="chartdataDisk" [options]="chartoptions1"></p-chart>
+              <!--
+                          <p-chart type="line" width="450px" height="250px" [data]="chartdata1" [options]="chartoptions1"></p-chart>
+              -->
+            </td>
+          </tr>
+        </table>
+
+<!--
+      <div style="width: 50%">
+        <p-chart type="line" [data]="chartdata3"></p-chart>
+      </div>
+-->
+    </tab>
+
     <tab customClass="tab-shng" heading="{{ 'SYSTEM.PYPI CHECK'|translate }}">
       <table id="package_check" class="table table-hover">
         <thead>
         <tr class="shng_heading">
-          <th scope="col" style="width: 25%; border-top: 0">Python {{ 'SYSTEM.PACKAGE'|translate }}</th>
-          <th scope="col" style="width: 25%; border-top: 0">{{ 'SYSTEM.INSTALLED VERSION'|translate }}</th>
-          <th scope="col" style="width: 25%; border-top: 0">{{ 'SYSTEM.REQUIREMENTS'|translate }}</th>
-          <th scope="col" style="width: 25%; border-top: 0">{{ 'SYSTEM.NEWEST VERSION'|translate }} (PyPI)</th>
+          <th scope="col" style="min-width: 250px; border-top: 0">Python {{ 'SYSTEM.PACKAGE'|translate }}</th>
+          <th scope="col" style="min-width: 150px; border-top: 0">{{ 'SYSTEM.MINIMUM VERSION'|translate }}</th>
+          <th scope="col" style="min-width: 150px; border-top: 0; background-color: #f7f7f7;">{{ 'SYSTEM.INSTALLED VERSION'|translate }}</th>
+          <th scope="col" style="min-width: 150px; border-top: 0">{{ 'SYSTEM.MAXIMUM VERSION'|translate }}</th>
+<!--      <th scope="col" style="width: 25%; border-top: 0">{{ 'SYSTEM.REQUIREMENTS'|translate }}</th> -->
+          <th scope="col" style="min-width: 150px; border-top: 0">{{ 'SYSTEM.NEWEST VERSION'|translate }} (PyPI)</th>
         </tr>
         </thead>
         <tbody>
+
+        <ng-container *ngIf="loading">
+          <tr><td  colspan="5">
+            <p style="padding-top: 100px; text-align: center; font-size: x-large">Loading...</p>
+          </td></tr>
+        </ng-container>
+
+        <!-- is required (BASE) -->
+
         <ng-container  *ngFor="let pypipackage of pypiinfo">
           <tr *ngIf="pypipackage.is_required === true">
             <ng-container *ngIf="pypipackage.pypi_doc_url === ''">
@@ -98,9 +146,39 @@
             <ng-container *ngIf="pypipackage.pypi_doc_url !== ''">
               <td class="py-1"><a target="_blank" class="text-shng-bold pypi_link" href="{{ pypipackage.pypi_doc_url }}">{{ pypipackage.name }}</a></td>
             </ng-container>
-            <td class="py-1">{{ pypipackage.vers_installed }}</td>
-            <td class="py-1">{{ reqinfodisplay[pypipackage.name] }}</td>
-            <td class="py-1">{{ pypipackage.pypi_version }}</td>
+            <td class="py-1">{{ pypipackage.vers_req_min || '*' }}</td>
+
+            <ng-container *ngIf="pypipackage.vers_ok && pypipackage.vers_recent">
+              <td class="py-1" style="background-color: #f7f7f7; color: green; font-weight: bold;">{{ pypipackage.vers_installed }} <i class="fa fa-check-circle"></i></td>
+            </ng-container>
+            <ng-container *ngIf="pypipackage.vers_ok && !pypipackage.vers_recent">
+              <td class="py-1" style="background-color: #f7f7f7;">{{ pypipackage.vers_installed }} <i class="far fa-check-circle"></i></td>
+            </ng-container>
+            <ng-container *ngIf="!pypipackage.vers_ok && pypipackage.vers_installed === '-'">
+              <td class="py-1" style="background-color: #f7f7f7; color: red; font-weight: bold;">{{ 'SYSTEM.MISSING'|translate }} <i class="fa fa-times-circle"></i></td>
+            </ng-container>
+            <ng-container *ngIf="!pypipackage.vers_ok && pypipackage.vers_installed !== '-'">
+              <td class="py-1" style="background-color: #f7f7f7; color: red;">{{ pypipackage.vers_installed }}</td>
+            </ng-container>
+
+            <ng-container *ngIf="pypipackage.pypi_version_ok || pypipackage.vers_recent">
+              <td class="py-1">{{ pypipackage.vers_req_max || '*' }}</td>
+            </ng-container>
+            <ng-container *ngIf="!pypipackage.pypi_version_ok && !pypipackage.vers_recent">
+              <td class="py-1" style="color: green; font-weight: bold;">{{ pypipackage.vers_req_max || '*' }} <i class="fa fa-check-circle"></i></td>
+            </ng-container>
+<!--        <td class="py-1">{{ reqinfodisplay[pypipackage.name] }}</td> -->
+
+            <ng-container *ngIf="pypipackage.pypi_version_ok && (pypipackage.vers_recent)">
+              <td class="py-1">{{ pypipackage.pypi_version }}</td>
+            </ng-container>
+            <ng-container *ngIf="pypipackage.pypi_version_ok && !pypipackage.vers_recent">
+              <td class="py-1" style="color: green; font-weight: bold;">{{ pypipackage.pypi_version }} <i class="fa fa-check-circle"></i></td>
+            </ng-container>
+            <ng-container *ngIf="!pypipackage.pypi_version_ok">
+              <td class="py-1" style="color: red;">{{ pypipackage.pypi_version || 'SYSTEM.UNKNOWN'|translate }} <i class="far fa-times-circle"></i></td>
+            </ng-container>
+
           </tr>
         </ng-container>
         </tbody>
@@ -112,6 +190,63 @@
         packageName = "<a target=\"_blank\" class=\"text-shng pypi_link\" href=\""+element['pypi_doc_url']+"\">"+packageName+"</a>";
         }
 -->
+
+        <!-- is required (PLUGINS) -->
+
+        <ng-container *ngIf="plugincount > 0">
+          <thead>
+          <tr class="shng_heading">
+            <th class="py-1" style="background:#eee;" colspan="5">{{ 'SYSTEM.PACKAGES_REQ_PLUGINS'|translate }}</th>
+          </tr>
+          </thead>
+          <tbody>
+          <ng-container  *ngFor="let pypipackage of pypiinfo">
+            <tr *ngIf="pypipackage.is_required_for_plugins === true">
+              <ng-container *ngIf="pypipackage.pypi_doc_url === ''">
+                <td class="py-1">{{ pypipackage.name }}</td>
+              </ng-container>
+              <ng-container *ngIf="pypipackage.pypi_doc_url !== ''">
+                <td class="py-1"><a target="_blank" class="text-shng pypi_link" href="{{ pypipackage.pypi_doc_url }}">{{ pypipackage.name }}</a></td>
+              </ng-container>
+              <td class="py-1">{{ pypipackage.vers_req_min || '*' }}</td>
+
+              <ng-container *ngIf="pypipackage.vers_ok && pypipackage.vers_recent">
+                <td class="py-1" style="background-color: #f7f7f7; color: green; font-weight: bold;">{{ pypipackage.vers_installed }} <i class="fa fa-check-circle"></i></td>
+              </ng-container>
+              <ng-container *ngIf="pypipackage.vers_ok && !pypipackage.vers_recent">
+                <td class="py-1" style="background-color: #f7f7f7;">{{ pypipackage.vers_installed }} <i class="far fa-check-circle"></i></td>
+              </ng-container>
+              <ng-container *ngIf="!pypipackage.vers_ok && pypipackage.vers_installed === '-'">
+                <td class="py-1" style="background-color: #f7f7f7; color: red; font-weight: bold;">{{ 'SYSTEM.MISSING'|translate }} <i class="fa fa-times-circle"></i></td>
+              </ng-container>
+              <ng-container *ngIf="!pypipackage.vers_ok && pypipackage.vers_installed !== '-'">
+                <td class="py-1" style="background-color: #f7f7f7; color: red;">{{ pypipackage.vers_installed }}</td>
+              </ng-container>
+
+              <ng-container *ngIf="pypipackage.pypi_version_ok || pypipackage.vers_recent">
+                <td class="py-1">{{ pypipackage.vers_req_max || '*' }}</td>
+              </ng-container>
+              <ng-container *ngIf="!pypipackage.pypi_version_ok && !pypipackage.vers_recent">
+                <td class="py-1" style="color: green; font-weight: bold;">{{ pypipackage.vers_req_max || '*' }} <i class="fa fa-check-circle"></i></td>
+              </ng-container>
+              <!--        <td class="py-1">{{ reqinfodisplay[pypipackage.name] }}</td> -->
+
+              <ng-container *ngIf="pypipackage.pypi_version_ok && (pypipackage.vers_recent)">
+                <td class="py-1">{{ pypipackage.pypi_version }} <i class="far fa-check-circle"></i></td>
+              </ng-container>
+              <ng-container *ngIf="pypipackage.pypi_version_ok && !pypipackage.vers_recent">
+                <td class="py-1" style="color: green; font-weight: bold;">{{ pypipackage.pypi_version }}</td>
+              </ng-container>
+              <ng-container *ngIf="!pypipackage.pypi_version_ok">
+                <td class="py-1" style="color: red;">{{ pypipackage.pypi_version || 'SYSTEM.UNKNOWN'|translate }} <i class="far fa-times-circle"></i></td>
+              </ng-container>
+
+            </tr>
+          </ng-container>
+          </tbody>
+        </ng-container>
+
+        <!-- is required (DOCUMENTAION) -->
 
         <ng-container *ngIf="documentationcount > 0">
           <thead>
@@ -128,13 +263,45 @@
               <ng-container *ngIf="pypipackage.pypi_doc_url !== ''">
                 <td class="py-1"><a target="_blank" class="text-shng pypi_link" href="{{ pypipackage.pypi_doc_url }}">{{ pypipackage.name }}</a></td>
               </ng-container>
-              <td class="py-1">{{ pypipackage.vers_installed }}</td>
-              <td class="py-1">{{ reqinfodisplay[pypipackage.name] }}</td>
-              <td class="py-1">{{ pypipackage.pypi_version }}</td>
+              <td class="py-1">{{ pypipackage.vers_req_min || '*' }}</td>
+
+              <ng-container *ngIf="pypipackage.vers_ok && pypipackage.vers_recent">
+                <td class="py-1" style="color: green; font-weight: bold;">{{ pypipackage.vers_installed }} <i class="fa fa-check-circle"></i></td>
+              </ng-container>
+              <ng-container *ngIf="pypipackage.vers_ok && !pypipackage.vers_recent">
+                <td class="py-1">{{ pypipackage.vers_installed }} <i class="far fa-check-circle"></i></td>
+              </ng-container>
+              <ng-container *ngIf="!pypipackage.vers_ok && pypipackage.vers_installed === '-'">
+                <td class="py-1" style="color: red; font-weight: bold;">{{ 'SYSTEM.MISSING'|translate }} <i class="fa fa-times-circle"></i></td>
+              </ng-container>
+              <ng-container *ngIf="!pypipackage.vers_ok && pypipackage.vers_installed !== '-'">
+                <td class="py-1" style="color: red;">{{ pypipackage.vers_installed }}</td>
+              </ng-container>
+
+              <ng-container *ngIf="pypipackage.pypi_version_ok || pypipackage.vers_recent">
+                <td class="py-1">{{ pypipackage.vers_req_max || '*' }}</td>
+              </ng-container>
+              <ng-container *ngIf="!pypipackage.pypi_version_ok && !pypipackage.vers_recent">
+                <td class="py-1" style="color: green; font-weight: bold;">{{ pypipackage.vers_req_max || '*' }} <i class="fa fa-check-circle"></i></td>
+              </ng-container>
+              <!--        <td class="py-1">{{ reqinfodisplay[pypipackage.name] }}</td> -->
+
+              <ng-container *ngIf="pypipackage.pypi_version_ok && (pypipackage.vers_recent)">
+                <td class="py-1">{{ pypipackage.pypi_version }} <i class="far fa-check-circle"></i></td>
+              </ng-container>
+              <ng-container *ngIf="pypipackage.pypi_version_ok && !pypipackage.vers_recent">
+                <td class="py-1" style="color: green; font-weight: bold;">{{ pypipackage.pypi_version }}</td>
+              </ng-container>
+              <ng-container *ngIf="!pypipackage.pypi_version_ok">
+                <td class="py-1" style="color: red;">{{ pypipackage.pypi_version || 'SYSTEM.UNKNOWN'|translate }} <i class="far fa-times-circle"></i></td>
+              </ng-container>
+
             </tr>
         </ng-container>
         </tbody>
         </ng-container>
+
+        <!-- is required (TESTSUITE) -->
 
         <ng-container *ngIf="testsuitecount > 0">
           <thead>
@@ -151,13 +318,45 @@
                 <ng-container *ngIf="pypipackage.pypi_doc_url !== ''">
                   <td class="py-1"><a target="_blank" class="text-shng pypi_link" href="{{ pypipackage.pypi_doc_url }}">{{ pypipackage.name }}</a></td>
                 </ng-container>
-                <td class="py-1">{{ pypipackage.vers_installed }}</td>
-                <td class="py-1">{{ reqinfodisplay[pypipackage.name] }}</td>
-                <td class="py-1">{{ pypipackage.pypi_version }}</td>
+                <td class="py-1">{{ pypipackage.vers_req_min || '*' }}</td>
+
+                <ng-container *ngIf="pypipackage.vers_ok && pypipackage.vers_recent">
+                  <td class="py-1" style="color: green; font-weight: bold;">{{ pypipackage.vers_installed }} <i class="fa fa-check-circle"></i></td>
+                </ng-container>
+                <ng-container *ngIf="pypipackage.vers_ok && !pypipackage.vers_recent">
+                  <td class="py-1">{{ pypipackage.vers_installed }} <i class="far fa-check-circle"></i></td>
+                </ng-container>
+                <ng-container *ngIf="!pypipackage.vers_ok && pypipackage.vers_installed === '-'">
+                  <td class="py-1" style="color: red; font-weight: bold;">{{ 'SYSTEM.MISSING'|translate }} <i class="fa fa-times-circle"></i></td>
+                </ng-container>
+                <ng-container *ngIf="!pypipackage.vers_ok && pypipackage.vers_installed !== '-'">
+                  <td class="py-1" style="color: red;">{{ pypipackage.vers_installed }}</td>
+                </ng-container>
+
+                <ng-container *ngIf="pypipackage.pypi_version_ok || pypipackage.vers_recent">
+                  <td class="py-1">{{ pypipackage.vers_req_max || '*' }}</td>
+                </ng-container>
+                <ng-container *ngIf="!pypipackage.pypi_version_ok && !pypipackage.vers_recent">
+                  <td class="py-1" style="color: green; font-weight: bold;">{{ pypipackage.vers_req_max || '*' }} <i class="fa fa-check-circle"></i></td>
+                </ng-container>
+                <!--        <td class="py-1">{{ reqinfodisplay[pypipackage.name] }}</td> -->
+
+                <ng-container *ngIf="pypipackage.pypi_version_ok && (pypipackage.vers_recent)">
+                  <td class="py-1">{{ pypipackage.pypi_version }} <i class="far fa-check-circle"></i></td>
+                </ng-container>
+                <ng-container *ngIf="pypipackage.pypi_version_ok && !pypipackage.vers_recent">
+                  <td class="py-1" style="color: green; font-weight: bold;">{{ pypipackage.pypi_version }}</td>
+                </ng-container>
+                <ng-container *ngIf="!pypipackage.pypi_version_ok">
+                  <td class="py-1" style="color: red;">{{ pypipackage.pypi_version || 'SYSTEM.UNKNOWN'|translate }} <i class="far fa-times-circle"></i></td>
+                </ng-container>
+
               </tr>
             </ng-container>
           </tbody>
         </ng-container>
+
+        <!-- is NOT required -->
 
         <ng-container *ngIf="norequirementcount > 0">
           <thead>
@@ -167,15 +366,19 @@
           </thead>
           <tbody>
           <ng-container  *ngFor="let pypipackage of pypiinfo">
-            <tr *ngIf="pypipackage.is_required === false && pypipackage.is_required_for_docbuild === false && pypipackage.is_required_for_testsuite === false">
+            <tr *ngIf="pypipackage.is_required === false && pypipackage.is_required_for_plugins === false && pypipackage.is_required_for_docbuild === false && pypipackage.is_required_for_testsuite === false">
               <ng-container *ngIf="pypipackage.pypi_doc_url === ''">
                 <td class="py-1">{{ pypipackage.name }}</td>
               </ng-container>
               <ng-container *ngIf="pypipackage.pypi_doc_url !== ''">
                 <td class="py-1"><a target="_blank" class="text-shng pypi_link" href="{{ pypipackage.pypi_doc_url }}">{{ pypipackage.name }}</a></td>
               </ng-container>
+              <td class="py-1">{{ pypipackage.vers_req_min || '-' }}</td>
+
               <td class="py-1">{{ pypipackage.vers_installed }}</td>
-              <td class="py-1">-</td>
+
+              <td class="py-1">{{ pypipackage.vers_req_max || '-' }}</td>
+<!--          <td class="py-1">{{ reqinfodisplay[pypipackage.name] }}</td> -->
               <td class="py-1">{{ pypipackage.pypi_version }}</td>
             </tr>
           </ng-container>

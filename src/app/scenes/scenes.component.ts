@@ -6,22 +6,13 @@ import { TranslateService } from '@ngx-translate/core';
 import { MessageService } from 'primeng/api';
 
 
-import {PlugininfoType, SceneinfoType, SysteminfoType, TreeNode} from '../interfaces';
-import { DataService } from '../data.service';
+import { TreeNode } from '../models/interfaces';
+import { ScenesApiService } from '../common/services/scenes-api.service';
+import {PlugininfoType} from '../models/plugin-info';
+import {SystemInfo} from '../models/system-info';
+import {SceneInfo} from '../models/scene-info';
 
 
-export interface Car {
-  vin?;
-  year?;
-  brand?;
-  color?;
-  price?;
-  saleDate?;
-}
-
-export class PrimeCar implements Car {
-  constructor(public vin?, public year?, public brand?, public color?) {}
-}
 
 
 @Component({
@@ -33,68 +24,28 @@ export class PrimeCar implements Car {
 export class ScenesComponent implements OnInit {
 
 
-  sceneList: SceneinfoType[];
+  sceneList: SceneInfo[];
 
-  systeminfo: SysteminfoType = <SysteminfoType>{};
-
-  /* ----- */
-
-
-  files1: TreeNode[];
-
-  files2: TreeNode[];
-
-  cols: any[];
-  carcols: any[];
-
-  /* ----- */
-
-  car: Car = new PrimeCar();
-
-  selectedCar: Car;
-
-  newCar: boolean;
-
-  cars: Car[];
-
-
+  systeminfo: SystemInfo = <SystemInfo>{};
 
 
   constructor(private http: HttpClient,
               private translate: TranslateService,
               private messageService: MessageService,
-              private dataService: DataService) { }
+              private dataService: ScenesApiService) { }
+
 
   ngOnInit() {
-    this.dataService.getSysteminfo()
+    console.log('ScenesComponent.ngOnInit');
+
+    this.dataService.getScenes()
       .subscribe(
-        (response: SysteminfoType) => {
-          console.log('getSysteminfo:');
-          console.log(response);
-          this.systeminfo = response;
-          },
-        (error) => {
-          console.log('SystemComponent: dataService.getSysteminfo():');
-          console.log(error);
+        (response) => {
+          this.sceneList = <SceneInfo[]>response;
+//          this.schedulerinfo.sort(function (a, b) {return (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)});
+          console.log('getScenes', {response});
         }
       );
-
-
-    this.dataService.getSceneinfo()
-      .subscribe(
-        (response: SceneinfoType[]) => {
-          console.log('SceneComponent:');
-          console.log(response);
-          this.sceneList = response;
-//          this.plugininfo.sort(function (a, b) {return (a.pluginname + a.configname.toLowerCase() > b.pluginname + b.configname.toLowerCase()) ? 1 : ((b.pluginname + b.configname.toLowerCase() > a.pluginname + a.configname.toLowerCase()) ? -1 : 0)});
-        },
-        (error) => {
-          console.log('ERROR: SceneComponent: dataService.getSceneinfo():');
-          console.log(error)
-        }
-      );
-
   }
-
 
 }

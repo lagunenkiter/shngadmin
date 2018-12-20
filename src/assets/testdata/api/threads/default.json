@@ -2,7 +2,7 @@
   25,
   [
     {
-      "name": "CP Server",
+      "name": "CP Server (API)",
       "sort": "cp server",
       "id": "(14 threads)",
       "alive": "True"

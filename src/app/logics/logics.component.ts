@@ -1,41 +1,39 @@
 
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { DataService } from '../data.service';
+import { OlddataService } from '../common/services/olddata.service';
 
-import { SchedulerType } from '../interfaces';
+import { SchedulerInfo } from '../models/scheduler-info';
+import {SchedulersApiService} from '../common/services/schedulers-api.service';
 
 
 @Component({
   selector: 'app-logics',
   templateUrl: './logics.component.html',
   styleUrls: ['./logics.component.css'],
-  providers: [DataService]
+  providers: [OlddataService]
 })
 
 
 export class LogicsComponent implements OnInit {
 
-  schedulerinfo: SchedulerType[];
+//  schedulerinfo: SchedulerInfo[];
 
-  constructor(private http: HttpClient, private dataService: DataService) { }
+  constructor(private http: HttpClient, private dataService: SchedulersApiService) {
+  }
 
   ngOnInit() {
-    console.log('ngOnInit LogicsComponent');
+    console.log('ServicesComponent.ngOnInit');
 
-    this.dataService.getSchedulerinfo()
+    this.dataService.getSchedulers()
       .subscribe(
-        (response: SchedulerType[]) => {
-          console.log('getSchedulerinfo:');
-          console.log(response);
-          this.schedulerinfo = response;
-          this.schedulerinfo.sort(function (a, b) {return (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)});
-        },
-        (error) => {
-          console.log('ERROR: LogicsComponent: dataService.getSchedulerinfo():');
-          console.log(error)
+        (response) => {
+//          this.schedulerinfo = <SchedulerInfo[]>response;
+//          this.schedulerinfo.sort(function (a, b) {return (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)});
+          console.log('getSchedulers', {response});
         }
       );
+
   }
 
 }

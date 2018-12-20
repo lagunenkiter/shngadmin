@@ -1,0 +1,23 @@
+
+<div style="margin-left: 10px; margin-right: 10px; margin-top: 55px;">
+
+<div style="margin: 0 auto; margin-top: 100px; width: 400px;">
+
+  <form class="form-signin" #f="ngForm" (ngSubmit)="signIn(f.value)">
+    <h2 class="form-signin-heading">{{ 'LOGIN.PLEASE_SIGN_IN'|translate }}</h2>
+
+    <div *ngIf="invalidLogin" class="alert alert-danger">{{ 'LOGIN.INVALID_SIGNIN'|translate }}</div>
+    <div *ngIf="authService.expiredLogin" class="alert alert-warning">{{ 'LOGIN.EXPIRED_SIGNIN'|translate }}</div>
+
+    <label for="inputUsername" class="sr-only">{{ 'LOGIN.USERNAME'|translate }}</label>
+    <input type="text" autocomplete="off" id="inputUsername" name="username" ngModel class="form-control" placeholder="{{ 'LOGIN.USERNAME'|translate }}" required autofocus>
+    <label for="inputPassword" class="sr-only">{{ 'LOGIN.PASSWORD'|translate }}</label>
+    <input type="password" id="inputPassword" name="password" ngModel class="form-control" placeholder="{{ 'LOGIN.PASSWORD'|translate }}" required>
+
+    <br>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">{{ 'LOGIN.SIGN_IN'|translate }}</button>
+  </form>
+
+</div>
+
+</div>

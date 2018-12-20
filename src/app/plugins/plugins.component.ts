@@ -7,15 +7,15 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { faPlayCircle, faPauseCircle } from '@fortawesome/free-solid-svg-icons';
 
-import { DataService } from '../data.service';
-import { SchedulerType } from '../interfaces';
-import { PlugininfoType } from '../interfaces';
+import { OlddataService } from '../common/services/olddata.service';
+import { SchedulerInfo } from '../models/scheduler-info';
+import { PlugininfoType } from '../models/plugin-info';
 
 @Component({
   selector: 'app-plugins',
   templateUrl: './plugins.component.html',
   styleUrls: ['./plugins.component.css'],
-  providers: [DataService]
+  providers: [OlddataService]
 })
 export class PluginsComponent implements OnInit {
 
@@ -24,18 +24,20 @@ export class PluginsComponent implements OnInit {
 
   plugininfo: PlugininfoType[];
 
+  plugintypes: string[] = ['system', 'gateway', 'interface', 'protocol', 'web', ''];
+
   modalRef: BsModalRef;
-  constructor(private http: HttpClient, private dataService: DataService, private modalService: BsModalService) {
+  constructor(private http: HttpClient, private dataService: OlddataService, private modalService: BsModalService) {
   }
 
   ngOnInit() {
-    console.log('ngOnInit PluginsComponent');
+    console.log('PluginsComponent.ngOnInit');
 
     this.dataService.getPlugininfo()
       .subscribe(
         (response: PlugininfoType[]) => {
-          console.log('PluginsComponent:');
-          console.log(response);
+//          console.log('PluginsComponent:');
+//          console.log(response);
           this.plugininfo = response;
           // this.plugininfo.sort(function (a, b) {return (a.pluginname > b.pluginname) ? 1 : ((b.pluginname > a.pluginname) ? -1 : 0)});
           // this.plugininfo.sort(function (a, b) {return (a.configname.toLowerCase() > b.configname.toLowerCase()) ? 1 : ((b.configname.toLowerCase() > a.configname.toLowerCase()) ? -1 : 0)});

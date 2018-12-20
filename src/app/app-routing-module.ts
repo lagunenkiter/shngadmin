@@ -2,28 +2,44 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
 import { SystemComponent } from './system/system.component';
+import { SystemConfigComponent } from './system/system-config/system-config.component';
 import { ServicesComponent } from './services/services.component';
 import { ItemsComponent } from './items/items.component';
 import { LogicsComponent } from './logics/logics.component';
 import { SchedulersComponent } from './schedulers/schedulers.component';
 import { PluginsComponent } from './plugins/plugins.component';
+import { PluginConfigComponent } from './plugins/config/plugin-config.component';
 import { ScenesComponent } from './scenes/scenes.component';
 import { ThreadsComponent } from './threads/threads.component';
 import { LogsComponent } from './logs/logs.component';
+import { LoggerListComponent } from './logs/logger-list/logger-list.component';
+import { LoggingConfigurationComponent } from './logs/logging-configuration/logging-configuration.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { LoginComponent } from './login/login.component';
+import { AuthGuardService } from './common/services/auth-guard.service';
+
 
 const appRoutes: Routes = [
 //  { path: '', redirectTo: '/system', pathMatch: 'full'},
-  { path: '', component: SystemComponent, pathMatch: 'full' },
-  { path: 'system', component: SystemComponent },
-  { path: 'system/systemproperties', component: SystemComponent },
-  { path: 'services', component: ServicesComponent },
-  { path: 'items', component: ItemsComponent },
-  { path: 'logics', component: LogicsComponent },
-  { path: 'schedulers', component: SchedulersComponent },
-  { path: 'plugins', component: PluginsComponent },
-  { path: 'scenes', component: ScenesComponent },
-  { path: 'threads', component: ThreadsComponent },
-  { path: 'logs', component: LogsComponent },
+  { path: '', component: SystemComponent, pathMatch: 'full', canActivate: [AuthGuardService] },
+  { path: 'system', component: SystemComponent, canActivate: [AuthGuardService] },
+  { path: 'system/systemproperties', component: SystemComponent, canActivate: [AuthGuardService] },
+  { path: 'system/config', component: SystemConfigComponent, canActivate: [AuthGuardService] },
+  { path: 'services', component: ServicesComponent, canActivate: [AuthGuardService] },
+  { path: 'items', component: ItemsComponent, canActivate: [AuthGuardService] },
+  { path: 'logics', component: LogicsComponent, canActivate: [AuthGuardService] },
+  { path: 'schedulers', component: SchedulersComponent, canActivate: [AuthGuardService] },
+  { path: 'plugins', component: PluginsComponent, canActivate: [AuthGuardService] },
+  { path: 'plugins_list', component: PluginsComponent, canActivate: [AuthGuardService] },
+  { path: 'plugins/config', component: PluginConfigComponent, canActivate: [AuthGuardService] },
+  { path: 'scenes', component: ScenesComponent, canActivate: [AuthGuardService] },
+  { path: 'threads', component: ThreadsComponent, canActivate: [AuthGuardService] },
+  { path: 'logs', component: LogsComponent, canActivate: [AuthGuardService] },
+  { path: 'logs/display', component: LogsComponent, canActivate: [AuthGuardService] },
+  { path: 'logs/logger-list', component: LoggerListComponent, canActivate: [AuthGuardService] },
+  { path: 'logs/logging-configuration', component: LoggingConfigurationComponent, canActivate: [AuthGuardService] },
+  { path: 'login', component: LoginComponent },
+  { path: '**', component: NotFoundComponent },
 ];
 
 @NgModule({

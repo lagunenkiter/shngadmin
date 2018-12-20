@@ -1,0 +1,63 @@
+<div style="margin-left: 10px; margin-right: 10px; margin-top: 55px;">
+  <div class="table-responsive">
+    <table class="table table-striped table-hover loggerList">
+      <thead>
+      <tr class="shng_heading">
+        <th>{{ 'LOGS.LOGGER_NAME'|translate }}</th>
+        <th>{{ 'LOGS.DISABLED'|translate }}</th>
+        <th>{{ 'LOGS.LEVEL'|translate }}</th>
+        <th>{{ 'LOGS.FILTERS'|translate }}</th>
+        <th>{{ 'LOGS.HANDLERS'|translate }}</th>
+        <th>{{ 'LOGS.LOGFILES'|translate }}</th>
+      </tr>
+      </thead>
+      <tbody>
+      <ng-container *ngFor="let l of this.loggerList">
+        <tr>
+          <ng-container *ngIf="l.name === 'root'">
+            <td class="py-1"><strong>{{ l.name }}</strong></td>
+            <td class="py-1"><strong>{{ l.disabled }}</strong></td>
+            <td class="py-1"><strong>{{ l.level }}</strong></td>
+          </ng-container>
+          <ng-container *ngIf="l.name !== 'root'">
+            <td class="py-1">{{ l.name }}</td>
+            <td class="py-1">{{ l.disabled }}</td>
+            <td class="py-1">{{ l.level }}</td>
+          </ng-container>
+
+          <td class="py-1">
+            <ng-container *ngFor="let f of l.filters; let i = index">
+              {{ f }}
+              <ng-container *ngIf="f !== '' && i < l.filters.length - 1">,</ng-container>
+            </ng-container>
+          </td>
+
+          <td class="py-1">
+            <ng-container *ngFor="let h of l.handlers; let i = index">
+              {{ h }}
+              <ng-container *ngIf="h !== '' && i < l.handlers.length - 1">,<br></ng-container>
+            </ng-container>
+          </td>
+
+          <td class="py-1">
+            <ng-container *ngFor="let fn of l.filenames; let i = index">
+              <a class="text-shng" href="logs?logfile={{ this.baseName(fn) }}">{{ this.baseName(fn) }}</a>
+              <ng-container *ngIf="fn !== '' && i < l.filenames.length - 1">,<br></ng-container>
+    <!--        <a class="text-shng" href="log_view.html?logfile={{ get_basename(fn) }}">{{ fn }}</a>  -->
+            </ng-container>
+          </td>
+
+        </tr>
+      </ng-container>
+
+      </tbody>
+    </table>
+  </div>
+
+  <p></p>
+  <p>
+    This is a dummy list  -  List of loggers is yet to come!
+  </p>
+
+</div>
+

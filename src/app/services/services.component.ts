@@ -1,39 +1,49 @@
 
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { DataService } from '../data.service';
+import { OlddataService } from '../common/services/olddata.service';
 
-import { SchedulerType } from '../interfaces';
+import {SchedulersApiService} from '../common/services/schedulers-api.service';
+import {ServerDataService} from '../common/services/server-data.service';
 
 
 @Component({
   selector: 'app-services',
   templateUrl: './services.component.html',
   styleUrls: ['./services.component.css'],
-  providers: [DataService]
+  providers: []
 })
 
 export class ServicesComponent implements OnInit {
 
-  schedulerinfo: SchedulerType[];
+//  schedulerinfo: SchedulerInfo[];
 
-  constructor(private http: HttpClient, private dataService: DataService) {
+  constructor(private http: HttpClient,
+              private dataService: SchedulersApiService,
+              private dataServiceServer: ServerDataService) {
   }
 
   ngOnInit() {
-    console.log('ngOnInit ServicesComponent');
+    console.log('ServicesComponent.ngOnInit');
 
-    this.dataService.getSchedulerinfo()
+    this.dataService.getSchedulers()
       .subscribe(
-        (response: SchedulerType[]) => {
-          console.log('getSchedulerinfo:');
-          console.log(response);
-          this.schedulerinfo = response;
-          this.schedulerinfo.sort(function (a, b) {return (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)});
-        },
-        (error) => {
-          console.log('ERROR: ServicesComponent: dataService.getSchedulerinfo():');
-          console.log(error)
+        (response) => {
+//          this.schedulerinfo = <SchedulerInfo[]>response;
+//          this.schedulerinfo.sort(function (a, b) {return (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)});
+          console.log('getSchedulers', {response});
+        }
+      );
+
+  }
+
+
+  restartShng() {
+    this.dataServiceServer.restartShngServer()
+      .subscribe(
+        (response) => {
+          const res = <any> response;
+          console.log('restartShng', res.result);
         }
       );
   }

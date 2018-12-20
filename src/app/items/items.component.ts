@@ -5,23 +5,24 @@ import { HttpClient } from '@angular/common/http';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { TranslateService } from '@ngx-translate/core';
-import { faSearch, faCircleNotch, faFolder, faFolderOpen, faCoffee, faSync, faList } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faCircleNotch, faFolder, faFolderOpen, faCoffee, faSync, faList, faStop, faTrashAlt, faThumbtack } from '@fortawesome/free-solid-svg-icons';
 import * as $ from 'jquery';
 import { TreeNode } from 'primeng/api';
 
 import { cloneDeep } from 'lodash';
 
 import { AppComponent } from '../app.component';
-import { DataService } from '../data.service';
-import { ItemtreeType, ItemDetailsType } from '../interfaces';
-import {SharedService} from '../shared.service';
+import { OlddataService } from '../common/services/olddata.service';
+import { ItemTree} from '../models/item-tree';
+import { SharedService } from '../common/services/shared.service';
+import {ItemDetails} from '../models/item-details';
 
 
 @Component({
   selector: 'app-items',
   templateUrl: './items.component.html',
   styleUrls: ['./items.component.css'],
-  providers: [AppComponent, DataService]
+  providers: [AppComponent]
 })
 export class ItemsComponent implements OnInit {
 
@@ -31,11 +32,16 @@ export class ItemsComponent implements OnInit {
   faFolderOpen = faFolderOpen;
   faSync = faSync;
   faList = faList;
+  faStop = faStop;
+  faTrashAlt = faTrashAlt;
+  faThumbtack = faThumbtack;
 
   itemcount = 0;
-  itemtree: ItemtreeType;
-  itemdetails: ItemDetailsType = <ItemDetailsType>{};
+  itemtree: ItemTree;
+  itemdetails: ItemDetails = <ItemDetails>{};
   itemdetailsloaded = false;
+
+  monitoredItems: string[] = [];
 
   filesTree0: {}[];
   filteredTree: {}[];
@@ -58,8 +64,7 @@ export class ItemsComponent implements OnInit {
   previous_change_age = '';
 
   modalRef: BsModalRef;
-  constructor(private http: HttpClient,
-              private dataService: DataService,
+  constructor(private dataService: OlddataService,
               private appComponent: AppComponent,
               private translate: TranslateService,
               private modalService: BsModalService,
@@ -68,10 +73,11 @@ export class ItemsComponent implements OnInit {
 
 
   static resizeItemTree() {
-    const browserHeight = $(window).height();
+    const browserHeight = window.innerHeight;
+//    console.log({browserHeight});
     const tree = $('#tree');
     const treeDetail = $('#tree_detail');
-    // const offsetTop = tree.offset().top;
+
     // const offsetTopDetail = treeDetail.offset().top;
     // initially offsetTop is off by a number of pixels. Correction: a fixed offset
     const offsetTop = 167;
@@ -86,13 +92,13 @@ export class ItemsComponent implements OnInit {
 
 
   ngOnInit() {
-    console.log('ngOnInit ItemsComponent:');
+    console.log('ItemsComponent.ngOnInit:');
 
     this.dataService.getItemtree()
       .subscribe(
-        (response: [number, ItemtreeType]) => {
-          console.log('ItemsComponent:');
-          console.log(response);
+        (response: [number, ItemTree]) => {
+//          console.log('ItemsComponent: dataService.getItemtree()');
+//          console.log(response);
           this.itemcount = response[0];
           this.filesTree0 = <any> response[1];
           this.filterNodes('');
@@ -118,7 +124,7 @@ export class ItemsComponent implements OnInit {
 
   updateValue(item_path, item_value, item_type, item_oldvalue, dialog) {
 
-    console.log('updateValue:');
+    console.log('ItemsComponent.updateValue:');
 
     if (item_type === 'num' || item_type === 'scene') {
       if (isNaN(item_value.value as any)) {
@@ -135,19 +141,7 @@ export class ItemsComponent implements OnInit {
       }
     }
     console.log('--> updateValue: ' + item_value.value);
-    if (this.dataService.getHostIp() !== 'localhost:4200') {
-      this.dataService.changeItemValue(item_path, item_value.value)
-        .subscribe(
-          (response: ItemDetailsType[]) => {
-            console.log('updateValue:');
-            console.log({response});
-          },
-          (error) => {
-            console.log('ERROR: ItemsComponent: dataService.updateValue():');
-            console.log(error)
-          }
-        );
-    }
+    this.dataService.changeItemValue(item_path, item_value.value);
   }
 
 
@@ -172,37 +166,65 @@ export class ItemsComponent implements OnInit {
   */
 
 
-  getDetails(path) {
-    console.log('getDetails: ' + path);
-    if ((this.dataService.getHostIp() !== 'localhost:4200') || (path === 'beoremote.beo4command')) {
+monitorItem(path: string, monitorIt: boolean) {
+  // console.log('monitorItem: path=' + path + ', monitorIt=' + String(monitorIt));
+  if (monitorIt) {
+    this.monitoredItems.push(path);
+  } else {
+    for (let i = this.monitoredItems.length - 1; i >= 0; i--) {
+      if (this.monitoredItems[i] === path) {
+        this.monitoredItems.splice(i, 1);
+        // break;       //<-- Uncomment  if only the first term has to be removed
+      }
+    }
+  }
+
+  // console.log(this.monitoredItems);
+}
+
+
+getDetails(path: string) {
+    console.log('ItemsComponent.getDetails: ' + path);
+    if ((path !== undefined)) {
       this.dataService.getItemDetails(path)
         .subscribe(
-          (response: ItemDetailsType[]) => {
-            console.log('ItemsComponent:');
-            console.log(response);
-            this.itemdetails = response[0];
-            this.itemdetailsloaded = true;
-
-            this.update_age = this.shared.ageToString(this.itemdetails.update_age);
-            this.change_age = this.shared.ageToString(this.itemdetails.change_age);
-            this.previous_update_age = this.shared.ageToString(this.itemdetails.previous_update_age);
-            this.previous_change_age = this.shared.ageToString(this.itemdetails.previous_change_age);
+          (response: ItemDetails[]) => {
+            this.showDetails(response[0]);
             },
           (error) => {
             console.log('ERROR: ItemsComponent: dataService.getItemDetails():');
             console.log(error)
           }
           );
+
     } else {
-      this.itemdetails = <ItemDetailsType>{};
+      this.showDetails();
+    }
+
+  }
+
+
+  showDetails(response?) {
+    console.log('showDetails:');
+    console.log({response});
+
+    if (response === undefined) {
+      this.itemdetails = <ItemDetails>{};
       this.itemdetails.config = {};
+
       this.update_age = this.shared.ageToString(0);
       this.change_age = this.shared.ageToString(0);
       this.previous_update_age = this.shared.ageToString(0);
       this.previous_change_age = this.shared.ageToString(0);
-      this.itemdetailsloaded = true;
-    }
+    } else {
+      this.itemdetails = response;
 
+      this.update_age = this.shared.ageToString(this.itemdetails.update_age);
+      this.change_age = this.shared.ageToString(this.itemdetails.change_age);
+      this.previous_update_age = this.shared.ageToString(this.itemdetails.previous_update_age);
+      this.previous_change_age = this.shared.ageToString(this.itemdetails.previous_change_age);
+    }
+    this.itemdetailsloaded = true;
   }
 
 
@@ -220,7 +242,8 @@ export class ItemsComponent implements OnInit {
   }
 
   filterNodes(value) {
-    console.log('filterTree: >' + value + '<')
+//    console.log('ItemsComponent.filterTree: >' + value + '<')
+    value = value.toLowerCase();
     this.filteredTree = cloneDeep(this.filesTree0);
     this.treeIsFiltered = false;
     if (value && value !== '') {
@@ -234,6 +257,7 @@ export class ItemsComponent implements OnInit {
   clearFilter(event, filter) {
     filter.value = '';
     this.filterTree(event, filter.value);
+    this.itemdetailsloaded = false;
   }
 
   prune(array, filter) {
@@ -247,7 +271,7 @@ export class ItemsComponent implements OnInit {
           return true;
         }
       }
-      if (obj.label.indexOf(filter) === -1) {
+      if (obj.label.toLowerCase().indexOf(filter) === -1) {
         if (obj.children.length === 0) {
           array.splice(i, 1);
         }
@@ -257,7 +281,7 @@ export class ItemsComponent implements OnInit {
 
 
   filterTreeY(event, value) {
-    console.log('filterTree: >' + value + '<')
+//    console.log('ItemsComponent.filterTree: >' + value + '<')
     this.filteredTree = cloneDeep(this.filesTree0);
     if (value && value !== '') {
       this.filteredTree.forEach( node => {

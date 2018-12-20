@@ -1,18 +1,24 @@
 {
   "MENU": {
     "SYSTEM": "System",
+    "SYSTEM_PROPERTIES": "System Properties",
     "SERVICES": "Services",
     "ITEMS": "Items",
     "LOGICS": "Logics",
     "SCHEDULERS": "Schedulers",
     "PLUGINS": "Plugins",
+    "PLUGINS_LIST": "List of Plugins",
     "SCENES": "Scenes",
     "THREADS": "Threads",
     "LOGS": "Logs",
-    "DISCLOSURES": "Disclosures"
+    "LOGS_DISPLAY": "Display Logs",
+    "LOGGER_LIST": "Logger List",
+    "CONFIGURATION": "Configuration",
+    "LOGIN": "Login"
   },
   "SYSTEM": {
     "SYSTEMINFO": "Systeminfo",
+    "CHARTS": "Resource Charts",
     "PYPI CHECK": "PyPI Check",
     "DISCLOSURES": "Disclosures",
     "SHNG_VERSION": "SmartHomeNG Version",
@@ -21,7 +27,7 @@
     "HOST": "Host",
     "OS": "Operating System",
     "ARCHITECTURE": "Architecture",
-    "USER": "User",
+    "USER": "OS User",
     "PYTHON VERSION": "Python Version",
     "FREE DISC SPACE": "Free disk space",
     "DATE": "Date",
@@ -32,11 +38,33 @@
 
     "PACKAGE": "Package",
     "INSTALLED VERSION": "Installed Version",
+    "MINIMUM VERSION": "Minimum Version",
+    "MAXIMUM VERSION": "Maximum Version",
     "REQUIREMENTS": "Requirements",
     "NEWEST VERSION": "Newest Version",
+    "PACKAGES_REQ_PLUGINS": "Packages required by plugins",
     "PACKAGES_REQ_DOCUMENTATION": "Packages for building the documentation",
     "PACKAGES_REQ_TESTSUITE": "Packages for the Testsuite",
-    "PACKAGES_WO_REQ": "Packages without requirements"
+    "PACKAGES_WO_REQ": "Packages without requirements",
+    "MISSING": "missing",
+    "UNKNOWN": "unknown",
+
+    "CONFIGURATION": "Configuration",
+    "COMMON_SETTINGS": "Common",
+    "HTTP_SETTINGS": "Http Module",
+    "ADMIN_SETTINGS": "Admin Module",
+    "ADVANCED_SETTINGS": "Advanced",
+
+    "SET_PASSWORD": "Set Password",
+    "CHANGE_PASSWORD": "Change Password",
+    "OLDPWD_EMPTY": "Old password may not be empty",
+    "OLDPWD_WRONG": "Old password is wrong",
+    "NEWPWDS_DIFFER": "Versions of new password differ",
+    "OLD_PASSWORD": "Old password",
+    "NEW_PASSWORD": "New password",
+    "NEW_PASSWORD_REPEAT": "New password (repeat)",
+    "SHOW_PASSWORDS": "Show passwords",
+    "REMEMBER TO SAVE CHANGES": "Remember to save changes after setting a new password"
   },
   "SERVICES": {
     "SERVICES": "Services",
@@ -62,6 +90,7 @@
 
     "ATTRIBUTE": "Attribute",
     "VALUE": "Value",
+    "ACTIONS": "Actions",
 
     "PATH": "Item Path",
     "NAME": "Item Name",
@@ -110,10 +139,13 @@
     "INSTANCE": "Instance",
     "VERSION": "Version",
     "MULTI INSTANCE": "Multi-Instance",
-    "WEBIF": "Web Interface",
+    "WEBIF": "Web IF",
+    "HELP": "Help",
 
     "DETAILS OF CONFIGURATION": "Details of plugin configuration section '{{configname}}' --- (for plugin '{{pluginname}}')",
     "PARAMETERS": "Parameters",
+    "PARAMETER": "Parameter",
+    "VALUE": "Value",
     "ITEM ATTRIBUTES": "Item Attributes",
     "UPDATES TRIGGERED BY": "Plugin updates are triggered by {{count}} items",
     "PLUGIN METADATA": "Plugin Metadata",
@@ -122,7 +154,18 @@
     "MAINTAINER": "Maintainer",
     "TESTER": "Tester",
     "SUPPORT": "Support",
-    "DOCUMENTATION": "Documentation"
+    "DOCUMENTATION": "Documentation",
+    "PLUGIN_CONFIGURATION": "Plugin Configuration",
+    "PLUGIN_DISABLED": "Plugin will not be loaded at restart!",
+
+    "CONFIGURATION_ERRORS": "Configuration error(s)",
+    "DEFINED_MIN": "Defined minimum is",
+    "DEFINED_MAX": "Defined maximum is",
+    "ACTUAL_VALUE": "the actual value is",
+    "MANDATORY_VALUE": "This parameter is mandatory and may not be left empty",
+    "INVALID_KNX_ADDRESS": "is not a valid KNX group address",
+    "INVALID_MAC_ADDRESS": "is not a valid MAC address",
+    "INVALID_IP_ADDRESS": "is not a valid IP address"
   },
   "SCENES": {
     "SCENE": "Scene",
@@ -137,7 +180,47 @@
     "ACTIVE": "Active"
   },
 
-  "CLOSE": "Close",
+  "LOGS": {
+    "LOGFILE": "Log",
+    "FILTER": "Filter",
+
+    "LOGGER_NAME": "Logger Name",
+    "DISABLED": "Disabled",
+    "LEVEL": "Level",
+    "FILTERS": "Filters",
+    "HANDLERS": "Handlers",
+    "LOGFILES": "Logfiles",
+    "SELECT_LOG": "Select a log",
+    "TIMEFRAME": "Timeframe",
+    "SELECT_FILE": "Select a file",
+    "ACTUAL": "actual"
+  },
+
+  "BUTTON": {
+    "CLOSE": "Close",
+    "CHANGE": "Change",
+    "SAVE": "Save",
+    "ABORT": "Abort",
+    "LOGOUT": "Logout",
+    "ADD_PLUGIN": "Add Plugin",
+    "RELOAD_LOG": "Reload Log",
+    "RESTART_SHNG": "Restart Core",
+    "SAVE_SETTINGS": "Save Settings"
+  },
+
+  "ERROR": {
+    "ERROR": "Error",
+    "PAGE_NOT_FOUND": "Page not found"
+  },
+
+  "LOGIN": {
+    "PLEASE_SIGN_IN": "Please sign in",
+    "USERNAME": "Username",
+    "PASSWORD": "Password",
+    "INVALID_SIGNIN": "Invalid username and/or password",
+    "EXPIRED_SIGNIN": "The previous login session has expired",
+    "SIGN_IN": "Sign in"
+  },
 
   "YES": "Yes",
   "NO": "No",
@@ -151,5 +234,8 @@
   "SECONDS": "seconds",
 
   "True": "True",
-  "False": "False"
+  "False": "False",
+
+  "CONFIGURATION": "Configuration",
+  "RESTART FOR CHANGES": "Restart SmartHomeNG for changes to take effect"
 }

@@ -1,6 +1,6 @@
 
 
-<div style="margin-left: 10px; margin-right: 10px; margin-top: 5px;">
+<div style="margin-left: 10px; margin-right: 10px; margin-top: 55px;">
   <p-accordion [multiple]="true">
     <ng-container *ngFor="let scene of sceneList">
       <p-accordionTab>
@@ -87,91 +87,3 @@
 </div>
 
 
-
-
-<!--
-
-
-
-<div style="margin-left: 10px; margin-right: 10px;">
-  <div class="table-responsive">
-    <table class="table table-striped table-hover">
-      <colgroup>
-        <col width="25px">
-        <col width="40px">
-        <col width="80px">
-        <col width="400px">
-        <col minwidth="300px">
-      </colgroup>
-      <thead>
-      <tr class="shng_heading">
-        <th colspan="2">{{ 'Szene'|translate }}</th>
-        <th>{{ 'Lernen'|translate }}</th>
-        <th>{{ 'Item'|translate }}</th>
-        <th>{{ 'Wert'|translate }}</th>
-      </tr>
-      </thead>
-      <tbody>
-      <ng-container *ngFor="let scene of sceneList">
-        <tr>
-          <td *ngIf="scene['name'] === ''" class="p-1" colspan="5"><strong>{{ scene['path'] }}</strong></td>
-          <td *ngIf="scene['name'] !== ''" class="p-1" colspan="5"><strong>{{ scene['path'] }}</strong> &nbsp; ({{ scene['name'] }})</td>
-        </tr>
-
-
-        <ng-container *ngFor="let value of scene['values']">
-          <ng-container *ngFor="let action of value['action_list']">
-
-          <ng-container *ngIf="(action === value['action_list'][0]) && (value['action_name'] !== '')">
-            <tr>
-              <td class="p-1"></td>
-              <td class="p-1" colspan="3"><strong>{{ value['action'] }}</strong>: {{ value['action_name'] }}</td>
-              <td class="p-1"></td>
-              <td class="p-1"></td>
-            </tr>
-          </ng-container>
-
-            <tr>
-              <td class="p-1"></td>
-              <td class="p-1">
-                <ng-container *ngIf="action === value['action_list'][0] && value['action_name'] === ''" >
-                  <strong>{{ value['action'] }}</strong>:
-                </ng-container>
-              </td>
-
-              <td class="p-1">
-                <ng-container *ngIf="action[2]" >
-                  {{ 'ja'|translate }}
-                </ng-container>
-                <ng-container *ngIf="!action[2]" >
-                  {{ 'nein'|translate }}
-                </ng-container>
-              </td>
-
-              <td class="p-1">{{ action[0] }}</td>
-
-              <td class="p-1">
-                <ng-container *ngIf="!action[3] || action[3] === action[1]" >
-                  {{ action[1] }}
-                </ng-container>
-                <ng-container *ngIf="!(!action[3] || action[3] === action[1])" >
-                  {{ action[3] }} (default: {{ action[1] }})
-                </ng-container>
-              </td>
-
-              <td class="p-1">
-              </td>
-
-            </tr>
-
-          </ng-container>
-        </ng-container>
-
-      </ng-container>
-      </tbody>
-    </table>
-  </div>
-</div>
-
-
--->

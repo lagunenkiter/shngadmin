@@ -1,5 +1,5 @@
 
-<div style="margin-left: 10px; margin-right: 10px;">
+<div style="margin-left: 10px; margin-right: 10px; margin-top: 55px;">
   <table id="1" class="table table-striped table-hover">
     <thead>
     <tr class="shng_heading">
@@ -7,11 +7,12 @@
       <th style="width: 30px; border-top: 0"></th>
       <th style="width: 150px; border-top: 0">{{ 'PLUGIN.TYPE'|translate }}</th>
       <th style="width: 200px; border-top: 0">{{ 'PLUGIN.CONFIGNAME'|translate }}</th>
-      <th style="width: 260px; border-top: 0">{{ 'PLUGIN.PLUGINNAME'|translate }}</th>
-      <th style="width: 170px; border-top: 0">{{ 'PLUGIN.INSTANCE'|translate }}</th>
+      <th style="width: 250px; border-top: 0">{{ 'PLUGIN.PLUGINNAME'|translate }}</th>
+      <th style="width: 160px; border-top: 0">{{ 'PLUGIN.INSTANCE'|translate }}</th>
       <th style="width: 150px; border-top: 0">{{ 'PLUGIN.VERSION'|translate }}</th>
-      <th style="width: 130px; border-top: 0">{{ 'PLUGIN.MULTI  INSTANCE'|translate }}</th>
-      <th style="width: 130px; border-top: 0">{{ 'PLUGIN.WEBIF'|translate }}</th>
+      <th style="width: 120px; border-top: 0">{{ 'PLUGIN.MULTI  INSTANCE'|translate }}</th>
+      <th style="width: 40px;  border-top: 0;" >{{ 'PLUGIN.WEBIF'|translate }}</th>
+      <th style="width: 260px; border-top: 0;" >{{ 'PLUGIN.HELP'|translate }}</th>
     </tr>
     </thead>
     <tbody>
@@ -61,7 +62,28 @@
           <td class="py-1">
             <ng-container *ngIf="plugin.webif_url !== ''">
               <a href="{{ plugin.webif_url }}" target="_blank">
-                <img src="assets/img/html.svg" style="width: 25px; cursor: pointer;"/>
+                <img src="assets/img/html.svg" style="width: 35px; padding-right: 10px; cursor: pointer;"/>
+              </a>
+            </ng-container>
+            <ng-container *ngIf="plugin.webif_url === ''">
+              <a style="padding-right: 35px;"></a>
+            </ng-container>
+          </td>
+
+          <td class="py-1">
+            <ng-container *ngIf="plugin.smartplugin === true">
+              <a href="https://www.smarthomeng.de/user/plugins_doc/config/{{plugin.pluginname}}.html" target="_blank">
+                <img src="assets/img/info-button.svg" style="width: 35px; padding-right: 10px; cursor: pointer;"/>
+              </a>
+            </ng-container>
+            <ng-container *ngIf="plugin.metadata.documentation !== undefined && plugin.metadata.documentation !== ''">
+              <a href="{{plugin.metadata.documentation}}" target="_blank">
+                <img src="assets/img/read-manual.svg" style="width: 35px; padding-right: 10px; cursor: pointer;"/>
+              </a>
+            </ng-container>
+            <ng-container *ngIf="plugin.metadata.support !== undefined && plugin.metadata.support !== ''">
+              <a href="{{plugin.metadata.support}}" target="_blank">
+                <img src="assets/img/forum_chat2.svg" style="width: 25px; cursor: pointer;"/>
               </a>
             </ng-container>
           </td>
@@ -241,7 +263,7 @@
 
               </div>
               <div class="modal-footer">
-                <button type="button" tabindex="1" autofocus="autofocus" class="btn btn-primary btn-sm btn-shng" (click)="details.hide()">{{'CLOSE'|translate}}</button>
+                <button type="button" tabindex="1" autofocus="autofocus" class="btn btn-primary btn-sm btn-shng" (click)="details.hide()">{{'BUTTON.CLOSE'|translate}}</button>
               </div>
             </div>
           </div>

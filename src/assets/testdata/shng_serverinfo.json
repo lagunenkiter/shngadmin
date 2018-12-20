@@ -4,5 +4,7 @@
   "itemtree_fullpath": false,
   "itemtree_searchstart": 2,
   "tz": "Europe/Berlin",
-  "tzname": "CEST"
+  "tzname": "CEST",
+  "websocket_host": "smarthomeng.local",
+  "websocket_port": "2424"
 }
