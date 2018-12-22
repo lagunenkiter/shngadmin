@@ -3,9 +3,9 @@ import { HttpClient } from '@angular/common/http';
 
 import { TranslateService } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { ServerDataService } from './common/services/server-data.service';
-import {AuthService} from './common/services/auth.service';
-import {ServerInfo} from './models/server-info';
+import { ServerApiService } from './common/services/server-api.service';
+import { AuthService } from './common/services/auth.service';
+import { ServerInfo } from './common/models/server-info';
 
 
 
@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
   title = 'app';
 
   constructor(private http: HttpClient,
-              private dataService: ServerDataService,
+              private dataService: ServerApiService,
               private translate: TranslateService,
               public authService: AuthService) {
 
@@ -33,7 +33,7 @@ export class AppComponent implements OnInit {
 
 //    translate.setDefaultLang('de');
 
-    this.dataService.getShngServerinfo()
+    this.dataService.getServerinfo()
       .subscribe(
         (response: ServerInfo) => {
           this.dataService.shng_serverinfo = response;

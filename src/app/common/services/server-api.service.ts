@@ -1,11 +1,15 @@
-import {Inject, Injectable} from '@angular/core';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-import {TranslateService} from '@ngx-translate/core';
-import {parse} from "url";
-import {ServerInfo} from '../../models/server-info';
-import {catchError, map} from 'rxjs/operators';
-import {JwtHelperService} from '@auth0/angular-jwt';
-import {of} from 'rxjs';
+
+import { Inject, Injectable } from '@angular/core';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+
+import { map, catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
+
+
+import { TranslateService } from '@ngx-translate/core';
+import { parse } from 'url';
+import { ServerInfo } from '../models/server-info';
+
 
 
 let dataUrl = 'http://';
@@ -14,7 +18,8 @@ let host_ip = '';
 @Injectable({
   providedIn: 'root'
 })
-export class ServerDataService {
+export class ServerApiService {
+// export class ThreadsApiService {
 
   baseUrl: string;
   shng_serverinfo: ServerInfo = <ServerInfo>{'itemtree_fullpath': true};
@@ -22,14 +27,11 @@ export class ServerDataService {
 
   constructor(private http: HttpClient, private translate: TranslateService, @Inject('BASE_URL') baseUrl: string) {
 
-    console.log('ServerDataService.constructor:');
+    console.log('ServerApiService.constructor:');
 
     this.baseUrl = baseUrl;
 
     const parsedUrl = parse(baseUrl);
-    // console.log({parsedUrl});
-    // let apiUrl = parsedUrl.protocol + '//' + parsedUrl.host + '/api/';
-    // Omit the domain to get automatic whitelisting in angular2-jwt
     let apiUrl = '/api/';
 
     if (host_ip === '') {
@@ -40,28 +42,20 @@ export class ServerDataService {
       } else {
         dataUrl = baseUrl;
       }
-      // console.log({host_ip});
       sessionStorage.setItem('apiUrl', apiUrl);
       sessionStorage.setItem('dataUrl', dataUrl);
 
     }
 
+
+
     // this language will be used as a fallback when a translation isn't found in the current language
     translate.setDefaultLang('en');
 
-    this.getShngServerinfo()
+    this.getServerinfo()
       .subscribe(
         (response: ServerInfo) => {
           this.shng_serverinfo = response;
-          console.log('ServerDataService.getShngServerinfo', {response});
-          sessionStorage.setItem('default_language', this.shng_serverinfo.default_language);
-          sessionStorage.setItem('client_ip', this.shng_serverinfo.client_ip);
-          sessionStorage.setItem('tz', this.shng_serverinfo.tz);
-          sessionStorage.setItem('tzname', this.shng_serverinfo.tzname);
-          sessionStorage.setItem('itemtree_fullpath', this.shng_serverinfo.itemtree_fullpath.toString());
-          sessionStorage.setItem('itemtree_searchstart', this.shng_serverinfo.itemtree_searchstart.toString());
-
-          this.translate.use(this.shng_serverinfo.default_language);
         },
         (error) => {
           console.warn('DataService: getShngServerinfo():', {error});
@@ -72,14 +66,38 @@ export class ServerDataService {
   }
 
 
-  getShngServerinfo() {
-    const url = dataUrl + 'shng_serverinfo.json\\';
-    // console.log('getShngServerinfo: url: ' + url);
-    return this.http.get(url);
+  getServerinfo() {
+    const apiUrl = sessionStorage.getItem('apiUrl');
+    let url = apiUrl + 'serverinfo/';
+    if (apiUrl.includes('localhost')) {
+      url += 'default.json';
+    }
+    return this.http.get(url)
+      .pipe(
+        map(response => {
+          this.shng_serverinfo = <ServerInfo> response;
+          const result = response;
+          sessionStorage.setItem('default_language', this.shng_serverinfo.default_language);
+          sessionStorage.setItem('client_ip', this.shng_serverinfo.client_ip);
+          sessionStorage.setItem('tz', this.shng_serverinfo.tz);
+          sessionStorage.setItem('tzname', this.shng_serverinfo.tzname);
+          sessionStorage.setItem('itemtree_fullpath', this.shng_serverinfo.itemtree_fullpath.toString());
+          sessionStorage.setItem('itemtree_searchstart', this.shng_serverinfo.itemtree_searchstart.toString());
+          sessionStorage.setItem('core_branch', this.shng_serverinfo.core_branch);
+          sessionStorage.setItem('plugins_branch', this.shng_serverinfo.plugins_branch);
+
+          this.translate.use(sessionStorage.getItem('default_language'));
+          return result;
+        }),
+        catchError((err: HttpErrorResponse) => {
+          console.error('ServerApiService (getServerinfo): Could not read serverinfo data' + ' - ' + err.error.error);
+          return of({});
+        })
+      );
   }
 
 
-
+  // get Status of shNG software
   getShngServerStatus() {
     const apiUrl = sessionStorage.getItem('apiUrl');
     let url = apiUrl + 'status/';
@@ -100,6 +118,7 @@ export class ServerDataService {
   }
 
 
+  // restart shNG software
   restartShngServer() {
     const apiUrl = sessionStorage.getItem('apiUrl');
     let url = apiUrl + 'restart/';
@@ -120,4 +139,7 @@ export class ServerDataService {
   }
 
 }
+
+
+
 

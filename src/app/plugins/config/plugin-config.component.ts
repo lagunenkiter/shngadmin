@@ -1,22 +1,23 @@
 
-import {Component, OnInit, TemplateRef} from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
+import { ChangeDetectorRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { faPlus, faPlusCircle, faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 
 
-import {ItemDetails} from '../../models/item-details';
-import { ServerDataService } from '../../common/services/server-data.service';
+import {ItemDetails} from '../../common/models/item-details';
+import { ServerApiService } from '../../common/services/server-api.service';
 import { OlddataService } from '../../common/services/olddata.service';
 import { PluginService } from '../../common/services/plugin.service';
 import {TranslateService} from '@ngx-translate/core';
 
 import { SharedService } from '../../common/services/shared.service';
 import {AppComponent} from '../../app.component';
-import {PlugininfoType} from '../../models/plugin-info';
-import {ServerInfo} from '../../models/server-info';
-import {PluginConfig} from '../../models/plugin-config';
+import {PlugininfoType} from '../../common/models/plugin-info';
+import {ServerInfo} from '../../common/models/server-info';
+import {PluginConfig} from '../../common/models/plugin-config';
 
 
 @Component({
@@ -56,7 +57,8 @@ export class PluginConfigComponent implements OnInit {
   validation_dialog_text: string[];
 
 
-  constructor(private serverdataService: ServerDataService,
+  constructor(private cdRef: ChangeDetectorRef,
+              private serverdataService: ServerApiService,
               private dataService: OlddataService,
               private pluginService: PluginService,
               private translate: TranslateService,
@@ -64,70 +66,41 @@ export class PluginConfigComponent implements OnInit {
 
 
   ngOnInit() {
-    console.log('PluginConfigComponent.ngOnInit');
+    // console.log('PluginConfigComponent.ngOnInit');
 
-    this.serverdataService.getShngServerinfo()
-      .subscribe(
-        (response: ServerInfo) => {
-          console.log('getShngServerinfo:');
-          console.log(response);
-          this.server_info = response;
-          this.translate.use(this.dataService.getconfigDefaultLanguage());
+    this.lang = sessionStorage.getItem('default_language');
+    this.translate.use(this.lang);
 
-          this.lang = this.serverdataService.shng_serverinfo.default_language;
+    this.pluginService.getPluginConfig().then(pluginconf => { this.pluginconflist = pluginconf;
+      // console.log(this.pluginconflist);
 
-          this.pluginService.getPluginConfig().then(pluginconf => { this.pluginconflist = pluginconf;
-            console.log(this.pluginconflist);
+      for (const plg in this.pluginconflist.plugin_config) {
+        if (this.pluginconflist.plugin_config.hasOwnProperty(plg) ) {
+          const confname = plg;
+          let plgname = this.pluginconflist.plugin_config[plg]['plugin_name'];
+          if (plgname === undefined) {
+            plgname = this.pluginconflist.plugin_config[plg]['class_path'];
+          }
+          const instance = this.pluginconflist.plugin_config[plg]['instance'];
+          const conf = {'confname': confname, 'instance': instance, 'plugin': plgname, 'desc': '' };
 
-            for (const plg in this.pluginconflist.plugin_config) {
-              if (this.pluginconflist.plugin_config.hasOwnProperty(plg) ) {
-                const confname = plg;
-                let plgname = this.pluginconflist.plugin_config[plg]['plugin_name'];
-                if (plgname === undefined) {
-                  plgname = this.pluginconflist.plugin_config[plg]['class_path'];
-                }
-                const instance = this.pluginconflist.plugin_config[plg]['instance'];
-                const conf = {'confname': confname, 'instance': instance, 'plugin': plgname, 'desc': '' };
+          let enabled = 'true';
+          if (this.pluginconflist.plugin_config[plg]['plugin_enabled'] === 'False') {
+            enabled = 'false';
+          }
+          conf['enabled'] = enabled;
+          // get description from plugin_config (faster)
+//          const desc = this.pluginconflist.plugin_config[plg]['_description'][this.lang];
+          const desc = this.pluginconflist.plugin_config[plg]['_description'];
+          if (desc !== undefined) {
+            conf['desc'] = desc[this.lang];
+          }
 
-                let enabled = 'true';
-                if (this.pluginconflist.plugin_config[plg]['plugin_enabled'] === 'False') {
-                  enabled = 'false';
-                }
-                conf['enabled'] = enabled;
-/*
-                // get description by loading the metadata of the plugin
-                if (plgname.startsWith('plugins.') ) {
-                  // remove the beginning of the class-path
-                  plgname = plgname.substring(8);
-                }
-                this.pluginService.getPluginMedatata(plgname).then(meta => { const pluginmetadata = meta;
-                  if (pluginmetadata !== null) {
-                    console.log('Metadata: lang='+this.lang)
-                    console.log(pluginmetadata.plugin.description)
-                    const desc = pluginmetadata.plugin.description[this.lang];
-                    conf['desc'] = desc;
-                  }
-                });
-*/
-                // get description from plugin_config (faster)
-//                const desc = this.pluginconflist.plugin_config[plg]['_description'][this.lang];
-                const desc = this.pluginconflist.plugin_config[plg]['_description'];
-                if (desc !== undefined) {
-                  conf['desc'] = desc[this.lang];
-                }
-
-                // add to the table of configured plugins
-                this.configuredplugins.push(conf);
-              }
-            }
-          });
-
-        },
-        (error) => {
-          console.log('ERROR: ServicesComponent: dataService.getSchedulerinfo():');
-          console.log(error)
+          // add to the table of configured plugins
+          this.configuredplugins.push(conf);
         }
-      );
+      }
+    });
 
 
     this.cols = [

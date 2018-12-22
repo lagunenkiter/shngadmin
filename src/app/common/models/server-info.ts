@@ -1,6 +1,6 @@
 
 //
-// Datatype for <shng-server>:<port>/admin/shng_serverinfo.json
+// Datatype for <shng-server>:<port>/api/serverinfo
 //
 export interface ServerInfo {
   default_language: string;
@@ -9,4 +9,8 @@ export interface ServerInfo {
   itemtree_searchstart: number;
   tz: string;
   tzname: string;
+  core_branch: string;
+  plugins_branch: string;
+  websocket_host: string;
+  websocket_port: string;
 }

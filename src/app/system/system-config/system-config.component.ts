@@ -2,7 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ConfigApiService} from '../../common/services/config-api.service';
 import {SchedulersApiService} from '../../common/services/schedulers-api.service';
-import {ServerDataService} from '../../common/services/server-data.service';
+import {ServerApiService} from '../../common/services/server-api.service';
 
 import {sha512} from 'js-sha512';
 
@@ -55,7 +55,7 @@ export class SystemConfigComponent implements OnInit {
 
 
   constructor(private dataService: ConfigApiService,
-              private dataServiceServer: ServerDataService) { }
+              private dataServiceServer: ServerApiService) { }
 
 
   ngOnInit() {

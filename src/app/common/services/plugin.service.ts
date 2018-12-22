@@ -3,8 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 
-import { PluginConfig } from '../../models/plugin-config';
-import { ServerDataService } from './server-data.service';
+import { PluginConfig } from '../models/plugin-config';
+import { ServerApiService } from './server-api.service';
 
 
 @Injectable({
@@ -13,7 +13,7 @@ import { ServerDataService } from './server-data.service';
 export class PluginService {
 
   constructor(private http: HttpClient,
-              private dataService: ServerDataService) { }
+              private dataService: ServerApiService) { }
 
   getPluginConfig() {
     const dataUrl = sessionStorage.getItem('dataUrl');

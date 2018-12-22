@@ -1,10 +1,9 @@
 
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { OlddataService } from '../common/services/olddata.service';
 
 import {SchedulersApiService} from '../common/services/schedulers-api.service';
-import {ServerDataService} from '../common/services/server-data.service';
+import {ServerApiService} from '../common/services/server-api.service';
 
 
 @Component({
@@ -20,7 +19,7 @@ export class ServicesComponent implements OnInit {
 
   constructor(private http: HttpClient,
               private dataService: SchedulersApiService,
-              private dataServiceServer: ServerDataService) {
+              private dataServiceServer: ServerApiService) {
   }
 
   ngOnInit() {

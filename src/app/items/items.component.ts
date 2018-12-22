@@ -13,9 +13,9 @@ import { cloneDeep } from 'lodash';
 
 import { AppComponent } from '../app.component';
 import { OlddataService } from '../common/services/olddata.service';
-import { ItemTree} from '../models/item-tree';
+import { ItemTree} from '../common/models/item-tree';
 import { SharedService } from '../common/services/shared.service';
-import {ItemDetails} from '../models/item-details';
+import {ItemDetails} from '../common/models/item-details';
 
 
 @Component({
@@ -128,13 +128,13 @@ export class ItemsComponent implements OnInit {
 
     if (item_type === 'num' || item_type === 'scene') {
       if (isNaN(item_value.value as any)) {
-        this.item_val = item_value
+        this.item_val = item_value;
         this.alertText = this.translate.instant('ITEMS.ALERT.NOT NUMERIC');
         dialog.show();
         return;
       }
       if (item_type === 'scene' && (item_value.value < 0 || item_value.value > 63)) {
-        this.item_val = item_value
+        this.item_val = item_value;
         this.alertText = this.translate.instant('ITEMS.ALERT.INVALID SCENE NUMBER');
         dialog.show();
         return;

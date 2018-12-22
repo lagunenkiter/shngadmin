@@ -1,7 +1,7 @@
 
 import { Component, OnInit } from '@angular/core';
 
-import { ThreadInfo } from '../models/thread-info';
+import { ThreadInfo } from '../common/models/thread-info';
 import {ThreadsApiService} from '../common/services/threads-api.service';
 
 

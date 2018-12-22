@@ -2,8 +2,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
-import { LogsType } from '../../models/logfiles-info';
-import { ServerDataService } from './server-data.service';
+import { LogsType } from '../models/logfiles-info';
+import { ServerApiService } from './server-api.service';
 import { map, catchError } from 'rxjs/operators';
 import {of} from 'rxjs';
 
@@ -15,7 +15,7 @@ import {of} from 'rxjs';
 export class LogsApiService {
 
   constructor(private http: HttpClient,
-              private dataService: ServerDataService) { }
+              private dataService: ServerApiService) { }
 
 
   getLogs() {

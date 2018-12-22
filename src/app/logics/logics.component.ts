@@ -1,17 +1,15 @@
 
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { OlddataService } from '../common/services/olddata.service';
 
-import { SchedulerInfo } from '../models/scheduler-info';
+import { SchedulerInfo } from '../common/models/scheduler-info';
 import {SchedulersApiService} from '../common/services/schedulers-api.service';
 
 
 @Component({
   selector: 'app-logics',
   templateUrl: './logics.component.html',
-  styleUrls: ['./logics.component.css'],
-  providers: [OlddataService]
+  styleUrls: ['./logics.component.css']
 })
 
 

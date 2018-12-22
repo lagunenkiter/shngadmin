@@ -2,10 +2,10 @@
 import {APP_BASE_HREF} from '@angular/common';
 import {Inject, Injectable, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {ItemDetails} from '../../models/item-details';
+import {ItemDetails} from '../models/item-details';
 import {TranslateService} from '@ngx-translate/core';
-import {SystemInfo} from '../../models/system-info';
-import {ServerInfo} from '../../models/server-info';
+import {SystemInfo} from '../models/system-info';
+import {ServerInfo} from '../models/server-info';
 import {parse} from 'url';
 
 let url_start = 'http://';

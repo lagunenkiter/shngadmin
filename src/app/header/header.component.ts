@@ -3,15 +3,13 @@ import { Component, OnInit } from '@angular/core';
 import { isSuccess } from '@angular/http/src/http_utils';
 
 import { TranslateService } from '@ngx-translate/core';
-// import { faCircleNotch, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { MenuItem } from 'primeng/api';
 
-import {ServerInfo} from '../models/server-info';
-import { ServerDataService } from '../common/services/server-data.service';
-// import {SystemInfo} from '../models/system-info';
-import {AuthService} from '../common/services/auth.service';
-import {AppComponent} from '../app.component';
-import {Router} from '@angular/router';
+import { ServerInfo } from '../common/models/server-info';
+import { ServerApiService } from '../common/services/server-api.service';
+import { AuthService } from '../common/services/auth.service';
+import { AppComponent } from '../app.component';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -33,7 +31,7 @@ export class HeaderComponent implements OnInit {
 
 
   constructor(private appComponent: AppComponent,
-              private dataService: ServerDataService,
+              private dataService: ServerApiService,
               private translate: TranslateService,
               protected router: Router,
               public authService: AuthService) {
@@ -44,39 +42,17 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     // console.log('HeaderComponent.ngOnInit:');
-    // const default_language = sessionStorage.getItem('default_language)')
-    // console.log({default_language});
     const credentials = {'username': '', 'password': ''};
     // console.log('signIn', {credentials});
     this.authService.login(credentials)
       .subscribe((result: boolean) => {
         // console.log('Anonymous login:', {result});
-      this.dataService.getShngServerinfo()
-        .subscribe(
-          (response: ServerInfo) => {
-            this.translate.use(response.default_language);
 
-            sessionStorage.setItem('default_language', this.dataService.shng_serverinfo.default_language);
-            sessionStorage.setItem('client_ip', this.dataService.shng_serverinfo.client_ip);
-            sessionStorage.setItem('tz', this.dataService.shng_serverinfo.tz);
-            sessionStorage.setItem('tzname', this.dataService.shng_serverinfo.tzname);
-            sessionStorage.setItem('itemtree_fullpath', this.dataService.shng_serverinfo.itemtree_fullpath.toString());
-            sessionStorage.setItem('itemtree_searchstart', this.dataService.shng_serverinfo.itemtree_searchstart.toString());
-
-            this.buildMenu();
-
-          },
-          (error) => {
-            console.log('HeaderComponent: dataService.getShngServerinfo() 2:');
-            console.log(error);
-          }
-        );
-
-
+        this.buildMenu();
       });
 
-
   }
+
 
   buildMenu() {
 
@@ -186,6 +162,9 @@ export class HeaderComponent implements OnInit {
 
 
   getMenuItems() {
+
+    this.translate.use(sessionStorage.getItem('default_language'));
+
     const isLoggedIn = this.authService.isLoggedIn();
     if (this.items) {
       this.items[0].visible = isLoggedIn;

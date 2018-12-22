@@ -1,7 +1,7 @@
 
 import { Component, OnInit } from '@angular/core';
 
-import { LogsType, LogsInfoDict } from '../models/logfiles-info';
+import { LogsType, LogsInfoDict } from '../common/models/logfiles-info';
 import { LogsApiService } from '../common/services/logs-api.service';
 import {TranslateService} from '@ngx-translate/core';
 
