@@ -103,7 +103,8 @@ export class ItemsComponent implements OnInit {
           this.filesTree0 = <any> response[1];
           this.filterNodes('');
           // this.plugininfo.sort(function (a, b) {return (a.pluginname > b.pluginname) ? 1 : ((b.pluginname > a.pluginname) ? -1 : 0)});
-          this.searchStart_param = {'number': this.dataService.getconfigItemtreeSearchstart()};
+//          this.searchStart_param = {'number': sessionStorage.getItem('itemtree_searchstart')};
+          this.searchStart_param = {'number': sessionStorage.getItem('itemtree_searchstart')};
         },
         (error) => {
           console.log('ERROR: ItemsComponent: dataService.getItemtree():');
@@ -234,7 +235,7 @@ getDetails(path: string) {
 */
 
   filterTree(treeModel, value) {
-    if (value.length >= this.dataService.getconfigItemtreeSearchstart()) {
+    if (value.length >= sessionStorage.getItem('itemtree_searchstart')) {
       this.filterNodes(value);
     } else {
       this.filterNodes('');

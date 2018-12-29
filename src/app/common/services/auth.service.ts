@@ -34,7 +34,9 @@ export class AuthService {
 
   login(credentials) {
     const send_hash = 'shNG0160$';
-    const hostip = this.dataService.getHostIp();
+    // const hostip = this.dataService.getHostIp();
+    const hostip = sessionStorage.getItem('hostIp');
+
 
     const send_credentials = <any>{};
 

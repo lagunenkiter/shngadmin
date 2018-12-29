@@ -26,6 +26,7 @@ export class OlddataService implements OnInit {
 
   constructor(private http: HttpClient, private translate: TranslateService, @Inject('BASE_URL') baseUrl: string) {
 
+/*
     console.log('OlddataService.constructor:');
 
     // this language will be used as a fallback when a translation isn't found in the current language
@@ -43,71 +44,14 @@ export class OlddataService implements OnInit {
       // console.log({host_ip});
 
     }
+*/
   }
 
 
   ngOnInit() {
 //    console.log('OlddataService.ngOnInit:');
-/*
-    this.getShngServerinfo()
-      .subscribe(
-        (response: ServerInfo) => {
-          this.shng_serverinfo = response;
-          console.log({response});
-          sessionStorage.setItem('tz', this.shng_serverinfo.tz);
-          sessionStorage.setItem('tzname', this.shng_serverinfo.tzname);
-
-//            console.log('DataService.constructor (2):');
-//            console.log(this.shng_serverinfo)
-          this.translate.use(this.getconfigDefaultLanguage());
-        },
-        (error) => {
-          console.warn('DataService: getShngServerinfo():', {error});
-        }
-      );
-*/
   }
 
-
-  getHostIp() {
-    return host_ip.split(':')[0];
-  }
-
-
-  getHostPort() {
-    return host_ip.split(':')[1];
-  }
-
-
-  getWsPort() {
-    return '2424';
-  }
-
-
-  getBaseUrl() {
-    return this.baseUrl;
-  }
-
-
-  getUrlStart() {
-    if (host_ip === 'localhost:4200') {
-      url_start = this.baseUrl + 'assets/testdata/';
-    } else {
-      url_start = this.baseUrl;
-    }
-    return url_start;
-  }
-
-
-  getconfigItemtreeFullpath() {
-//    console.log('getconfigItemtreeFullpath: itemtree_fullpath=' + shng_serverinfo.itemtree_fullpath);
-    return this.shng_serverinfo.itemtree_fullpath;
-  }
-
-  getconfigItemtreeSearchstart() {
-//    console.log('getconfigItemtreeSearchstart: itemtree_searchstart=' + shng_serverinfo.itemtree_searchstart);
-    return this.shng_serverinfo.itemtree_searchstart;
-  }
 
   getconfigDefaultLanguage() {
 //    console.log('getconfigDefaultLanguage: default_language=' + shng_serverinfo.default_language);
@@ -127,13 +71,6 @@ export class OlddataService implements OnInit {
   }
 
 
-/*
-  getShngServerinfo() {
-    const url = url_start + 'shng_serverinfo.json\\';
-    // console.log('getShngServerinfo: url: ' + url);
-    return this.http.get(url);
-  }
-*/
 
 
   getSysteminfo() {
@@ -200,15 +137,8 @@ export class OlddataService implements OnInit {
     }
   }
 
-  // --------------------------------------------------------------------------
 
-  getPlugininfo() {
-    const url = url_start + 'plugininfo.json\\';
-    // console.log('getPlugininfo: url: ' + url);
-    return this.http.get(url);
-  }
-
-
+/*
   // -----------------------------------------------------------
   //  Update config of one plugin in etc/plugin.yaml on backend
   //
@@ -232,6 +162,7 @@ export class OlddataService implements OnInit {
         );
     }
   }
+*/
 
 }
 

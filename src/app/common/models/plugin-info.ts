@@ -4,7 +4,7 @@ import {PluginItemAttribute} from './plugin-item-attribute';
 import {PluginParameter} from './plugin-parameter';
 
 //
-// Datatype for <shng-server>:<port>/admin/plugininfo.json
+// Datatype for <shng-server>:<port>/api/plugins/info
 //
 export interface PlugininfoType {
   pluginname: string;

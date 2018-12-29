@@ -45,12 +45,15 @@ export class ServerApiService {
       sessionStorage.setItem('apiUrl', apiUrl);
       sessionStorage.setItem('dataUrl', dataUrl);
 
-    }
+      sessionStorage.setItem('hostIp', host_ip.split(':')[0]);
+      sessionStorage.setItem('wsPort', '2424');
 
+    }
 
 
     // this language will be used as a fallback when a translation isn't found in the current language
     translate.setDefaultLang('en');
+
 
     this.getServerinfo()
       .subscribe(

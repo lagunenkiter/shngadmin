@@ -1,23 +1,29 @@
 
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { ChangeDetectorRef } from '@angular/core';
+import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { faPlus, faPlusCircle, faPlusSquare } from '@fortawesome/free-solid-svg-icons';
+import { TranslateService } from '@ngx-translate/core';
 
 
-import {ItemDetails} from '../../common/models/item-details';
 import { ServerApiService } from '../../common/services/server-api.service';
+import { PluginsApiService } from '../../common/services/plugins-api.service';
 import { OlddataService } from '../../common/services/olddata.service';
-import { PluginService } from '../../common/services/plugin.service';
-import {TranslateService} from '@ngx-translate/core';
 
 import { SharedService } from '../../common/services/shared.service';
+
 import {AppComponent} from '../../app.component';
 import {PlugininfoType} from '../../common/models/plugin-info';
 import {ServerInfo} from '../../common/models/server-info';
-import {PluginConfig} from '../../common/models/plugin-config';
+import { PluginsConfig } from '../../common/models/plugins-config';
+import { PluginsInstalled } from '../../common/models/plugins-installed';
+import {SceneInfo} from '../../common/models/scene-info';
+
+
+export interface ConfiguredPlugin { confname: string; instance: string; plugin: string; desc: string; }
 
 
 @Component({
@@ -32,9 +38,9 @@ export class PluginConfigComponent implements OnInit {
   faPlusCircle = faPlusCircle;
   faPlusSquare = faPlusSquare;
 
-  configuredplugins: any[];
+  configuredplugins: ConfiguredPlugin[];
   cols: any[];
-  pluginconflist: PluginConfig;
+  pluginconflist: PluginsConfig;
   restart_core_button: boolean;
 
   server_info: ServerInfo;
@@ -46,11 +52,29 @@ export class PluginConfigComponent implements OnInit {
   parameter_cols: any[];
   rowclicked_foredit: any = false;
 
+  // for list of installed plugins dialog
   dialog_display: boolean = false;
   dialog_readonly: boolean = false;
   dialog_configname: string;
   dialog_pluginname: string;
   dialog_description: string;
+
+
+  // for add dialog
+  add_display: boolean = false;
+  plugintypes: string[] = ['system', 'gateway', 'interface', 'protocol', 'web', 'unclassified'];
+  plugintypes_expanded: boolean[] = [];
+  spinner_display: boolean = false;
+  add_firstrun: boolean = true;
+  plugins_installed: PluginsInstalled;
+  plugins_installed_list: string[];
+
+  // set configuration name dialog
+  setconfig_display: boolean = false;
+  selected_plugin: string;
+  pluginconfig_name: string;
+  translate_params: {} = {};
+  add_enabled: boolean;
 
   validation_dialog_display: boolean = false;
   validation_dialog_parameter: string;
@@ -59,10 +83,11 @@ export class PluginConfigComponent implements OnInit {
 
   constructor(private cdRef: ChangeDetectorRef,
               private serverdataService: ServerApiService,
+              private pluginsdataService: PluginsApiService,
               private dataService: OlddataService,
-              private pluginService: PluginService,
               private translate: TranslateService,
-              private shared: SharedService) { }
+              private shared: SharedService,
+              private router: Router) { }
 
 
   ngOnInit() {
@@ -71,36 +96,42 @@ export class PluginConfigComponent implements OnInit {
     this.lang = sessionStorage.getItem('default_language');
     this.translate.use(this.lang);
 
-    this.pluginService.getPluginConfig().then(pluginconf => { this.pluginconflist = pluginconf;
-      // console.log(this.pluginconflist);
 
-      for (const plg in this.pluginconflist.plugin_config) {
-        if (this.pluginconflist.plugin_config.hasOwnProperty(plg) ) {
-          const confname = plg;
-          let plgname = this.pluginconflist.plugin_config[plg]['plugin_name'];
-          if (plgname === undefined) {
-            plgname = this.pluginconflist.plugin_config[plg]['class_path'];
-          }
-          const instance = this.pluginconflist.plugin_config[plg]['instance'];
-          const conf = {'confname': confname, 'instance': instance, 'plugin': plgname, 'desc': '' };
+    this.pluginsdataService.getPluginsConfig()
+      .subscribe(
+        (response) => {
+          this.pluginconflist = <any>response;
+          // console.log(this.pluginconflist);
 
-          let enabled = 'true';
-          if (this.pluginconflist.plugin_config[plg]['plugin_enabled'] === 'False') {
-            enabled = 'false';
-          }
-          conf['enabled'] = enabled;
-          // get description from plugin_config (faster)
+          for (const plg in this.pluginconflist.plugin_config) {
+            if (this.pluginconflist.plugin_config.hasOwnProperty(plg) ) {
+              const confname = plg;
+              let plgname = this.pluginconflist.plugin_config[plg]['plugin_name'];
+              if (plgname === undefined) {
+                plgname = this.pluginconflist.plugin_config[plg]['class_path'];
+              }
+              const instance = this.pluginconflist.plugin_config[plg]['instance'];
+              const conf = {'confname': confname, 'instance': instance, 'plugin': plgname, 'desc': '' };
+
+              let enabled = 'true';
+              if (this.pluginconflist.plugin_config[plg]['plugin_enabled'] === 'False') {
+                enabled = 'false';
+              }
+              conf['enabled'] = enabled;
+              // get description from plugin_config (faster)
 //          const desc = this.pluginconflist.plugin_config[plg]['_description'][this.lang];
-          const desc = this.pluginconflist.plugin_config[plg]['_description'];
-          if (desc !== undefined) {
-            conf['desc'] = desc[this.lang];
+              const desc = this.pluginconflist.plugin_config[plg]['_description'];
+              if (desc !== undefined) {
+                conf['desc'] = desc[this.lang];
+              }
+
+              // add to the table of configured plugins
+              this.configuredplugins.push(conf);
+            }
           }
 
-          // add to the table of configured plugins
-          this.configuredplugins.push(conf);
         }
-      }
-    });
+      );
 
 
     this.cols = [
@@ -197,11 +228,15 @@ export class PluginConfigComponent implements OnInit {
 
           if (paramdata.type === 'bool') {
             if (conf[param] === undefined) {
-              paramdata.value = false;
+              paramdata.value = null;
             } else if (typeof conf[param] === 'boolean') {
               paramdata.value = conf[param];
             } else {
-              paramdata.value = (conf[param].toLowerCase() === 'true');
+              if (conf[param] === null) {
+                paramdata.value = null;
+              } else {
+                paramdata.value = (conf[param].toLowerCase() === 'true');
+              }
             }
           } else {
             paramdata.value = <string>conf[param];
@@ -318,11 +353,27 @@ export class PluginConfigComponent implements OnInit {
       const config = JSON.parse(JSON.stringify( this.pluginconflist.plugin_config[this.dialog_configname] ));
       delete config['_meta'];
       delete config['_description'];
+      console.log({config});
+      for (const conf in config) {
+        if (config.hasOwnProperty(conf) ) {
+          if (config[conf] === null) {
+            delete config[conf];
+          }
+          console.log({conf}, config[conf]);
+        }
+      }
 
       this.restart_core_button = true;
 
       // transfer to backend server
-      this.dataService.setPluginConfig(this.dialog_configname, config);
+      this.pluginsdataService.setPluginConfig(this.dialog_configname, {'config': config})
+        .subscribe(
+            (response: any) => {
+              if (response.result !== 'ok') {
+                // display error dialog, if save failed?
+              }
+            }
+          );
     }
   }
 
@@ -339,11 +390,80 @@ export class PluginConfigComponent implements OnInit {
   }
 
 
-  addPlugin() {
-    console.log('PluginConfigComponent.addPlugin:');
 
-    console.error('code for adding plugin is missing!');
-    alert('code for adding plugin is missing!');
+
+  addPluginDialog() {
+    console.log('PluginConfigComponent.addPluginDialog:');
+
+    for (let i = 0; i < this.plugintypes.length; i++) {
+      this.plugintypes_expanded[i] = !this.add_firstrun;
+    }
+    this.add_firstrun = false;
+
+    this.spinner_display = true;
+    this.pluginsdataService.getInstalledPlugins()
+      .subscribe(
+        (response) => {
+          this.plugins_installed = <PluginsInstalled>response;
+          this.plugins_installed_list = Object.keys(<PluginsInstalled>response);
+//          this.schedulerinfo.sort(function (a, b) {return (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)});
+          console.log('addPluginDialog', {response});
+
+          this.spinner_display = false;
+          this.add_display = true;
+
+          for (let i = 0; i < this.plugintypes.length; i++) {
+            this.plugintypes_expanded[i] = false;
+          }
+        }
+      );
+
+  }
+
+
+  selectPlugin(iplugin) {
+    console.warn({iplugin})
+    this.selected_plugin = iplugin;
+    this.pluginconfig_name = '';
+    this.translate_params = {'selected_plugin': this.selected_plugin}
+    this.add_enabled = false;
+
+    this.setconfig_display = true;
+    // alert('code for selecting plugin "' + iplugin + '" is not yet implemented!');
+  }
+
+
+  checkInput() {
+    this.add_enabled = false;
+    if (this.pluginconfig_name.length > 0) {
+      this.add_enabled = true;
+      for (const conf in this.configuredplugins) {
+        if (this.configuredplugins[conf].confname === this.pluginconfig_name) {
+          this.add_enabled = false;
+        }
+      }
+
+    }
+    console.warn(this.add_enabled);
+  }
+
+
+  addPlugin() {
+    console.warn(this.selected_plugin, this.pluginconfig_name);
+    this.setconfig_display = false;
+    this.add_display = false;
+    const config = {'plugin_name': this.selected_plugin, 'plugin_enabled': false};
+
+    // transfer to backend server
+    this.pluginsdataService.addPluginConfig(this.pluginconfig_name, {'config': config})
+      .subscribe(
+        (response: any) => {
+          if (response) {
+            console.log('PluginConfigComponent.addPlugin(): call ngOnInit()');
+            this.ngOnInit();
+          }
+        }
+      );
   }
 
 }

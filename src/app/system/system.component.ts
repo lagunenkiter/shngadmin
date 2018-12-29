@@ -177,7 +177,8 @@ export class SystemComponent implements OnInit {
     SystemComponent.resizeDisclosure();
 
     let filepath = '/3rdpartylicenses.txt';
-    if (this.dataService.getHostIp() !== 'localhost') {
+    const hostip = sessionStorage.getItem('hostIp');
+    if (hostip !== 'localhost') {
       filepath = '/admin' + filepath;
     }
     this.http.get(filepath, {responseType: 'text'})

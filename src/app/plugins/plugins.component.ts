@@ -7,6 +7,7 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { faPlayCircle, faPauseCircle } from '@fortawesome/free-solid-svg-icons';
 
+import { PluginsApiService } from '../common/services/plugins-api.service';
 import { OlddataService } from '../common/services/olddata.service';
 import { SchedulerInfo } from '../common/models/scheduler-info';
 import { PlugininfoType } from '../common/models/plugin-info';
@@ -24,34 +25,24 @@ export class PluginsComponent implements OnInit {
 
   plugininfo: PlugininfoType[];
 
-  plugintypes: string[] = ['system', 'gateway', 'interface', 'protocol', 'web', ''];
-
   modalRef: BsModalRef;
-  constructor(private http: HttpClient, private dataService: OlddataService, private modalService: BsModalService) {
+  constructor(private http: HttpClient, private pluginsdataService: PluginsApiService, private modalService: BsModalService) {
   }
 
   ngOnInit() {
     console.log('PluginsComponent.ngOnInit');
 
-    this.dataService.getPlugininfo()
+    this.pluginsdataService.getPluginsInfo()
       .subscribe(
-        (response: PlugininfoType[]) => {
-//          console.log('PluginsComponent:');
-//          console.log(response);
-          this.plugininfo = response;
-          // this.plugininfo.sort(function (a, b) {return (a.pluginname > b.pluginname) ? 1 : ((b.pluginname > a.pluginname) ? -1 : 0)});
-          // this.plugininfo.sort(function (a, b) {return (a.configname.toLowerCase() > b.configname.toLowerCase()) ? 1 : ((b.configname.toLowerCase() > a.configname.toLowerCase()) ? -1 : 0)});
+        (response) => {
+          this.plugininfo = <any>response;
           this.plugininfo.sort(function (a, b) {return (a.pluginname + a.configname.toLowerCase() > b.pluginname + b.configname.toLowerCase()) ? 1 : ((b.pluginname + b.configname.toLowerCase() > a.pluginname + a.configname.toLowerCase()) ? -1 : 0)});
-          // for (const pi in this.plugininfo) {
-          //   this.plugininfo[pi].metadata.description_long = this.plugininfo[pi].metadata.description_long.split("\n").join("\<br\>");
-          // }
-        },
-        (error) => {
-          console.log('ERROR: PluginsComponent: dataService.getPlugininfo():');
-          console.log(error)
         }
       );
+
   }
+
+
 
   parameterLines(parameters) {
     let result = Math.round(parameters / 2);

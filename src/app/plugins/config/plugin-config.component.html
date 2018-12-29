@@ -7,7 +7,7 @@
   <div class="shng_headline" style="margin-top: 20px; margin-left: 8px;">
     <h3>
       {{'PLUGIN.PLUGIN_CONFIGURATION'|translate}}
-      <button type="button" class="float-sm-right btn-shng btn btn-sm" style="margin-left: 0px; font-size: medium;" id="btn-monitor" [disabled]="false" (click)="addPlugin();" icon="fa fa-sign-out-alt"><fa-icon [icon]="faPlus"></fa-icon>&nbsp; {{ 'BUTTON.ADD_PLUGIN'|translate }}</button>
+      <button type="button" class="float-sm-right btn-shng btn btn-sm" style="margin-left: 0px; font-size: medium;" id="btn-monitor" [disabled]="false" (click)="addPluginDialog();" icon="fa fa-sign-out-alt"><fa-icon [icon]="faPlus"></fa-icon>&nbsp; {{ 'BUTTON.ADD_PLUGIN'|translate }}</button>
     </h3>
   </div>
   <p-table [columns]="cols" [value]="configuredplugins" selectionMode="single">
@@ -49,7 +49,8 @@
 </div>
 
 
-<!--
+
+<!-- ---------------------------------------------------------------------------------------
   -- Dialog for configuring the parameters of a plugin
   -->
 
@@ -139,3 +140,249 @@
     <button pButton type="button" icon="pi pi-times" (click)="validation_dialog_display=false" label="{{'BUTTON.CLOSE'|translate}}"></button>
   </p-footer>
 </p-dialog>
+
+
+
+
+
+
+<!-- ---------------------------------------------------------------------------------------
+  -- Dialog for selecting a plugin to add to the configured plugins
+  -->
+
+<p-dialog #pluginadd header="" [(visible)]="add_display" (onShow)="pluginadd.maximize()" [modal]="true" blockScroll="true" [closable]="false" [resizable]="true" [maximizable]="false" [minWidth]="600" [minHeight]="300" [minY]="100" >
+  <p-header>
+    {{'PLUGIN.ADD'|translate}}
+    <ng-container *ngIf="plugin_enabled === false">
+      &nbsp; - &nbsp;<strong>{{'PLUGIN.PLUGIN_DISABLED'|translate}}</strong>
+    </ng-container>
+  </p-header>
+
+  <p-accordion [multiple]="true">
+    <ng-container *ngFor="let plugintype of plugintypes; let i = index">
+      <p-accordionTab [(selected)]="plugintypes_expanded[i]" (click)="pluginadd.maximize()">
+        <p-header style="font-size: larger;">
+          <img src="assets/img/plugin_{{ plugintype }}.svg" style="width: 30px; cursor: pointer;"/> {{plugintype.charAt(0).toUpperCase() + plugintype.substring(1)}} Plugins
+        </p-header>
+        <!--
+          <table class="table table-striped table-hover" [columns]="cols" [value]="configuredplugins" selectionMode="single">
+        -->
+          <table class="table table-striped table-hover">
+            <colgroup>
+              <col width="60px">
+              <col width="25px">
+              <col minwidth="400px">
+            </colgroup>
+            <thead>
+              <th>Plugin</th>
+              <th>Multi-Instance</th>
+              <th>Description</th>
+            </thead>
+            <ng-container *ngFor="let iplugin of plugins_installed_list">
+              <ng-container *ngIf="(plugins_installed[iplugin].type === plugintype) || (plugintype === 'unclassified' && plugintypes.indexOf(plugins_installed[iplugin].type) === -1 )">
+                <tr style="cursor: pointer" (click)="selectPlugin(iplugin)">
+                  <td style="padding-left: 15px;">
+                    {{iplugin}}
+                  </td>
+                  <td>&nbsp; &nbsp;
+                    <ng-container *ngIf="plugins_installed[iplugin].multi_instance">
+                      <i style="color: #709cc2;" class="fa fa-check"></i>
+                    </ng-container>
+
+                  </td>
+                  <td>
+                    {{plugins_installed[iplugin].description}}
+                  </td>
+                </tr>
+              </ng-container>
+            </ng-container>
+          </table>
+      </p-accordionTab>
+    </ng-container>
+  </p-accordion>
+
+  <ng-container *ngIf="dialog_readonly === false">
+    <a style="font-size: small">{{ 'RESTART FOR CHANGES'|translate }}</a>
+  </ng-container>
+
+  <p-footer>
+    <ng-container *ngIf="dialog_readonly === false">
+<!--
+      <button pButton type="button" icon="pi pi-check" (click)="this.saveConfig()" label="{{'BUTTON.SAVE'|translate}}" class="ui-button-success"></button>
+-->
+      <button pButton type="button" icon="pi pi-times" (click)="add_display=false" label="{{'BUTTON.CLOSE'|translate}}" class="ui-button-secondary"></button>
+    </ng-container>
+  </p-footer>
+</p-dialog>
+
+
+
+<!--
+  -- Progress spinner
+  -->
+
+<p-dialog #pluginspinner header="{{'PLUGIN.LOADLIST'|translate}}..." [ngStyle]="{'align': 'center'}" [(visible)]="spinner_display" [modal]="true" blockScroll="true" [closable]="false" [resizable]="false" [maximizable]="false" [minWidth]="200" [minHeight]="100" [minY]="100" >
+  <div align="center">
+    <p-progressSpinner></p-progressSpinner>
+  </div>
+</p-dialog>
+
+
+
+<!--
+  -- Dialog for setting the configuration name of a plugin(-instance)
+  -->
+
+<p-dialog header="" [(visible)]="setconfig_display" [modal]="true" blockScroll="true" [closable]="false" [maximizable]="false" [minWidth]="600" [minHeight]="200" [minY]="100" >
+  <p-header>
+    {{'PLUGIN.NAME_CONFIGURATION'|translate:translate_params}}
+    <ng-container *ngIf="plugin_enabled === false">
+      &nbsp; - &nbsp;<strong>{{'PLUGIN.PLUGIN_DISABLED'|translate}}</strong>
+    </ng-container>
+  </p-header>
+
+  <br>
+  Eineindeutiger Name der Konfiguration:
+  <input [(ngModel)]="pluginconfig_name" type="text" (input)="checkInput();" pInputText placeholder="" [ngStyle]="{'width': 20}" autofocus/>
+
+  <br>
+  <br>
+<!--
+  <p-table [columns]="parameter_cols" [value]="parameters" selectionMode="single">
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th *ngFor="let col of columns" [pSortableColumn]="col.field" [ngStyle]="{'width': col.width}">
+          {{col.header|translate}}
+          <p-sortIcon *ngIf="col.sfield !== ''" [field]="col.field" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+      <tr>
+        <td *ngFor="let col of columns">
+
+          <ng-container *ngIf="dialog_readonly === false && col.field === 'value'">
+            <ng-container *ngIf="rowData.valid_list.length > 0">
+              <p-dropdown [options]="rowData.valid_list" [showClear]="true" placeholder="{{rowData.default}}" [(ngModel)]="rowData[col.field]" (ngModelChange)="rowData[col.field] = $event"></p-dropdown>
+            </ng-container>
+
+            <ng-container *ngIf="(['int','num','float','scene'].indexOf(rowData.type) > -1) && rowData.valid_list.length === 0">
+              <input [(ngModel)]="rowData[col.field]" type="number" min="{{rowData.valid_min}}" max="{{rowData.valid_max}}" pInputText placeholder="{{rowData.default}}" pInputText name="{{col.field}}" [ngStyle]="{'width': col.iwidth}"/>
+            </ng-container>
+
+            <ng-container *ngIf="rowData.type !== 'bool' && ['int','num','float','scene'].indexOf(rowData.type) === -1 && rowData.valid_list.length === 0">
+              <input [(ngModel)]="rowData[col.field]" type="text" pInputText placeholder="{{rowData.default}}" name="{{col.field}}" [ngStyle]="{'width': col.iwidth}"/>
+            </ng-container>
+          </ng-container>
+          <ng-container *ngIf="dialog_readonly === true || col.field !== 'value'">
+            {{rowData[col.field]}}
+          </ng-container>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+-->
+  <ng-container *ngIf="dialog_readonly === false">
+    <a style="font-size: small">{{ 'RESTART FOR CHANGES'|translate }}</a>
+  </ng-container>
+  <p-footer>
+    <ng-container *ngIf="dialog_readonly === false">
+      <button pButton type="button" icon="pi pi-check" (click)="this.addPlugin()" [(disabled)]="!this.add_enabled" label="{{'BUTTON.ADD'|translate}}" class="ui-button-success" autofocus></button>
+      <button pButton type="button" icon="pi pi-times" (click)="setconfig_display=false" label="{{'BUTTON.ABORT'|translate}}" class="ui-button-secondary"></button>
+    </ng-container>
+  </p-footer>
+</p-dialog>
+
+
+
+
+<!-- --------------------------------------------------------------------------------------------------- -->
+
+<!--
+<div style="margin-left: 10px; margin-right: 10px; margin-top: 55px;">
+  <p-accordion [multiple]="true">
+    <ng-container *ngFor="let scene of sceneList">
+      <p-accordionTab>
+        <p-header>
+          <span style="font-size: large; font-weight: bold; ">{{scene['path']}}</span>
+          <ng-container *ngIf="scene['name'] && scene['name'] !== ''">
+            &nbsp;  &nbsp; ({{scene['name']}})
+          </ng-container>
+        </p-header>
+        <div style="margin-left: 17px;">
+          <table class="table table-striped table-hover" style="border: 1px solid #ddd; ">
+            <colgroup>
+              <col width="15px">
+              <col width="50px">
+              <col width="80px">
+              <col width="400px">
+              <col minwidth="300px">
+            </colgroup>
+            <thead>
+            <tr class="shng_heading">
+              <th colspan="2">{{ 'SCENES.SCENE'|translate }}</th>
+              <th style="padding-left: 0px;">{{ 'SCENES.LEARN'|translate }}</th>
+              <th style="padding-left: 0px;">{{ 'SCENES.ITEM'|translate }}</th>
+              <th style="padding-left: 0px;">{{ 'SCENES.VALUE'|translate }}</th>
+              <th></th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <ng-container *ngFor="let value of scene['values']">
+              <ng-container *ngFor="let action of value['action_list']">
+
+                <ng-container *ngIf="(action === value['action_list'][0]) && (value['action_name'] !== '')">
+                  <tr>
+                    <td class="p-1"></td>
+                    <td class="p-1" colspan="3"><strong>{{ value['action'] }}</strong>: {{ value['action_name'] }}</td>
+                    <td class="p-1"></td>
+                    <td class="p-1"></td>
+                  </tr>
+                </ng-container>
+
+                <tr>
+                  <td class="p-1"></td>
+                  <td class="p-1">
+                    <ng-container *ngIf="action === value['action_list'][0] && value['action_name'] === ''" >
+                      <strong>{{ value['action'] }}</strong>:
+                    </ng-container>
+                  </td>
+
+                  <td class="p-1">
+                    <ng-container *ngIf="action[2]" >
+                      {{ 'ja'|translate }}
+                    </ng-container>
+                    <ng-container *ngIf="!action[2]" >
+                      {{ 'nein'|translate }}
+                    </ng-container>
+                  </td>
+
+                  <td class="p-1">{{ action[0] }}</td>
+
+                  <td class="p-1">
+                    <ng-container *ngIf="!action[3] || action[3] === action[1]" >
+                      {{ action[1] }}
+                    </ng-container>
+                    <ng-container *ngIf="!(!action[3] || action[3] === action[1])" >
+                      {{ action[3] }} (default: {{ action[1] }})
+                    </ng-container>
+                  </td>
+
+                  <td class="p-1">
+                  </td>
+
+                </tr>
+
+              </ng-container>
+            </ng-container>
+
+            </tbody>
+          </table>
+        </div>
+      </p-accordionTab>
+    </ng-container>
+  </p-accordion>
+</div>
+-->
+

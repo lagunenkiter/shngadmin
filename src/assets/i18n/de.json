@@ -134,6 +134,7 @@
     "CRONTAB": "Crontab"
   },
   "PLUGIN": {
+    "ADD": "Plugin hinzufügen",
     "TYPE": "Typ",
     "CONFIGNAME": "Konfig Name",
     "PLUGINNAME": "Plugin",
@@ -158,6 +159,8 @@
     "DOCUMENTATION": "Dokumentation",
     "PLUGIN_CONFIGURATION": "Plugin Konfiguration",
     "PLUGIN_DISABLED": "Plugin wird bei Neustart nicht geladen!",
+    "LOADLIST": "Lade Liste der installierten Plugins",
+    "NAME_CONFIGURATION": "Konfiguration des Plugins '{{selected_plugin}}' benennen",
 
     "CONFIGURATION_ERRORS": "Konfigurationsfehler",
     "DEFINED_MIN": "Definierter Minimalwert ist",
@@ -202,6 +205,7 @@
     "CHANGE": "Ändern",
     "SAVE": "Sichern",
     "ABORT": "Abbrechen",
+    "ADD": "Hinzufügen",
     "LOGOUT": "Abmelden",
     "ADD_PLUGIN": "Plugin hinzufügen",
     "RELOAD_LOG": "Log aktualisieren",

@@ -1,6 +1,6 @@
 
 //
-// Datatype (subtype) for <shng-server>:<port>/admin/plugininfo.json
+// Datatype (subtype) for <shng-server>:<port>/api/plugins/info
 //
 export interface PluginMetadata {
   type: string;

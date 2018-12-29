@@ -1,0 +1,191 @@
+{
+  "alexa": {
+    "type": "web",
+    "description": "Plugin zur Ansteuerung von SmartHomeNG via Amazon Echo / Alexa, **seit SmartHomeNG v1.3**",
+    "version": "1.3.0.9.0",
+    "documentation": "",
+    "multi_instance": false
+  },
+  "apcups": {
+    "type": "interface",
+    "description": "Unterstützung für smartUPS Geräte der Firma APC",
+    "version": "1.3.1",
+    "documentation": "",
+    "multi_instance": true
+  },
+  "appletv": {
+    "type": "interface",
+    "description": "Steuerung eines Apple TV's",
+    "version": "1.5.1",
+    "documentation": "",
+    "multi_instance": true
+  },
+  "backend": {
+    "type": "system",
+    "description": "Web Interface zur Anzeige von Informationen zum System und SmartHomeNG Backend-Daten",
+    "version": "1.4.14",
+    "documentation": "http://smarthomeng.de/user/plugins/backend/user_doc.html",
+    "multi_instance": false
+  },
+  "blockly": {
+    "type": "system",
+    "description": "Blockly - graphischer Editor für Logiken - Noch in der Entwicklung, nicht für die Nutzung gedacht",
+    "version": "1.4.0",
+    "documentation": "",
+    "multi_instance": false
+  },
+  "easymeter": {
+    "type": "interface",
+    "description": "Easymeter Q3D Unterstützung",
+    "version": "",
+    "documentation": "",
+    "multi_instance": ""
+  },
+  "ebus": {
+    "type": "interface",
+    "description": "Unterstützt eBus Heizungen (z.B. Vailant, Wolf, Kromschroeder) - Dieses Plugin verbindet sich zu einem ebusd Deamon (http://www.cometvisu.de/wiki/Ebusd), welcher mit einer eBus Heizung kommuniziert. Voraussetzungen: Ein ebusd Deamon läuft auf dem Netzwerk. (Anmerkung: Der ebusd benötigt ein ebus-Interface um mit ihm zu kommunizieren.",
+    "version": "1.5.0",
+    "documentation": "",
+    "multi_instance": false
+  },
+  "homematic": {
+    "type": "gateway",
+    "description": "Ansteuerung von HomeMatic Komponenten über eine HomeMatic CCU2 Zentrale. Es werden HomeMatic und HomeMaticIP Geräte unterstützt.",
+    "version": "1.5.0",
+    "documentation": "http://smarthomeng.de/user/plugins/homematic/user_doc.html",
+    "multi_instance": true
+  },
+  "hue": {
+    "type": "gateway",
+    "description": "Anbindung einer oder mehrerer Philips HUE Bridges",
+    "version": "1.4.4",
+    "documentation": "",
+    "multi_instance": false
+  },
+  "iaqstick": {
+    "type": "gateway",
+    "description": "Unterstützung für Applied Sensor iAQ Stick und Voltcraft CO-20",
+    "version": "",
+    "documentation": "",
+    "multi_instance": ""
+  },
+  "ical": {
+    "type": "web",
+    "description": "Ermöglicht die Verwendung von Kalendern (ICS)",
+    "version": "1.3.0",
+    "documentation": "",
+    "multi_instance": false
+  },
+  "influxdata": {
+    "type": "system",
+    "description": "Ermöglicht Speicherung von Daten in InfluxData TSDB z.B. zur Erzeugung von Graphen mit Grafana oder Chronograf (Plugin aus 2016)",
+    "version": "1.0.0",
+    "documentation": "https://github.com/smarthomeNG/smarthome/wiki/Installation-Influx-Grafana",
+    "multi_instance": false
+  },
+  "influxdb": {
+    "type": "system",
+    "description": "Ermöglicht Speicherung von Item Werten in einer InfluxData time-series Datenbank (Plugin aus 2017)",
+    "version": "1.0.0",
+    "documentation": "https://github.com/smarthomeNG/smarthome/wiki/Installation-Influx-Grafana",
+    "multi_instance": false
+  },
+  "intercom_2n": {
+    "type": "interface",
+    "description": "Integration von 2N SIP-Türsprechanlagen",
+    "version": "1.3.0.1",
+    "documentation": "",
+    "multi_instance": false
+  },
+  "join": {
+    "type": "web",
+    "description": "Ermöglicht die Verwendung der Join API",
+    "version": "1.4.1.0",
+    "documentation": "http://smarthomeng.de/user/plugins_doc/config/join.html",
+    "multi_instance": false
+  },
+  "jvcproj": {
+    "type": "interface",
+    "description": "Plugin um JVC D-ILA Projektoren zu kontrollieren und durch jvcprojectortools erstellte Gammakurven zu uebertragen",
+    "version": "1.0.0",
+    "documentation": "",
+    "multi_instance": false
+  },
+  "kathrein": {
+    "type": "interface",
+    "description": "Kathrein Receiver",
+    "version": "",
+    "documentation": "",
+    "multi_instance": ""
+  },
+  "knx": {
+    "type": "gateway",
+    "description": "Anbindung von KNX Bussystemen via EIBD/KNXD Daemon",
+    "version": "1.4.6",
+    "documentation": "http://smarthomeng.de/user/plugins/knx/user_doc.html",
+    "multi_instance": true
+  },
+  "kodi": {
+    "type": "interface",
+    "description": "Anbindung von Kodi (ehemals XBMC) v12 (Frodo) oder neuer",
+    "version": "1.3c.0",
+    "documentation": "",
+    "multi_instance": true
+  },
+  "priv_sample_classicplugin": {
+    "type": "",
+    "description": "Implementierung von ...",
+    "version": "",
+    "documentation": "",
+    "multi_instance": ""
+  },
+  "priv_sample_plugin_1_5": {
+    "type": "",
+    "description": "Beispiel Plugin für SmartHomeNG v1.5 und höher",
+    "version": "1.5.0",
+    "documentation": "",
+    "multi_instance": false
+  },
+  "priv_sample_plugin_1_6": {
+    "type": "",
+    "description": "Beispiel Plugin für SmartHomeNG v1.5 und höher",
+    "version": "1.6.0",
+    "documentation": "",
+    "multi_instance": false
+  },
+  "priv_telegram_1_1_3": {
+    "type": "web",
+    "description": "",
+    "version": "",
+    "documentation": "",
+    "multi_instance": ""
+  },
+  "priv_widgets": {
+    "type": "",
+    "description": "Einige Widgets für die smartVISU v2.8",
+    "version": "1.4c.0",
+    "documentation": "",
+    "multi_instance": false
+  },
+  "wunderground": {
+    "type": "web",
+    "description": "Abfrage der Daten des Wetterdienstes Wunderground.com",
+    "version": "1.4.8",
+    "documentation": "http://smarthomeng.de/user/plugins/wunderground/user_doc.html",
+    "multi_instance": true
+  },
+  "test_uncl": {
+    "type": "",
+    "description": "Abfrage der Daten des Wetterdienstes Wunderground (unclassified)",
+    "version": "1.4.8",
+    "documentation": "http://smarthomeng.de/user/plugins/wunderground/user_doc.html",
+    "multi_instance": true
+  },
+  "xbmc": {
+    "type": "interface",
+    "description": "Anbindung von XBMC v12 (Frodo) oder neuer",
+    "version": "",
+    "documentation": "",
+    "multi_instance": ""
+  }
+}
