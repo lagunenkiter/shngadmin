@@ -161,6 +161,7 @@
     "PLUGIN_DISABLED": "Plugin wird bei Neustart nicht geladen!",
     "LOADLIST": "Lade Liste der installierten Plugins",
     "NAME_CONFIGURATION": "Konfiguration des Plugins '{{selected_plugin}}' benennen",
+    "CLASSIC_NOT_CONFIGURABLE": "Classic Plugins können hier nicht konfiguriert werden!",
 
     "CONFIGURATION_ERRORS": "Konfigurationsfehler",
     "DEFINED_MIN": "Definierter Minimalwert ist",

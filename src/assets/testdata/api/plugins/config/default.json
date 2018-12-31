@@ -254,6 +254,7 @@
       "plugin_name": "priv_develop",
       "_meta": {
         "plugin": {
+          "type": "system",
           "description": {
             "de": "Development Plugin für SmartHomeNG v1.5 und höher - zur Anzeige interner Daten von SmartHomeNG",
             "en": "Develop Plugin for for SmartHomeNG v1.5 and up - For display of internal data of SmartHomeNG"
@@ -274,6 +275,7 @@
       "plugin_name": "priv_logconf",
       "_meta": {
         "plugin": {
+          "type": "system",
           "description": {
             "de": "Proof of concept für eine online Konfiguration des Logging für SmartHomeNG v1.5 und höher",
             "en": "Proof of concept for online logging configuration for for SmartHomeNG v1.5 and up"
@@ -2328,6 +2330,7 @@
       "plugin_name": "priv_widgets",
       "_meta": {
         "plugin": {
+          "type": "system",
           "description": {
             "de": "Einige Widgets für die smartVISU v2.8",
             "en": "A couple of widgets for smartVISU v2.8"
@@ -3906,7 +3909,17 @@
       }
     },
     "sampleclassic": {
-      "plugin_name": "priv_sample_classicplugin"
+      "plugin_name": "priv_sample_classicplugin",
+      "_meta": {
+        "plugin": {
+          "type": "classic",
+          "description": {
+            "de": "Implementierung von ...",
+            "en": "GImplementation of ..."
+          },
+          "classname": "Classic"
+        }
+      }
     },
     "database": {
       "plugin_name": "database",
@@ -4643,6 +4656,7 @@
       "plugin_enabled": "False",
       "_meta": {
         "plugin": {
+          "type": "<plugin-type>>",
           "description": {
             "de": "Beispiel Plugin für SmartHomeNG v1.5 und höher",
             "en": "Sample plugin for SmartHomeNG v1.5 and up"

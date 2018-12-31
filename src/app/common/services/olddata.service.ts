@@ -26,7 +26,7 @@ export class OlddataService implements OnInit {
 
   constructor(private http: HttpClient, private translate: TranslateService, @Inject('BASE_URL') baseUrl: string) {
 
-/*
+
     console.log('OlddataService.constructor:');
 
     // this language will be used as a fallback when a translation isn't found in the current language
@@ -44,7 +44,7 @@ export class OlddataService implements OnInit {
       // console.log({host_ip});
 
     }
-*/
+
   }
 
 
@@ -78,7 +78,6 @@ export class OlddataService implements OnInit {
     // console.log('getSysteminfo: url: ' + url);
     return this.http.get(url);
   }
-
 
 
   getPypiinfo() {

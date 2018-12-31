@@ -160,6 +160,7 @@
     "PLUGIN_DISABLED": "Plugin will not be loaded at restart!",
     "LOADLIST": "Loading list of installed plugins",
     "NAME_CONFIGURATION": "Name the configuration of '{{selected_plugin}}' plugin and add to the configured plugins",
+    "CLASSIC_NOT_CONFIGURABLE": "Classic plugins can't be configured here!",
 
     "CONFIGURATION_ERRORS": "Configuration error(s)",
     "DEFINED_MIN": "Defined minimum is",

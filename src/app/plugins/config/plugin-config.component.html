@@ -30,7 +30,18 @@
               <i style="color: #a9a9a9;" class="fa fa-toggle-off"></i>
             </ng-container>
           </ng-container>
-          <ng-container *ngIf="col.field !== 'enabled'">
+
+          <ng-container *ngIf="col.field === 'type' && ['web','protocol','interface','gateway','system'].includes(rowData[col.field])">
+            <img src="assets/img/plugin_{{ rowData[col.field] }}.svg" style="width: 25px;"/>
+          </ng-container>
+          <ng-container *ngIf="col.field === 'type' && ['classic'].includes(rowData[col.field])">
+            &nbsp; -
+          </ng-container>
+          <ng-container *ngIf="col.field === 'type' && !['web','protocol','interface','gateway','system','classic'].includes(rowData[col.field])">
+            <img src="assets/img/plugin_defaultlogo.png" style="width: 25px;"/>
+          </ng-container>
+
+          <ng-container *ngIf="col.field !== 'enabled' && col.field !== 'type'">
             {{rowData[col.field]}}
           </ng-container>
         </td>
@@ -61,6 +72,7 @@
       &nbsp; - &nbsp;<strong>{{'PLUGIN.PLUGIN_DISABLED'|translate}}</strong>
     </ng-container>
   </p-header>
+
   <table>
     <tr>
       <td width="75px">
@@ -73,39 +85,47 @@
   </table>
   <br>
 
-  <p-table [columns]="parameter_cols" [value]="parameters" selectionMode="single">
-    <ng-template pTemplate="header" let-columns>
-      <tr>
-        <th *ngFor="let col of columns" [pSortableColumn]="col.field" [ngStyle]="{'width': col.width}">
-          {{col.header|translate}}
-          <p-sortIcon *ngIf="col.sfield !== ''" [field]="col.field" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
-        </th>
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-rowData let-columns="columns">
-      <tr>
-        <td *ngFor="let col of columns">
+  <ng-container *ngIf="!this.classic">
+    <p-table [columns]="parameter_cols" [value]="parameters" selectionMode="single">
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th *ngFor="let col of columns" [pSortableColumn]="col.field" [ngStyle]="{'width': col.width}">
+            {{col.header|translate}}
+            <p-sortIcon *ngIf="col.sfield !== ''" [field]="col.field" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr>
+          <td *ngFor="let col of columns">
 
-          <ng-container *ngIf="dialog_readonly === false && col.field === 'value'">
-            <ng-container *ngIf="rowData.valid_list.length > 0">
-              <p-dropdown [options]="rowData.valid_list" [showClear]="true" placeholder="{{rowData.default}}" [(ngModel)]="rowData[col.field]" (ngModelChange)="rowData[col.field] = $event"></p-dropdown>
-            </ng-container>
+            <ng-container *ngIf="dialog_readonly === false && col.field === 'value'">
+              <ng-container *ngIf="rowData.valid_list.length > 0">
+                <p-dropdown [options]="rowData.valid_list" [showClear]="true" placeholder="{{rowData.default}}" [(ngModel)]="rowData[col.field]" (ngModelChange)="rowData[col.field] = $event"></p-dropdown>
+              </ng-container>
 
-            <ng-container *ngIf="(['int','num','float','scene'].indexOf(rowData.type) > -1) && rowData.valid_list.length === 0">
-              <input [(ngModel)]="rowData[col.field]" type="number" min="{{rowData.valid_min}}" max="{{rowData.valid_max}}" pInputText placeholder="{{rowData.default}}" pInputText name="{{col.field}}" [ngStyle]="{'width': col.iwidth}"/>
-            </ng-container>
+              <ng-container *ngIf="(['int','num','float','scene'].indexOf(rowData.type) > -1) && rowData.valid_list.length === 0">
+                <input [(ngModel)]="rowData[col.field]" type="number" min="{{rowData.valid_min}}" max="{{rowData.valid_max}}" pInputText placeholder="{{rowData.default}}" pInputText name="{{col.field}}" [ngStyle]="{'width': col.iwidth}"/>
+              </ng-container>
 
-            <ng-container *ngIf="rowData.type !== 'bool' && ['int','num','float','scene'].indexOf(rowData.type) === -1 && rowData.valid_list.length === 0">
-              <input [(ngModel)]="rowData[col.field]" type="text" pInputText placeholder="{{rowData.default}}" name="{{col.field}}" [ngStyle]="{'width': col.iwidth}"/>
+              <ng-container *ngIf="rowData.type !== 'bool' && ['int','num','float','scene'].indexOf(rowData.type) === -1 && rowData.valid_list.length === 0">
+                <input [(ngModel)]="rowData[col.field]" type="text" pInputText placeholder="{{rowData.default}}" name="{{col.field}}" [ngStyle]="{'width': col.iwidth}"/>
+              </ng-container>
             </ng-container>
-          </ng-container>
-          <ng-container *ngIf="dialog_readonly === true || col.field !== 'value'">
-            {{rowData[col.field]}}
-          </ng-container>
-        </td>
-      </tr>
-    </ng-template>
-  </p-table>
+            <ng-container *ngIf="dialog_readonly === true || col.field !== 'value'">
+              {{rowData[col.field]}}
+            </ng-container>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </ng-container>
+  <ng-container *ngIf="this.classic">
+    <h4>
+      {{'PLUGIN.CLASSIC_NOT_CONFIGURABLE'|translate}}
+    </h4><br>
+  </ng-container>
+
   <ng-container *ngIf="dialog_readonly === false">
     <a style="font-size: small">{{ 'RESTART FOR CHANGES'|translate }}</a>
   </ng-container>

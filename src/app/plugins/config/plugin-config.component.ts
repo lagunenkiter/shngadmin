@@ -50,6 +50,7 @@ export class PluginConfigComponent implements OnInit {
   parameters: any[];
   plugin_enabled: boolean;
   parameter_cols: any[];
+  classic: boolean = false;
   rowclicked_foredit: any = false;
 
   // for list of installed plugins dialog
@@ -117,10 +118,24 @@ export class PluginConfigComponent implements OnInit {
               if (this.pluginconflist.plugin_config[plg]['plugin_enabled'] === 'False') {
                 enabled = 'false';
               }
+              // is plugin enabled?
               conf['enabled'] = enabled;
+
+              // get logo for plugin type
+              const meta = this.pluginconflist.plugin_config[confname]['_meta'];
+              if (meta === undefined) {
+                conf['type'] = 'classic';
+              } else {
+                conf['type'] = meta.plugin.type;
+              }
+
+
               // get description from plugin_config (faster)
-//          const desc = this.pluginconflist.plugin_config[plg]['_description'][this.lang];
-              const desc = this.pluginconflist.plugin_config[plg]['_description'];
+              let desc = this.pluginconflist.plugin_config[plg]['_description'];
+              if (conf['type'] === undefined || conf['type'] === 'classic') {
+                conf['type'] = 'classic';
+                desc = this.pluginconflist.plugin_config[plg]['_meta']['plugin']['description'];
+              }
               if (desc !== undefined) {
                 conf['desc'] = desc[this.lang];
               }
@@ -136,6 +151,7 @@ export class PluginConfigComponent implements OnInit {
 
     this.cols = [
       { field: 'enabled',  sfield: '',         header: '',                   width:  '30px' },
+      { field: 'type',     sfield: 'type',     header: '',                   width:  '30px' },
       { field: 'confname', sfield: 'confname', header: 'PLUGIN.CONFIGNAME',  width: '150px' },
       { field: 'plugin',   sfield: 'plugin',   header: 'PLUGIN.PLUGINNAME',  width: '200px' },
       { field: 'instance', sfield: 'instance', header: 'PLUGIN.INSTANCE',    width: '150px' },
@@ -163,9 +179,16 @@ export class PluginConfigComponent implements OnInit {
 
     const conf = this.pluginconflist.plugin_config[rowdata.confname]
     const meta = this.pluginconflist.plugin_config[rowdata.confname]['_meta']
-    const desc = meta['plugin']['description'];
+    let desc = null;
+    this.classic = true;
+    if (meta !== undefined && meta.plugin !== undefined) {
+      if  (meta.plugin.type !== undefined && meta.plugin.type !== 'classic') {
+        this.classic = false;
+      }
+      desc = meta['plugin']['description'];
+    }
     this.dialog_readonly = this.pluginconflist.readonly;
-    if (desc !== undefined) {
+    if (desc !== null && desc !== undefined) {
       this.dialog_description = desc[this.lang];
     }
 
@@ -185,7 +208,7 @@ export class PluginConfigComponent implements OnInit {
 
     this.parameters = [];
 
-    if (meta['parameters'] !== 'NONE') {
+    if (meta !== undefined && meta['parameters'] !== 'NONE') {
       for (const param in meta['parameters']) {
         if (meta['parameters'].hasOwnProperty(param) ) {
 
