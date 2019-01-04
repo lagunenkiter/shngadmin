@@ -54,10 +54,9 @@ import { LoggingConfigurationComponent } from './logs/logging-configuration/logg
 import { NotFoundComponent } from './not-found/not-found.component';
 import { LoginComponent } from './login/login.component';
 import { NoAccessComponent } from './no-access/no-access.component';
-import {AuthService} from './common/services/auth.service';
+import { AuthService } from './common/services/auth.service';
 import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { SystemConfigComponent } from './system/system-config/system-config.component';
-import { AddComponent } from './plugins/add/add.component';
 
 export function translateHttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -82,8 +81,7 @@ export function translateHttpLoaderFactory(http: HttpClient) {
     NotFoundComponent,
     LoginComponent,
     NoAccessComponent,
-    SystemConfigComponent,
-    AddComponent
+    SystemConfigComponent
   ],
   imports: [
     BrowserModule,

@@ -88,6 +88,13 @@ export class ServerApiService {
           sessionStorage.setItem('itemtree_searchstart', this.shng_serverinfo.itemtree_searchstart.toString());
           sessionStorage.setItem('core_branch', this.shng_serverinfo.core_branch);
           sessionStorage.setItem('plugins_branch', this.shng_serverinfo.plugins_branch);
+          const hostip = sessionStorage.getItem('hostIp');
+          if (hostip === 'localhost') {
+            sessionStorage.setItem('wsHost', this.shng_serverinfo.websocket_host);
+          } else {
+            sessionStorage.setItem('wsHost', hostip);
+          }
+          sessionStorage.setItem('wsPort', this.shng_serverinfo.websocket_port);
 
           this.translate.use(sessionStorage.getItem('default_language'));
           return result;

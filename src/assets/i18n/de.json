@@ -161,6 +161,9 @@
     "PLUGIN_DISABLED": "Plugin wird bei Neustart nicht geladen!",
     "LOADLIST": "Lade Liste der installierten Plugins",
     "NAME_CONFIGURATION": "Konfiguration des Plugins '{{selected_plugin}}' benennen",
+    "DELETE_CONFIG": "Löschen der Konfiguration bestätigen",
+    "DELETE_CONFIG_TEXT": "Soll die Konfiguration '{{config}}' wirklich gelöscht werden?",
+
     "CLASSIC_NOT_CONFIGURABLE": "Classic Plugins können hier nicht konfiguriert werden!",
 
     "CONFIGURATION_ERRORS": "Konfigurationsfehler",
@@ -207,6 +210,7 @@
     "SAVE": "Sichern",
     "ABORT": "Abbrechen",
     "ADD": "Hinzufügen",
+    "DELETE": "Löschen",
     "LOGOUT": "Abmelden",
     "ADD_PLUGIN": "Plugin hinzufügen",
     "RELOAD_LOG": "Log aktualisieren",

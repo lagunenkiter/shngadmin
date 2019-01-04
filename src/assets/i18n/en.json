@@ -159,8 +159,11 @@
     "PLUGIN_CONFIGURATION": "Plugin Configuration",
     "PLUGIN_DISABLED": "Plugin will not be loaded at restart!",
     "LOADLIST": "Loading list of installed plugins",
-    "NAME_CONFIGURATION": "Name the configuration of '{{selected_plugin}}' plugin and add to the configured plugins",
     "CLASSIC_NOT_CONFIGURABLE": "Classic plugins can't be configured here!",
+
+    "NAME_CONFIGURATION": "Name the configuration of '{{selected_plugin}}' plugin and add to the configured plugins",
+    "DELETE_CONFIG": "Confirm delete configuration",
+    "DELETE_CONFIG_TEXT": "Please confirm, that you want to delete the plugin configuration '{{config}}'",
 
     "CONFIGURATION_ERRORS": "Configuration error(s)",
     "DEFINED_MIN": "Defined minimum is",
@@ -206,6 +209,7 @@
     "SAVE": "Save",
     "ABORT": "Abort",
     "ADD": "Add",
+    "DELETE": "Delete",
     "LOGOUT": "Logout",
     "ADD_PLUGIN": "Add Plugin",
     "RELOAD_LOG": "Reload Log",

@@ -62,6 +62,11 @@ textarea {
   color: #555555 !important;
 }
 
+.ui-button-danger {
+  background-color: #c40808 !important;
+  border-color: #cccccc !important;
+}
+
 .ui-button-secondary2 {
   background-color: #f0f0f0 !important;
   border-color: #f5f5f5 !important;

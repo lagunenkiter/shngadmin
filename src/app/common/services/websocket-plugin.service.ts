@@ -144,15 +144,11 @@ export class WebsocketPluginService implements OnInit {
 
 
   connect() {
-    let host = sessionStorage.getItem('hostIp');
-    // for testing
-    if (host === 'localhost') {
-      host = 'smarthomeng.fritz.box';
-    }
-    const wsport = sessionStorage.getItem('wsPort');
-    const plugin_url = 'ws://' + host + ':' + wsport;
-//    const plugin_url = 'ws://smarthomeng.fritz.box:2424/';
-    console.log({plugin_url})
+    const wsHost = sessionStorage.getItem('wsHost');
+    const wsPort = sessionStorage.getItem('wsPort');
+    const plugin_url = 'ws://' + wsHost + ':' + wsPort;
+
+    console.log({plugin_url}, '\nFür mockup Environment in \n\'testdata/serverinfo/default.json\' anpassen');
     this.wsService = new WebsocketService();
     this.subject = this.wsService.connect(plugin_url);
     this.subject.subscribe(msg => {

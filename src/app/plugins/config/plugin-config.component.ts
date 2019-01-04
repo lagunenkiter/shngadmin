@@ -8,6 +8,7 @@ import { Injectable } from '@angular/core';
 import { faPlus, faPlusCircle, faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 
+// import { DeleteConfigComponent } from './delete-config/delete-config.component';
 
 import { ServerApiService } from '../../common/services/server-api.service';
 import { PluginsApiService } from '../../common/services/plugins-api.service';
@@ -81,8 +82,13 @@ export class PluginConfigComponent implements OnInit {
   validation_dialog_parameter: string;
   validation_dialog_text: string[];
 
+  // confirm delete dialog
+  confirmdelete_display: boolean = false;
+  delete_param: {};
+
 
   constructor(private cdRef: ChangeDetectorRef,
+//              private deleteConfigComponent: DeleteConfigComponent,
               private serverdataService: ServerApiService,
               private pluginsdataService: PluginsApiService,
               private dataService: OlddataService,
@@ -414,7 +420,9 @@ export class PluginConfigComponent implements OnInit {
 
 
 
-
+  // -------------------------------------------------------------------
+  //  Add configuration
+  //
   addPluginDialog() {
     console.log('PluginConfigComponent.addPluginDialog:');
 
@@ -489,5 +497,59 @@ export class PluginConfigComponent implements OnInit {
       );
   }
 
+
+
+  // -------------------------------------------------------------------
+  //  Delete configuration
+  //
+  DeleteConfig() {
+    console.log('PluginConfigComponent.DeleteConfig:');
+    console.warn(this.dialog_configname);
+
+    this.delete_param = {'config': this.dialog_configname};
+
+    this.confirmdelete_display = true;
+
+
+  }
+
+
+  DeleteConfigConfirm() {
+    console.log('PluginConfigComponent.DeleteConfigConfirm:');
+    console.warn(this.dialog_configname);
+
+    // close confirm dialog
+    this.confirmdelete_display = false;
+
+    // delete on backend server
+    this.pluginsdataService.deletePluginConfig(this.dialog_configname)
+      .subscribe(
+        (response: any) => {
+          if (response) {
+            // close configuration dialog
+            this.dialog_display = false;
+            console.log('PluginConfigComponent.DeleteConfigConfirm(): call ngOnInit()');
+            this.ngOnInit();
+            this.restart_core_button = true;
+
+          }
+        }
+      );
+
+    // alert('code for removal of plugin "' + this.dialog_configname + '" configurations is not yet implemented');
+
+
+    return true;
+  }
+
+
+  DeleteConfigAbort() {
+    console.log('PluginConfigComponent.DeleteConfigAbort:');
+
+    // close confim dialog
+    this.confirmdelete_display = false;
+
+    return false;
+  }
 }
 

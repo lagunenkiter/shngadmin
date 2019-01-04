@@ -180,4 +180,49 @@ export class PluginsApiService {
 
   }
 
+
+  // -----------------------------------------------------------
+  //  add a new config of one plugin in etc/plugin.yaml on backend
+  //
+  deletePluginConfig(pluginsection) {
+    console.log('PluginsApiService.deletePluginConfig\n', {pluginsection});
+
+    const apiUrl = sessionStorage.getItem('apiUrl');
+    const url = apiUrl + 'plugin/' + pluginsection + '/';
+    if (apiUrl.includes('localhost')) {
+      console.warn('PluginsApiService.deletePluginConfig', 'Cannot simulate deleting data in dev environment\n', '- section', pluginsection);
+      return of(true);
+    }
+
+    return this.http.delete(url)
+      .pipe(
+        map(response => {
+          const result = <any>response;
+
+          if (result) {
+            console.log('PluginsApiService.deletePluginConfig', '- section', pluginsection, '\nresult', {result});
+            if (result.result === 'ok') {
+              console.log('PluginsApiService.deletePluginConfig', 'success');
+              return true;
+//              return result;
+            } else {
+              console.log('PluginsApiService.deletePluginConfig', 'fail');
+              alert('PluginsApiService.addPluginConfig:\n' + result.result + '\n' + result.description);
+              return false;
+//              return result;
+            }
+
+          } else {
+            console.log('PluginsApiService.deletePluginConfig', 'fail: undefined result');
+          }
+        }),
+        catchError((err: HttpErrorResponse) => {
+          console.error('PluginsApiService (deletePluginConfig): Could not set plugin config data' + ' - ' + err.error.error);
+          return of({});
+        })
+      );
+
+  }
+
+
 }
