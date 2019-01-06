@@ -9,6 +9,7 @@ import { of } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { parse } from 'url';
 import { ServerInfo } from '../models/server-info';
+import {SharedService} from './shared.service';
 
 
 
@@ -25,7 +26,10 @@ export class ServerApiService {
   shng_serverinfo: ServerInfo = <ServerInfo>{'itemtree_fullpath': true};
 
 
-  constructor(private http: HttpClient, private translate: TranslateService, @Inject('BASE_URL') baseUrl: string) {
+  constructor(private http: HttpClient,
+              private translate: TranslateService,
+              private shared: SharedService,
+              @Inject('BASE_URL') baseUrl: string) {
 
     console.log('ServerApiService.constructor:');
 
@@ -52,7 +56,7 @@ export class ServerApiService {
 
 
     // this language will be used as a fallback when a translation isn't found in the current language
-    translate.setDefaultLang('en');
+    translate.setDefaultLang(this.shared.getFallbackLanguage());
 
 
     this.getServerinfo()
@@ -96,7 +100,7 @@ export class ServerApiService {
           }
           sessionStorage.setItem('wsPort', this.shng_serverinfo.websocket_port);
 
-          this.translate.use(sessionStorage.getItem('default_language'));
+          this.shared.setGuiLanguage();
           return result;
         }),
         catchError((err: HttpErrorResponse) => {
@@ -109,6 +113,7 @@ export class ServerApiService {
 
   // get Status of shNG software
   getShngServerStatus() {
+    // console.log('getShngServerStatus')
     const apiUrl = sessionStorage.getItem('apiUrl');
     let url = apiUrl + 'status/';
     if (apiUrl.includes('localhost')) {
@@ -117,11 +122,14 @@ export class ServerApiService {
     return this.http.get(url)
       .pipe(
         map(response => {
-          const result = response;
-          return result;
+          return response;
         }),
         catchError((err: HttpErrorResponse) => {
-          console.error('ServerDataService (getShngServerStatus): Could not read server status' + ' - ' + err.error.error);
+          if (err.error.error !== undefined) {
+            console.error('ServerApiService (getShngServerStatus): Could not read server status' + ' - ' + err.error.error);
+//          } else {
+//            console.warn('ServerApiService (getShngServerStatus): SmartHomeNG is not running');
+          }
           return of({});
         })
       );
@@ -130,6 +138,7 @@ export class ServerApiService {
 
   // restart shNG software
   restartShngServer() {
+    // console.log('restartShngServer')
     const apiUrl = sessionStorage.getItem('apiUrl');
     let url = apiUrl + 'restart/';
     if (apiUrl.includes('localhost')) {
@@ -138,11 +147,10 @@ export class ServerApiService {
     return this.http.get(url)
       .pipe(
         map(response => {
-          const result = response;
-          return result;
+          return response;
         }),
         catchError((err: HttpErrorResponse) => {
-          console.error('ServerDataService (RestartShngServer): Could not restart server' + ' - ' + err.error.error);
+          console.error('ServerApiService (RestartShngServer): Could not restart server' + ' - ' + err.error.error);
           return of({});
         })
       );

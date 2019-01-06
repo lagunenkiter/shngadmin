@@ -13,4 +13,7 @@ export interface ServerInfo {
   plugins_branch: string;
   websocket_host: string;
   websocket_port: string;
+  daemon_knx: string;
+  daemon_ow: string;
+  daemon_mqtt: string;
 }

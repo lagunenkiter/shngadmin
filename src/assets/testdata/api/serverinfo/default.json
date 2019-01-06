@@ -8,5 +8,8 @@
   "core_branch": "develop",
   "plugins_branch": "develop",
   "websocket_host": "smarthomeng.local",
-  "websocket_port": "2424"
+  "websocket_port": "2424",
+  "daemon_knx": "eibd",
+  "daemon_ow": "SERVICES.INACTIVE",
+  "daemon_mqtt": "SERVICES.INACTIVE"
 }

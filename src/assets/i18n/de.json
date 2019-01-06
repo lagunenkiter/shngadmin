@@ -68,9 +68,58 @@
   },
   "SERVICES": {
     "SERVICES": "Dienste",
+    "LANGUAGE_UI": "Sprache der graphischen Oberfläche",
+    "KNX_SUPPORT": "Dienst für die KNX Unterstützung",
+    "OW_SUPPORT": "Dienst für die 1-wire Unterstützung",
+    "MQTT_SUPPORT": "Broker für die MQTT Unterstützung",
+    "INACTIVE": "Nicht aktiv",
+
     "EVAL CHECKER": "eval Syntax Prüfer",
     "YAML CHECKER": "YAML Syntax Prüfer",
-    "CONF TO YAML": "CONF-YAML Konverter"
+    "CONF TO YAML": "CONF-YAML Konverter",
+    "SERVICE": "Dienst",
+    "STATUS": "Status",
+    "ACTION": "Aktion"
+  },
+  "SHNG_STATE": {
+    "Initalizing": "Initialisiert",
+    "Initalizing: Logging initalized": "Initialisiert: Logging initialisiert",
+    "Initalizing: Requirements checked": "Initialisiert: Voraussetzungen überprüft",
+    "Starting": "Startet",
+    "Starting: Initalizing and starting loadable modules": "Startet: Initialisiert und startet ladbare Module",
+    "Starting: Initalizing plugins": "Startet: Initialisiert Plugins",
+    "Starting: Loading item definitions": "Startet: Lädt Item Definitionen",
+    "Starting: Initializing logics": "Startet: Initialisiert Logiken",
+    "Starting: Starting plugins": "Startet: Startet Plugins",
+    "Running": "Aktiv",
+    "Restarting": "Startet neu",
+    "Stopping": "Stoppen",
+    "Stopping: Stopping threads": "Stoppen: Threads beenden",
+    "Stopped": "Angehalten",
+
+    "Restart clicked": "Neustart ausgelöst",
+    "not active": "Nicht aktiv",
+    "Running (dummy)": "Aktiv (dummy)"
+  },
+  "SHNG_STATECODE": {
+    "Initalizing": "0",
+    "Initalizing: Logging initalized": "1",
+    "Initalizing: Requirements checked": "2",
+    "Starting": "10",
+    "Starting: Initalizing and starting loadable modules": "11",
+    "Starting: Initalizing plugins": "12",
+    "Starting: Loading item definitions": "13",
+    "Starting: Initializing logics": "14",
+    "Starting: Starting plugins": "15",
+    "Running": "20",
+    "Restarting": "30",
+    "Stopping": "31",
+    "Stopping: Stopping threads": "32",
+    "Stopped": "33",
+
+    "Restart clicked": "<none>",
+    "not active": "<none>",
+    "Running (dummy)": "<none>"
   },
   "ITEMS": {
     "TOOLTIP SEARCH": "Suche beginnt nachdem mindestens {{number}} Zeichen eingegeben wurden.",

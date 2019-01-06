@@ -42,7 +42,7 @@ export class AuthService {
 
     send_credentials.username = '';
     if (credentials.username !== '') {
-      send_credentials.username = sha512(credentials.username+send_hash);
+      send_credentials.username = sha512(credentials.username + send_hash);
     }
 
     send_credentials.password = '';
@@ -76,6 +76,10 @@ export class AuthService {
       .pipe(map(response => {
         const result = <any>response;
 
+        let anon = '';
+        if (credentials.username === '') {
+          anon = 'anonymous ';
+        }
         if (result && result.token) {
           localStorage.setItem('token', result.token);
 
@@ -86,10 +90,10 @@ export class AuthService {
           // if login succeeds with an empty username, no login is required
           this.isLoginRequired = !(credentials.username === '');
 
-          console.log('login', 'success');
+          console.log(anon + 'login:', 'success');
           return true;
         } else {
-          console.log('login', 'fail');
+          console.log(anon + 'login:', 'fail');
           return false;
         }
       }));

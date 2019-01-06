@@ -6,6 +6,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ServerApiService } from './common/services/server-api.service';
 import { AuthService } from './common/services/auth.service';
 import { ServerInfo } from './common/models/server-info';
+import {SharedService} from './common/services/shared.service';
 
 
 
@@ -27,6 +28,7 @@ export class AppComponent implements OnInit {
   constructor(private http: HttpClient,
               private dataService: ServerApiService,
               private translate: TranslateService,
+              private shared: SharedService,
               public authService: AuthService) {
 
     console.log('AppComponent.constructor:');
@@ -44,7 +46,7 @@ export class AppComponent implements OnInit {
           sessionStorage.setItem('itemtree_fullpath', this.dataService.shng_serverinfo.itemtree_fullpath.toString());
           sessionStorage.setItem('itemtree_searchstart', this.dataService.shng_serverinfo.itemtree_searchstart.toString());
 
-          translate.use(this.dataService.shng_serverinfo.default_language);
+          this.shared.setGuiLanguage();
         },
         (error) => {
           console.warn('DataService: getShngServerinfo():', {error});

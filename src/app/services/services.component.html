@@ -2,19 +2,68 @@
 <div style="margin-left: 10px; margin-right: 10px; margin-top: 55px;">
   <tabset #staticTabs>
     <tab customClass="tab-shng" heading="{{ 'SERVICES.SERVICES'|translate }}">
+      <div class="container-fluid"style="margin-top: 0px; margin-left: 10px; margin-right: 10px;"></div>
       <div style="margin-left: 10px; margin-right: 10px;">
-        <p></p>
-        <p>
-          Services works!
-        </p>
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead border="0">
+              <tr class="shng_heading">
+                <th width="70" style="border: 0px;"></th>
+                <th style="width:350px; border: 0px;">{{'SERVICES.SERVICE'|translate}}</th>
+                <th style="width:300px; border: 0px;">{{'SERVICES.STATUS'|translate}}</th>
+                <th style="border: 0px;">{{'SERVICES.ACTION'|translate}}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><img src="assets/img/languages.svg" alt="Icon languages" width="48" height="48"></td>
+                <td style="padding-top:23px;">{{'SERVICES.LANGUAGE_UI'|translate}}</td>
+                <td style="padding-top:23px;"><strong>{{this.default_language}}</strong></td>
+                <td style="padding-top:21px;">
+                  <p-dropdown [style]="{'width':'150px'}" [options]="valid_languagelist" [showClear]="false" placeholder="{{valid_default_language}}" (onChange)="setLanguage()" [(ngModel)]="selected_language" (ngModelChange)="selected_language = $event"></p-dropdown>
+                </td>
+              </tr>
+              <tr>
+                <td><img src="assets/img/logo_small_76x76.png" alt="SmartHomeNG logo" width="48" height="48"></td>
+                <td style="padding-top:23px;">SmartHomeNG</td>
+                <td style="padding-top:23px;"><strong>{{shng_status}}</strong></td>
+                <td style="padding-top:22px;">
+                  <button pButton type="button" icon="fa fa-circle-notch" [disabled]="(shng_statuscode !== 20)" (click)="this.restartShng()" label="{{'BUTTON.RESTART_SHNG'|translate}}" class="ui-button-success"></button>
+                </td>
+              </tr>
+              <tr>
+                <td><img src="assets/img/plugin_gateway.svg" alt="Icon knxd" width="48" height="48"></td>
+                <td style="padding-top:23px;">{{'SERVICES.KNX_SUPPORT'|translate}}</td>
+                <td style="padding-top:23px;"><strong>{{serverInfo.daemon_knx|translate}}</strong></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><img src="assets/img/pins_and_ribbon.svg" alt="Icon 1-wire" width="48" height="48"></td>
+                <td style="padding-top:23px;">{{'SERVICES.OW_SUPPORT'|translate}}</td>
+                <td style="padding-top:23px;"><strong>{{serverInfo.daemon_ow|translate}}</strong></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><img src="assets/img/mqtt_logo.png" alt="Icon mqtt" width="48" height="48"></td>
+                <td style="padding-top:23px;">{{'SERVICES.MQTT_SUPPORT'|translate}}</td>
+                <td style="padding-top:23px;"><strong>{{serverInfo.daemon_mqtt|translate}}</strong></td>
+                <td></td>
+              </tr>
 
+            </tbody>
+
+          </table>
+        </div>
+
+<!--
         <button pButton type="button" icon="fa fa-circle-notch" (click)="this.restartShng()" label="{{'BUTTON.RESTART_SHNG'|translate}}" class="ui-button-success"></button>
+-->
 
       </div>
     </tab>
 
     <tab customClass="tab-shng" heading="{{ 'SERVICES.EVAL CHECKER'|translate }}">
-      <div class="container-fluid navBorder"></div>
+      <div class="container-fluid" style="margin-top: 10px; margin-left: 10px;" ></div>
       <form name="input" action="eval_syntax_checker.html" method="POST" enctype="multipart/form-data">
         <div class="container-fluid" style="width: 100%;">
           <div style="width: 100%; float: left; margin-bottom: 10px; margin-right: 5px;">
@@ -46,10 +95,14 @@
 -->
         </div>
       </form>
+      <div class="container-fluid" style="margin-top: 30px;">
+        &nbsp;
+        <p style="font-size: large; color: red;"><strong>This tab is still under construction</strong></p>
+      </div>
     </tab>
 
     <tab customClass="tab-shng" heading="{{ 'SERVICES.YAML CHECKER'|translate }}">
-      <div class="container-fluid navBorder"></div>
+      <div class="container-fluid" style="margin-top: 10px; margin-left: 10px; margin-right: 10px;"></div>
       <form name="input" action="yaml_syntax_checker.html" method="POST" enctype="multipart/form-data">
         <div class="container-fluid" style="width: 100%;">
           <div style="width: 48%; float: left; margin-bottom: 10px; margin-right: 5px;">
@@ -63,7 +116,7 @@
 <!--
               {% if output_format == 'python' %}
               <div style="font-weight: bold; padding-left: 5px;">{{ 'Ergebnis: Aufbereitet als Python Source Code'|translate }}</div>
-              <!--
+              < !--
               {% else %}
 -->
               <div style="font-weight: bold; padding-left: 5px;">{{ 'Ergebnis: Aufbereitetes .YAML Format'|translate }}</div>
@@ -83,13 +136,21 @@
 -->
         </div>
       </form>
+      <div class="container-fluid" style="margin-top: 30px;">
+        &nbsp;
+        <p style="font-size: large; color: red;"><strong>This tab is still under construction</strong></p>
+      </div>
     </tab>
 
     <tab customClass="tab-shng" heading="{{ 'SERVICES.CONF TO YAML'|translate }}">
-      <div style="margin-left: 10px; margin-right: 10px;">
+      <div style="margin-top: 10px; margin-left: 10px; margin-right: 10px;">
         <p>
           ConfToYaml works!
         </p>
+      </div>
+      <div class="container-fluid" style="margin-top: 30px;">
+        &nbsp;
+        <p style="font-size: large; color: red;"><strong>This tab is still under construction</strong></p>
       </div>
     </tab>
 
@@ -100,133 +161,196 @@
 
 <!--
 
-{% block content %}
-<div class="container-fluid navBorder"></div>
-<form name="input" action="eval_syntax_checker.html" method="POST" enctype="multipart/form-data">
-	<div class="container-fluid" style="width: 100%;">
-		<div style="width: 100%; float: left; margin-bottom: 10px; margin-right: 5px;">
-			<div title="{{ _('Hier den Ausdruck eingeben, der ausgewertet werden soll. Items können mit absolutem Pfad oder relativem Pfad angegeben werden.') }}">
-				<div style="font-weight: bold; padding-left: 5px;">{{ _('Ausdruck (Eingabe im Python Eval-Format)') }}</div>
-				<textarea id="eval_code" name="eval_code">{{ eval_code }}</textarea>
-			</div>
-			<div title="{{ _('Um relative Itempfade aufzulösen, hier das Item eingeben, zu dem die Pfade relativ sind.') }}">
-				<div style="font-weight: bold; padding-left: 5px;">{{ _('Relativ zu (Eingabe des Item-Path)') }}</div>
-				<input type="text" style="width: 599px;" name="relative_to" value="{{ relative_to }}"/>
-			</div>
+<div style="margin-left: 10px; margin-right: 10px;">
+<div class="table-responsive">
+	<table class="table table-striped">
+		<thead>
+			<tr class="shng_heading">
+				<th width="70">{{ _('Dienst') }}</th>
+				<th style="width:600px;">{{ _('Status') }}</th>
+				<th>{{ _('Aktion') }}</th>
+			</tr>
+		</thead>
 
-			<div title="{{ _('Hier wird der Ausdruck angezeigt, nachdem die relativen Itempfade aufgelöst wurden.') }}">
-				<div style="font-weight: bold; padding-left: 5px; border-bottom: 0px solid #ccc;">&nbsp;</div>
-				<div style="font-weight: bold; padding-left: 5px; border-bottom: 1px solid #ccc;">{{ _('Expandierter Ausdruck') }}</div>
-				<div style="padding-left: 5px; border-bottom: 0px solid #ccc;">{{ expanded_code }}&nbsp;</div>
-			</div>
-			<div title="{{ _('Hier wird das Ergebnis Ausdruck angezeigt.') }}">
-				<div style="font-weight: bold; padding-left: 5px; border-bottom: 0px solid #ccc;">&nbsp;</div>
-				<div style="font-weight: bold; padding-left: 5px; border-bottom: 1px solid #ccc;">{{ _('Ergebnis') }}</div>
-				<div style="padding-left: 5px; border-bottom: 1px solid #ccc;">{{ check_result }}&nbsp;</div>
-			</div>
-		</div>
-	</div>
-    <br>
-	<div class="container-fluid" style="width: 100%;">
-		<input name="check" value="{{ _('Prüfen','button') }}" type="submit" class="btn btn-dark">
-    </div>
-</form>
-<script>
-     var rulers = [];
-     for (var i = 1; i <= 100; i++) {
-        rulers.push({color: '#eee', column: i * 4, lineStyle: "dashed"});
-     }
-
-     var myCodeMirrorEval = CodeMirror.fromTextArea(document.getElementById("eval_code"), {
-        lineNumbers: true,
-        lineSeparator: '\n',
-        indentUnit: 4,
-        rulers: rulers,
-        lineWrapping: true,
-        indentWithTabs: false,
-        mode: "python"
-     });
-
-	 window.addEventListener("resize", function(){resizeCodeMirror(myCodeMirrorEval, 300)}, false);
-     resizeCodeMirror(myCodeMirrorEval, 300);
-</script>
-{% endblock %}
-
--->
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--
-
-{% block content %}
-<div class="container-fluid navBorder"></div>
-<form name="input" action="yaml_syntax_checker.html" method="POST" enctype="multipart/form-data">
-    <div class="container-fluid" style="width: 100%;">
-		<div style="width: 48%; float: left; margin-bottom: 10px; margin-right: 5px;">
-			<div title="{{ _('Hier den YAML Code eingeben, der geprüft werden soll.') }}">
-    		    <div style="font-weight: bold; padding-left: 5px;">{{ _('Eingabe im .YAML Format') }}</div>
-				<textarea id="yaml_code" name="yaml_code">{{ yaml_code }}</textarea>
-			</div>
-		</div>
-    	<div style="width: 48%; float: left; margin-bottom: 10px;">
-			<div title="{{ _('Hier wird das Ergebnis Ausdruck angezeigt.') }}">
-				{% if output_format == 'python' %}
-	        		<div style="font-weight: bold; padding-left: 5px;">{{ _('Ergebnis: Aufbereitet als Python Source Code') }}</div>
-				{% else %}
-	        		<div style="font-weight: bold; padding-left: 5px;">{{ _('Ergebnis: Aufbereitetes .YAML Format') }}</div>
+		<tbody>
+			<tr>
+				<td><img src="static/img/languages.svg" alt="Icon languages" width="48" height="48"></td>
+				<td style="padding-top:23px;">
+					<div style="float:left; margin-right:15px;">{{ _('Sprache des Backends') }}:</div>
+					<select class="custom-select" id="language" onChange="location.href='reload_translation.html?lang='+$('#language').val()" style="float:left; width: 250px; margin-top:-7px;">
+						<option {% if lang=='de' %}selected{% endif %} value="de">{% if lang!='de' %}{{ _('Auf Deutsch wechseln') }}{% else %}{{ _('Deutsch','button') }}{% endif %}</option>
+						<option {% if lang=='en' %}selected{% endif %} value="en">{% if lang!='en' %}{{ _('Auf Englisch wechseln') }}{% else %}{{ _('Englisch','button') }}{% endif %}</option>
+						<option {% if lang=='fr' %}selected{% endif %} value="fr">{% if lang!='fr' %}{{ _('Auf Französisch wechseln') }}{% else %}{{ _('Französisch','button') }}{% endif %}</option>
+						<option {% if lang=='pl' %}selected{% endif %} value="pl">{% if lang!='pl' %}{{ _('Auf Polnisch wechseln') }}{% else %}{{ _('Polnisch','button') }}{% endif %}</option>
+					</select>
+				<td style="padding-top:15px;">
+				{% if develop %}
+					<button style="min-width:190px;" type="button" class="btn btn-shng btn-sm" onclick="location.href='reload_translation.html'">{{ _('Übersetzung neu laden') }}</button>
 				{% endif %}
-    		    <textarea id="check_result" autocomplete="off" name="check_result">{{ check_result }}</textarea>
-		    </div>
-	    </div>
-    </div>
-    <div class="container-fluid" style="width: 100%;">
-	    <input name="check" value="{{ _('Prüfen','button') }}" type="submit" class="btn btn-dark">
-		{% if develop %}
-		    <input name="check2" value="{{ _('Prüfen','button') }} ({{ _('Python Code Ausgabe') }})" type="submit" class="btn btn-dark">
-		{% endif %}
-    </div>
-</form>
-<script>
-     var rulers = [];
-     for (var i = 1; i <= 100; i++) {
-        rulers.push({color: '#eee', column: i * 4, lineStyle: "dashed"});
-     }
+				</td>
+			</tr>
 
-     var myCodeMirrorConf = CodeMirror.fromTextArea(document.getElementById("yaml_code"), {
-        lineNumbers: true,
-        lineSeparator: '\n',
-        indentUnit: 4,
-        rulers: rulers,
-        lineWrapping: false,
-        indentWithTabs: false,
-        mode: "yaml"
-     });
-     var myCodeMirrorYaml = CodeMirror.fromTextArea(document.getElementById("check_result"), {
-        lineNumbers: true,
-        lineSeparator: '\n',
-        indentUnit: 4,
-        rulers: rulers,
-        lineWrapping: false,
-        indentWithTabs: false,
-        readOnly: true,
-        mode: "{{ output_format }}"
-     });
+    		{% if service_ctrl %}
+            <tr>
+				<td><img src="gstatic/img/logo_small_76x76.png" alt="SmartHomeNG logo small" width="48" height="48"></td>
+                {%  if shng_service %}
+	                <td style="padding-top:23px;"><div style="float:left; margin-right:15px;">Dienst für SmartHomeNG: <strong>smarthome.service</strong></div></td>
+                    <td style="padding-top:15px;">
+	    				<button style="min-width:190px;" type="button" class="btn btn-shng btn-sm" name="restart" onclick="location.href='services_shng_restart.html'">{{ _('Service neu starten','button') }}</button>
+                    </td>
+                {%  else %}
+                    <td style="padding-top:23px;"><strong>SmartHomeNG</strong> {{ '(läuft nicht als Dienst)' }}</td>
+< !--
+                    <td style="padding-top:15px;">
+						<button style="min-width:190px;" type="button" class="btn btn-shng btn-sm" name="restart" onclick="location.href='services_shng_restart.html'">{{ _('Prozess neu starten','button') }}</button>
+    				</td>
+-- >
+{% endif %}
+</tr>
+{% endif %}
 
-     window.addEventListener("resize", function(){resizeCodeMirror(myCodeMirrorConf, 60)}, false);
-     resizeCodeMirror(myCodeMirrorConf, 60);
-     window.addEventListener("resize", function(){resizeCodeMirror(myCodeMirrorYaml, 60)}, false);
-     resizeCodeMirror(myCodeMirrorYaml, 60);
-</script>
-{% endblock %}
+<tr>
+  <td><img src="/gstatic/img/plugin_gateway.svg" alt="Icon knxd service" width="48" height="48"></td>
+  <td style="padding-top:23px;">{{ _('Dienst für die KNX Unterstützung') }}:&nbsp;<strong>
+    {% if knxdeamon %}
+    {{ knxdeamon }}
+    {% else %}
+    {{ _('Nicht aktiv') }}
+    {% endif %}
+  </strong></td>
+  <td></td>
+</tr>
+{% if 1 == 2 %}
+<tr>
+  <td><img src="static/img/logo_small_76x76.png" alt="SmartHomeNG logo small" width="48" height="48"></td>
+  <td style="padding-top:23px;"><pre>{{ smarthome_service }}</pre>
+  </td>
+  <td style="padding-top:15px;">
+    {% if knxd_active %}
+    <form action="stop_smarthome" method="post">
+      <input type="submit" class="btn btn-shng btn-sm" value="{{ _('smarthomeNG beenden','button') }}"/>
+    </form>
+    {% else %}
+    <form action="start_smarthome" method="post">
+      <input type="submit" class="btn btn-shng btn-sm" value="{{ _('smarthomeNG starten','button') }}"/>
+    </form>
+    {% endif %}
+  </td>
+</tr>
+<tr>
+  <td><img src="static/img/knxd_service.png" alt="Icon KNXD service" width="48" height="48"></td>
+  <td style="padding-top:23px;"><pre>{{ knxd_service }}</pre>
+  </td>
+  <td style="padding-top:15px;">
+    {% if knxd_active %}
+    <form action="stop_knxd_service" method="post">
+      <input type="submit" class="btn btn-shng btn-sm" value="{{ _('knxd service beenden','button') }}"/>
+    </form>
+    {% else %}
+    <form action="start_knxd" method="post">
+      <input type="submit" class="btn btn-shng btn-sm" value="{{ _('knxd service starten','button') }}"/>
+    </form>
+    {% endif %}
+  </td>
+</tr>
+<tr>
+  <td><img src="static/img/knxd_socket.png" alt="Icon KNXD socket" width="48" height="48"></td>
+  <td style="padding-top:23px;"><pre>{{ knxd_socket }}</pre>
+  </td>
+  <td style="padding-top:15px;">
+    {% if knxd_active %}
+    <form action="stop_knxd" method="post">
+      <input type="submit" class="btn btn-shng btn-sm" value="{{ _('knxd socket beenden','button') }}"/>
+    </form>
+    {% else %}
+    <form action="start_knxd" method="post">
+      <input type="submit" class="btn btn-shng btn-sm" value="{{ _('knxd socket starten','button') }}"/>
+    </form>
+    {% endif %}
+  </td>
+</tr>
+<tr>
+  <td><img src="static/img/reboot.svg" alt="Icon Reboot" width="48" height="48"></td>
+  <td style="padding-top:15px;">
+    <form class="navbar-form navbar-left" action="reboot" method="post">
+      <div class="form-group">
+        <input type="password" class="form-control" name="password" maxlength="128" placeholder="{{ _('Root-Passwort') }}"/>
+      </div>
+      <input type="submit" class="btn btn-shng btn-sm" value="{{ _('Neu starten','button') }}"/>
+    </form>
+  </td>
+  <td>{% if rbt1 %}
+    {{ rbt1 }}
+    {% else %}
+
+    {% endif %}
+  </td>
+</tr>
+{% endif %}
+</tbody>
+</table>
+<table class="table table-striped">
+  <thead>
+  <tr class="shng_heading">
+    <th width="70">{{ _('Dienst') }}</th>
+    <th>{{ _('Aktion') }}</th>
+  </tr>
+  </thead>
+  <tbody>
+  {#
+  {% if sql_plugin %}
+  <tr>
+            <td><img src="static/img/db_backup.svg" alt="Icon database backup" width="48" height="48"></td>
+            <td style="min-width:190px;" style="padding-top:15px;"><button type="button" class="btn btn-shng btn-sm" onclick="window.open('db_dump.html?plugin=sqlite_old')">{{ _('Datenbank-Dump','button') }} (SQLite)</button></td>
+			</tr>
+  {% endif %}
+  {% if database_plugin %}
+  {% for p in database_plugin  %}
+  <tr>
+              <td><img src="static/img/db_backup.svg" alt="Icon database backup" width="48" height="48"></td>
+              <td style="min-width:190px;" style="padding-top:15px;"><button type="button" class="btn btn-shng btn-sm" onclick="window.open('/db_dump.html?plugin={{ p }}')">{{ _('Datenbank-Dump','button') }} - {{ _('Instanz') }}: ({{ p }})</button></td>
+				</tr>
+  {% endfor %}
+  {% endif %}
+  #}
+  <tr>
+    <td><img src="static/img/cache.svg" alt="Icon cache" width="48" height="48"></td>
+    <td colspan="2" style="padding-top:15px;">
+      <span style="min-width:190px;" class="btn btn-shng btn-sm" onclick="checkCache()">{{ _('Cacheprüfung','button') }}</span>
+      <div id="cache_check" style="margin-top: 5px; width: 1100px;"></div>
+    </td>
+  </tr>
+  <tr>
+    <td><img src="static/img/password.svg" alt="Icon password" width="48" height="48"></td>
+    <td colspan="2" style="padding-top:15px;">
+      <div class="form-inline">
+        <input class="form-control" type="text" id="plaintext" size="20" maxlength="50" style="width: 250px;"/>
+        <input class="form-control" type="password" id="plainpass" size="20" maxlength="50" style="width: 250px;"/>
+        <span style="min-width:190px;" class="btn btn-shng btn-sm ml-2" onclick="createHash()">{{ _('Passwort-Hash erzeugen','button') }}</span>
+      </div>
+      <input type="checkbox" style="..." id="showtext"  onclick="togglePlainFields();"> {{ _('Passwort anzeigen') }}
+      <div id="hash_value" style="margin-top: 5px; width: 900px;"></div>
+    </td>
+  </tr>
+  <tr>
+    <td><img src="static/img/tree.png" alt="Icon cache" width="48" height="48"></td>
+    <td style="padding-top:15px;">
+      <span style="min-width:190px;" class="btn btn-shng btn-sm" onclick="checkYaml()">{{ _('YAML Syntax Checker') }}</span>
+      <span style="padding-right:58px;" type="text">&nbsp;</span>
+      <span style="min-width:190px;" class="btn btn-shng btn-sm" onclick="convertYaml()">{{ _('CONF-YAML Konverter') }}</span>
+      <div id="yaml_check" style="margin-top: 5px; width: 1000px;"></div>
+    </td>
+  </tr>
+  <tr>
+    <td><img src="static/img/eval.svg" alt="Icon cache" width="48" height="48"></td>
+    <td colspan="2" style="padding-top:15px;">
+      <span style="min-width:190px;" class="btn btn-shng btn-sm" onclick="checkEval()">{{ _('Eval Syntax Checker') }}</span>
+      <div id="yaml_check" style="margin-top: 5px; width: 1000px;"></div>
+    </td>
+  </tr>
+  </tbody>
+</table>
+</div>
+</div>
 
 -->

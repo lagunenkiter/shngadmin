@@ -100,8 +100,9 @@ export class PluginConfigComponent implements OnInit {
   ngOnInit() {
     // console.log('PluginConfigComponent.ngOnInit');
 
+    // this.translate.use(this.lang);
+    this.shared.setGuiLanguage();
     this.lang = sessionStorage.getItem('default_language');
-    this.translate.use(this.lang);
 
 
     this.pluginsdataService.getPluginsConfig()
@@ -143,7 +144,12 @@ export class PluginConfigComponent implements OnInit {
                 desc = this.pluginconflist.plugin_config[plg]['_meta']['plugin']['description'];
               }
               if (desc !== undefined) {
+                // if a description is defined
                 conf['desc'] = desc[this.lang];
+                if (conf['desc'] === undefined) {
+                  // if description in selected language is undefined, use fallbak language
+                  conf['desc'] = desc[this.shared.getFallbackLanguage()];
+                }
               }
 
               // add to the table of configured plugins

@@ -249,4 +249,30 @@ export class SharedService {
     };
   }
 
+
+  // ---------------------------------------------------------
+  // setGuiLanguage() sets the default language to one of
+  // the installed languages
+  setGuiLanguage() {
+    const installed_languages = ['en', 'de', 'fr'];
+    if (installed_languages.indexOf(sessionStorage.getItem('default_language')) > -1 ) {
+      this.translate.use(sessionStorage.getItem('default_language'));
+    } else {
+      console.warn('SharedService.setGuiLanguage', 'language ' + sessionStorage.getItem('default_language') +
+                   ' not installed, using ' + installed_languages[0] + ' instead');
+      this.translate.use(installed_languages[0]);
+      sessionStorage.setItem('default_language', installed_languages[0]);
+    }
+  }
+
+  // ---------------------------------------------------------
+  // getFallbackLanguage() returns the fallback language
+  // (must be 'en' or 'de' (because only those translations
+  // have to exist
+  getFallbackLanguage() {
+    return 'en';
+  }
 }
+
+
+

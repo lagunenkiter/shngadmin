@@ -68,9 +68,58 @@
   },
   "SERVICES": {
     "SERVICES": "Services",
+    "LANGUAGE_UI": "Language of the user interface",
+    "KNX_SUPPORT": "Service for KNX support",
+    "OW_SUPPORT": "Service for 1-wire support",
+    "MQTT_SUPPORT": "Broker for MQTT support",
+    "INACTIVE": "Not active",
+
     "EVAL CHECKER": "eval Syntax Checker",
     "YAML CHECKER": "YAML Syntax Checker",
-    "CONF TO YAML": "CONF-YAML Converter"
+    "CONF TO YAML": "CONF-YAML Converter",
+    "SERVICE": "Service",
+    "STATUS": "State",
+    "ACTION": "Action"
+  },
+  "SHNG_STATE": {
+    "Initalizing": "Initalizing",
+    "Initalizing: Logging initalized": "Initalizing: Logging initalized",
+    "Initalizing: Requirements checked": "Initalizing: Requirements checked",
+    "Starting": "Starting",
+    "Starting: Initalizing and starting loadable modules": "Starting: Initalizing and starting loadable modules",
+    "Starting: Initalizing plugins": "Starting: Initalizing plugins",
+    "Starting: Loading item definitions": "Starting: Loading item definitions",
+    "Starting: Initializing logics": "Starting: Initializing logics",
+    "Starting: Starting plugins": "Starting: Starting plugins",
+    "Running": "Running",
+    "Restarting": "Restarting",
+    "Stopping": "Stopping",
+    "Stopping: Stopping threads": "Stopping: Stopping threads",
+    "Stopped": "Stopped",
+
+    "Restart clicked": "Restart clicked",
+    "not active": "not active",
+    "Running (dummy)": "Running (dummy)"
+  },
+  "SHNG_STATECODE": {
+    "Initalizing": "0",
+    "Initalizing: Logging initalized": "1",
+    "Initalizing: Requirements checked": "2",
+    "Starting": "10",
+    "Starting: Initalizing and starting loadable modules": "11",
+    "Starting: Initalizing plugins": "12",
+    "Starting: Loading item definitions": "13",
+    "Starting: Initializing logics": "14",
+    "Starting: Starting plugins": "15",
+    "Running": "20",
+    "Restarting": "30",
+    "Stopping": "31",
+    "Stopping: Stopping threads": "32",
+    "Stopped": "33",
+
+    "Restart clicked": "<none>",
+    "not active": "<none>",
+    "Running (dummy)": "<none>"
   },
   "ITEMS": {
     "TOOLTIP SEARCH": "Search starts after entering a minimum of {{number}} characters",

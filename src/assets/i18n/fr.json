@@ -1,0 +1,84 @@
+{
+  "MENU": {
+    "SYSTEM": "Système",
+    "SYSTEM_PROPERTIES": "Info système",
+    "SERVICES": "Services",
+    "ITEMS": "Objets",
+    "LOGICS": "Logiques",
+    "SCHEDULERS": "Planificateur",
+    "PLUGINS": "Extensions",
+    "PLUGINS_LIST": "Liste des Extensions",
+    "SCENES": "Scènes",
+    "THREADS": "Tâches",
+    "LOGS": "Les journaux",
+    "LOGS_DISPLAY": "afficher les journaux",
+    "LOGGER_LIST": "Liste des enregistreurs",
+    "CONFIGURATION": "Configuration",
+    "LOGIN": "s'identifier"
+  },
+
+  "SYSTEM": {
+  },
+  "SERVICES": {
+  },
+  "SHNG_STATE": {
+  },
+  "SHNG_STATECODE": {
+    "Initalizing": "0",
+    "Initalizing: Logging initalized": "1",
+    "Initalizing: Requirements checked": "2",
+    "Starting": "10",
+    "Starting: Initalizing and starting loadable modules": "11",
+    "Starting: Initalizing plugins": "12",
+    "Starting: Loading item definitions": "13",
+    "Starting: Initializing logics": "14",
+    "Starting: Starting plugins": "15",
+    "Running": "20",
+    "Restarting": "30",
+    "Stopping": "31",
+    "Stopping: Stopping threads": "32",
+    "Stopped": "33",
+
+    "Restart clicked": "<none>",
+    "not active": "<none>",
+    "Running (dummy)": "<none>"
+  },
+  "ITEMS": {
+    "ALERT": {
+    }
+  },
+  "LOGICS": {
+  },
+  "SCHEDULERS": {
+  },
+  "PLUGIN": {
+  },
+  "SCENES": {
+  },
+  "THREADS": {
+  },
+
+  "LOGS": {
+  },
+
+  "BUTTON": {
+    "CLOSE": "Fermer",
+    "CHANGE": "changement",
+    "SAVE": "Sauvegarder",
+    "ABORT": "abandonner",
+    "ADD": "ajouter",
+    "DELETE": "effacer",
+    "LOGOUT": "déconnecter",
+    "ADD_PLUGIN": "ajouter extension",
+    "RELOAD_LOG": "recharger le journal",
+    "RESTART_SHNG": "redémarrer SmartHomeNG",
+    "SAVE_SETTINGS": "enregistrer les paramètres"
+  },
+
+  "ERROR": {
+  },
+
+  "LOGIN": {
+  }
+
+}
