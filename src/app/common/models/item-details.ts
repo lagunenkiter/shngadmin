@@ -6,6 +6,7 @@ export interface ItemDetails {
   path: string;
   name: string;
   type: string;
+  struct?: string;
   value: string;
   change_age: number;
   update_age: number;

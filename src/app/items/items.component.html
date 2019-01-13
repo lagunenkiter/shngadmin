@@ -19,7 +19,7 @@
           <div class="modal-content">
             <div class="modal-header">
               <h5 id="dialog-sizes-name2" class="modal-title pull-left">
-                <p [translate]="'Ungültiger Wert'"></p>
+                <a [translate]="'Ungültiger Wert'"></a>
               </h5>
               <button type="button" class="close pull-right" aria-label="Close" (click)="closeAlert(myalert, itemdetails.value)">
                 <span aria-hidden="true">&times;</span>
@@ -123,6 +123,9 @@
                           <tr><td class="py-1">{{'ITEMS.PATH'|translate}}</td><td class="py-1">{{itemdetails.path}}</td></tr>
                           <tr><td class="py-1">{{'ITEMS.NAME'|translate}}</td><td class="py-1">{{itemdetails.name}}</td></tr>
                           <tr><td class="py-1">{{'ITEMS.TYPE'|translate}}</td><td class="py-1">{{itemdetails.type}}</td></tr>
+                          <ng-container *ngIf="itemdetails.struct !== undefined">
+                            <tr><td class="py-1">{{'ITEMS.STRUCT'|translate}}</td><td class="py-1">{{itemdetails.struct}}</td></tr>
+                          </ng-container>
 <!--
                           <tr><td class="py-1">{{'value'|translate}}</td><td class="py-1">{{itemdetails.input}}</td></tr>
 -->
