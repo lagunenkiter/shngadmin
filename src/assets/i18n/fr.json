@@ -58,7 +58,9 @@
     "FILENAME": "Nom du fichier",
     "ACTIONS": "Actions",
     "ENABLE": "Activer",
-    "DISABLE": "Désactiver"
+    "DISABLE": "Désactiver",
+    "TRIGGER": "Déclencher",
+    "RELOAD": "Recharger"
   },
   "SCHEDULERS": {
   },

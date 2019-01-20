@@ -180,7 +180,9 @@
     "FILENAME": "Dateiname",
     "ACTIONS": "Aktionen",
     "ENABLE": "Aktivieren",
-    "DISABLE": "Deaktivieren"
+    "DISABLE": "Deaktivieren",
+    "TRIGGER": "Auslösen",
+    "RELOAD": "Neu Laden"
   },
   "SCHEDULERS": {
     "ITEM SCHEDULERS": "Item Scheduler",

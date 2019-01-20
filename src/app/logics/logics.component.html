@@ -66,10 +66,14 @@
               <td class="p-1">
                 <ng-container *ngIf="logic.enabled; then logicEnabledActions; else logicDisabledActions"></ng-container>
                   <ng-template #logicEnabledActions>
+                    <button name="trigger" title="{{ 'LOGICS.TRIGGER'|translate }}" class="btn btn-outline-dark btn-sm"><i class="fas fa-hand-pointer"></i></button>
+                    <button name="reload"  title="{{ 'LOGICS.RELOAD'|translate }}" class="btn btn-outline-dark btn-sm"><i class="fas fa-sync"></i></button>
                     <button name="disable" title="{{ 'LOGICS.DISABLE'|translate }}" class="btn btn-outline-dark btn-sm"><i class="fas fa-pause"></i></button>
                   </ng-template>
                   <ng-template #logicDisabledActions>
-                    <button name="enable" title="{{ 'LOGICS.ENABLE'|translate }}" class="btn btn-outline-dark btn-sm"><i class="fas fa-play"></i></button>
+                    <button disabled="true" name="trigger" title="{{ 'LOGICS.TRIGGER'|translate }}" class="btn btn-outline-dark btn-sm"><i class="fas fa-hand-pointer"></i></button>
+                    <button name="reload"  title="{{ 'LOGICS.RELOAD'|translate }}" class="btn btn-outline-dark btn-sm"><i class="fas fa-sync"></i></button>
+                    <button name="enable"  title="{{ 'LOGICS.ENABLE'|translate }}" class="btn btn-outline-dark btn-sm"><i class="fas fa-play"></i></button>
                   </ng-template>
               </td>
             </tr>

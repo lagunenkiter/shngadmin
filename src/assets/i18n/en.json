@@ -179,7 +179,9 @@
     "FILENAME": "Filename",
     "ACTIONS": "Actions",
     "ENABLE": "Enable",
-    "DISABLE": "Disable"
+    "DISABLE": "Disable",
+    "TRIGGER": "Trigger",
+    "RELOAD": "Reload"
   },
   "SCHEDULERS": {
     "ITEM SCHEDULERS": "Item Schedulers",
