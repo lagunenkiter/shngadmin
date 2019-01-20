@@ -50,7 +50,7 @@ export class ServerApiService {
       sessionStorage.setItem('dataUrl', dataUrl);
 
       sessionStorage.setItem('hostIp', host_ip.split(':')[0]);
-      sessionStorage.setItem('wsPort', '2424');
+      // sessionStorage.setItem('wsPort', '2424');
 
     }
 
@@ -59,7 +59,7 @@ export class ServerApiService {
     translate.setDefaultLang(this.shared.getFallbackLanguage());
 
 
-    this.getServerinfo()
+    this.getServerBasicinfo()
       .subscribe(
         (response: ServerInfo) => {
           this.shng_serverinfo = response;
@@ -73,12 +73,50 @@ export class ServerApiService {
   }
 
 
-  getServerinfo() {
+  getServerBasicinfo() {
     const apiUrl = sessionStorage.getItem('apiUrl');
-    let url = apiUrl + 'serverinfo/';
+    let url = apiUrl + 'server/';
     if (apiUrl.includes('localhost')) {
       url += 'default.json';
     }
+    return this.http.get(url)
+      .pipe(
+        map(response => {
+          this.shng_serverinfo = <ServerInfo>response;
+          const result = response;
+          sessionStorage.setItem('default_language', this.shng_serverinfo.default_language);
+          sessionStorage.setItem('client_ip', this.shng_serverinfo.client_ip);
+          // sessionStorage.setItem('tz', this.shng_serverinfo.tz);
+          // sessionStorage.setItem('tzname', this.shng_serverinfo.tzname);
+          // sessionStorage.setItem('itemtree_fullpath', this.shng_serverinfo.itemtree_fullpath.toString());
+          // sessionStorage.setItem('itemtree_searchstart', this.shng_serverinfo.itemtree_searchstart.toString());
+          // sessionStorage.setItem('core_branch', this.shng_serverinfo.core_branch);
+          // sessionStorage.setItem('plugins_branch', this.shng_serverinfo.plugins_branch);
+          const hostip = sessionStorage.getItem('hostIp');
+          if (hostip === 'localhost') {
+            // sessionStorage.setItem('wsHost', this.shng_serverinfo.websocket_host);
+          } else {
+            sessionStorage.setItem('wsHost', hostip);
+          }
+          // sessionStorage.setItem('wsPort', this.shng_serverinfo.websocket_port);
+
+          this.shared.setGuiLanguage();
+          return result;
+        }),
+        catchError((err: HttpErrorResponse) => {
+          console.error('ServerApiService (getServerinfo): Could not read serverinfo data' + ' - ' + err.error.error);
+          return of({});
+        })
+      );
+  }
+
+  getServerinfo() {
+    const apiUrl = sessionStorage.getItem('apiUrl');
+    let url = apiUrl + 'server/info/';
+    if (apiUrl.includes('localhost')) {
+      url += 'default.json';
+    }
+    console.log('getServerinfo()');
     return this.http.get(url)
       .pipe(
         map(response => {
@@ -108,6 +146,7 @@ export class ServerApiService {
           return of({});
         })
       );
+
   }
 
 
@@ -115,7 +154,7 @@ export class ServerApiService {
   getShngServerStatus() {
     // console.log('getShngServerStatus')
     const apiUrl = sessionStorage.getItem('apiUrl');
-    let url = apiUrl + 'status/';
+    let url = apiUrl + 'server/status/';
     if (apiUrl.includes('localhost')) {
       url += 'default.json';
     }
@@ -140,11 +179,11 @@ export class ServerApiService {
   restartShngServer() {
     // console.log('restartShngServer')
     const apiUrl = sessionStorage.getItem('apiUrl');
-    let url = apiUrl + 'restart/';
+    let url = apiUrl + 'server/restart/';
     if (apiUrl.includes('localhost')) {
       url += 'default.json';
     }
-    return this.http.get(url)
+    return this.http.put(url, JSON.stringify(''))
       .pipe(
         map(response => {
           return response;

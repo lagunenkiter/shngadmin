@@ -196,6 +196,8 @@ export class HeaderComponent implements OnInit {
       this.items[8].items[0].label = this.translate.instant('MENU.LOGS_DISPLAY');
       this.items[8].items[1].label = this.translate.instant('MENU.LOGGER_LIST');
       this.items[8].items[2].label = this.translate.instant('MENU.CONFIGURATION');
+
+      this.items[9].label = this.translate.instant('MENU.LOGIN');
     }
     return this.items;
   }

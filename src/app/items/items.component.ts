@@ -16,6 +16,8 @@ import { OlddataService } from '../common/services/olddata.service';
 import { ItemTree} from '../common/models/item-tree';
 import { SharedService } from '../common/services/shared.service';
 import {ItemDetails} from '../common/models/item-details';
+import {ServerInfo} from '../common/models/server-info';
+import {ServerApiService} from '../common/services/server-api.service';
 
 
 @Component({
@@ -65,6 +67,7 @@ export class ItemsComponent implements OnInit {
 
   modalRef: BsModalRef;
   constructor(private dataService: OlddataService,
+              private dataServiceServer: ServerApiService,
               private appComponent: AppComponent,
               private translate: TranslateService,
               private modalService: BsModalService,
@@ -94,6 +97,25 @@ export class ItemsComponent implements OnInit {
   ngOnInit() {
     console.log('ItemsComponent.ngOnInit:');
 
+    this.dataServiceServer.getServerinfo()
+      .subscribe(
+        (response) => {
+          this.getItemtree();
+        }
+      );
+
+    window.addEventListener('resize', ItemsComponent.resizeItemTree, false);
+    ItemsComponent.resizeItemTree();
+  }
+
+
+  closeAlert(myalert, item_oldvalue) {
+    this.item_val.value = item_oldvalue;
+    myalert.hide();
+  }
+
+
+  getItemtree() {
     this.dataService.getItemtree()
       .subscribe(
         (response: [number, ItemTree]) => {
@@ -111,15 +133,6 @@ export class ItemsComponent implements OnInit {
           console.log(error);
         }
       );
-
-    window.addEventListener('resize', ItemsComponent.resizeItemTree, false);
-    ItemsComponent.resizeItemTree();
-  }
-
-
-  closeAlert(myalert, item_oldvalue) {
-    this.item_val.value = item_oldvalue;
-    myalert.hide();
   }
 
 

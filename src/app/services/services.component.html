@@ -274,7 +274,7 @@
   <td style="padding-top:15px;">
     <form class="navbar-form navbar-left" action="reboot" method="post">
       <div class="form-group">
-        <input type="password" class="form-control" name="password" maxlength="128" placeholder="{{ _('Root-Passwort') }}"/>
+        <input type="password" class="form-server" name="password" maxlength="128" placeholder="{{ _('Root-Passwort') }}"/>
       </div>
       <input type="submit" class="btn btn-shng btn-sm" value="{{ _('Neu starten','button') }}"/>
     </form>
@@ -324,8 +324,8 @@
     <td><img src="static/img/password.svg" alt="Icon password" width="48" height="48"></td>
     <td colspan="2" style="padding-top:15px;">
       <div class="form-inline">
-        <input class="form-control" type="text" id="plaintext" size="20" maxlength="50" style="width: 250px;"/>
-        <input class="form-control" type="password" id="plainpass" size="20" maxlength="50" style="width: 250px;"/>
+        <input class="form-server" type="text" id="plaintext" size="20" maxlength="50" style="width: 250px;"/>
+        <input class="form-server" type="password" id="plainpass" size="20" maxlength="50" style="width: 250px;"/>
         <span style="min-width:190px;" class="btn btn-shng btn-sm ml-2" onclick="createHash()">{{ _('Passwort-Hash erzeugen','button') }}</span>
       </div>
       <input type="checkbox" style="..." id="showtext"  onclick="togglePlainFields();"> {{ _('Passwort anzeigen') }}

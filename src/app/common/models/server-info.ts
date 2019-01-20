@@ -1,6 +1,6 @@
 
 //
-// Datatype for <shng-server>:<port>/api/serverinfo
+// Datatype for <shng-server>:<port>/api/server
 //
 export interface ServerInfo {
   default_language: string;

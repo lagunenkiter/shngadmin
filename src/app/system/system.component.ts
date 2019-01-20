@@ -18,6 +18,7 @@ import { PypiInfo } from '../common/models/pypi-info';
 import { WebsocketService } from '../common/services/websocket.service';
 import { WebsocketPluginService } from '../common/services/websocket-plugin.service';
 import { SharedService } from '../common/services/shared.service';
+import {ServerApiService} from '../common/services/server-api.service';
 
 
 @Component({
@@ -70,6 +71,7 @@ export class SystemComponent implements OnInit {
 
   constructor(private http: HttpClient,
               private dataService: OlddataService,
+              private dataServiceServer: ServerApiService,
               private translate: TranslateService,
               private websocketPluginService: WebsocketPluginService,
               public shared: SharedService) {
@@ -92,8 +94,19 @@ export class SystemComponent implements OnInit {
     console.log('SystemComponent.ngOnInit:');
 
 
-    // -----------------------------------
-    // Initialize system info
+    this.dataServiceServer.getServerinfo()
+      .subscribe(
+        (response) => {
+          this.initSystemInfo();
+        }
+      );
+  }
+
+
+  initSystemInfo() {
+
+    // ---------------------------------------------
+    // Initialize system info (from OlddataService)
     //
     this.dataService.getSysteminfo()
       .subscribe(
@@ -102,8 +115,6 @@ export class SystemComponent implements OnInit {
 
           this.os_uptime = this.shared.ageToString(this.systeminfo.uptime);
           this.sh_uptime = this.shared.ageToString(this.systeminfo.sh_uptime);
-
-
 
 
         },
