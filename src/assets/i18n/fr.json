@@ -48,6 +48,15 @@
     }
   },
   "LOGICS": {
+    "USERLOGICS": "Logiques utilisateur",
+    "SYSTEMLOGICS": "Logiques système",
+    "LOGIC": "Logique",
+    "NEXT_EXEC": "Prochaine exécution",
+    "CYCLE": "Cycle",
+    "CRONTAB": "Crontab",
+    "WATCH_ITEMS": "Objets surveillés",
+    "FILENAME": "Nom du fichier",
+    "ACTIONS": "Actions"
   },
   "SCHEDULERS": {
   },

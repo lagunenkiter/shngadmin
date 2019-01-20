@@ -171,7 +171,14 @@
   },
   "LOGICS": {
     "USERLOGICS": "Nutzerlogiken",
-    "SYSTEMLOGICS": "Systemlogiken"
+    "SYSTEMLOGICS": "Systemlogiken",
+    "LOGIC": "Logik",
+    "NEXT_EXEC": "Nächste Ausführung",
+    "CYCLE": "Cycle",
+    "CRONTAB": "Crontab",
+    "WATCH_ITEMS": "Beobachtete Items",
+    "FILENAME": "Dateiname",
+    "ACTIONS": "Aktionen"
   },
   "SCHEDULERS": {
     "ITEM SCHEDULERS": "Item Scheduler",
