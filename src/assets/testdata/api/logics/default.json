@@ -1,5 +1,18 @@
 {
-  "logics_new": [{"logictype": "None", "filename": "", "userlogic": true, "name": "testlogik_neu"}],
+  "logics_new": [
+    {
+      "logictype": "None",
+      "filename": "",
+      "userlogic": true,
+      "name": "testlogik_neu"
+    },
+    {
+      "logictype": "None",
+      "filename": "testlogik_neu2.py",
+      "userlogic": true,
+      "name": "testlogik_neu2"
+    }
+  ],
   "logics":[
     {
       "enabled":true,

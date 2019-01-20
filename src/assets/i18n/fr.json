@@ -60,6 +60,9 @@
     "ENABLE": "Activer",
     "DISABLE": "Désactiver",
     "TRIGGER": "Déclencher",
+    "UNLOAD": "Décharger",
+    "DELETE": "Supprimer",
+    "ADD": "Ajouter",
     "RELOAD": "Recharger",
     "NEW_LOGICS": "Nouvelles logiques (non encore chargées)"
   },

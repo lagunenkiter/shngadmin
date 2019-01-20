@@ -181,6 +181,9 @@
     "ENABLE": "Enable",
     "DISABLE": "Disable",
     "TRIGGER": "Trigger",
+    "UNLOAD": "Unload",
+    "DELETE": "Delete",
+    "ADD": "Add",
     "RELOAD": "Reload",
     "NEW_LOGICS": "New Logics (not loaded)"
   },

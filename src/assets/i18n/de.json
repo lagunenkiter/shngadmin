@@ -182,6 +182,9 @@
     "ENABLE": "Aktivieren",
     "DISABLE": "Deaktivieren",
     "TRIGGER": "Auslösen",
+    "UNLOAD": "Entladen",
+    "DELETE": "Löschen",
+    "ADD": "Hinzufügen",
     "RELOAD": "Neu Laden",
     "NEW_LOGICS": "Neue Logiken (nicht geladen)"
   },

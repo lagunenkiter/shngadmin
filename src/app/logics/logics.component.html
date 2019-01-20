@@ -73,6 +73,8 @@
                     <button name="reload"  title="{{ 'LOGICS.RELOAD'|translate }}" class="btn btn-outline-dark btn-sm mr-1"><i class="fas fa-sync"></i></button>
                     <button name="enable"  title="{{ 'LOGICS.ENABLE'|translate }}" class="btn btn-outline-dark btn-sm mr-1"><i class="fas fa-play"></i></button>
                   </ng-template>
+                  <button name="unload" title="{{ 'LOGICS.UNLOAD'|translate }}" class="btn btn-outline-dark btn-sm mr-1"><i class="fas fa-eject"></i></button>
+                  <button name="delete" title="{{ 'LOGICS.DELETE'|translate }}" class="btn btn-outline-danger btn-sm"><i class="far fa-trash-alt" aria-hidden="true" style="color: #c40808;"></i></button>
               </td>
             </tr>
           </ng-container>
@@ -106,6 +108,10 @@
                 </ng-template>
               </td>
               <td class="p-1">
+                <ng-container *ngIf="logic.filename != ''">
+                  <button name="add" title="{{ 'LOGICS.ADD'|translate }}" type="submit" class="btn btn-outline-dark btn-sm mr-1"><i class="fas fa-plus"></i></button>
+                </ng-container>
+                <button name="delete" title="{{ 'LOGICS.DELETE'|translate }}" class="btn btn-outline-danger btn-sm"><i class="far fa-trash-alt" aria-hidden="true" style="color: #c40808;"></i></button>
               </td>
             </tr>
           </ng-container>
