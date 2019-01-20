@@ -52,7 +52,7 @@
       "filename":"temperature_control_night.py"
     },
     {
-      "enabled":true,
+      "enabled":false,
       "last_run":"2019-01-15 16:44:09+0100",
       "watch_item_list":[
         "avm.monitor.newest.event"
