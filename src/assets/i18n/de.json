@@ -186,7 +186,8 @@
     "DELETE": "Löschen",
     "ADD": "Hinzufügen",
     "RELOAD": "Neu Laden",
-    "NEW_LOGICS": "Neue Logiken (nicht geladen)"
+    "NEW_LOGICS": "Neue Logiken (nicht geladen)",
+    "NO_DATA": "Keine Daten verfügbar"
   },
   "SCHEDULERS": {
     "ITEM SCHEDULERS": "Item Scheduler",

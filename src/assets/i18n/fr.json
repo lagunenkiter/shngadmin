@@ -64,7 +64,8 @@
     "DELETE": "Supprimer",
     "ADD": "Ajouter",
     "RELOAD": "Recharger",
-    "NEW_LOGICS": "Nouvelles logiques (non encore chargées)"
+    "NEW_LOGICS": "Nouvelles logiques (non encore chargées)",
+    "NO_DATA": "Pas de données disponibles"
   },
   "SCHEDULERS": {
   },

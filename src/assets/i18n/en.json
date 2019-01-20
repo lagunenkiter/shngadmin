@@ -185,7 +185,8 @@
     "DELETE": "Delete",
     "ADD": "Add",
     "RELOAD": "Reload",
-    "NEW_LOGICS": "New Logics (not loaded)"
+    "NEW_LOGICS": "New Logics (not loaded)",
+    "NO_DATA": "No data available"
   },
   "SCHEDULERS": {
     "ITEM SCHEDULERS": "Item Schedulers",
