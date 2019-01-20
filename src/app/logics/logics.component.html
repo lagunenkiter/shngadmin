@@ -7,13 +7,13 @@
         <thead>
         <tr class="shng_heading">
           <th style="width: 30px; border-top:0;"></th>
-          <th class="p-1" style="width: 350px; border-top: 0;">{{ 'LOGICS.LOGIC'|translate }}</th>
+          <th class="p-1" style="width: 320px; border-top: 0;">{{ 'LOGICS.LOGIC'|translate }}</th>
           <th class="p-1" style="width: 220px; border-top: 0;">{{ 'LOGICS.NEXT_EXEC'|translate }}</th>
           <th class="p-1" style="width: 70px;  border-top: 0;">{{ 'LOGICS.CYCLE'|translate }}</th>
           <th class="p-1" style="width: 150px; border-top: 0;">{{ 'LOGICS.CRONTAB'|translate }}</th>
-          <th class="p-1" style="width: 70px;  border-top: 0;">{{ 'LOGICS.WATCH_ITEMS'|translate }}</th>
+          <th class="p-1" style="width: 120px;  border-top: 0;">{{ 'LOGICS.WATCH_ITEMS'|translate }}</th>
           <th class="p-1" style="width: 250px; border-top: 0;">{{ 'LOGICS.FILENAME'|translate }}</th>
-          <th class="p-1" style="width: 260px; border-top: 0;">{{ 'LOGICS.ACTIONS'|translate }}</th>
+          <th class="p-1" style="width: 200px; border-top: 0;">{{ 'LOGICS.ACTIONS'|translate }}</th>
         </tr>
         </thead>
         <tbody>
@@ -64,14 +64,14 @@
               <td class="p-1">
                 <ng-container *ngIf="logic.enabled; then logicEnabledActions; else logicDisabledActions"></ng-container>
                   <ng-template #logicEnabledActions>
-                    <button name="trigger" title="{{ 'LOGICS.TRIGGER'|translate }}" class="btn btn-outline-dark btn-sm"><i class="fas fa-hand-pointer"></i></button>
-                    <button name="reload"  title="{{ 'LOGICS.RELOAD'|translate }}" class="btn btn-outline-dark btn-sm"><i class="fas fa-sync"></i></button>
-                    <button name="disable" title="{{ 'LOGICS.DISABLE'|translate }}" class="btn btn-outline-dark btn-sm"><i class="fas fa-pause"></i></button>
+                    <button name="trigger" title="{{ 'LOGICS.TRIGGER'|translate }}" class="btn btn-outline-dark btn-sm mr-1"><i class="fas fa-hand-pointer"></i></button>
+                    <button name="reload"  title="{{ 'LOGICS.RELOAD'|translate }}" class="btn btn-outline-dark btn-sm mr-1"><i class="fas fa-sync"></i></button>
+                    <button name="disable" title="{{ 'LOGICS.DISABLE'|translate }}" class="btn btn-outline-dark btn-sm mr-1"><i class="fas fa-pause"></i></button>
                   </ng-template>
                   <ng-template #logicDisabledActions>
-                    <button disabled="true" name="trigger" title="{{ 'LOGICS.TRIGGER'|translate }}" class="btn btn-outline-dark btn-sm"><i class="fas fa-hand-pointer"></i></button>
-                    <button name="reload"  title="{{ 'LOGICS.RELOAD'|translate }}" class="btn btn-outline-dark btn-sm"><i class="fas fa-sync"></i></button>
-                    <button name="enable"  title="{{ 'LOGICS.ENABLE'|translate }}" class="btn btn-outline-dark btn-sm"><i class="fas fa-play"></i></button>
+                    <button disabled="true" name="trigger" title="{{ 'LOGICS.TRIGGER'|translate }}" class="btn btn-outline-dark btn-sm mr-1"><i class="fas fa-hand-pointer"></i></button>
+                    <button name="reload"  title="{{ 'LOGICS.RELOAD'|translate }}" class="btn btn-outline-dark btn-sm mr-1"><i class="fas fa-sync"></i></button>
+                    <button name="enable"  title="{{ 'LOGICS.ENABLE'|translate }}" class="btn btn-outline-dark btn-sm mr-1"><i class="fas fa-play"></i></button>
                   </ng-template>
               </td>
             </tr>
