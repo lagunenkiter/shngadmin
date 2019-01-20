@@ -177,7 +177,9 @@
     "CRONTAB": "Crontab",
     "WATCH_ITEMS": "Watch Items",
     "FILENAME": "Filename",
-    "ACTIONS": "Actions"
+    "ACTIONS": "Actions",
+    "ENABLE": "Enable",
+    "DISABLE": "Disable"
   },
   "SCHEDULERS": {
     "ITEM SCHEDULERS": "Item Schedulers",

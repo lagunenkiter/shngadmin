@@ -39,23 +39,22 @@
                 <td style="cursor: pointer;">
                   <ng-container *ngIf="logic.enabled; then watchItemSizeEnabled; else watchItemSizeDisabled"></ng-container>
                     <ng-template #watchItemSizeEnabled>
-                    <span>
-                      {{ logic.watch_item_list?.length }}
-                      <span class="fas fa-arrow-circle-down"></span>
-                    </span>
+                      <span>
+                        {{ logic.watch_item_list?.length }}
+                        <span class="fas fa-arrow-circle-down"></span>
+                      </span>
                     </ng-template>
                     <ng-template #watchItemSizeDisabled>
-                    <span style="color:#bbb;">
-                      {{ logic.watch_item_list?.length }}
-                      <span class="fas fa-arrow-circle-down" style="color: #ddd;"></span>
-                    </span>
+                      <span style="color:#bbb;">
+                        {{ logic.watch_item_list?.length }}
+                        <span class="fas fa-arrow-circle-down" style="color: #ddd;"></span>
+                      </span>
                     </ng-template>
                 </td>
               </ng-container>
               <ng-container *ngIf="logic.watch_item_list?.length === 0">
                 <td class="p-1">-</td>
               </ng-container>
-              <td class="p-1"></td>
               <td class="p-1">
                 <ng-container *ngIf="logic.logictype === 'Blockly'; then blocklyLink; else noBlocklyLink">
                 </ng-container>
@@ -64,7 +63,15 @@
                   <a class="text-shng" href="logics_view.html?file_path={{ logic.pathname }}&logicname={{ logic.name }}">{{ logic.filename }}</a>
                 </ng-template>
               </td>
-              <td></td>
+              <td class="p-1">
+                <ng-container *ngIf="logic.enabled; then logicEnabledActions; else logicDisabledActions"></ng-container>
+                  <ng-template #logicEnabledActions>
+                    <button name="disable" title="{{ 'LOGICS.DISABLE'|translate }}" class="btn btn-outline-dark btn-sm"><i class="fas fa-pause"></i></button>
+                  </ng-template>
+                  <ng-template #logicDisabledActions>
+                    <button name="enable" title="{{ 'LOGICS.ENABLE'|translate }}" class="btn btn-outline-dark btn-sm"><i class="fas fa-play"></i></button>
+                  </ng-template>
+              </td>
             </tr>
           </ng-container>
         </ng-container>

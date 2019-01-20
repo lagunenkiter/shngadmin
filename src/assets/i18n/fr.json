@@ -56,7 +56,9 @@
     "CRONTAB": "Crontab",
     "WATCH_ITEMS": "Objets surveillés",
     "FILENAME": "Nom du fichier",
-    "ACTIONS": "Actions"
+    "ACTIONS": "Actions",
+    "ENABLE": "Activer",
+    "DISABLE": "Désactiver"
   },
   "SCHEDULERS": {
   },
