@@ -17,7 +17,7 @@
         </tr>
         </thead>
         <tbody>
-        <ng-container *ngFor="let logic of logicsinfo">
+        <ng-container *ngFor="let logic of userlogics">
           <ng-container *ngIf="logic.userlogic === true">
             <tr>
               <td class="p-1 pl-2">
@@ -79,10 +79,10 @@
             </tr>
           </ng-container>
         </ng-container>
-        <ng-container *ngIf="newlogicsinfo?.length >0">
+        <ng-container *ngIf="newlogics?.length >0">
           <tr><th colspan="8">{{ 'LOGICS.NEW_LOGICS'|translate }}</th><tr>
         </ng-container>
-        <ng-container *ngFor="let logic of newlogicsinfo">
+        <ng-container *ngFor="let logic of newlogics">
           <ng-container *ngIf="logic.userlogic === true">
             <tr>
               <td class="p-1 pl-2">
@@ -138,7 +138,7 @@
           </tr>
           </thead>
           <tbody>
-          <ng-container *ngFor="let logic of logicsinfo">
+          <ng-container *ngFor="let logic of systemlogics">
             <ng-container *ngIf="logic.userlogic === false">
               <tr>
                 <td class="p-1 pl-2">

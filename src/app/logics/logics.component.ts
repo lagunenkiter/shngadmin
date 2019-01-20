@@ -17,10 +17,13 @@ import {Log} from '@angular/core/testing/src/logger';
   providers: [OlddataService]
 })
 export class LogicsComponent implements OnInit {
-
-  logicsinfo: LogicsinfoType[];
-  newlogicsinfo: LogicsinfoType[];
+  logics: LogicsinfoType[];
+  userlogics: LogicsinfoType[];
+  systemlogics: LogicsinfoType[];
+  newlogics: LogicsinfoType[];
   constructor(private http: HttpClient, private dataService: LogicsApiService, private modalService: BsModalService) {
+    this.userlogics = [];
+    this.systemlogics = [];
   }
 
   ngOnInit() {
@@ -29,11 +32,17 @@ export class LogicsComponent implements OnInit {
     this.dataService.getLogics()
       .subscribe(
         (response) => {
-            this.logicsinfo = <LogicsinfoType[]>response['logics'];
-            this.newlogicsinfo = <LogicsinfoType[]>response['logics_new'];
-            this.logicsinfo.sort(function (a, b) {return (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0); });
-            this.newlogicsinfo.sort(function (a, b) {return (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0); });
-            console.log(response);
+            this.logics = <LogicsinfoType[]>response['logics'];
+            this.logics.sort(function (a, b) {return (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0); });
+            for (const logic of this.logics) {
+              if (logic.userlogic === true) {
+                this.userlogics.push(logic);
+              } else {
+                this.systemlogics.push(logic);
+              }
+            }
+            this.newlogics = <LogicsinfoType[]>response['logics_new'];
+            this.newlogics.sort(function (a, b) {return (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0); });
         }
       );
   }
