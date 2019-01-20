@@ -60,7 +60,8 @@
     "ENABLE": "Activer",
     "DISABLE": "Désactiver",
     "TRIGGER": "Déclencher",
-    "RELOAD": "Recharger"
+    "RELOAD": "Recharger",
+    "NEW_LOGICS": "Nouvelles logiques (non encore chargées)"
   },
   "SCHEDULERS": {
   },

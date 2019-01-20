@@ -181,7 +181,8 @@
     "ENABLE": "Enable",
     "DISABLE": "Disable",
     "TRIGGER": "Trigger",
-    "RELOAD": "Reload"
+    "RELOAD": "Reload",
+    "NEW_LOGICS": "New Logics (not loaded)"
   },
   "SCHEDULERS": {
     "ITEM SCHEDULERS": "Item Schedulers",

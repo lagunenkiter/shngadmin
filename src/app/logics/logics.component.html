@@ -77,6 +77,39 @@
             </tr>
           </ng-container>
         </ng-container>
+        <ng-container *ngIf="newlogicsinfo?.length >0">
+          <tr><th colspan="8">{{ 'LOGICS.NEW_LOGICS'|translate }}</th><tr>
+        </ng-container>
+        <ng-container *ngFor="let logic of newlogicsinfo">
+          <ng-container *ngIf="logic.userlogic === true">
+            <tr>
+              <td class="p-1 pl-2">
+                <ng-container *ngIf="logic.enabled === true, then logicEnabled; else logicDisabled"></ng-container>
+                <ng-template #logicEnabled>
+                  <span style="color: green;" class="fas fa-play-circle"></span>
+                </ng-template>
+                <ng-template #logicDisabled>
+                  <span style="color: red" class="fas fa-pause-circle"></span>
+                </ng-template>
+              </td>
+              <td class="p-1">{{ logic.name }}</td>
+              <td class="p-1"></td>
+              <td class="p-1"></td>
+              <td class="p-1"></td>
+              <td class="p-1"></td>
+              <td class="p-1">
+                <ng-container *ngIf="logic.logictype === 'Blockly'; then blocklyLink; else noBlocklyLink">
+                </ng-container>
+                <ng-template #blocklyLink></ng-template>
+                <ng-template #noBlocklyLink>
+                  <a class="text-shng" href="logics_view.html?file_path={{ logic.pathname }}&logicname={{ logic.name }}">{{ logic.filename }}</a>
+                </ng-template>
+              </td>
+              <td class="p-1">
+              </td>
+            </tr>
+          </ng-container>
+        </ng-container>
         </tbody>
       </table>
       </div>

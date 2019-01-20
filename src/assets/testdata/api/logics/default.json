@@ -1,4 +1,5 @@
 {
+  "logics_new": [{"logictype": "None", "filename": "", "userlogic": true, "name": "testlogik_neu"}],
   "logics":[
     {
       "enabled":true,
@@ -850,8 +851,5 @@
       "userlogic":true,
       "filename":"zeit.py"
     }
-  ],
-  "new_logics":[
-
   ]
 }

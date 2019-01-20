@@ -182,7 +182,8 @@
     "ENABLE": "Aktivieren",
     "DISABLE": "Deaktivieren",
     "TRIGGER": "Auslösen",
-    "RELOAD": "Neu Laden"
+    "RELOAD": "Neu Laden",
+    "NEW_LOGICS": "Neue Logiken (nicht geladen)"
   },
   "SCHEDULERS": {
     "ITEM SCHEDULERS": "Item Scheduler",
