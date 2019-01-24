@@ -63,19 +63,25 @@ export class StructsComponent implements OnInit {
       );
   }
 
+  // -------------------------------------------------------------------------------------------
+  // build a display tree for the PrimeNG component from the itemtree received from the backend
+  //
   buildDisplayTree(subtree) {
     const displayTreeList = [];
     for (const key in subtree) {
       if (key in subtree) {
         const displayNode = {};
-        if (typeof subtree[key] === 'string') {
-          displayNode['label'] = key + ': ' + subtree[key];
+        if (Array.isArray(subtree)) {
+          displayNode['label'] = '- ' + subtree[key];
         } else {
-          displayNode['label'] = key;
+          if (typeof subtree[key] === 'string') {
+            displayNode['label'] = key + ': ' + subtree[key];
+          } else {
+            displayNode['label'] = key;
+          }
         }
         if (typeof subtree[key] === 'object') {
           displayNode['children'] = this.buildDisplayTree(subtree[key]);
-          // displayNode['expanded'] = true;
         }
         displayTreeList.push(displayNode);
       }
