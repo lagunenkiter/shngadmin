@@ -1,0 +1,42 @@
+
+<div style="margin-left: 10px; margin-right: 10px; margin-top: 55px;">
+  <h4 style="margin-left: 15px; margin-top: 65px;">{{ 'ITEMS.STRUCT_TEMPLATES'|translate }}</h4>
+  <p-accordion [multiple]="true" (onOpen)="structExpanded[structsList[$event.index]]=true"  (onClose)="structExpanded[structsList[$event.index]]=false">
+    <ng-container *ngFor="let struct of structsList">
+      <p-accordionTab>
+        <p-header>
+          <ng-container *ngIf="structsDict[struct]['name'] === undefined">
+            <span style="font-size: large; font-weight: bold; ">{{struct}}</span>
+          </ng-container>
+          <ng-container *ngIf="structsDict[struct]['name'] !== undefined">
+            <span style="font-size: large; font-weight: bold; ">{{struct}}</span> &nbsp; &nbsp; ({{structsDict[struct]['name']}})
+          </ng-container>
+
+          <ng-container *ngIf="structExpanded[struct] === true">
+            <button pButton label="{{ 'ITEMS.REDUCE ALL'|translate }}" type="button" style="margin-right: 5px" icon="fa fa-folder" (click)="$event.stopPropagation(); collapseAll(displayTrees[struct])" class="float-sm-right ui-button-success"></button>
+            <button pButton label="{{ 'ITEMS.EXPAND ALL'|translate }}" type="button" style="margin-right: 5px" icon="fa fa-folder-open" (click)="$event.stopPropagation(); expandAll(displayTrees[struct])" class="float-sm-right ui-button-success"></button>
+          </ng-container>
+
+        </p-header>
+
+        <div style="margin-left: 17px;">
+
+          <p-tree [value]="displayTrees[struct]"
+                  selectionMode="single"
+                  [(selection)]="selectedItem"
+                  emptyMessage="{{'ITEMS.NO ITEMS'|translate}}"
+                  [style]="{width: '100%'}">
+            <ng-template let-node  pTemplate="default">
+              {{node.label}} &nbsp;
+            </ng-template>
+
+          </p-tree>
+
+        </div>
+      </p-accordionTab>
+    </ng-container>
+  </p-accordion>
+
+</div>
+
+

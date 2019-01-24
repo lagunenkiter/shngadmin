@@ -57,6 +57,7 @@ import { NoAccessComponent } from './no-access/no-access.component';
 import { AuthService } from './common/services/auth.service';
 import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { SystemConfigComponent } from './system/system-config/system-config.component';
+import { StructsComponent } from './items/structs/structs.component';
 
 export function translateHttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -81,7 +82,8 @@ export function translateHttpLoaderFactory(http: HttpClient) {
     NotFoundComponent,
     LoginComponent,
     NoAccessComponent,
-    SystemConfigComponent
+    SystemConfigComponent,
+    StructsComponent
   ],
   imports: [
     BrowserModule,

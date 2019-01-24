@@ -78,6 +78,16 @@ export class HeaderComponent implements OnInit {
       {
         label: this.translate.instant('MENU.ITEMS'),
         routerLink: ['/items'],
+        items: [
+          {
+            label: this.translate.instant('MENU.ITEM_TREE'),
+            routerLink: ['/item_tree'],
+          },
+          {
+            label: this.translate.instant('MENU.ITEM_STRUCTS'),
+            routerLink: ['/items/structs'],
+          }
+        ]
       },
       {
         label: this.translate.instant('MENU.LOGICS'),
@@ -184,6 +194,8 @@ export class HeaderComponent implements OnInit {
       this.items[0].items[1].label = this.translate.instant('MENU.CONFIGURATION');
       this.items[1].label = this.translate.instant('MENU.SERVICES');
       this.items[2].label = this.translate.instant('MENU.ITEMS');
+      this.items[2].items[0].label = this.translate.instant('MENU.ITEM_TREE');
+      this.items[2].items[1].label = this.translate.instant('MENU.ITEM_STRUCTS');
       this.items[3].label = this.translate.instant('MENU.LOGICS');
       this.items[4].label = this.translate.instant('MENU.SCHEDULERS');
       this.items[5].label = this.translate.instant('MENU.PLUGINS');

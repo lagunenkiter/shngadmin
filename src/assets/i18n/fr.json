@@ -4,6 +4,8 @@
     "SYSTEM_PROPERTIES": "Info système",
     "SERVICES": "Services",
     "ITEMS": "Objets",
+    "ITEM_TREE": "Item Tree",
+    "ITEM_STRUCTS": "Structure Templates",
     "LOGICS": "Logiques",
     "SCHEDULERS": "Planificateur",
     "PLUGINS": "Extensions",

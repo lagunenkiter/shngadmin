@@ -13,7 +13,7 @@ import { cloneDeep } from 'lodash';
 
 import { AppComponent } from '../app.component';
 import { OlddataService } from '../common/services/olddata.service';
-import { ItemTree} from '../common/models/item-tree';
+import { ItemTree } from '../common/models/item-tree';
 import { SharedService } from '../common/services/shared.service';
 import {ItemDetails} from '../common/models/item-details';
 import {ServerInfo} from '../common/models/server-info';
