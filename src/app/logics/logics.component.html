@@ -11,7 +11,7 @@
           <th class="p-1" style="width: 220px; border-top: 0;">{{ 'LOGICS.NEXT_EXEC'|translate }}</th>
           <th class="p-1" style="width: 70px;  border-top: 0;">{{ 'LOGICS.CYCLE'|translate }}</th>
           <th class="p-1" style="width: 150px; border-top: 0;">{{ 'LOGICS.CRONTAB'|translate }}</th>
-          <th class="p-1" style="width: 120px;  border-top: 0;">{{ 'LOGICS.WATCH_ITEMS'|translate }}</th>
+          <th class="p-1" style="width: 120px; border-top: 0;">{{ 'LOGICS.WATCH_ITEMS'|translate }}</th>
           <th class="p-1" style="width: 250px; border-top: 0;">{{ 'LOGICS.FILENAME'|translate }}</th>
           <th class="p-1" style="width: 200px; border-top: 0;">{{ 'LOGICS.ACTIONS'|translate }}</th>
         </tr>
@@ -35,18 +35,18 @@
                 <td class="p-1">{{ logic.cycle }}</td>
                 <td class="p-1">{{ logic.crontab }}</td>
                 <ng-container *ngIf="logic.watch_item_list?.length > 0">
-                  <td style="cursor: pointer;">
+                  <td style="cursor: pointer;" (click)="details.show()">
                     <ng-container *ngIf="logic.enabled; then watchItemSizeEnabled; else watchItemSizeDisabled"></ng-container>
                       <ng-template #watchItemSizeEnabled>
                         <span>
                           {{ logic.watch_item_list?.length }}
-                          <span class="fas fa-arrow-circle-down"></span>
+                          <span class="fas fa-search"></span>
                         </span>
                       </ng-template>
                       <ng-template #watchItemSizeDisabled>
                         <span style="color:#bbb;">
                           {{ logic.watch_item_list?.length }}
-                          <span class="fas fa-arrow-circle-down" style="color: #ddd;"></span>
+                          <span class="fas fa-search" style="color: #ddd;"></span>
                         </span>
                       </ng-template>
                   </td>
@@ -78,6 +78,29 @@
                     <button name="delete" title="{{ 'LOGICS.DELETE'|translate }}" class="btn btn-outline-danger btn-sm"><i class="far fa-trash-alt" aria-hidden="true" style="color: #c40808;"></i></button>
                 </td>
               </tr>
+              <div bsModal #details="bs-modal" class="modal fade" tabindex="1" role="dialog" aria-labelledby="dialog-sizes-name2">
+                <div class="modal-dialog modal-lg">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 id="dialog-sizes-name2" class="modal-title pull-left">
+                        {{ 'LOGICS.WATCH_ITEMS'|translate }}
+                      </h5>
+                      <button type="button" class="close pull-right" aria-label="Close" (click)="details.hide()">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="card" style="margin-bottom: 5px;">
+                        <div class="card-body p-1">
+                          <ng-container *ngFor="let watch_item of logic.watch_item_list">
+                          <div class="item-box m-1 p-1">{{ watch_item }}</div>
+                          </ng-container>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </ng-container>
           </ng-container>
         </ng-container>
