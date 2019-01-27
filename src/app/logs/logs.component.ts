@@ -1,10 +1,11 @@
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
 import { LogsType, LogsInfoDict } from '../common/models/logfiles-info';
 import { LogsApiService } from '../common/services/logs-api.service';
-import {TranslateService} from '@ngx-translate/core';
+import { TranslateService } from '@ngx-translate/core';
 
+import * as CodeMirror from 'codemirror';
 
 interface DropDownEntry {
   label: string;
@@ -14,7 +15,9 @@ interface DropDownEntry {
 @Component({
   selector: 'app-logs',
   templateUrl: './logs.component.html',
-  styleUrls: ['./logs.component.css']
+  styleUrls: ['./logs.component.css'],
+//  styles: ['.CodeMirror { width: 100%; height: 50vh; }' ],
+  encapsulation: ViewEncapsulation.None
 })
 export class LogsComponent implements OnInit {
 
@@ -28,8 +31,20 @@ export class LogsComponent implements OnInit {
   selectedFile: string = null;
 
   displayLogfile = '';
+  text_filter = '';
 
   logfile_content = '';
+
+  cmOptions = {
+    lineNumbers: true,
+    readOnly: true,
+    indentUnit: 4,
+    lineSeparator: '\n',
+    mode: 'ttcn',
+    lineWrapping: false,
+//    firstLineNumber: firstLineNumber,
+    indentWithTabs: false
+  };
 
 
   constructor(private dataService: LogsApiService,
@@ -127,5 +142,22 @@ export class LogsComponent implements OnInit {
     }
     console.log('displayLogfile: ', this.displayLogfile);
   }
+
+  // -------------------------------------------------------------
+
+
+
+/*
+    window.addEventListener("resize", function(){resizeCodeMirror(logCodeMirror, 75)}, false);
+    resizeCodeMirror(logCodeMirror, 75);
+
+    $('#linewrapping').click(function(e) {
+      switchLineWrapping(logCodeMirror)
+    });
+
+    {% if current_page <= 1 %}$('#fast-backward').prop('disabled', true);$('#step-backward').prop('disabled', true);{% endif %}
+    {% if current_page >= pages %}$('#fast-forward').prop('disabled', true);$('#step-forward').prop('disabled', true);{% endif %}
+*/
+
 }
 

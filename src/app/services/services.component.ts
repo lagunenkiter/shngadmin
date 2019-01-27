@@ -1,30 +1,31 @@
 
-import { Component, OnInit } from '@angular/core';
+import { Component, AfterViewInit, AfterViewChecked, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import {SchedulersApiService} from '../common/services/schedulers-api.service';
+import {ServicesApiService} from '../common/services/services-api.service';
 import {ServerApiService} from '../common/services/server-api.service';
 
 import { ServerInfo } from '../common/models/server-info';
 import {TranslateService} from '@ngx-translate/core';
 import {SharedService} from '../common/services/shared.service';
 
-
 @Component({
   selector: 'app-services',
   templateUrl: './services.component.html',
   styleUrls: ['./services.component.css'],
+  encapsulation: ViewEncapsulation.None,
   providers: []
 })
 
-export class ServicesComponent implements OnInit {
+
+export class ServicesComponent implements AfterViewChecked, OnInit {
 
 //  schedulerinfo: SchedulerInfo[];
 
   constructor(private http: HttpClient,
               private translate: TranslateService,
               private shared: SharedService,
-              private dataService: SchedulersApiService,
+              private dataService: ServicesApiService,
               private dataServiceServer: ServerApiService) {
   }
 
@@ -40,8 +41,49 @@ export class ServicesComponent implements OnInit {
   shng_statuscode: number = 0;
 
 
+  @ViewChild('codeeditor') private codeEditor;
+  @ViewChild('codeeditor2') private codeEditor2;
+
+  rulers = [];
+  myTextarea = '';
+  cmOptions = {
+    lineNumbers: true,
+    readOnly: false,
+    indentUnit: 4,
+    lineSeparator: '\n',
+    rulers: this.rulers,
+    mode: 'yaml',
+    lineWrapping: false,
+    firstLineNumber: 1,
+    indentWithTabs: false,
+    autorefresh: true,
+    fixedGutter: true,
+  };
+
+  myTextOutput = '';
+  cmOptionsOutput = {
+    lineNumbers: true,
+    readOnly: false,
+    indentUnit: 4,
+    lineSeparator: '\n',
+    rulers: this.rulers,
+    mode: 'yaml',
+    lineWrapping: false,
+    firstLineNumber: 1,
+    indentWithTabs: false,
+    autorefresh: true,
+    fixedGutter: true,
+  };
+
+
+
   ngOnInit() {
     console.log('ServicesComponent.ngOnInit');
+
+    for (let i = 1; i <= 100; i++) {
+      this.rulers.push({color: '#eee', column: i * 4, lineStyle: 'dashed'});
+    }
+
 
     this.shng_status = '?';
     this.default_language = sessionStorage.getItem('default_language');
@@ -62,6 +104,34 @@ export class ServicesComponent implements OnInit {
 
           // this.valid_default_language = 'Deutsch';
           this.selected_language = this.default_language;
+        }
+      );
+
+  }
+
+
+  ngAfterViewChecked() {
+
+    const editor = this.codeEditor.codeMirror;
+    const editor2 = this.codeEditor2.codeMirror;
+    editor.refresh();
+    editor2.refresh();
+  }
+
+
+  checkYaml() {
+    // this.myTextoutput = this.myTextarea;
+
+    this.dataService.CheckYamlText(this.myTextarea)
+      .subscribe(
+        (response) => {
+          this.myTextOutput = <any> response;
+          this.cmOptionsOutput.lineNumbers = true;
+          if (this.myTextOutput.startsWith('ERROR:')) {
+            this.cmOptionsOutput.lineNumbers = false;
+          }
+          const editor2 = this.codeEditor2.codeMirror;
+          editor2.refresh();
         }
       );
 

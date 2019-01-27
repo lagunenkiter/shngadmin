@@ -12,6 +12,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { CodemirrorModule } from '@ctrl/ngx-codemirror';
 
 import { TreeModule } from 'primeng/tree';
 import { TreeNode } from 'primeng/api';
@@ -120,6 +121,7 @@ export function translateHttpLoaderFactory(http: HttpClient) {
     TabViewModule,
     TriStateCheckboxModule,
     ProgressSpinnerModule,
+    CodemirrorModule,
 
     TabsModule.forRoot(),
     AlertModule.forRoot(),

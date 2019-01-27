@@ -81,7 +81,10 @@
     "CONF TO YAML": "CONF-YAML Konverter",
     "SERVICE": "Dienst",
     "STATUS": "Status",
-    "ACTION": "Aktion"
+    "ACTION": "Aktion",
+
+    "YAML_CHECK_SOURCE": "Eingabe im .YAML Format",
+    "YAML_CHECK_RESULT": "Ergebnis: Aufbereitetes .YAML Format"
   },
   "SHNG_STATE": {
     "Initalizing": "Initialisiert",
@@ -284,7 +287,9 @@
     "ADD_PLUGIN": "Plugin hinzufügen",
     "RELOAD_LOG": "Log aktualisieren",
     "RESTART_SHNG": "Core neu starten",
-    "SAVE_SETTINGS": "Einstellungen sichern"
+    "SAVE_SETTINGS": "Einstellungen sichern",
+    "CHECK": "Prüfen"
+
   },
 
   "ERROR": {
@@ -316,5 +321,8 @@
   "False": "Nein",
 
   "CONFIGURATION": "Konfiguration",
-  "RESTART FOR CHANGES": "Änderungen werden erst nach einem Neustart von SmartHomeNG wirksam"
+  "RESTART FOR CHANGES": "Änderungen werden erst nach einem Neustart von SmartHomeNG wirksam",
+
+  "LINEBREAK": "Zeilenumbrusch"
+
 }

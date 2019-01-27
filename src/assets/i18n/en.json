@@ -81,7 +81,10 @@
     "CONF TO YAML": "CONF-YAML Converter",
     "SERVICE": "Service",
     "STATUS": "State",
-    "ACTION": "Action"
+    "ACTION": "Action",
+
+    "YAML_CHECK_SOURCE": "Enter YAML code to be checked here",
+    "YAML_CHECK_RESULT": "The checked expression is displayed here"
   },
   "SHNG_STATE": {
     "Initalizing": "Initalizing",
@@ -283,7 +286,8 @@
     "ADD_PLUGIN": "Add Plugin",
     "RELOAD_LOG": "Reload Log",
     "RESTART_SHNG": "Restart Core",
-    "SAVE_SETTINGS": "Save Settings"
+    "SAVE_SETTINGS": "Save Settings",
+    "CHECK": "Check"
   },
 
   "ERROR": {
@@ -315,5 +319,7 @@
   "False": "False",
 
   "CONFIGURATION": "Configuration",
-  "RESTART FOR CHANGES": "Restart SmartHomeNG for changes to take effect"
+  "RESTART FOR CHANGES": "Restart SmartHomeNG for changes to take effect",
+
+  "LINEBREAK": "Line Break"
 }

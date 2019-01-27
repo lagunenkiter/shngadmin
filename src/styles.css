@@ -1,5 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
 
+@import "~codemirror/lib/codemirror.css";
+@import "~codemirror/addon/display/fullscreen.css";
+@import "~codemirror/addon/hint/show-hint.css";
+@import "~codemirror/addon/dialog/dialog.css";
+@import "~codemirror/addon/search/matchesonscrollbar.css";
+@import "~codemirror/addon/fold/foldgutter.css";
+
+
+/*
+
+    <link rel="stylesheet" href="/gstatic/css/smarthomeng.css" type="text/css"/>
+
+*/
+
+
+
 textarea {
   white-space: pre;
   overflow-wrap: normal;
