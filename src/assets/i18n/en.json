@@ -79,12 +79,15 @@
     "EVAL CHECKER": "eval Syntax Checker",
     "YAML CHECKER": "YAML Syntax Checker",
     "CONF TO YAML": "CONF-YAML Converter",
+    "CACHE_CHECKER": "Cache Checker",
     "SERVICE": "Service",
     "STATUS": "State",
     "ACTION": "Action",
 
-    "YAML_CHECK_SOURCE": "Enter YAML code to be checked here",
-    "YAML_CHECK_RESULT": "The checked expression is displayed here"
+    "YAML_CHECK_SOURCE": "Enter YAML code to be checked",
+    "YAML_CHECK_RESULT": "The checked YAML expression",
+    "YAML_CONVERTER_SOURCE": "Enter code in .CONF to be checked",
+    "YAML_CONVERTER_RESULT": "The converted expression in YAML format"
   },
   "SHNG_STATE": {
     "Initalizing": "Initalizing",

@@ -79,12 +79,15 @@
     "EVAL CHECKER": "eval Syntax Prüfer",
     "YAML CHECKER": "YAML Syntax Prüfer",
     "CONF TO YAML": "CONF-YAML Konverter",
+    "CACHE_CHECKER": "Cache Prüfung",
     "SERVICE": "Dienst",
     "STATUS": "Status",
     "ACTION": "Aktion",
 
     "YAML_CHECK_SOURCE": "Eingabe im .YAML Format",
-    "YAML_CHECK_RESULT": "Ergebnis: Aufbereitetes .YAML Format"
+    "YAML_CHECK_RESULT": "Ergebnis: Aufbereitetes .YAML Format",
+    "YAML_CONVERTER_SOURCE": "Eingabe im .CONF Format",
+    "YAML_CONVERTER_RESULT": "Ergebnis: Konvertiert in das .YAML Format"
   },
   "SHNG_STATE": {
     "Initalizing": "Initialisiert",

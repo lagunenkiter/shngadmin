@@ -104,7 +104,7 @@
 
     <!-- ------------------------------------------------------------------------------------
           YAML Syntax checker
-    -->
+    ------------------------------------------------------------------------------------- -->
 
     <tab customClass="tab-shng" heading="{{ 'SERVICES.YAML CHECKER'|translate }}">
       <div class="container-fluid" style="margin-top: 10px; margin-left: 10px; margin-right: 10px;">
@@ -145,18 +145,63 @@
         </td>
       </tr>
       </tbody></table>
-
     </tab>
 
 
     <!-- ------------------------------------------------------------------------------------
-          CONF to YAML converter
-    -->
+           CONF to YAML converter
+    ------------------------------------------------------------------------------------- -->
 
     <tab customClass="tab-shng" heading="{{ 'SERVICES.CONF TO YAML'|translate }}">
+      <div class="container-fluid" style="margin-top: 10px; margin-left: 10px; margin-right: 10px;">
+      </div>
+
+      <table style="width: 100%">
+        <tbody>
+        <td style="min-width: 50%">
+          <div style="font-weight: bold; padding-top: 10px; padding-left: 10px; padding-right: 5px;">
+            {{ 'SERVICES.YAML_CONVERTER_SOURCE'|translate }}
+            <button pButton label="{{ 'BUTTON.CHECK'|translate }}" type="button" style="margin-right: 0px;" (click)="convertYaml()" class="float-sm-right ui-button-success"></button>
+          </div>
+        </td>
+        <td style="min-width: 50%">
+          <div style="font-weight: bold; padding-top: 10px; padding-left: 0px;">
+            {{ 'SERVICES.YAML_CONVERTER_RESULT'|translate }}
+          </div>
+        </td>
+        <tr>
+          <td>
+            <div style="height: 100px; margin-top: 10px; padding-left: 10px; padding-right: 5px; width: 100%">
+              <ngx-codemirror #convertercodeeditor
+                              [options]="cmConveterOptions"
+                              [(ngModel)]="myConverterTextarea"
+                              [autoFocus]="true"
+              ></ngx-codemirror>
+            </div>
+          </td>
+          <td>
+            <div style="height: 100px; margin-top: 10px; padding-left: 0px; padding-right: 15px; width: 100%">
+              <ngx-codemirror #convertercodeeditor2
+                              [options]="cmConverterOptionsOutput"
+                              [ngModel]="myConverterTextOutput"
+                              [autoFocus]="true"
+                              [disabled]="true"
+              ></ngx-codemirror>
+            </div>
+          </td>
+        </tr>
+        </tbody></table>
+    </tab>
+
+
+    <!-- ------------------------------------------------------------------------------------
+          Cache Checker
+    -->
+
+    <tab customClass="tab-shng" heading="{{ 'SERVICES.CACHE_CHECKER'|translate }}">
       <div style="margin-top: 10px; margin-left: 10px; margin-right: 10px;">
         <p>
-          ConfToYaml works!
+          Cache Checker works!
         </p>
       </div>
       <div class="container-fluid" style="margin-top: 30px;">

@@ -64,5 +64,55 @@ export class ServicesApiService {
   }
 
 
+  // -----------------------------------------------------------
+  //  Send yaml text to check if it is conform to specification
+  //
+  ConvertToYamlText(confText) {
+    // console.log('ServicesApiService.CheckYamlText');
+
+    const apiUrl = sessionStorage.getItem('apiUrl');
+    let url = apiUrl + 'services/yamlconvert/';
+    if (apiUrl.includes('localhost')) {
+      url += 'default.txt';
+    }
+
+    if (apiUrl.includes('localhost')) {
+      console.warn('ServicesApiService.ConvertToYamlText', 'Cannot convert conf text to yaml in dev environment\n', '- yamlText: ', confText);
+
+      return this.http.get(url, { responseType: 'text' })
+        .pipe(
+          map(response => {
+            const result = response;
+            return result;
+          }),
+          catchError((err: HttpErrorResponse) => {
+            console.error('ServicesApiService (ConvertToYamlText): Could not read result data' + ' - ' + err.error.error);
+            return of({});
+          })
+        );
+    }
+
+    return this.http.put(url, confText, { responseType: 'text' })
+      .pipe(
+        map(response => {
+          const result = <any>response;
+
+          if (result) {
+            // console.log('ServicesApiService.ConvertToYamlText', '- config:', confText, '\nresult', {result});
+            return result;
+          } else {
+            console.log('ServicesApiService.ConvertToYamlText', 'fail: undefined result');
+          }
+        }),
+        catchError((err: HttpErrorResponse) => {
+          console.error('ServicesApiService.ConvertToYamlText: Could not set plugin config data' + ' - ' + err.error.error);
+          return of({});
+        })
+      );
+
+
+  }
+
+
 }
 

@@ -41,10 +41,17 @@ export class ServicesComponent implements AfterViewChecked, OnInit {
   shng_statuscode: number = 0;
 
 
+  // -----------------------------------------------------------------
+  //  Vars for the codemirror components
+  //
+  rulers = [];
+
+  // -----------------------------------------------------
+  //  Vars for the YAML syntax checker
+  //
   @ViewChild('codeeditor') private codeEditor;
   @ViewChild('codeeditor2') private codeEditor2;
 
-  rulers = [];
   myTextarea = '';
   cmOptions = {
     lineNumbers: true,
@@ -62,6 +69,42 @@ export class ServicesComponent implements AfterViewChecked, OnInit {
 
   myTextOutput = '';
   cmOptionsOutput = {
+    lineNumbers: true,
+    readOnly: false,
+    indentUnit: 4,
+    lineSeparator: '\n',
+    rulers: this.rulers,
+    mode: 'yaml',
+    lineWrapping: false,
+    firstLineNumber: 1,
+    indentWithTabs: false,
+    autorefresh: true,
+    fixedGutter: true,
+  };
+
+  // -----------------------------------------------------
+  //  Vars for the YAML converter
+  //
+  @ViewChild('convertercodeeditor') private converterCodeEditor;
+  @ViewChild('convertercodeeditor2') private converterCodeEditor2;
+
+  myConverterTextarea = '';
+  cmConveterOptions = {
+    lineNumbers: true,
+    readOnly: false,
+    indentUnit: 4,
+    lineSeparator: '\n',
+    rulers: this.rulers,
+    // mode: 'yaml',
+    lineWrapping: false,
+    firstLineNumber: 1,
+    indentWithTabs: false,
+    autorefresh: true,
+    fixedGutter: true,
+  };
+
+  myConverterTextOutput = '';
+  cmConverterOptionsOutput = {
     lineNumbers: true,
     readOnly: false,
     indentUnit: 4,
@@ -95,7 +138,8 @@ export class ServicesComponent implements AfterViewChecked, OnInit {
 
           this.getShngStatus();
 
-//          this.valid_languagelist = [{label: 'English', value: 'en'}, {label: 'Deutsch', value: 'de'}, {label: 'Français', value: 'fr'}, {label: 'Polski', value: 'pl'}];
+//          this.valid_languagelist = [{label: 'English', value: 'en'}, {label: 'Deutsch', value: 'de'}, {label: 'Français', value: 'fr'},
+//          {label: 'Polski', value: 'pl'}];
           this.valid_languagelist = [
             {label: 'English', value: 'en'},
             {label: 'Deutsch', value: 'de'},
@@ -112,10 +156,14 @@ export class ServicesComponent implements AfterViewChecked, OnInit {
 
   ngAfterViewChecked() {
 
-    const editor = this.codeEditor.codeMirror;
+    const editor1 = this.codeEditor.codeMirror;
     const editor2 = this.codeEditor2.codeMirror;
-    editor.refresh();
+    editor1.refresh();
     editor2.refresh();
+    const editor3 = this.converterCodeEditor.codeMirror;
+    const editor4 = this.converterCodeEditor2.codeMirror;
+    editor3.refresh();
+    editor4.refresh();
   }
 
 
@@ -132,6 +180,25 @@ export class ServicesComponent implements AfterViewChecked, OnInit {
           }
           const editor2 = this.codeEditor2.codeMirror;
           editor2.refresh();
+        }
+      );
+
+  }
+
+
+  convertYaml() {
+    // this.myTextoutput = this.myTextarea;
+
+    this.dataService.ConvertToYamlText(this.myConverterTextarea)
+      .subscribe(
+        (response) => {
+          this.myConverterTextOutput = <any> response;
+          this.cmConverterOptionsOutput.lineNumbers = true;
+//          if (this.myConverterTextOutput.startsWith('ERROR:')) {
+//            this.cmConverterOptionsOutput.lineNumbers = false;
+//          }
+//          const editor4 = this.converterCodeEditor2.codeMirror;
+//          editor4.refresh();
         }
       );
 
@@ -176,7 +243,7 @@ export class ServicesComponent implements AfterViewChecked, OnInit {
             console.log('getShngStatus', 'SmartHomeNG not running');
             this.shng_status = '';
           } else {
-            console.log('getShngStatus', res.code, res.text);
+            // console.log('getShngStatus', res.code, res.text);
             this.shng_statuscode = res.code;
             this.shng_status = this.translate_shngStatus(res.text);
             this.status_errorcount = 0;
