@@ -63,6 +63,44 @@
     </tab>
 
     <tab customClass="tab-shng" heading="{{ 'SERVICES.EVAL CHECKER'|translate }}">
+      <div class="container-fluid" style="margin-top: 10px; margin-left: 10px; margin-right: 10px;">
+      </div>
+
+      <div style="font-weight: bold; padding-top: 10px; padding-left: 10px; padding-right: 5px;">
+        {{ 'SERVICES.EVAL_CHECK_SOURCE'|translate }}
+        <ngx-codemirror #evalcodeeditor
+                        [options]="cmEvalOptions"
+                        [(ngModel)]="myEvalTextarea"
+                        [autoFocus]="true"
+        ></ngx-codemirror>
+      </div>
+
+      <br>
+      <div style="font-weight: bold; padding-top: 10px; padding-left: 10px; padding-right: 5px;">
+        {{ 'SERVICES.EVAL_RELATIVE_TO'|translate }}: &nbsp;
+        <input type="text" pInputText style="width: 400px" [(ngModel)]="myRelativeTo"/>
+        <button pButton label="{{ 'BUTTON.CHECK'|translate }}" type="button" style="margin-right: 0px;" (click)="checkEval()" class="float-sm-right ui-button-success"></button>
+      </div>
+
+      <br>
+      <div style="font-weight: bold; padding-top: 10px; padding-left: 10px; padding-right: 5px;">
+        {{ 'SERVICES.EVAL_CHECK_EXPANDED'|translate }}
+        <ngx-codemirror #evalcodeeditor2
+                        [options]="cmEvalOptionsOutput"
+                        [ngModel]="myEvalTextOutput"
+                        [autoFocus]="true"
+                        [disabled]="true"
+        ></ngx-codemirror>
+      </div>
+
+
+      <br>
+      <div style="font-weight: bold; padding-top: 10px; padding-left: 10px; padding-right: 5px;">
+        {{ 'SERVICES.EVAL_CHECK_RESULT'|translate }}: &nbsp; <a  style="font-weight: normal;">{{ myEvalResult }}</a>
+      </div>
+
+
+<!--
       <div class="container-fluid" style="margin-top: 10px; margin-left: 10px;" ></div>
       <form name="input" action="eval_syntax_checker.html" method="POST" enctype="multipart/form-data">
         <div class="container-fluid" style="width: 100%;">
@@ -90,15 +128,19 @@
         </div>
         <br>
         <div class="container-fluid" style="width: 100%;">
+-->
+
 <!--
           <input name="check" value="{{ 'Prüfen','button'|translate }}" type="submit" class="btn btn-dark">
 -->
+<!--
         </div>
       </form>
       <div class="container-fluid" style="margin-top: 30px;">
         &nbsp;
         <p style="font-size: large; color: red;"><strong>This tab is still under construction</strong></p>
       </div>
+-->
     </tab>
 
 

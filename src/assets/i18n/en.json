@@ -84,6 +84,10 @@
     "STATUS": "State",
     "ACTION": "Action",
 
+    "EVAL_CHECK_SOURCE": "Expression (Input in Python eval-format",
+    "EVAL_RELATIVE_TO": "Relative to item (Input path of item)",
+    "EVAL_CHECK_EXPANDED": "Expanded expression",
+    "EVAL_CHECK_RESULT": "Result of computed expression",
     "YAML_CHECK_SOURCE": "Enter YAML code to be checked",
     "YAML_CHECK_RESULT": "The checked YAML expression",
     "YAML_CONVERTER_SOURCE": "Enter code in .CONF to be checked",

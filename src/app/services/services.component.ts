@@ -47,6 +47,44 @@ export class ServicesComponent implements AfterViewChecked, OnInit {
   rulers = [];
 
   // -----------------------------------------------------
+  //  Vars for the EVAL syntax checker
+  //
+  @ViewChild('evalcodeeditor') private evalCodeEditor;
+  @ViewChild('evalcodeeditor2') private evalCodeEditor2;
+
+  myEvalTextarea = '';
+  myRelativeTo = '';
+  myEvalResult: '';
+  cmEvalOptions = {
+    lineNumbers: true,
+    readOnly: false,
+    indentUnit: 4,
+    lineSeparator: '\n',
+    rulers: this.rulers,
+    mode: 'python',
+    lineWrapping: false,
+    firstLineNumber: 1,
+    indentWithTabs: false,
+    autorefresh: true,
+    fixedGutter: true,
+  };
+
+  myEvalTextOutput = '';
+  cmEvalOptionsOutput = {
+    lineNumbers: true,
+    readOnly: false,
+    indentUnit: 4,
+    lineSeparator: '\n',
+    rulers: this.rulers,
+    mode: 'python',
+    lineWrapping: false,
+    firstLineNumber: 1,
+    indentWithTabs: false,
+    autorefresh: true,
+    fixedGutter: true,
+  };
+
+  // -----------------------------------------------------
   //  Vars for the YAML syntax checker
   //
   @ViewChild('codeeditor') private codeEditor;
@@ -156,6 +194,14 @@ export class ServicesComponent implements AfterViewChecked, OnInit {
 
   ngAfterViewChecked() {
 
+    const evalEditor1 = this.evalCodeEditor.codeMirror;
+    const evalEditor2 = this.evalCodeEditor2.codeMirror;
+    const h = evalEditor1.getViewport();
+
+    evalEditor1.setSize('100%', 160);
+    evalEditor1.refresh();
+    evalEditor2.setSize('100%', 160);
+    evalEditor2.refresh();
     const editor1 = this.codeEditor.codeMirror;
     const editor2 = this.codeEditor2.codeMirror;
     editor1.refresh();
@@ -180,6 +226,21 @@ export class ServicesComponent implements AfterViewChecked, OnInit {
           }
           const editor2 = this.codeEditor2.codeMirror;
           editor2.refresh();
+        }
+      );
+
+  }
+
+
+  checkEval() {
+    const evalData = {'expression': this.myEvalTextarea, 'relative_to': this.myRelativeTo}
+    console.log({evalData});
+    this.dataService.CheckEvalData(evalData)
+      .subscribe(
+        (response) => {
+          const myResponse = <any> response;
+          this.myEvalTextOutput = myResponse.expression;
+          this.myEvalResult = myResponse.result;
         }
       );
 
