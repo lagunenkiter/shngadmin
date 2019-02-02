@@ -126,7 +126,7 @@ export class ServicesApiService {
     if (apiUrl.includes('localhost')) {
       console.warn('ServicesApiService.ConvertToYamlText', 'Cannot convert conf text to yaml in dev environment\n', '- yamlText: ', confText);
 
-      return this.http.get(url, { responseType: 'text' })
+      return this.http.get(url, {responseType: 'text'})
         .pipe(
           map(response => {
             const result = response;
@@ -139,7 +139,7 @@ export class ServicesApiService {
         );
     }
 
-    return this.http.put(url, confText, { responseType: 'text' })
+    return this.http.put(url, confText, {responseType: 'text'})
       .pipe(
         map(response => {
           const result = <any>response;
@@ -156,10 +156,72 @@ export class ServicesApiService {
           return of({});
         })
       );
-
-
   }
 
+
+  getCacheOrphans() {
+    const apiUrl = sessionStorage.getItem('apiUrl');
+    let url = apiUrl + 'services/cachecheck/';
+    if (apiUrl.includes('localhost')) {
+      url += 'default.json';
+    }
+    return this.http.get(url)
+      .pipe(
+        map(response => {
+          const result = response;
+          return result;
+        }),
+        catchError((err: HttpErrorResponse) => {
+          console.error('ServicesApiService (getCacheOrphans): Could not read cache orphans data' + ' - ' + err.error.error);
+          return of({});
+        })
+      );
+  }
+
+
+  deleteCacheFile(filename) {
+    // console.log('ServicesApiService.deleteCacheFile');
+
+    const apiUrl = sessionStorage.getItem('apiUrl');
+    let url = apiUrl + 'services/cachefile_delete?filename=' + filename;
+    if (apiUrl.includes('localhost')) {
+      url += 'default.txt';
+    }
+
+    if (apiUrl.includes('localhost')) {
+      console.warn('ServicesApiService.deleteCacheFile', 'Cannot delete cache file in dev environment\n', '- filename:', filename);
+
+      return this.http.get(url)
+        .pipe(
+          map(response => {
+            const result = response;
+            return result;
+          }),
+          catchError((err: HttpErrorResponse) => {
+            console.error('ServicesApiService (deleteCacheFile): Could not read result data' + ' - ' + err.error.error);
+            return of({});
+          })
+        );
+    }
+
+    return this.http.put(url, 'xxx')
+      .pipe(
+        map(response => {
+          const result = <any>response;
+
+          if (result) {
+            // console.log('ServicesApiService.ConvertToYamlText', '- config:', confText, '\nresult', {result});
+            return result;
+          } else {
+            console.log('ServicesApiService.deleteCacheFile', 'fail: undefined result');
+          }
+        }),
+        catchError((err: HttpErrorResponse) => {
+          console.error('ServicesApiService.deleteCacheFile: Could not set plugin config data' + ' - ' + err.error.error);
+          return of({});
+        })
+      );
+  }
 
 }
 

@@ -49,15 +49,27 @@
                 <td style="padding-top:23px;"><strong>{{serverInfo.daemon_mqtt|translate}}</strong></td>
                 <td></td>
               </tr>
+              <tr>
+                <td>
+                  <img src="assets/img/password.svg" alt="Icon password" width="48" height="48">
+                  <div id="hash_value" style="margin-top: 15px; width:70px;">{{ pwd_hash }}</div>
+                </td>
+                <td style="padding-top:23px;">
+                  {{'SERVICES.PASSWORD_HASH'|translate}}
+                </td>
+                <td style="padding-top:13px;">
+                  <input class="form-control" [(ngModel)]="pwd_clear" [type]="pwd_show ? 'text' : 'password'" id="plainpass" size="20" maxlength="50" style="width: 250px;"/>
+                  <input type="checkbox" [(ngModel)]="pwd_show" style="..." id="showtext"  onclick="this.pwd_show = true;"> {{ 'Passwort anzeigen' }}
+                </td>
+                <td style="padding-top:22px;">
+                  <button pButton type="button" icon="fa fa-toolbox" (click)="createPwdHash()" label="{{'BUTTON.CREATE_HASH'|translate}}" class="ui-button-success"></button>
+                </td>
+              </tr>
 
             </tbody>
 
           </table>
         </div>
-
-<!--
-        <button pButton type="button" icon="fa fa-circle-notch" (click)="this.restartShng()" label="{{'BUTTON.RESTART_SHNG'|translate}}" class="ui-button-success"></button>
--->
 
       </div>
     </tab>
@@ -66,7 +78,7 @@
       <div class="container-fluid" style="margin-top: 10px; margin-left: 10px; margin-right: 10px;">
       </div>
 
-      <div style="font-weight: bold; padding-top: 10px; padding-left: 10px; padding-right: 5px;">
+      <div style="font-weight: normal; padding-top: 10px; padding-left: 10px; padding-right: 5px;">
         {{ 'SERVICES.EVAL_CHECK_SOURCE'|translate }}
         <ngx-codemirror #evalcodeeditor
                         [options]="cmEvalOptions"
@@ -76,14 +88,14 @@
       </div>
 
       <br>
-      <div style="font-weight: bold; padding-top: 10px; padding-left: 10px; padding-right: 5px;">
+      <div style="font-weight: normal; padding-top: 10px; padding-left: 10px; padding-right: 5px;">
         {{ 'SERVICES.EVAL_RELATIVE_TO'|translate }}: &nbsp;
         <input type="text" pInputText style="width: 400px" [(ngModel)]="myRelativeTo"/>
         <button pButton label="{{ 'BUTTON.CHECK'|translate }}" type="button" style="margin-right: 0px;" (click)="checkEval()" class="float-sm-right ui-button-success"></button>
       </div>
 
       <br>
-      <div style="font-weight: bold; padding-top: 10px; padding-left: 10px; padding-right: 5px;">
+      <div style="font-weight: normal; padding-top: 10px; padding-left: 10px; padding-right: 5px;">
         {{ 'SERVICES.EVAL_CHECK_EXPANDED'|translate }}
         <ngx-codemirror #evalcodeeditor2
                         [options]="cmEvalOptionsOutput"
@@ -95,52 +107,10 @@
 
 
       <br>
-      <div style="font-weight: bold; padding-top: 10px; padding-left: 10px; padding-right: 5px;">
-        {{ 'SERVICES.EVAL_CHECK_RESULT'|translate }}: &nbsp; <a  style="font-weight: normal;">{{ myEvalResult }}</a>
+      <div style="font-weight: normal; padding-top: 10px; padding-left: 10px; padding-right: 5px;">
+        {{ 'SERVICES.EVAL_CHECK_RESULT'|translate }}: &nbsp; <a  style="font-weight: normal;"><strong>{{ myEvalResult }}</strong></a>
       </div>
 
-
-<!--
-      <div class="container-fluid" style="margin-top: 10px; margin-left: 10px;" ></div>
-      <form name="input" action="eval_syntax_checker.html" method="POST" enctype="multipart/form-data">
-        <div class="container-fluid" style="width: 100%;">
-          <div style="width: 100%; float: left; margin-bottom: 10px; margin-right: 5px;">
-            <div title="{{ 'Hier den Ausdruck eingeben, der ausgewertet werden soll. Items können mit absolutem Pfad oder relativem Pfad angegeben werden.'|translate }}">
-              <div style="font-weight: bold; padding-left: 5px;">{{ 'Ausdruck (Eingabe im Python Eval-Format)'|translate }}</div>
-              <textarea id="eval_code" name="eval_code">{{ 'eval_code' }}</textarea>
-            </div>
-            <div title="{{ 'Um relative Itempfade aufzulösen, hier das Item eingeben, zu dem die Pfade relativ sind.'|translate }}">
-              <div style="font-weight: bold; padding-left: 5px;">{{ 'Relativ zu (Eingabe des Item-Path)'|translate }}</div>
-              <input type="text" style="width: 599px;" name="relative_to" value="{{ 'relative_to' }}"/>
-            </div>
-
-            <div title="{{ 'Hier wird der Ausdruck angezeigt, nachdem die relativen Itempfade aufgelöst wurden.'|translate }}">
-              <div style="font-weight: bold; padding-left: 5px; border-bottom: 0px solid #ccc;">&nbsp;</div>
-              <div style="font-weight: bold; padding-left: 5px; border-bottom: 1px solid #ccc;">{{ 'Expandierter Ausdruck'|translate }}</div>
-              <div style="padding-left: 5px; border-bottom: 0px solid #ccc;">{{ 'expanded_code' }}&nbsp;</div>
-            </div>
-            <div title="{{ 'Hier wird das Ergebnis Ausdruck angezeigt.'|translate }}">
-              <div style="font-weight: bold; padding-left: 5px; border-bottom: 0px solid #ccc;">&nbsp;</div>
-              <div style="font-weight: bold; padding-left: 5px; border-bottom: 1px solid #ccc;">{{ 'Ergebnis'|translate }}</div>
-              <div style="padding-left: 5px; border-bottom: 1px solid #ccc;">{{ 'check_result' }}&nbsp;</div>
-            </div>
-          </div>
-        </div>
-        <br>
-        <div class="container-fluid" style="width: 100%;">
--->
-
-<!--
-          <input name="check" value="{{ 'Prüfen','button'|translate }}" type="submit" class="btn btn-dark">
--->
-<!--
-        </div>
-      </form>
-      <div class="container-fluid" style="margin-top: 30px;">
-        &nbsp;
-        <p style="font-size: large; color: red;"><strong>This tab is still under construction</strong></p>
-      </div>
--->
     </tab>
 
 
@@ -155,13 +125,13 @@
       <table style="width: 100%">
       <tbody>
       <td style="min-width: 50%">
-        <div style="font-weight: bold; padding-top: 10px; padding-left: 10px; padding-right: 5px;">
+        <div style="font-weight: normal; padding-top: 10px; padding-left: 10px; padding-right: 5px;">
           {{ 'SERVICES.YAML_CHECK_SOURCE'|translate }}
           <button pButton label="{{ 'BUTTON.CHECK'|translate }}" type="button" style="margin-right: 0px;" (click)="checkYaml()" class="float-sm-right ui-button-success"></button>
         </div>
       </td>
       <td style="min-width: 50%">
-        <div style="font-weight: bold; padding-top: 10px; padding-left: 0px;">
+        <div style="font-weight: normal; padding-top: 10px; padding-left: 0px;">
           {{ 'SERVICES.YAML_CHECK_RESULT'|translate }}
         </div>
       </td>
@@ -201,13 +171,13 @@
       <table style="width: 100%">
         <tbody>
         <td style="min-width: 50%">
-          <div style="font-weight: bold; padding-top: 10px; padding-left: 10px; padding-right: 5px;">
+          <div style="font-weight: normal; padding-top: 10px; padding-left: 10px; padding-right: 5px;">
             {{ 'SERVICES.YAML_CONVERTER_SOURCE'|translate }}
             <button pButton label="{{ 'BUTTON.CHECK'|translate }}" type="button" style="margin-right: 0px;" (click)="convertYaml()" class="float-sm-right ui-button-success"></button>
           </div>
         </td>
         <td style="min-width: 50%">
-          <div style="font-weight: bold; padding-top: 10px; padding-left: 0px;">
+          <div style="font-weight: normal; padding-top: 10px; padding-left: 0px;">
             {{ 'SERVICES.YAML_CONVERTER_RESULT'|translate }}
           </div>
         </td>
@@ -238,217 +208,47 @@
 
     <!-- ------------------------------------------------------------------------------------
           Cache Checker
-    -->
+    ------------------------------------------------------------------------------------- -->
 
     <tab customClass="tab-shng" heading="{{ 'SERVICES.CACHE_CHECKER'|translate }}">
-      <div style="margin-top: 10px; margin-left: 10px; margin-right: 10px;">
-        <p>
-          Cache Checker works!
-        </p>
-      </div>
       <div class="container-fluid" style="margin-top: 30px;">
-        &nbsp;
-        <p style="font-size: large; color: red;"><strong>This tab is still under construction</strong></p>
+        {{ 'SERVICES.FILES_WITHOUT_ITEM'|translate }} /var/cache: <strong>{{ cacheInfo.length }}</strong>
+        <br>&nbsp;
+        <table class="table table-striped" style="border: 1px solid #ccc;">
+          <thead><tr>
+            <th><input [(ngModel)]="cacheAllChecked" (change)="cacheCheckAll()" type="checkbox"/></th>
+            <th style="width: 550px;">{{ 'SERVICES.FILENAME'|translate }}</th>
+            <th style="min-width:200px;">{{ 'SERVICES.LAST_MODIFICATION'|translate }}</th>
+            <th style="min-width:200px;">{{ 'SERVICES.CREATION_DATE'|translate }}</th>
+            <th>{{ 'SERVICES.ACTIONS'|translate }}</th>
+          </tr></thead>
+
+          <tbody>
+            <ng-container *ngFor="let cacheEntry of cacheInfo; index as i">
+              <tr>
+                <td><input [(ngModel)]="cacheEntry.checked" type="checkbox"/></td>
+                <td>{{ cacheEntry.filename }}</td>
+                <td>{{ cacheEntry.last_modified }}</td>
+                <td>{{ cacheEntry.created }}</td>
+                <td>
+                  <button pButton type="button" (click)="deleteCacheEntry(i)" label="{{'BUTTON.DELETE'|translate}}" class="ui-button-success"></button>
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+
+        <ng-container *ngIf="cacheInfo.length !== 0">
+          <button pButton type="button" (click)="deleteCacheSelected()" label="{{'BUTTON.DELETE_SELECTED'|translate}}" class="ui-button-success"></button>
+        </ng-container>
+        <ng-container *ngIf="cacheInfo.length === 0">
+          <button pButton type="button" (click)="loadCacheOrphans()" label="{{'BUTTON.UPDATE'|translate}}" class="ui-button-success"></button>
+        </ng-container>
+        <br>&nbsp;
       </div>
+
     </tab>
 
   </tabset>
 </div>
 
-
-
-<!--
-
-<div style="margin-left: 10px; margin-right: 10px;">
-<div class="table-responsive">
-	<table class="table table-striped">
-		<thead>
-			<tr class="shng_heading">
-				<th width="70">{{ _('Dienst') }}</th>
-				<th style="width:600px;">{{ _('Status') }}</th>
-				<th>{{ _('Aktion') }}</th>
-			</tr>
-		</thead>
-
-		<tbody>
-			<tr>
-				<td><img src="static/img/languages.svg" alt="Icon languages" width="48" height="48"></td>
-				<td style="padding-top:23px;">
-					<div style="float:left; margin-right:15px;">{{ _('Sprache des Backends') }}:</div>
-					<select class="custom-select" id="language" onChange="location.href='reload_translation.html?lang='+$('#language').val()" style="float:left; width: 250px; margin-top:-7px;">
-						<option {% if lang=='de' %}selected{% endif %} value="de">{% if lang!='de' %}{{ _('Auf Deutsch wechseln') }}{% else %}{{ _('Deutsch','button') }}{% endif %}</option>
-						<option {% if lang=='en' %}selected{% endif %} value="en">{% if lang!='en' %}{{ _('Auf Englisch wechseln') }}{% else %}{{ _('Englisch','button') }}{% endif %}</option>
-						<option {% if lang=='fr' %}selected{% endif %} value="fr">{% if lang!='fr' %}{{ _('Auf Französisch wechseln') }}{% else %}{{ _('Französisch','button') }}{% endif %}</option>
-						<option {% if lang=='pl' %}selected{% endif %} value="pl">{% if lang!='pl' %}{{ _('Auf Polnisch wechseln') }}{% else %}{{ _('Polnisch','button') }}{% endif %}</option>
-					</select>
-				<td style="padding-top:15px;">
-				{% if develop %}
-					<button style="min-width:190px;" type="button" class="btn btn-shng btn-sm" onclick="location.href='reload_translation.html'">{{ _('Übersetzung neu laden') }}</button>
-				{% endif %}
-				</td>
-			</tr>
-
-    		{% if service_ctrl %}
-            <tr>
-				<td><img src="gstatic/img/logo_small_76x76.png" alt="SmartHomeNG logo small" width="48" height="48"></td>
-                {%  if shng_service %}
-	                <td style="padding-top:23px;"><div style="float:left; margin-right:15px;">Dienst für SmartHomeNG: <strong>smarthome.service</strong></div></td>
-                    <td style="padding-top:15px;">
-	    				<button style="min-width:190px;" type="button" class="btn btn-shng btn-sm" name="restart" onclick="location.href='services_shng_restart.html'">{{ _('Service neu starten','button') }}</button>
-                    </td>
-                {%  else %}
-                    <td style="padding-top:23px;"><strong>SmartHomeNG</strong> {{ '(läuft nicht als Dienst)' }}</td>
-< !--
-                    <td style="padding-top:15px;">
-						<button style="min-width:190px;" type="button" class="btn btn-shng btn-sm" name="restart" onclick="location.href='services_shng_restart.html'">{{ _('Prozess neu starten','button') }}</button>
-    				</td>
--- >
-{% endif %}
-</tr>
-{% endif %}
-
-<tr>
-  <td><img src="/gstatic/img/plugin_gateway.svg" alt="Icon knxd service" width="48" height="48"></td>
-  <td style="padding-top:23px;">{{ _('Dienst für die KNX Unterstützung') }}:&nbsp;<strong>
-    {% if knxdeamon %}
-    {{ knxdeamon }}
-    {% else %}
-    {{ _('Nicht aktiv') }}
-    {% endif %}
-  </strong></td>
-  <td></td>
-</tr>
-{% if 1 == 2 %}
-<tr>
-  <td><img src="static/img/logo_small_76x76.png" alt="SmartHomeNG logo small" width="48" height="48"></td>
-  <td style="padding-top:23px;"><pre>{{ smarthome_service }}</pre>
-  </td>
-  <td style="padding-top:15px;">
-    {% if knxd_active %}
-    <form action="stop_smarthome" method="post">
-      <input type="submit" class="btn btn-shng btn-sm" value="{{ _('smarthomeNG beenden','button') }}"/>
-    </form>
-    {% else %}
-    <form action="start_smarthome" method="post">
-      <input type="submit" class="btn btn-shng btn-sm" value="{{ _('smarthomeNG starten','button') }}"/>
-    </form>
-    {% endif %}
-  </td>
-</tr>
-<tr>
-  <td><img src="static/img/knxd_service.png" alt="Icon KNXD service" width="48" height="48"></td>
-  <td style="padding-top:23px;"><pre>{{ knxd_service }}</pre>
-  </td>
-  <td style="padding-top:15px;">
-    {% if knxd_active %}
-    <form action="stop_knxd_service" method="post">
-      <input type="submit" class="btn btn-shng btn-sm" value="{{ _('knxd service beenden','button') }}"/>
-    </form>
-    {% else %}
-    <form action="start_knxd" method="post">
-      <input type="submit" class="btn btn-shng btn-sm" value="{{ _('knxd service starten','button') }}"/>
-    </form>
-    {% endif %}
-  </td>
-</tr>
-<tr>
-  <td><img src="static/img/knxd_socket.png" alt="Icon KNXD socket" width="48" height="48"></td>
-  <td style="padding-top:23px;"><pre>{{ knxd_socket }}</pre>
-  </td>
-  <td style="padding-top:15px;">
-    {% if knxd_active %}
-    <form action="stop_knxd" method="post">
-      <input type="submit" class="btn btn-shng btn-sm" value="{{ _('knxd socket beenden','button') }}"/>
-    </form>
-    {% else %}
-    <form action="start_knxd" method="post">
-      <input type="submit" class="btn btn-shng btn-sm" value="{{ _('knxd socket starten','button') }}"/>
-    </form>
-    {% endif %}
-  </td>
-</tr>
-<tr>
-  <td><img src="static/img/reboot.svg" alt="Icon Reboot" width="48" height="48"></td>
-  <td style="padding-top:15px;">
-    <form class="navbar-form navbar-left" action="reboot" method="post">
-      <div class="form-group">
-        <input type="password" class="form-server" name="password" maxlength="128" placeholder="{{ _('Root-Passwort') }}"/>
-      </div>
-      <input type="submit" class="btn btn-shng btn-sm" value="{{ _('Neu starten','button') }}"/>
-    </form>
-  </td>
-  <td>{% if rbt1 %}
-    {{ rbt1 }}
-    {% else %}
-
-    {% endif %}
-  </td>
-</tr>
-{% endif %}
-</tbody>
-</table>
-<table class="table table-striped">
-  <thead>
-  <tr class="shng_heading">
-    <th width="70">{{ _('Dienst') }}</th>
-    <th>{{ _('Aktion') }}</th>
-  </tr>
-  </thead>
-  <tbody>
-  {#
-  {% if sql_plugin %}
-  <tr>
-            <td><img src="static/img/db_backup.svg" alt="Icon database backup" width="48" height="48"></td>
-            <td style="min-width:190px;" style="padding-top:15px;"><button type="button" class="btn btn-shng btn-sm" onclick="window.open('db_dump.html?plugin=sqlite_old')">{{ _('Datenbank-Dump','button') }} (SQLite)</button></td>
-			</tr>
-  {% endif %}
-  {% if database_plugin %}
-  {% for p in database_plugin  %}
-  <tr>
-              <td><img src="static/img/db_backup.svg" alt="Icon database backup" width="48" height="48"></td>
-              <td style="min-width:190px;" style="padding-top:15px;"><button type="button" class="btn btn-shng btn-sm" onclick="window.open('/db_dump.html?plugin={{ p }}')">{{ _('Datenbank-Dump','button') }} - {{ _('Instanz') }}: ({{ p }})</button></td>
-				</tr>
-  {% endfor %}
-  {% endif %}
-  #}
-  <tr>
-    <td><img src="static/img/cache.svg" alt="Icon cache" width="48" height="48"></td>
-    <td colspan="2" style="padding-top:15px;">
-      <span style="min-width:190px;" class="btn btn-shng btn-sm" onclick="checkCache()">{{ _('Cacheprüfung','button') }}</span>
-      <div id="cache_check" style="margin-top: 5px; width: 1100px;"></div>
-    </td>
-  </tr>
-  <tr>
-    <td><img src="static/img/password.svg" alt="Icon password" width="48" height="48"></td>
-    <td colspan="2" style="padding-top:15px;">
-      <div class="form-inline">
-        <input class="form-server" type="text" id="plaintext" size="20" maxlength="50" style="width: 250px;"/>
-        <input class="form-server" type="password" id="plainpass" size="20" maxlength="50" style="width: 250px;"/>
-        <span style="min-width:190px;" class="btn btn-shng btn-sm ml-2" onclick="createHash()">{{ _('Passwort-Hash erzeugen','button') }}</span>
-      </div>
-      <input type="checkbox" style="..." id="showtext"  onclick="togglePlainFields();"> {{ _('Passwort anzeigen') }}
-      <div id="hash_value" style="margin-top: 5px; width: 900px;"></div>
-    </td>
-  </tr>
-  <tr>
-    <td><img src="static/img/tree.png" alt="Icon cache" width="48" height="48"></td>
-    <td style="padding-top:15px;">
-      <span style="min-width:190px;" class="btn btn-shng btn-sm" onclick="checkYaml()">{{ _('YAML Syntax Checker') }}</span>
-      <span style="padding-right:58px;" type="text">&nbsp;</span>
-      <span style="min-width:190px;" class="btn btn-shng btn-sm" onclick="convertYaml()">{{ _('CONF-YAML Konverter') }}</span>
-      <div id="yaml_check" style="margin-top: 5px; width: 1000px;"></div>
-    </td>
-  </tr>
-  <tr>
-    <td><img src="static/img/eval.svg" alt="Icon cache" width="48" height="48"></td>
-    <td colspan="2" style="padding-top:15px;">
-      <span style="min-width:190px;" class="btn btn-shng btn-sm" onclick="checkEval()">{{ _('Eval Syntax Checker') }}</span>
-      <div id="yaml_check" style="margin-top: 5px; width: 1000px;"></div>
-    </td>
-  </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
--->

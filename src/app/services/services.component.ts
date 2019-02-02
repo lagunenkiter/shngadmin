@@ -9,6 +9,18 @@ import { ServerInfo } from '../common/models/server-info';
 import {TranslateService} from '@ngx-translate/core';
 import {SharedService} from '../common/services/shared.service';
 
+import {sha512} from 'js-sha512';
+import {LogicsWatchItem} from '../common/models/logics-watch-item';
+
+
+export interface CacheEntryType {
+  filename: string;
+  created: string;
+  last_modified: string;
+  checked?: boolean;
+}
+
+
 @Component({
   selector: 'app-services',
   templateUrl: './services.component.html',
@@ -39,6 +51,10 @@ export class ServicesComponent implements AfterViewChecked, OnInit {
   valid_default_language = '          ';
   selected_language = null;
   shng_statuscode: number = 0;
+
+  pwd_clear: string = '';
+  pwd_hash: string;
+  pwd_show: boolean;
 
 
   // -----------------------------------------------------------------
@@ -156,6 +172,8 @@ export class ServicesComponent implements AfterViewChecked, OnInit {
     fixedGutter: true,
   };
 
+  cacheInfo: CacheEntryType[] = [];
+  cacheAllChecked: boolean;
 
 
   ngOnInit() {
@@ -186,9 +204,60 @@ export class ServicesComponent implements AfterViewChecked, OnInit {
 
           // this.valid_default_language = 'Deutsch';
           this.selected_language = this.default_language;
+
+          this.loadCacheOrphans();
         }
       );
 
+  }
+
+
+  loadCacheOrphans() {
+
+    this.dataService.getCacheOrphans()
+      .subscribe(
+        (response) => {
+          this.cacheInfo = <CacheEntryType[]> response;
+          this.cacheAllChecked = false;
+          // console.log('loadChacheOrphans', this.cacheInfo);
+        }
+      );
+  }
+
+
+  deleteCacheEntry(entryNr) {
+    // console.log('deleteCacheEntry', this.cacheInfo[entryNr].filename);
+    this.dataService.deleteCacheFile(this.cacheInfo[entryNr].filename)
+      .subscribe(
+        (response) => {
+          this.loadCacheOrphans();
+        }
+      );
+  }
+
+
+  deleteCacheSelected() {
+    const filelist = [];
+    for (let i = 0; i < this.cacheInfo.length; i++) {
+      if (this.cacheInfo[i].checked) {
+        filelist.push(this.cacheInfo[i].filename);
+      }
+    }
+
+    this.dataService.deleteCacheFile(JSON.stringify(filelist))
+      .subscribe(
+        (response) => {
+          this.loadCacheOrphans();
+        }
+      );
+
+  }
+
+
+  cacheCheckAll() {
+    for (let i = 0; i < this.cacheInfo.length; i++) {
+      this.cacheInfo[i].checked = this.cacheAllChecked;
+    }
   }
 
 
@@ -213,6 +282,12 @@ export class ServicesComponent implements AfterViewChecked, OnInit {
   }
 
 
+  createPwdHash() {
+    console.log('createPwdHash')
+    this.pwd_hash = sha512(this.pwd_clear);
+  }
+
+
   checkYaml() {
     // this.myTextoutput = this.myTextarea;
 
@@ -234,7 +309,6 @@ export class ServicesComponent implements AfterViewChecked, OnInit {
 
   checkEval() {
     const evalData = {'expression': this.myEvalTextarea, 'relative_to': this.myRelativeTo}
-    console.log({evalData});
     this.dataService.CheckEvalData(evalData)
       .subscribe(
         (response) => {

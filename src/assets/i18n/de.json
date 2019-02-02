@@ -74,6 +74,7 @@
     "KNX_SUPPORT": "Dienst für die KNX Unterstützung",
     "OW_SUPPORT": "Dienst für die 1-wire Unterstützung",
     "MQTT_SUPPORT": "Broker für die MQTT Unterstützung",
+    "PASSWORD_HASH": "Password-Hash erzeugen",
     "INACTIVE": "Nicht aktiv",
 
     "EVAL CHECKER": "eval Syntax Prüfer",
@@ -84,14 +85,21 @@
     "STATUS": "Status",
     "ACTION": "Aktion",
 
-    "EVAL_CHECK_SOURCE": "Ausdruckn (Eingabe im Python eval-Format",
+    "EVAL_CHECK_SOURCE": "Ausdruck (Eingabe im Python eval-Format",
     "EVAL_RELATIVE_TO": "Relativ zu Item (Pfad des Items angeben)",
     "EVAL_CHECK_EXPANDED": "Expandierter Ausdruck",
     "EVAL_CHECK_RESULT": "Ergebnis der Berechnung des Ausdrucks",
     "YAML_CHECK_SOURCE": "Eingabe im .YAML Format",
     "YAML_CHECK_RESULT": "Ergebnis: Aufbereitetes .YAML Format",
     "YAML_CONVERTER_SOURCE": "Eingabe im .CONF Format",
-    "YAML_CONVERTER_RESULT": "Ergebnis: Konvertiert in das .YAML Format"
+    "YAML_CONVERTER_RESULT": "Ergebnis: Konvertiert in das .YAML Format",
+
+    "FILES_WITHOUT_ITEM": "Dateien ohne zugehöriges Item im Verzeichnis",
+    "FILENAME": "Dateiname",
+    "LAST_MODIFICATION": "Letzte Änderung",
+    "CREATION_DATE": "Erstellungsdatum",
+    "ACTIONS": "Aktionen"
+
   },
   "SHNG_STATE": {
     "Initalizing": "Initialisiert",
@@ -289,8 +297,11 @@
     "SAVE": "Sichern",
     "ABORT": "Abbrechen",
     "ADD": "Hinzufügen",
+    "UPDATE": "Aktualisieren",
     "DELETE": "Löschen",
+    "DELETE_SELECTED": "Ausgewählte Löschen",
     "LOGOUT": "Abmelden",
+    "CREATE_HASH": "Hash erzeugen",
     "ADD_PLUGIN": "Plugin hinzufügen",
     "RELOAD_LOG": "Log aktualisieren",
     "RESTART_SHNG": "Core neu starten",

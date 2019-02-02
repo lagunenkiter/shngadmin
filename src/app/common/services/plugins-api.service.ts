@@ -46,7 +46,7 @@ export class PluginsApiService {
   //  - for plugins-config.component
   //
   getPluginsConfig() {
-    console.log('PluginsApiService.getPluginsConfig');
+    // console.log('PluginsApiService.getPluginsConfig');
 
     const apiUrl = sessionStorage.getItem('apiUrl');
     let url = apiUrl + 'plugins/config/';
@@ -73,7 +73,7 @@ export class PluginsApiService {
   //  - for plugins.component
   //
   getPluginsInfo() {
-    console.log('PluginsApiService.getPluginsInfo');
+    // console.log('PluginsApiService.getPluginsInfo');
 
     const apiUrl = sessionStorage.getItem('apiUrl');
     let url = apiUrl + 'plugins/info/';
@@ -99,7 +99,7 @@ export class PluginsApiService {
   //  Update config of one plugin in etc/plugin.yaml on backend
   //
   setPluginConfig(pluginsection, config) {
-    console.log('PluginsApiService.setPluginConfig');
+    // console.log('PluginsApiService.setPluginConfig');
 
     const apiUrl = sessionStorage.getItem('apiUrl');
     const url = apiUrl + 'plugin/' + pluginsection + '/';
@@ -141,7 +141,7 @@ export class PluginsApiService {
   //  add a new config of one plugin in etc/plugin.yaml on backend
   //
   addPluginConfig(pluginsection, config) {
-    console.log('PluginsApiService.addPluginConfig');
+    // console.log('PluginsApiService.addPluginConfig');
 
     const apiUrl = sessionStorage.getItem('apiUrl');
     const url = apiUrl + 'plugin/' + pluginsection + '/';
@@ -185,7 +185,7 @@ export class PluginsApiService {
   //  add a new config of one plugin in etc/plugin.yaml on backend
   //
   deletePluginConfig(pluginsection) {
-    console.log('PluginsApiService.deletePluginConfig\n', {pluginsection});
+    // console.log('PluginsApiService.deletePluginConfig\n', {pluginsection});
 
     const apiUrl = sessionStorage.getItem('apiUrl');
     const url = apiUrl + 'plugin/' + pluginsection + '/';

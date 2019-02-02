@@ -32,11 +32,11 @@
             <ng-container *ngIf="['web','protocol','interface','gateway','system'].includes(plugin.metadata.type)">
               <img src="assets/img/plugin_{{ plugin.metadata.type }}.svg" style="width: 25px; cursor: pointer;"/>
             </ng-container>
-            <ng-container *ngIf="['classic'].includes(plugin.metadata.type)">
+            <ng-container *ngIf="plugin.smartplugin !== true">
               -
             </ng-container>
-            <ng-container *ngIf="!['web','protocol','interface','gateway','system', 'classic'].includes(plugin.metadata.type)">
-              <img src="assets/img/plugin_default_logo.png" style="width: 25px; cursor: pointer;"/>
+            <ng-container *ngIf="(plugin.smartplugin === true) && !['web','protocol','interface','gateway','system', 'classic'].includes(plugin.metadata.type)">
+              <img src="assets/img/plugin_defaultlogo.png" style="width: 25px; cursor: pointer;"/>
             </ng-container>
           </td>
 

@@ -74,6 +74,7 @@
     "KNX_SUPPORT": "Service for KNX support",
     "OW_SUPPORT": "Service for 1-wire support",
     "MQTT_SUPPORT": "Broker for MQTT support",
+    "PASSWORD_HASH": "Create password-hash",
     "INACTIVE": "Not active",
 
     "EVAL CHECKER": "eval Syntax Checker",
@@ -91,7 +92,13 @@
     "YAML_CHECK_SOURCE": "Enter YAML code to be checked",
     "YAML_CHECK_RESULT": "The checked YAML expression",
     "YAML_CONVERTER_SOURCE": "Enter code in .CONF to be checked",
-    "YAML_CONVERTER_RESULT": "The converted expression in YAML format"
+    "YAML_CONVERTER_RESULT": "The converted expression in YAML format",
+
+    "FILES_WITHOUT_ITEM": "Files without corresponding item in directory",
+    "FILENAME": "Filename",
+    "LAST_MODIFICATION": "Last Modification",
+    "CREATION_DATE": "Creation Date",
+    "ACTIONS": "Actions"
   },
   "SHNG_STATE": {
     "Initalizing": "Initalizing",
@@ -288,8 +295,11 @@
     "SAVE": "Save",
     "ABORT": "Abort",
     "ADD": "Add",
+    "UPDATE": "Update",
     "DELETE": "Delete",
+    "DELETE_SELECTED": "Delete selected",
     "LOGOUT": "Logout",
+    "CREATE_HASH": "Create Hash",
     "ADD_PLUGIN": "Add Plugin",
     "RELOAD_LOG": "Reload Log",
     "RESTART_SHNG": "Restart Core",
