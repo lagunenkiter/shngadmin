@@ -70,7 +70,8 @@ export class ServicesComponent implements AfterViewChecked, OnInit {
 
   myEvalTextarea = '';
   myRelativeTo = '';
-  myEvalResult: '';
+  myEvalResult = '';
+  myResultType = '';
   cmEvalOptions = {
     lineNumbers: true,
     readOnly: false,
@@ -314,7 +315,12 @@ export class ServicesComponent implements AfterViewChecked, OnInit {
         (response) => {
           const myResponse = <any> response;
           this.myEvalTextOutput = myResponse.expression;
-          this.myEvalResult = myResponse.result;
+          this.myResultType = myResponse.type;
+          if (this.myResultType === 'list' || this.myResultType === 'dict') {
+            this.myEvalResult = JSON.stringify(myResponse.result);
+          } else {
+            this.myEvalResult = myResponse.result;
+          }
         }
       );
 

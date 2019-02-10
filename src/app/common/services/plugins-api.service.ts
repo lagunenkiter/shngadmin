@@ -114,9 +114,9 @@ export class PluginsApiService {
           const result = <any>response;
 
           if (result) {
-            console.log('PluginsApiService.setPluginConfig', '- config', config, '\nresult', {result});
+            // console.log('PluginsApiService.setPluginConfig', '- config', config, '\nresult', {result});
             if (result.result === 'ok') {
-              console.log('PluginsApiService.setPluginConfig', 'success');
+              // console.log('PluginsApiService.setPluginConfig', 'success');
               return true;
             } else {
               console.log('PluginsApiService.setPluginConfig', 'fail');

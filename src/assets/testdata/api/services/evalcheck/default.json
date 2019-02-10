@@ -1,4 +1,5 @@
 {
   "expression": "Expandierter Ausdruck",
-  "result": "42 (dummy, mock data)"
+  "result": "42 (dummy, mock data)",
+  "type": "str"
 }

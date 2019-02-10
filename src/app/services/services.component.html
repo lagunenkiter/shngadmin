@@ -74,6 +74,11 @@
       </div>
     </tab>
 
+
+    <!-- ------------------------------------------------------------------------------------
+          Eval checker
+    ------------------------------------------------------------------------------------- -->
+
     <tab customClass="tab-shng" heading="{{ 'SERVICES.EVAL CHECKER'|translate }}">
       <div class="container-fluid" style="margin-top: 10px; margin-left: 10px; margin-right: 10px;">
       </div>
@@ -108,7 +113,16 @@
 
       <br>
       <div style="font-weight: normal; padding-top: 10px; padding-left: 10px; padding-right: 5px;">
-        {{ 'SERVICES.EVAL_CHECK_RESULT'|translate }}: &nbsp; <a  style="font-weight: normal;"><strong>{{ myEvalResult }}</strong></a>
+        <table>
+          <tr>
+            <td>{{ 'SERVICES.EVAL_CHECK_RESULT'|translate }}: &nbsp;</td>
+            <td><strong>{{ myEvalResult }}</strong></td>
+          </tr>
+          <tr>
+            <td>{{ 'SERVICES.EVAL_RESULT_TYPE'|translate }}: &nbsp;</td>
+            <td><strong>{{ myResultType }}</strong></td>
+          </tr>
+        </table>
       </div>
 
     </tab>

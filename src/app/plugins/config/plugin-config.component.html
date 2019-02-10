@@ -65,7 +65,17 @@
   -- Dialog for configuring the parameters of a plugin
   -->
 
-<p-dialog header="" [(visible)]="dialog_display" [modal]="true" blockScroll="true" [closable]="false" [maximizable]="true" [minWidth]="600" [minHeight]="300" [minY]="100" >
+<p-dialog
+  header=""
+  [(visible)]="dialog_display"
+  [modal]="true"
+  blockScroll="true"
+  [closable]="false"
+  [maximizable]="true"
+  [minY]="100"
+  [style]="{'minWidth':'600px', 'minHeight':'300px'}"
+>
+
   <p-header>
     {{'CONFIGURATION'|translate}} <strong>{{ this.dialog_configname }}</strong> &nbsp; (Plugin <strong>{{ this.dialog_pluginname }}</strong>)
     <ng-container *ngIf="plugin_enabled === false">
@@ -108,7 +118,14 @@
                 <input [(ngModel)]="rowData[col.field]" type="number" min="{{rowData.valid_min}}" max="{{rowData.valid_max}}" pInputText placeholder="{{rowData.default}}" pInputText name="{{col.field}}" [ngStyle]="{'width': col.iwidth}"/>
               </ng-container>
 
-              <ng-container *ngIf="rowData.type !== 'bool' && ['int','num','float','scene'].indexOf(rowData.type) === -1 && rowData.valid_list.length === 0">
+              <ng-container *ngIf="rowData.type === 'hide-int' && rowData.valid_list.length === 0">
+                <input [(ngModel)]="rowData[col.field]" type="number" min="{{rowData.valid_min}}" max="{{rowData.valid_max}}" pInputText placeholder="{{rowData.default}}" pInputText name="{{col.field}}" [ngStyle]="{'width': col.iwidth}"/>
+              </ng-container>
+              <ng-container *ngIf="rowData.type === 'hide-str' && rowData.valid_list.length === 0">
+                <input [(ngModel)]="rowData[col.field]" type="password" pInputText placeholder="{{rowData.default}}" name="{{col.field}}" [ngStyle]="{'width': col.iwidth}"/>
+              </ng-container>
+
+              <ng-container *ngIf="rowData.type !== 'bool' && ['int','num','float','scene','hide-str', 'hide-int'].indexOf(rowData.type) === -1 && rowData.valid_list.length === 0">
                 <input [(ngModel)]="rowData[col.field]" type="text" pInputText placeholder="{{rowData.default}}" name="{{col.field}}" [ngStyle]="{'width': col.iwidth}"/>
               </ng-container>
             </ng-container>
@@ -174,7 +191,20 @@
   -- Dialog for selecting a plugin to add to the configured plugins
   -->
 
-<p-dialog #pluginadd header="" [(visible)]="add_display" (onShow)="pluginadd.maximize()" [modal]="true" blockScroll="true" [closable]="false" [resizable]="true" [maximizable]="false" [minWidth]="600" [minHeight]="300" [minY]="100" >
+<p-dialog
+  #pluginadd
+  header=""
+  [(visible)]="add_display"
+  (onShow)="pluginadd.maximize()"
+  [modal]="true"
+  blockScroll="true"
+  [closable]="false"
+  [resizable]="true"
+  [maximizable]="false"
+  [minY]="100"
+  [style]="{'minWidth':'600px', 'minHeight':'300px'}"
+>
+
   <p-header>
     {{'PLUGIN.ADD'|translate}}
     <ng-container *ngIf="plugin_enabled === false">
@@ -245,7 +275,19 @@
   -- Progress spinner
   -->
 
-<p-dialog #pluginspinner header="{{'PLUGIN.LOADLIST'|translate}}..." [ngStyle]="{'align': 'center'}" [(visible)]="spinner_display" [modal]="true" blockScroll="true" [closable]="false" [resizable]="false" [maximizable]="false" [minWidth]="200" [minHeight]="100" [minY]="100" >
+<p-dialog
+  #pluginspinner
+  header="{{'PLUGIN.LOADLIST'|translate}}..."
+  [ngStyle]="{'align': 'center'}"
+  [(visible)]="spinner_display"
+  [modal]="true" blockScroll="true"
+  [closable]="false"
+  [resizable]="false"
+  [maximizable]="false"
+  [minY]="100"
+  [style]="{'minWidth':'200px', 'minHeight':'100px'}"
+>
+
   <div align="center">
     <p-progressSpinner></p-progressSpinner>
   </div>
@@ -257,7 +299,17 @@
   -- Dialog for setting the configuration name of a plugin(-instance)
   -->
 
-<p-dialog header="" [(visible)]="setconfig_display" [modal]="true" blockScroll="true" [closable]="false" [maximizable]="false" [minWidth]="600" [minHeight]="200" [minY]="100" >
+<p-dialog
+  header=""
+  [(visible)]="setconfig_display"
+  [modal]="true"
+  blockScroll="true"
+  [closable]="false"
+  [maximizable]="false"
+  [minY]="100"
+  [style]="{'minWidth':'600px', 'minHeight':'200px'}"
+>
+
   <p-header>
     {{'PLUGIN.NAME_CONFIGURATION'|translate:translate_params}}
     <ng-container *ngIf="plugin_enabled === false">

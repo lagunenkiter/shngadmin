@@ -189,8 +189,8 @@ export class PluginConfigComponent implements OnInit {
     this.dialog_pluginname = rowdata.plugin;
     this.rowclicked_foredit = rowdata;
 
-    const conf = this.pluginconflist.plugin_config[rowdata.confname]
-    const meta = this.pluginconflist.plugin_config[rowdata.confname]['_meta']
+    const conf = this.pluginconflist.plugin_config[rowdata.confname];
+    const meta = this.pluginconflist.plugin_config[rowdata.confname]['_meta'];
     let desc = null;
     this.classic = true;
     if (meta !== undefined && meta.plugin !== undefined) {
@@ -242,7 +242,7 @@ export class PluginConfigComponent implements OnInit {
           }
 
           // fill description with active language
-          let paramdesc = ''
+          let paramdesc = '';
           if (meta['parameters'][param]['description'] !== undefined) {
             paramdesc = meta['parameters'][param]['description'][this.lang];
             if (paramdesc === '' || paramdesc === undefined) {
@@ -259,7 +259,11 @@ export class PluginConfigComponent implements OnInit {
             'default': meta['parameters'][param]['default'],
             'mandatory': meta['parameters'][param]['mandatory'],
             'value': conf[param],
-            'desc': paramdesc};
+            'desc': paramdesc
+          };
+          if (meta['parameters'][param]['hide'] && (['str', 'int'].indexOf(meta['parameters'][param]['type']) !== -1)) {
+            paramdata['type'] = 'hide' + '-' + meta['parameters'][param]['type'];
+          }
 
           if (paramdata.type === 'bool') {
             if (conf[param] === undefined) {
@@ -280,6 +284,21 @@ export class PluginConfigComponent implements OnInit {
           // add to the table of configured plugins
           this.parameters.push(paramdata);
         }
+      }
+      // Add an entry for the 'instance' attribute at the end, if it is a multi-instance plugin
+      const multiinstance = meta['plugin']['multi_instance'];
+      if (multiinstance) {
+        const instance = rowdata.instance;
+        const paramdata = {
+          'name': 'instance',
+          'type': 'str',
+          'valid_list': [],
+          'default': '',
+          'mandatory': false,
+          'value': instance,
+          'desc': this.translate.instant('PLUGIN.DESCRIPTION_INSTANCE_ATTRIBUTE')
+        };
+        this.parameters.push(paramdata);
       }
     }
 /*
@@ -384,17 +403,17 @@ export class PluginConfigComponent implements OnInit {
       this.rowclicked_foredit.instance = this.pluginconflist.plugin_config[this.dialog_configname]['instance']
 
       // save configuration of the edited plugin to the backend to section <this.dialog_configname>
-      console.log('save configuration of "' + this.dialog_configname + '" to Backend');
+      // console.log('save configuration of "' + this.dialog_configname + '" to Backend');
       const config = JSON.parse(JSON.stringify( this.pluginconflist.plugin_config[this.dialog_configname] ));
       delete config['_meta'];
       delete config['_description'];
-      console.log({config});
+      // console.log({config});
       for (const conf in config) {
         if (config.hasOwnProperty(conf) ) {
           if (config[conf] === null) {
             delete config[conf];
           }
-          console.log({conf}, config[conf]);
+          // console.log({conf}, config[conf]);
         }
       }
 
