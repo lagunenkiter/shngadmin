@@ -250,6 +250,9 @@ export class PluginConfigComponent implements OnInit {
             }
           }
 
+          const paramdescBlocks = [];
+          paramdescBlocks.push(paramdesc);
+
           const paramdata = {
             'name': param,
             'type': meta['parameters'][param]['type'],

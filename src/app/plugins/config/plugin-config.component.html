@@ -7,7 +7,7 @@
   <div class="shng_headline" style="margin-top: 20px; margin-left: 8px;">
     <h3>
       {{'PLUGIN.PLUGIN_CONFIGURATION'|translate}}
-      <button type="button" class="float-sm-right btn-shng btn btn-sm" style="margin-left: 0px; font-size: medium;" id="btn-monitor" [disabled]="false" (click)="addPluginDialog();" icon="fa fa-sign-out-alt"><fa-icon [icon]="faPlus"></fa-icon>&nbsp; {{ 'BUTTON.ADD_PLUGIN'|translate }}</button>
+      <button pButton type="button" style="margin-left: 0px; margin-top: 5px; font-size: medium;" id="btn-monitor" [disabled]="false" (click)="addPluginDialog();" icon="fa fa-plus" label="{{ 'BUTTON.ADD_PLUGIN'|translate }}" class="ui-button-success float-sm-right"></button>
     </h3>
   </div>
   <p-table [columns]="cols" [value]="configuredplugins" selectionMode="single">
@@ -130,7 +130,21 @@
               </ng-container>
             </ng-container>
             <ng-container *ngIf="dialog_readonly === true || col.field !== 'value'">
-              {{rowData[col.field]}}
+              <ng-container *ngIf="dialog_readonly === true || col.field !== 'desc'">
+                {{rowData[col.field]}}
+              </ng-container>
+              <ng-container *ngIf="dialog_readonly === true || col.field === 'desc'">
+                <ng-container *ngFor="let bl of rowData[col.field].split('\n')">
+                  {{ bl }}<br>
+                </ng-container>
+              </ng-container>
+<!--
+              <ng-container *ngIf="typeof rowData[col.field]  !== 'string'">
+                <ng-container *ngFor="let bl of col.field">
+                  {{ bl }}}
+                </ng-container>
+              </ng-container>
+-->
             </ng-container>
           </td>
         </tr>

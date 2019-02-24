@@ -83,7 +83,7 @@ export class ServerApiService {
       .pipe(
         map(response => {
           this.shng_serverinfo = <ServerInfo>response;
-          const result = response;
+          const result = <ServerInfo>response;
           sessionStorage.setItem('default_language', this.shng_serverinfo.default_language);
           sessionStorage.setItem('client_ip', this.shng_serverinfo.client_ip);
           // sessionStorage.setItem('tz', this.shng_serverinfo.tz);

@@ -11,7 +11,7 @@
           "type": "system",
           "subtype": "core",
           "description": {
-            "de": "Web Interface zur Anzeige von Informationen zum System und SmartHomeNG Backend-Daten",
+            "de": "Web Interface zur Anzeige\n [neue Zeile] von Informationen zum System und SmartHomeNG Backend-Daten",
             "en": "webinterface for displaying system information and SmartHomeNG backend data"
           },
           "description_long": {
@@ -118,7 +118,7 @@
           "type": "system",
           "subtype": "core",
           "description": {
-            "de": "Command Line Interface für SmartHomeNG - Funktioniert mit SmartHomeNG v1.4 und höher",
+            "de": "Command Line Interface für SmartHomeNG\n [neue Zeile] - Funktioniert mit SmartHomeNG v1.4 und höher",
             "en": "Commandline interface for SmartHomeNG - Works with SmartHomeNG v1.4 and up"
           },
           "maintainer": "msinn",
@@ -135,7 +135,7 @@
             "type": "bool",
             "default": false,
             "description": {
-              "de": "Wenn dieser Parameter False ist, ist der CLI Zugriff rein lesend. Um Updates duchführen zu können, muss dieser Parameter auf True gesetzt werden.",
+              "de": "Wenn dieser Parameter False ist, ist der CLI Zugriff rein lesend.\n\n Um Updates duchführen zu können, muss dieser Parameter auf True gesetzt werden.",
               "en": "Restrict the access of the items to read only (false) or allows read/write access (true)."
             },
             "listtype": [

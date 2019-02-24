@@ -74,6 +74,7 @@
     "KNX_SUPPORT": "Service for KNX support",
     "OW_SUPPORT": "Service for 1-wire support",
     "MQTT_SUPPORT": "Broker for MQTT support",
+    "NODE_RED_SUPPORT": "Node-RED service",
     "PASSWORD_HASH": "Create password-hash",
     "INACTIVE": "Not active",
 
@@ -279,16 +280,25 @@
     "LOGFILE": "Log",
     "FILTER": "Filter",
 
-    "LOGGER_NAME": "Logger Name",
-    "DISABLED": "Disabled",
-    "LEVEL": "Level",
-    "FILTERS": "Filters",
-    "HANDLERS": "Handlers",
-    "LOGFILES": "Logfiles",
     "SELECT_LOG": "Select a log",
     "TIMEFRAME": "Timeframe",
     "SELECT_FILE": "Select a file",
     "ACTUAL": "actual"
+  },
+  "LOGGERS": {
+    "STANDARD": "Standard Logger",
+    "PLUGINS": "Plugin Logger",
+    "ADVANCED": "Advanced Logger",
+    "CUSTOM": "Custom Logger",
+
+    "LOGGER_NAME": "Logger Name",
+    "DISABLED": "Disabled",
+    "LEVEL": "Level",
+    "ACTIVE_LEVEL": "Active Level",
+    "FILTERS": "Filters",
+    "HANDLERS": "Handlers",
+    "HANDLER_TYPES": "Handler-Types",
+    "LOGFILES": "Logfiles"
   },
 
   "BUTTON": {

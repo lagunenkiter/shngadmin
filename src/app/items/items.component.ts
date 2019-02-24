@@ -225,6 +225,7 @@ getDetails(path: string) {
     if (response === undefined) {
       this.itemdetails = <ItemDetails>{};
       this.itemdetails.config = {};
+      // this.itemdetails.value = item_value.value;
 
       this.update_age = this.shared.ageToString(0);
       this.change_age = this.shared.ageToString(0);
@@ -327,6 +328,7 @@ getDetails(path: string) {
 
   nodeSelect(event) {
     console.log('Node Selected: ' + event.node.label);
+    this.itemdetailsloaded = false;
     this.getDetails(event.node.path);
 
     }

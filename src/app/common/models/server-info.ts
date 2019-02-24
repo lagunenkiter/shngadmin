@@ -16,4 +16,5 @@ export interface ServerInfo {
   daemon_knx: string;
   daemon_ow: string;
   daemon_mqtt: string;
+  daemon_node_red: string;
 }
