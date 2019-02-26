@@ -17,9 +17,16 @@ export class LoggerListComponent implements OnInit {
 
   loggerList: any[];
 
+  levelOptions: {}[] = [{label: 'ERROR', value: 'ERROR'},
+    {label: 'WARNING', value: 'WARNING'},
+    {label: 'INFO', value: 'INFO'},
+    {label: 'DEBUG', value: 'DEBUG'}
+  ];
+  levelDefault: string = 'WARNING';
 
   constructor(private dataService: LoggersApiService,
-              private translate: TranslateService) { }
+              private translate: TranslateService) {
+  }
 
   ngOnInit() {
     console.log('LoggerListComponent.ngOnInit');
@@ -34,25 +41,6 @@ export class LoggerListComponent implements OnInit {
         }
       );
 
-
-    this.loggerList = [
-      {
-        name: 'root',
-        disabled: 'false',
-        level: 'WARNING',
-        filters: [],
-        handlers: ['TimedRotatingFileHandler', '_LogHandler'],
-        filenames: ['/usr/local/shng_dev/var/log/smarthome-warnings.log ']
-      },
-      {
-        name: '__main__',
-        disabled: 'false',
-        level: 'WARNING',
-        filters: [],
-        handlers: ['TimedRotatingFileHandler', 'TimedRotatingFileHandler', 'TimedRotatingFileHandler', 'TimedRotatingFileHandler'],
-        filenames: ['/usr/local/shng_dev/var/log/smarthome-details.log', '/usr/local/shng_dev/var/log/q21-items.log', '/usr/local/shng_dev/var/log/q21-wetter.log', '/usr/local/shng_dev/var/log/smarthome-warnings.log ']
-      }
-    ];
   }
 
   baseName(str, withExtension = true) {
@@ -63,5 +51,20 @@ export class LoggerListComponent implements OnInit {
     }
     return base;
   }
-}
 
+  levelChanged(logger, level) {
+    if (level === null) {
+      // console.log('Setting to default');
+      this.loggers[logger].active.level = this.levelDefault;
+    }
+    console.log({logger}, {level}, this.loggers[logger]);
+    this.dataService.setLoggerLevel(logger, level)
+      .subscribe(
+        (response) => {
+        }
+      );
+
+    this.loggers[logger].level = this.loggers[logger].active.level;
+  }
+
+}

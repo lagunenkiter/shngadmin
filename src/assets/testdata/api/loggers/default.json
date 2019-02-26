@@ -163,12 +163,8 @@
       "disabled": false,
       "level": "INFO",
       "filters": [],
-      "handlers": [
-        "TimedRotatingFileHandler"
-      ],
-      "logfiles": [
-        "/usr/local/shng_dev/var/log/smarthome-details.log"
-      ]
+      "handlers": [],
+      "logfiles": []
     }
   },
   "plugins.mlgw": {
@@ -177,12 +173,8 @@
       "disabled": false,
       "level": "INFO",
       "filters": [],
-      "handlers": [
-        "TimedRotatingFileHandler"
-      ],
-      "logfiles": [
-        "/usr/local/shng_dev/var/log/smarthome-details.log"
-      ]
+      "handlers": [],
+      "logfiles": []
     }
   },
   "plugins.mqtt": {
@@ -191,12 +183,8 @@
       "disabled": false,
       "level": "WARNING",
       "filters": [],
-      "handlers": [
-        "TimedRotatingFileHandler"
-      ],
-      "logfiles": [
-        "/usr/local/shng_dev/var/log/smarthome-details.log"
-      ]
+      "handlers": [],
+      "logfiles": []
     }
   },
   "plugins.network": {
@@ -205,12 +193,8 @@
       "disabled": false,
       "level": "DEBUG",
       "filters": [],
-      "handlers": [
-        "TimedRotatingFileHandler"
-      ],
-      "logfiles": [
-        "/usr/local/shng_dev/var/log/smarthome-details.log"
-      ]
+      "handlers": [],
+      "logfiles": []
     }
   },
   "plugins.priv_nodered": {
@@ -219,12 +203,8 @@
       "disabled": false,
       "level": "DEBUG",
       "filters": [],
-      "handlers": [
-        "TimedRotatingFileHandler"
-      ],
-      "logfiles": [
-        "/usr/local/shng_dev/var/log/smarthome-details.log"
-      ]
+      "handlers": [],
+      "logfiles": []
     }
   },
   "plugins.stateengine": {
@@ -250,12 +230,8 @@
       "disabled": false,
       "level": "INFO",
       "filters": [],
-      "handlers": [
-        "TimedRotatingFileHandler"
-      ],
-      "logfiles": [
-        "/usr/local/shng_dev/var/log/smarthome-details.log"
-      ]
+      "handlers": [],
+      "logfiles": []
     }
   },
   "plugins.visu_websocket": {
@@ -264,12 +240,8 @@
       "disabled": false,
       "level": "INFO",
       "filters": [],
-      "handlers": [
-        "TimedRotatingFileHandler"
-      ],
-      "logfiles": [
-        "/usr/local/shng_dev/var/log/smarthome-details.log"
-      ]
+      "handlers": [],
+      "logfiles": []
     }
   },
   "plugins.webservices": {
@@ -278,12 +250,8 @@
       "disabled": false,
       "level": "INFO",
       "filters": [],
-      "handlers": [
-        "TimedRotatingFileHandler"
-      ],
-      "logfiles": [
-        "/usr/local/shng_dev/var/log/smarthome-details.log"
-      ]
+      "handlers": [],
+      "logfiles": []
     }
   },
   "plugins.widgets": {
@@ -292,12 +260,8 @@
       "disabled": false,
       "level": "INFO",
       "filters": [],
-      "handlers": [
-        "TimedRotatingFileHandler"
-      ],
-      "logfiles": [
-        "/usr/local/shng_dev/var/log/smarthome-details.log"
-      ]
+      "handlers": [],
+      "logfiles": []
     }
   },
   "plugins.wunderground": {
@@ -321,7 +285,18 @@
     "handlers": [
       "shng_details_file"
     ],
-    "level": "ERROR"
+    "level": "WARNING",
+    "active": {
+      "disabled": false,
+      "level": "WARNING",
+      "filters": [],
+      "handlers": [
+        "TimedRotatingFileHandler"
+      ],
+      "logfiles": [
+        "/usr/local/shng_dev/var/log/smarthome-details.log"
+      ]
+    }
   },
   "lib.config": {
     "handlers": [
@@ -397,12 +372,8 @@
       "disabled": false,
       "level": "WARNING",
       "filters": [],
-      "handlers": [
-        "TimedRotatingFileHandler"
-      ],
-      "logfiles": [
-        "/usr/local/shng_dev/var/log/smarthome-details.log"
-      ]
+      "handlers": [],
+      "logfiles": []
     }
   },
   "lib.metadata": {
@@ -411,12 +382,8 @@
       "disabled": false,
       "level": "WARNING",
       "filters": [],
-      "handlers": [
-        "TimedRotatingFileHandler"
-      ],
-      "logfiles": [
-        "/usr/local/shng_dev/var/log/smarthome-details.log"
-      ]
+      "handlers": [],
+      "logfiles": []
     }
   },
   "lib.module": {
@@ -425,12 +392,8 @@
       "disabled": false,
       "level": "WARNING",
       "filters": [],
-      "handlers": [
-        "TimedRotatingFileHandler"
-      ],
-      "logfiles": [
-        "/usr/local/shng_dev/var/log/smarthome-details.log"
-      ]
+      "handlers": [],
+      "logfiles": []
     }
   },
   "lib.network": {
@@ -439,12 +402,8 @@
       "disabled": false,
       "level": "WARNING",
       "filters": [],
-      "handlers": [
-        "TimedRotatingFileHandler"
-      ],
-      "logfiles": [
-        "/usr/local/shng_dev/var/log/smarthome-details.log"
-      ]
+      "handlers": [],
+      "logfiles": []
     }
   },
   "lib.orb": {
@@ -453,12 +412,8 @@
       "disabled": false,
       "level": "WARNING",
       "filters": [],
-      "handlers": [
-        "TimedRotatingFileHandler"
-      ],
-      "logfiles": [
-        "/usr/local/shng_dev/var/log/smarthome-details.log"
-      ]
+      "handlers": [],
+      "logfiles": []
     }
   },
   "lib.plugin": {
@@ -467,12 +422,8 @@
       "disabled": false,
       "level": "WARNING",
       "filters": [],
-      "handlers": [
-        "TimedRotatingFileHandler"
-      ],
-      "logfiles": [
-        "/usr/local/shng_dev/var/log/smarthome-details.log"
-      ]
+      "handlers": [],
+      "logfiles": []
     }
   },
   "lib.scene": {
@@ -481,12 +432,8 @@
       "disabled": false,
       "level": "WARNING",
       "filters": [],
-      "handlers": [
-        "TimedRotatingFileHandler"
-      ],
-      "logfiles": [
-        "/usr/local/shng_dev/var/log/smarthome-details.log"
-      ]
+      "handlers": [],
+      "logfiles": []
     }
   },
   "lib.scheduler": {
@@ -495,12 +442,8 @@
       "disabled": false,
       "level": "INFO",
       "filters": [],
-      "handlers": [
-        "TimedRotatingFileHandler"
-      ],
-      "logfiles": [
-        "/usr/local/shng_dev/var/log/smarthome-details.log"
-      ]
+      "handlers": [],
+      "logfiles": []
     }
   },
   "lib.shtime": {
@@ -509,12 +452,8 @@
       "disabled": false,
       "level": "WARNING",
       "filters": [],
-      "handlers": [
-        "TimedRotatingFileHandler"
-      ],
-      "logfiles": [
-        "/usr/local/shng_dev/var/log/smarthome-details.log"
-      ]
+      "handlers": [],
+      "logfiles": []
     }
   },
   "lib.shyaml": {
@@ -523,12 +462,8 @@
       "disabled": false,
       "level": "WARNING",
       "filters": [],
-      "handlers": [
-        "TimedRotatingFileHandler"
-      ],
-      "logfiles": [
-        "/usr/local/shng_dev/var/log/smarthome-details.log"
-      ]
+      "handlers": [],
+      "logfiles": []
     }
   },
   "lib.utils": {
@@ -537,12 +472,8 @@
       "disabled": false,
       "level": "WARNING",
       "filters": [],
-      "handlers": [
-        "TimedRotatingFileHandler"
-      ],
-      "logfiles": [
-        "/usr/local/shng_dev/var/log/smarthome-details.log"
-      ]
+      "handlers": [],
+      "logfiles": []
     }
   },
   "logics": {
@@ -709,6 +640,25 @@
         "/usr/local/shng_dev/var/log/q21.log",
         "/usr/local/shng_dev/var/log/q21-phones.log",
         "/usr/local/shng_dev/var/log/smarthome-stateengine.log"
+      ]
+    }
+  },
+  "root": {
+    "level": "WARNING",
+    "handlers": [
+      "shng_warnings_file"
+    ],
+    "active": {
+      "disabled": false,
+      "level": "WARNING",
+      "filters": [],
+      "handlers": [
+        "TimedRotatingFileHandler",
+        "_LogHandler"
+      ],
+      "logfiles": [
+        "/usr/local/shng_dev/var/log/smarthome-warnings.log",
+        ""
       ]
     }
   },

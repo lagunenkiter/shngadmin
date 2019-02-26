@@ -4,7 +4,7 @@
 //
 
 export interface LoggersType {
-  [key: string]: string[];
+  [key: string]: any;
 }
 
 /*
