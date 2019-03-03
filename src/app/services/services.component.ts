@@ -2,6 +2,8 @@
 import { Component, AfterViewInit, AfterViewChecked, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
+import { saveAs } from 'file-saver';
+
 import {ServicesApiService} from '../common/services/services-api.service';
 import {ServerApiService} from '../common/services/server-api.service';
 
@@ -56,6 +58,8 @@ export class ServicesComponent implements AfterViewChecked, OnInit {
   pwd_hash: string;
   pwd_show: boolean;
 
+  backup_disabled: boolean = false;
+  show_backup_confirm: boolean = false;
 
   // -----------------------------------------------------------------
   //  Vars for the codemirror components
@@ -434,5 +438,17 @@ export class ServicesComponent implements AfterViewChecked, OnInit {
       );
   }
 
+  downloadBackup() {
+    this.backup_disabled = true;
+    this.dataServiceServer.downloadConfigBackup()
+      .subscribe(
+        (response) => {
+          const res = <any> response;
+          saveAs(res, 'shng_backup.zip');
+          this.show_backup_confirm = true;
+          this.backup_disabled = false;
+        }
+      );
+  }
 
 }

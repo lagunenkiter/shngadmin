@@ -71,6 +71,9 @@
   "SERVICES": {
     "SERVICES": "Dienste",
     "LANGUAGE_UI": "Sprache der graphischen Oberfläche",
+    "BACKUP_CONFIG": "Konfiguration sichern",
+    "BACKUP_DONE_TITLE": "Backup der Konfiguration erstellt",
+    "BACKUP_DONE": "Ein Zip-Archiv mit den Konfigurationsdaten wurde heruntergeladen.",
     "KNX_SUPPORT": "Dienst für die KNX Unterstützung",
     "OW_SUPPORT": "Dienst für die 1-wire Unterstützung",
     "MQTT_SUPPORT": "Broker für die MQTT Unterstützung",
@@ -318,8 +321,8 @@
     "RELOAD_LOG": "Log aktualisieren",
     "RESTART_SHNG": "Core neu starten",
     "SAVE_SETTINGS": "Einstellungen sichern",
-    "CHECK": "Prüfen"
-
+    "CHECK": "Prüfen",
+    "DOWNLOAD": "Herunterladen"
   },
 
   "ERROR": {

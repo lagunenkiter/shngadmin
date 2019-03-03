@@ -71,6 +71,9 @@
   "SERVICES": {
     "SERVICES": "Services",
     "LANGUAGE_UI": "Language of the user interface",
+    "BACKUP_CONFIG": "Backup Configuration",
+    "BACKUP_DONE_TITLE": "Configurtion Backup Created",
+    "BACKUP_DONE": "A zip-archive with the configuration data has been downloaded.",
     "KNX_SUPPORT": "Service for KNX support",
     "OW_SUPPORT": "Service for 1-wire support",
     "MQTT_SUPPORT": "Broker for MQTT support",
@@ -302,6 +305,7 @@
   },
 
   "BUTTON": {
+    "OK": "Ok",
     "CLOSE": "Close",
     "CHANGE": "Change",
     "SAVE": "Save",
@@ -316,7 +320,8 @@
     "RELOAD_LOG": "Reload Log",
     "RESTART_SHNG": "Restart Core",
     "SAVE_SETTINGS": "Save Settings",
-    "CHECK": "Check"
+    "CHECK": "Check",
+    "DOWNLOAD": "Download"
   },
 
   "ERROR": {

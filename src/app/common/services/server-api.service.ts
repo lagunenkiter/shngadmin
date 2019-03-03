@@ -195,6 +195,28 @@ export class ServerApiService {
       );
   }
 
+
+  // Download config files as a zip archive
+
+  downloadConfigBackup() {
+    // console.log('restartShngServer')
+    const apiUrl = sessionStorage.getItem('apiUrl');
+    let url = apiUrl + 'files/backup/';
+    if (apiUrl.includes('localhost')) {
+      url += 'shng_backup.zip';
+    }
+    return this.http.get(url, {responseType: 'blob'})
+      .pipe(
+        map(response => {
+          return response;
+        }),
+        catchError((err: HttpErrorResponse) => {
+          console.error('ServerApiService (downloadConfigBackup): Could not download backup data' + ' - ' + err.error.error);
+          return of({});
+        })
+      );
+  }
+
 }
 
 

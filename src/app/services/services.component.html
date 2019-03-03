@@ -32,6 +32,14 @@
                 </td>
               </tr>
               <tr>
+                <td><img src="assets/img/backup.svg" alt="SmartHomeNG logo" width="48" height="48"></td>
+                <td style="padding-top:23px;">{{'SERVICES.BACKUP_CONFIG'|translate}}</td>
+                <td style="padding-top:23px;"><strong>{{' '}}</strong></td>
+                <td style="padding-top:22px;">
+                  <button pButton type="button" icon="fa fa-download" [disabled]="backup_disabled" (click)="this.downloadBackup()" label="{{'BUTTON.DOWNLOAD'|translate}}" class="ui-button-success"></button>
+                </td>
+              </tr>
+              <tr>
                 <td><img src="assets/img/plugin_gateway.svg" alt="Icon knxd" width="48" height="48"></td>
                 <td style="padding-top:23px;">{{'SERVICES.KNX_SUPPORT'|translate}}</td>
                 <td style="padding-top:23px;"><strong>{{serverInfo.daemon_knx|translate}}</strong></td>
@@ -272,3 +280,11 @@
   </tabset>
 </div>
 
+
+<p-dialog header="{{'SERVICES.BACKUP_DONE_TITLE'|translate}}" [(visible)]="show_backup_confirm" [modal]="true" [responsive]="true" [style]="{width: '400px', minWidth: '200px'}" [minY]="70"
+          [baseZIndex]="10000">
+    <span>{{'SERVICES.BACKUP_DONE'|translate}}</span>
+  <p-footer>
+    <button type="button" pButton icon="pi pi-check" (click)="show_backup_confirm = false" label="{{'BUTTON.OK'|translate}}" class="ui-button-success"></button>
+  </p-footer>
+</p-dialog>
