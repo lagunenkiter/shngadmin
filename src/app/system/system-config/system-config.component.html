@@ -144,6 +144,27 @@
 
 
 
+<!--
+  -- Validation dialog, showing information about the error, if from validation fails
+  -->
+
+<p-dialog header="" [(visible)]="validation_dialog_display" [modal]="true" blockScroll="true">
+  <p-header>
+    {{'PLUGIN.CONFIGURATION_ERRORS'|translate}}
+  </p-header>
+
+  <ng-container *ngFor="let l of this.validation_dialog_text">
+    <li>
+      {{ l }}
+    </li>
+  </ng-container>
+
+  <p-footer>
+    <button pButton type="button" icon="pi pi-times" (click)="validation_dialog_display=false" label="{{'BUTTON.CLOSE'|translate}}" class="ui-button-success"></button>
+  </p-footer>
+</p-dialog>
+
+
 
 <!--
   -- Password change dialog, showing information about the error, if from validation fails

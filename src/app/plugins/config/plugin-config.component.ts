@@ -335,8 +335,10 @@ export class PluginConfigComponent implements OnInit {
         conf[this.parameters[i]['name']] = this.parameters[i]['value'];
       }
 
+      if (this.parameters[i]['value'] === undefined) { this.parameters[i]['value'] = null; }
+
       // checking data types
-      if (this.parameters[i]['value'] !== undefined && this.parameters[i]['value'] !== '') {
+      if (this.parameters[i]['value'] !== null && this.parameters[i]['value'] !== '') {
         error_text = '\'' + this.parameters[i]['value'] + '\' '  ;
         if (this.parameters[i]['type'].toLowerCase() === 'knx_ga' && !this.shared.is_knx_groupaddress(this.parameters[i]['value'])) {
           error_found = true;
@@ -365,22 +367,23 @@ export class PluginConfigComponent implements OnInit {
       }
 
       // check valid minimum and maximum value
-      if (this.parameters[i]['value'] < this.parameters[i]['valid_min']) {
+      if ((this.parameters[i]['value'] !== null) && (this.parameters[i]['value'] < this.parameters[i]['valid_min'])) {
         error_found = true;
         error_text = this.translate.instant('PLUGIN.DEFINED_MIN') + ' \'' + this.parameters[i]['valid_min'] + '\'';
         error_text += ', ' + this.translate.instant('PLUGIN.ACTUAL_VALUE') + ' \'' + this.parameters[i]['value'] + '\'';
       }
-      if (this.parameters[i]['value'] > this.parameters[i]['valid_max']) {
+      if ((this.parameters[i]['value'] !== null) && (this.parameters[i]['value'] > this.parameters[i]['valid_max'])) {
         error_found = true;
         error_text = this.translate.instant('PLUGIN.DEFINED_MAX') + ' \'' + this.parameters[i]['valid_max'] + '\'';
         error_text += ', ' + this.translate.instant('PLUGIN.ACTUAL_VALUE') + ' \'' + this.parameters[i]['value'] + '\'';
       }
 
       // check if value is mandantory
-      if ((this.parameters[i]['value'] === undefined || this.parameters[i]['value'] === '') && this.parameters[i]['mandatory']) {
+      if ((this.parameters[i]['value'] === undefined || this.parameters[i]['value'] === null || this.parameters[i]['value'] === '') && this.parameters[i]['mandatory']) {
         error_found = true;
         error_text = this.translate.instant('PLUGIN.MANDATORY_VALUE');
       }
+
       if (error_found) {
         errors_found = true;
         error_found = false;
@@ -391,7 +394,7 @@ export class PluginConfigComponent implements OnInit {
       }
 
     }
-    // if validation did not fiind errors
+    // if validation did not find errors
     if (!errors_found) {
       // hide configuration dialog
       this.dialog_display = false;

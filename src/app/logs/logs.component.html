@@ -3,7 +3,7 @@
   <h6>SmartHomeNG {{ 'LOGS.LOGFILE'|translate }}:
     <p-dropdown [style]="{'width':'300px'}" [options]="logs" [(ngModel)]="selectedLog" placeholder="{{ 'LOGS.SELECT_LOG'|translate }}" (onChange)="fillTimeframe()" [showClear]="true"></p-dropdown>
     &nbsp; {{ 'LOGS.TIMEFRAME'|translate }}:
-    <p-dropdown [style]="{'width':'150px'}" [(options)]="files" [(ngModel)]="selectedFile" placeholder="{{ 'LOGS.SELECT_FILE'|translate }}" (onChange)="changedTimeframe()" [showClear]="true"></p-dropdown>
+    <p-dropdown [style]="{'width':'210px'}" [(options)]="files" [(ngModel)]="selectedFile" placeholder="{{ 'LOGS.SELECT_FILE'|translate }}" (onChange)="changedTimeframe()" [showClear]="true"></p-dropdown>
     &nbsp; &nbsp; <button pButton type="button" (click)="this.readLogfile()" [disabled]="(selectedLog === null) || (selectedFile === null)" label="{{'BUTTON.RELOAD_LOG'|translate}}" class="ui-button-success"></button>
   </h6>
 </div>
@@ -11,8 +11,20 @@
 
 <div class="container-fluid">
   <div class="form-group" style="display:inline;">
-    <div style="float:left; font-size: 20px;">{{ 'LOGS.FILTER'|translate }}:</div>
-    <input type="text" class="form-control form-control-sm" id="text_filter" value="{{ text_filter }}" style= "margin-left: 10px; width: 400px; float:left;"/>
+    <div style="margin-top: 2px; float:left; font-size: 20px;">{{ 'LOGS.FILTER'|translate }}:</div>
+    <input type="text" class="form-control form-control-sm" id="text_filter" pInputText [(ngModel)]="text_filter" style= "margin-top: 2px; margin-left: 10px; width: 395px; float:left;" (ngModelChange)="filterLogChunk()">
+    <!--
+    <button pButton label="{{ 'BUTTON.APPLY_FILTER'|translate }}" type="button" style="margin-top: 2px; margin-left: 12px; margin-right: 10px" icon="fa fa-filter" (click)="filterLogChunk()" class="float-sm-left ui-button-success"></button>
+    -->
+    <p-dropdown [style]="{'margin-left': '10px', 'width':'120px'}" [options]="loglevels" [(ngModel)]="level_filter" (onChange)="filterLogChunk()" [showClear]="false"></p-dropdown>
+    <button pButton label="{{ 'BUTTON.CLEAR_FILTER'|translate }}" type="button" style="margin-top: 2px; margin-left: 12px; margin-right: 10px" icon="fa fa-filter" (click)="text_filter = ''; level_filter = 'ALL'; filterLogChunk()" class="ui-button-success"></button>
+
+    <button pButton type="button" style="margin-top: 2px; margin-left: 31px" [disabled]="first_chunk" icon="fa fa-fast-backward" (click)="readLogfile(1)" class="ui-button-success"></button>
+    <button pButton type="button" style="margin-top: 2px; margin-left: 2px; margin-right: 5px" [disabled]="first_chunk" icon="fa fa-step-backward" (click)="readLogfile(chunk_no - 1)" class="ui-button-success"></button>
+    {{ chunk_no }}
+    <button pButton type="button" style="margin-top: 2px; margin-left: 5px" [disabled]="last_chunk" icon="fa fa-step-forward" (click)="readLogfile(chunk_no + 1)" class="ui-button-success"></button>
+    <button pButton type="button" style="margin-top: 2px; margin-left: 2px" [disabled]="last_chunk" icon="fa fa-fast-forward" (click)="readLogfile(0)" class="ui-button-success"></button>
+
 
     <ng-container *ngIf="cmOptions.lineWrapping === true">
       <button pButton label="{{ 'LINEBREAK'|translate }}" type="button" style="margin-right: 0px" icon="fa fa-check-square" (click)="cmOptions.lineWrapping = !cmOptions.lineWrapping" class="float-sm-right ui-button-success"></button>
@@ -21,17 +33,6 @@
       <button pButton label="{{ 'LINEBREAK'|translate }}" type="button" style="margin-right: 0px" icon="fa fa-square" (click)="cmOptions.lineWrapping = !cmOptions.lineWrapping" class="float-sm-right ui-button-success"></button>
     </ng-container>
 
-    <!--
-        <input type="text" class="form-control form-control-sm" id="text_filter" value="{{ text_filter }}" style= "margin-left: 10px; width: 400px; float:left;"/>
-        <select class="form-control form-control-sm" id="log_level_filter" style="margin-left: 10px; width: 200px; float:left;">
-          <option {% if log_level_filter=="ALL" %}selected{% endif %} value="ALL">ALL</option>
-          <option {% if log_level_filter=="DEBUG" %}selected{% endif %} value="DEBUG">DEBUG</option>
-          <option {% if log_level_filter=="INFO" %}selected{% endif %} value="INFO">INFO</option>
-          <option {% if log_level_filter=="WARNING" %}selected{% endif %} value="WARNING">WARNING</option>
-          <option {% if log_level_filter=="ERROR" %}selected{% endif %} value="ERROR">ERROR</option>
-          <option {% if log_level_filter=="CRITICAL" %}selected{% endif %} value="CRITICAL">CRITICAL</option>
-        </select>
-    -->
   </div>
 <!--
   <button type="button" class="btn btn-shng btn-sm" style="float:left; margin-left: 10px;" onclick="location.href='log_view.html?logfile={{ logfile }}&text_filter='+$('#text_filter').val()+'&log_level_filter='+$('#log_level_filter').val()">{{ _('Filter anwenden','button') }}</button>
@@ -42,17 +43,6 @@
 </div>
 
 <br style="clear:both;"/>
-<br>
-
-<!--
-<div class="container-fluid" style="overflow: none;">
-  <div style="margin-bottom: 10px;">
-    <textarea style="width:100%; height:75vh" pInputTextarea autocomplete="off">
-      {{ logfile_content }}
-    </textarea>
-  </div>
-</div>
--->
 
 <div style="width:100%; height:50vh">
   <div style="width:100%; height:75vh">
@@ -62,6 +52,34 @@
     ></ngx-codemirror>
   </div>
 </div>
+
+
+
+<!--
+  -- Progress spinner
+  -->
+
+<p-dialog
+  #logspinner
+  header="{{'LOGS.LOADCHUNK'|translate}}..."
+  [ngStyle]="{'align': 'center'}"
+  [(visible)]="spinner_display"
+  [modal]="true" blockScroll="true"
+  [closable]="false"
+  [resizable]="false"
+  [maximizable]="false"
+  [minY]="100"
+  [style]="{'minWidth':'200px', 'minHeight':'100px'}"
+>
+
+  <div align="center">
+    <p-progressSpinner></p-progressSpinner>
+  </div>
+</p-dialog>
+
+
+
+
 
 
 <!--
@@ -84,21 +102,6 @@
 <div class="container-fluid">
   <table>
     <tr>
-      <td style="width: 31px; text-align: center;">
-        <button type="button" id="fast-backward" class="btn btn-shng btn-sm" style="float:left;" onclick="location.href='log_view.html?logfile={{ logfile }}&text_filter='+$('#text_filter').val()+'&log_level_filter='+$('#log_level_filter').val()+'&page=1'"><i class="fa fa-fast-backward" aria-hidden="true"></i></button>
-      </td>
-      <td style="width: 31px; text-align: center;">
-        <button type="button" id="step-backward" class="btn btn-shng btn-sm" style="float:left;" onclick="location.href='log_view.html?logfile={{ logfile }}&text_filter='+$('#text_filter').val()+'&log_level_filter='+$('#log_level_filter').val()+'&page={{ current_page-1 }}'"><i class="fa fa-step-backward" aria-hidden="true"></i></button>
-      </td>
-      <td style="width: 75px; font-weight: bold; text-align: center;">
-        ({{ current_page }} / {{ pages }})
-      </td>
-      <td style="width: 31px; text-align: center;">
-        <button type="button" id="step-forward" class="btn btn-shng btn-sm" style="float:left;" onclick="location.href='log_view.html?logfile={{ logfile }}&text_filter='+$('#text_filter').val()+'&log_level_filter='+$('#log_level_filter').val()+'&page={{ current_page+1 }}'"><i class="fa fa-step-forward" aria-hidden="true"></i></button>
-      </td>
-      <td style="width: 31px; text-align: center;">
-        <button type="button" id="fast-forward" class="btn btn-shng btn-sm" style="float:left;" onclick="location.href='log_view.html?logfile={{ logfile }}&text_filter='+$('#text_filter').val()+'&log_level_filter='+$('#log_level_filter').val()+'&page={{ pages }}'"><i class="fa fa-fast-forward" aria-hidden="true"></i></button>
-      </td>
       <td style="width: 300px; text-align: right;">
         <button type="button" class="btn btn-shng btn-sm" onclick="window.open('log_dump.html?logfile={{ logfile }}')">{{ _('Logfile speichern','button') }}</button>
       </td>

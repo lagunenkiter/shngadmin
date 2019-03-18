@@ -6,6 +6,7 @@ import { LogsApiService } from '../common/services/logs-api.service';
 import { TranslateService } from '@ngx-translate/core';
 
 import * as CodeMirror from 'codemirror';
+import {$NBSP} from 'codelyzer/angular/styles/chars';
 
 interface DropDownEntry {
   label: string;
@@ -21,6 +22,8 @@ interface DropDownEntry {
 })
 export class LogsComponent implements OnInit {
 
+  loglevels: DropDownEntry[] = [];
+
   logs_info: LogsInfoDict = {};
   default_log = '';
 
@@ -32,11 +35,19 @@ export class LogsComponent implements OnInit {
 
   displayLogfile = '';
   text_filter = '';
+  level_filter = 'ALL';
 
+  nbsp = String.fromCharCode(160);
+
+  logfile_chunk = {};
+  first_chunk = true;
+  last_chunk = true;
+  chunk_no = 1;
   logfile_content = '';
 
   cmOptions = {
     lineNumbers: true,
+    firstLineNumber: 1,
     readOnly: true,
     indentUnit: 4,
     lineSeparator: '\n',
@@ -46,15 +57,23 @@ export class LogsComponent implements OnInit {
     indentWithTabs: false
   };
 
+  spinner_display: boolean = false;
+
 
   constructor(private dataService: LogsApiService,
               private translate: TranslateService) {
-    // this.logfile = 'smarthome-warnings.log';
   }
 
 
   ngOnInit() {
-    console.log('LogsComponent.ngOnInit');
+    // console.log('LogsComponent.ngOnInit');
+
+    this.loglevels.push({label: 'ALL', value: 'ALL'});
+    this.loglevels.push({label: 'DEBUG', value: this.nbsp + 'DEBUG' + this.nbsp});
+    this.loglevels.push({label: 'INFO', value: this.nbsp + 'INFO' + this.nbsp});
+    this.loglevels.push({label: 'WARNING', value: this.nbsp + 'WARNING' + this.nbsp});
+    this.loglevels.push({label: 'ERROR', value: this.nbsp + 'ERROR' + this.nbsp});
+    this.loglevels.push({label: 'CRITICAL', value: this.nbsp + 'CRITICAL' + this.nbsp});
 
     this.dataService.getLogs()
       .subscribe(
@@ -73,7 +92,7 @@ export class LogsComponent implements OnInit {
             this.fillTimeframe(true);
           }
           // this.selectedFile = this.translate.instant('LOGS.ACTUAL');
-          console.log('getLogs', {response});
+          // console.log('getLogs', {response});
         }
       );
   }
@@ -85,7 +104,7 @@ export class LogsComponent implements OnInit {
       this.readLogfile();
     } else {
       this.files = [];
-      console.log('selectedLog:', this.selectedLog);
+      // console.log('selectedLog:', this.selectedLog);
 
       this.logs_info[this.selectedLog].sort();
       this.logs_info[this.selectedLog].push(this.logs_info[this.selectedLog][0]);
@@ -93,12 +112,18 @@ export class LogsComponent implements OnInit {
       this.logs_info[this.selectedLog].reverse();
 
       for (let i = 0; i < (this.logs_info[this.selectedLog]).length; i++) {
-          let tf = this.logs_info[this.selectedLog][i];
+          let tf = this.logs_info[this.selectedLog][i][0];
+          let tfsize = this.logs_info[this.selectedLog][i][1];
+          let tfunit = 'KB';
           tf = tf.substr(String(this.selectedLog).length + 4);
           if (tf === '') {
             tf = '.' + this.translate.instant('LOGS.ACTUAL');
           }
-          const wrk = {label: tf.substr(1), value: this.logs_info[this.selectedLog][i]};
+          if (Number(tfsize) > 1024) {
+            tfsize = (Number(tfsize) / 1024).toFixed(1);
+            tfunit = 'MB';
+          }
+          const wrk = {label: tf.substr(1) + ' (' + tfsize + tfunit + ')', value: this.logs_info[this.selectedLog][i][0]};
         this.files.push(wrk);
       }
 
@@ -106,12 +131,13 @@ export class LogsComponent implements OnInit {
         this.selectedFile = this.files[0].value;
         this.readLogfile();
       } else {
-        this.selectedFile = null;
+        // use other preset?
+        this.selectedFile = this.files[0].value;
         this.readLogfile();
       }
     }
-    console.log('files: ', this.files);
-    console.log('selectedFile: ', this.selectedFile);
+    // console.log('files: ', this.files);
+    // console.log('selectedFile: ', this.selectedFile);
   }
 
 
@@ -124,23 +150,47 @@ export class LogsComponent implements OnInit {
   }
 
 
-  readLogfile() {
-    console.log('selectedFile:', this.selectedFile);
+  filterLogChunk() {
+    this.logfile_content = this.logfile_chunk['loglines'].join('');
+    this.logfile_content = '';
+    this.cmOptions.lineNumbers = ((this.level_filter === 'ALL') && (this.text_filter === ''));
+
+    const filter = this.text_filter.replace(/ /g, this.nbsp);
+    for (let i = 0; i < this.logfile_chunk['loglines'].length; i++) {
+      if (this.level_filter === 'ALL' || this.logfile_chunk['loglines'][i].indexOf(this.level_filter) > -1) {
+        if (filter === '' || this.logfile_chunk['loglines'][i].indexOf(filter) > -1) {
+          this.logfile_content += this.logfile_chunk['loglines'][i];
+        }
+      }
+    }
+  }
+
+
+  readLogfile(chunk = 1) {
+    // console.log('selectedFile:', this.selectedFile);
     if (this.selectedLog === null || this.selectedFile === null) {
       this.displayLogfile = '';
       this.logfile_content = '';
     } else {
+      this.spinner_display = true;
       this.displayLogfile = String(this.selectedFile);
 
-      this.dataService.readLogfile(this.displayLogfile)
+      this.dataService.readLogfile(this.displayLogfile, chunk)
         .subscribe(
           (response: string) => {
-            console.log({response});
-            this.logfile_content = response;
+            // console.log({response});
+            this.logfile_chunk = <any> response;
+            this.first_chunk = (this.logfile_chunk['lines'][0] === 1);
+            this.last_chunk = this.logfile_chunk['lastchunk'];
+            this.chunk_no = this.logfile_chunk['chunk'];
+            this.cmOptions.lineNumbers = true;
+            this.cmOptions.firstLineNumber = this.logfile_chunk['lines'][0];
+            this.filterLogChunk();
+            this.spinner_display = false;
           }
         );
     }
-    console.log('displayLogfile: ', this.displayLogfile);
+    // console.log('displayLogfile: ', this.displayLogfile);
   }
 
   // -------------------------------------------------------------

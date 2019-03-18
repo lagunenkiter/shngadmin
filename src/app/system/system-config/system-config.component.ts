@@ -1,8 +1,13 @@
 
 import { Component, OnInit } from '@angular/core';
+
+import { TranslateService } from '@ngx-translate/core';
+
 import {ConfigApiService} from '../../common/services/config-api.service';
 import {SchedulersApiService} from '../../common/services/schedulers-api.service';
 import {ServerApiService} from '../../common/services/server-api.service';
+
+import { SharedService } from '../../common/services/shared.service';
 
 import {sha512} from 'js-sha512';
 
@@ -53,9 +58,15 @@ export class SystemConfigComponent implements OnInit {
   pwd_old_is_wrong: boolean;
   pwd_new_not_identical: boolean;
 
+  validation_dialog_display: boolean = false;
+  validation_dialog_parameter: string;
+  validation_dialog_text: string[];
+
 
   constructor(private dataService: ConfigApiService,
-              private dataServiceServer: ServerApiService) { }
+              private dataServiceServer: ServerApiService,
+              private shared: SharedService,
+              private translate: TranslateService) { }
 
 
   ngOnInit() {
@@ -377,8 +388,6 @@ export class SystemConfigComponent implements OnInit {
     this.check_values();
   }
 
-
-
   check_values() {
     this.data_changed = false;
     for (const p in this.common_parameters) {
@@ -407,7 +416,107 @@ export class SystemConfigComponent implements OnInit {
     }
   }
 
+
+  check_value_restrictions(parameter) {
+    let error_found = false;
+    let error_text = '';
+
+    console.log('check_value_restrictions', {parameter});
+
+    if (parameter['value'] === undefined) { parameter['value'] = null; }
+
+    // checking data types
+    if (parameter['value'] !== null && parameter['value'] !== '') {
+      error_text = '\'' + parameter['value'] + '\' '  ;
+      if (parameter['type'].toLowerCase() === 'knx_ga' && !this.shared.is_knx_groupaddress(parameter['value'])) {
+        error_found = true;
+        error_text += this.translate.instant('PLUGIN.INVALID_KNX_ADDRESS');
+      }
+      if (parameter['type'].toLowerCase() === 'mac' && !this.shared.is_mac(parameter['value'])) {
+        error_found = true;
+        error_text += this.translate.instant('PLUGIN.INVALID_MAC_ADDRESS');
+      }
+      if (parameter['type'].toLowerCase() === 'ipv4' && !this.shared.is_ipv4(parameter['value'])) {
+        error_found = true;
+        error_text += this.translate.instant('PLUGIN.INVALID_IP_ADDRESS') + ' (v4)';
+      }
+      if (parameter['type'].toLowerCase() === 'ipv6' && !this.shared.is_ipv6(parameter['value'])) {
+        error_found = true;
+        error_text += this.translate.instant('PLUGIN.INVALID_IP_ADDRESS') + ' (v6)';
+      }
+      if (parameter['type'].toLowerCase() === 'ip') {
+        if (!this.shared.is_ipv4(parameter['value']) && !this.shared.is_ipv6(parameter['value'])) {
+          if (!this.shared.is_hostname(parameter['value'])) {
+            error_found = true;
+            error_text += this.translate.instant('PLUGIN.INVALID_HOSTNAME');
+          }
+        }
+      }
+    }
+
+    // check valid minimum and maximum value
+    if ((parameter['value'] !== null) && (parameter['value'] < parameter['valid_min'])) {
+      error_found = true;
+      error_text = this.translate.instant('PLUGIN.DEFINED_MIN') + ' \'' + parameter['valid_min'] + '\'';
+      error_text += ', ' + this.translate.instant('PLUGIN.ACTUAL_VALUE') + ' \'' + parameter['value'] + '\'';
+    }
+    if ((parameter['value'] !== null) && (parameter['value'] > parameter['valid_max'])) {
+      error_found = true;
+      error_text = this.translate.instant('PLUGIN.DEFINED_MAX') + ' \'' + parameter['valid_max'] + '\'';
+      error_text += ', ' + this.translate.instant('PLUGIN.ACTUAL_VALUE') + ' \'' + parameter['value'] + '\'';
+    }
+
+    // check if value is mandantory
+    if ((parameter['value'] === null || parameter['value'] === '') && parameter['mandatory']) {
+      error_found = true;
+      error_text = this.translate.instant('PLUGIN.MANDATORY_VALUE');
+    }
+
+    if (error_found) {
+      this.validation_dialog_text.push(this.translate.instant('PLUGIN.PARAMETER') + ' \'' + parameter['name'] + '\': ' + error_text);
+      this.validation_dialog_parameter = parameter['name'];
+
+      this.validation_dialog_display = true;
+      console.warn('Parameter ' + '\'' + parameter['name'] + '\'', error_text);
+      return false;
+    }
+    return true;
+  }
+
+
   saveSettings() {
+    let errors_found = false;
+    this.validation_dialog_text = [];
+
+
+    for (const p in this.common_parameters) {
+      if (this.common_parameters.hasOwnProperty(p)) {
+        if (!this.check_value_restrictions(this.common_parameters[p])) {
+          errors_found = true;
+        }
+      }
+    }
+    for (const p in this.http_parameters) {
+      if (this.http_parameters.hasOwnProperty(p)) {
+        if (!this.check_value_restrictions(this.http_parameters[p])) {
+          errors_found = true;
+        }
+      }
+    }
+    for (const p in this.admin_parameters) {
+      if (this.admin_parameters.hasOwnProperty(p)) {
+        if (!this.check_value_restrictions(this.admin_parameters[p])) {
+          errors_found = true;
+        }
+      }
+    }
+
+
+    if (errors_found) {
+      return false;
+    }
+
+
     const data = {};
     data['common'] = {};
     data['common']['data'] = {};

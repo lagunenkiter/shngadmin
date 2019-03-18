@@ -286,7 +286,8 @@
     "SELECT_LOG": "Select a log",
     "TIMEFRAME": "Timeframe",
     "SELECT_FILE": "Select a file",
-    "ACTUAL": "actual"
+    "ACTUAL": "actual",
+    "LOADCHUNK": "Loading chunk of logfile"
   },
   "LOGGERS": {
     "STANDARD": "Standard Logger",
@@ -321,7 +322,8 @@
     "RESTART_SHNG": "Restart Core",
     "SAVE_SETTINGS": "Save Settings",
     "CHECK": "Check",
-    "DOWNLOAD": "Download"
+    "DOWNLOAD": "Download",
+    "CLEAR_FILTER": "Clear Filter"
   },
 
   "ERROR": {

@@ -171,6 +171,8 @@
         },
         "port": {
           "type": "int",
+          "valid_min": 0,
+          "valid_max": 65535,
           "default": 8383,
           "description": {
             "de": "Portnummer für die Webinterfaces",
@@ -179,6 +181,8 @@
         },
         "tls_port": {
           "type": "int",
+          "valid_min": 0,
+          "valid_max": 65535,
           "default": 8385,
           "description": {
             "de": "Portnummer für die Webinterfaces bei Nutzung von https",
@@ -211,6 +215,8 @@
         },
         "servicesport": {
           "type": "int",
+          "valid_min": 0,
+          "valid_max": 65535,
           "default": 8384
         },
         "showpluginlist": {
@@ -264,6 +270,7 @@
       "parameters": {
         "pypi_timeout": {
           "type": "int",
+          "valid_min": 1,
           "default": 5,
           "description": {
             "de": "Timeout bei der Abfrage der pypi Website",
@@ -296,6 +303,7 @@
         "websocket_port": {
           "type": "int",
           "valid_min": 0,
+          "valid_max": 65535,
           "default": 2424,
           "description": {
             "de": "Port der für den Websocket Zugriff verwendet wird",

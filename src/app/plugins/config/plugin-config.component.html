@@ -170,7 +170,7 @@
       <button pButton type="button" icon="fa fa-times" (click)="dialog_display=false" label="{{'BUTTON.ABORT'|translate}}" class="ui-button-secondary"></button>
     </ng-container>
     <ng-container *ngIf="dialog_readonly === true">
-      <button pButton type="button" icon="fa fa-times" (click)="dialog_display=false" label="{{'BUTTON.CLOSE'|translate}}"></button>
+      <button pButton type="button" icon="fa fa-times" (click)="dialog_display=false" label="{{'BUTTON.CLOSE'|translate}}" class="ui-button-success"></button>
     </ng-container>
   </p-footer>
 </p-dialog>
@@ -192,7 +192,7 @@
   </ng-container>
 
   <p-footer>
-    <button pButton type="button" icon="pi pi-times" (click)="validation_dialog_display=false" label="{{'BUTTON.CLOSE'|translate}}"></button>
+    <button pButton type="button" icon="pi pi-times" (click)="validation_dialog_display=false" label="{{'BUTTON.CLOSE'|translate}}" class="ui-button-success"></button>
   </p-footer>
 </p-dialog>
 

@@ -37,9 +37,21 @@ export class LogsApiService {
       );
   }
 
-  readLogfile(filename) {
+  readLogfile(filename, chunk = null) {
     const apiUrl = sessionStorage.getItem('apiUrl');
-    return this.http.get(apiUrl + 'logs/' + filename + '/', { responseType: 'text' })
+    let url = apiUrl + 'logs/' + filename;
+
+    if (chunk === null) { chunk = 1; }
+    if (chunk !== null) {
+      if (apiUrl.includes('localhost')) {
+        url += '_chunk' + String(chunk);
+      } else {
+        url += '?chunk=' + String(chunk);
+      }
+    }
+
+    // return this.http.get(url, { responseType: 'text' })
+    return this.http.get(url)
       .pipe(
         map(response => {
           const result = response;
