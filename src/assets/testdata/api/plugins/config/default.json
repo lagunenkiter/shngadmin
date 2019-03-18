@@ -20,6 +20,7 @@
           },
           "maintainer": "psilo909, msinn, bmxp",
           "tester": "Sandman60",
+          "state": "deprecated",
           "support": "https://knx-user-forum.de/forum/supportforen/smarthome-py/959964-support-thread-für-das-backend-plugin",
           "version": "1.4.13",
           "sh_minversion": "1.4e",

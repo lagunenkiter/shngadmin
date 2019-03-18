@@ -49,8 +49,14 @@
             </ng-container>
           </td>
 
-      <td class="py-1" (click)="details.show()">{{ plugin.configname }}</td>
-          <td class="py-1" (click)="details.show()">{{ plugin.pluginname }}
+          <td class="py-1" (click)="details.show()">
+            {{ plugin.configname }}
+          </td>
+          <td class="py-1" (click)="details.show()">
+            {{ plugin.pluginname }} &nbsp;
+            <ng-container *ngIf="plugin.metadata.state && plugin.metadata.state.toLowerCase() === 'deprecated'">
+              <fa-icon style="color: #c40808;" [icon]="faExclamationTriangle"></fa-icon>
+            </ng-container>
           </td>
           <td class="py-1" (click)="details.show()">{{ plugin.instancename }}</td>
           <td class="py-1" (click)="details.show()">{{ plugin.version }}</td>
@@ -115,6 +121,14 @@
                 </button>
               </div>
               <div class="modal-body">
+                <ng-container *ngIf="plugin.metadata.state && plugin.metadata.state.toLowerCase() === 'deprecated'">
+                  <fa-icon style="color: #c40808;" [icon]="faExclamationTriangle"></fa-icon>
+                  <a style="width: 50%; padding:0px; background-color: #ffffff; border:0;"><strong>&nbsp; {{'PLUGIN.DEPRECATED'|translate}}:</strong></a>
+                  <br>
+                  <p style="padding:0px; background-color: #f2f2f2; border:0;">{{'PLUGIN.DEPRECATED_TEXT'|translate}}</p>
+
+                </ng-container>
+
                 <ng-container *ngIf="plugin.parameters && plugin.parameters.length !== 0">
                   <table class="table" style="padding: 0px;">
                   <tr>

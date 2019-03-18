@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { faPlus, faPlusCircle, faPlusSquare } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faPlusCircle, faPlusSquare, faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 
 // import { DeleteConfigComponent } from './delete-config/delete-config.component';
@@ -38,6 +38,7 @@ export class PluginConfigComponent implements OnInit {
   faPlus = faPlus;
   faPlusCircle = faPlusCircle;
   faPlusSquare = faPlusSquare;
+  faExclamationTriangle = faExclamationTriangle;
 
   configuredplugins: ConfiguredPlugin[];
   cols: any[];
@@ -52,6 +53,7 @@ export class PluginConfigComponent implements OnInit {
   plugin_enabled: boolean;
   parameter_cols: any[];
   classic: boolean = false;
+  state: string = '';
   rowclicked_foredit: any = false;
 
   // for list of installed plugins dialog
@@ -119,7 +121,17 @@ export class PluginConfigComponent implements OnInit {
                 plgname = this.pluginconflist.plugin_config[plg]['class_path'];
               }
               const instance = this.pluginconflist.plugin_config[plg]['instance'];
-              const conf = {'confname': confname, 'instance': instance, 'plugin': plgname, 'desc': '' };
+
+              // get logo for plugin type
+              const meta = this.pluginconflist.plugin_config[confname]['_meta'];
+
+              let deprecated = '-';
+              if (meta.plugin.state && meta.plugin.state.toLowerCase() === 'deprecated') {
+                deprecated = '+';
+              } else {
+                deprecated = '-';
+              }
+              const conf = {'confname': confname, 'instance': instance, 'plugin': deprecated + plgname, 'desc': '' };
 
               let enabled = 'true';
               if (this.pluginconflist.plugin_config[plg]['plugin_enabled'] === 'False') {
@@ -128,14 +140,11 @@ export class PluginConfigComponent implements OnInit {
               // is plugin enabled?
               conf['enabled'] = enabled;
 
-              // get logo for plugin type
-              const meta = this.pluginconflist.plugin_config[confname]['_meta'];
               if (meta === undefined) {
                 conf['type'] = 'classic';
               } else {
                 conf['type'] = meta.plugin.type;
               }
-
 
               // get description from plugin_config (faster)
               let desc = this.pluginconflist.plugin_config[plg]['_description'];
@@ -163,7 +172,6 @@ export class PluginConfigComponent implements OnInit {
 
     this.cols = [
       { field: 'enabled',  sfield: '',         header: '',                   width:  '30px' },
-      { field: 'type',     sfield: 'type',     header: '',                   width:  '30px' },
       { field: 'confname', sfield: 'confname', header: 'PLUGIN.CONFIGNAME',  width: '150px' },
       { field: 'plugin',   sfield: 'plugin',   header: 'PLUGIN.PLUGINNAME',  width: '200px' },
       { field: 'instance', sfield: 'instance', header: 'PLUGIN.INSTANCE',    width: '150px' },
@@ -196,6 +204,10 @@ export class PluginConfigComponent implements OnInit {
     if (meta !== undefined && meta.plugin !== undefined) {
       if  (meta.plugin.type !== undefined && meta.plugin.type !== 'classic') {
         this.classic = false;
+      }
+      this.state = '';
+      if  (meta.plugin.state !== undefined) {
+        this.state = meta.plugin.state;
       }
       desc = meta['plugin']['description'];
     }

@@ -185,6 +185,7 @@
     "configname": "backend",
     "version": "1.4.13",
     "smartplugin": true,
+    "state": "deprecated",
     "multiinstance": false,
     "instancename": "",
     "webif_url": "",

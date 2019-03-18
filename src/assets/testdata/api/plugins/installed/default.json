@@ -24,6 +24,7 @@
     "type": "system",
     "description": "Web Interface zur Anzeige\n [neue Zeile2] von Informationen zum System und SmartHomeNG Backend-Daten",
     "version": "1.4.14",
+    "state": "deprecated",
     "documentation": "http://smarthomeng.de/user/plugins/backend/user_doc.html",
     "multi_instance": false
   },
