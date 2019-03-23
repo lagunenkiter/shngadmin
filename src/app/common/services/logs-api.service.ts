@@ -60,7 +60,17 @@ export class LogsApiService {
         catchError((err: HttpErrorResponse) => {
           console.error({err});
           console.error('LogsApiService (readLogfile): Could not read logfile ' + filename + ' - ' + err.error.error);
-          return of('File not found!');
+
+          const result = {}
+          result['file'] = filename;
+          result['filesize'] = 0;
+          result['chunk'] = 1;
+          result['chunksize'] = 1000;
+          result['lines'] = [1, 1];
+          result['loglines'] = ['FILE NOT FOUND!'];
+          return of(result);
+
+          // return of('File not found!');
         })
       );
   }

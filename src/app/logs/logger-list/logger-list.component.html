@@ -42,10 +42,7 @@
 
                     <td class="py-1">
                       <ng-container *ngFor="let fn of loggers[l].active.logfiles; let i = index">
-      <!--
-                        <a class="text-shng" href="logs?logfile={{ this.baseName(fn) }}">{{ this.baseName(fn) }}</a>
-      -->
-                        <a>{{ this.baseName(fn) }}</a>
+                        <a class="text-shng" [routerLink]="['/logs/display', this.baseName(fn)]">{{ this.baseName(fn) }}</a>
                         <ng-container *ngIf="fn !== '' && i < loggers[l].active.logfiles.length - 1">,<br></ng-container>
                       </ng-container>
                     </td>
@@ -101,10 +98,7 @@
 
                     <td class="py-1">
                       <ng-container *ngFor="let fn of loggers[l].active.logfiles; let i = index">
-  <!--
-                        <a class="text-shng" href="logs?logfile={{ this.baseName(fn) }}">{{ this.baseName(fn) }}</a>
-  -->
-                        <a>{{ this.baseName(fn) }}</a>
+                        <a class="text-shng" [routerLink]="['/logs/display', this.baseName(fn)]">{{ this.baseName(fn) }}</a>
                         <ng-container *ngIf="fn !== '' && i < loggers[l].active.logfiles.length - 1">,<br></ng-container>
                       </ng-container>
                     </td>
@@ -154,7 +148,7 @@
 
                 <td class="py-1">
                   <ng-container *ngFor="let fn of loggers['root'].active.logfiles; let i = index">
-                    <a class="text-shng" href="logs?logfile={{ this.baseName(fn) }}">{{ this.baseName(fn) }}</a>
+                    <a class="text-shng" [routerLink]="['/logs/display', this.baseName(fn)]">{{ this.baseName(fn) }}</a>
                     <ng-container *ngIf="fn !== '' && i < loggers['root'].active.logfiles.length - 1">,<br></ng-container>
                   </ng-container>
                 </td>
@@ -199,10 +193,7 @@
                   <td class="py-1">
                     <ng-container *ngIf="loggers[l].active !== undefined">
                       <ng-container *ngFor="let fn of loggers[l].active.logfiles; let i = index">
-<!--
-                        <a class="text-shng" href="logs?logfile={{ this.baseName(fn) }}">{{ this.baseName(fn) }}</a>
--->
-                        <a>{{ this.baseName(fn) }}</a>
+                        <a class="text-shng" [routerLink]="['/logs/display', this.baseName(fn)]">{{ this.baseName(fn) }}</a>
                         <ng-container *ngIf="fn !== '' && i < loggers[l].active.logfiles.length - 1">,<br></ng-container>
                         <!--        <a class="text-shng" href="log_view.html?logfile={{ get_basename(fn) }}">{{ fn }}</a>  -->
                       </ng-container>
@@ -264,10 +255,7 @@
 
                 <td class="py-1">
                   <ng-container *ngFor="let fn of loggers[l].active.logfiles; let i = index">
-<!--
-                    <a class="text-shng" href="logs?logfile={{ this.baseName(fn) }}">{{ this.baseName(fn) }}</a>
--->
-                    <a>{{ this.baseName(fn) }}</a>
+                    <a class="text-shng" [routerLink]="['/logs/display', this.baseName(fn)]">{{ this.baseName(fn) }}</a>
                     <ng-container *ngIf="fn !== '' && i < loggers[l].active.logfiles.length - 1">,<br></ng-container>
                   </ng-container>
                 </td>

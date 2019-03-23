@@ -1,5 +1,6 @@
 
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import {ActivatedRoute, convertToParamMap} from '@angular/router';
 
 import { LogsType, LogsInfoDict } from '../common/models/logfiles-info';
 import { LogsApiService } from '../common/services/logs-api.service';
@@ -60,13 +61,23 @@ export class LogsComponent implements OnInit {
   spinner_display: boolean = false;
 
 
-  constructor(private dataService: LogsApiService,
+  constructor(private route: ActivatedRoute,
+              private dataService: LogsApiService,
               private translate: TranslateService) {
   }
 
 
   ngOnInit() {
     // console.log('LogsComponent.ngOnInit');
+
+    // test if component is called with a parameter and remove '.log' from the parameter
+    let logParam = this.route.snapshot.paramMap['params']['logname'];
+    if (logParam !== undefined) {
+      if (logParam.endsWith('.log')) {
+        logParam = logParam.slice(0, -4);
+      }
+    }
+    console.log({logParam});
 
     this.loglevels.push({label: 'ALL', value: 'ALL'});
     this.loglevels.push({label: 'DEBUG', value: this.nbsp + 'DEBUG' + this.nbsp});
@@ -87,7 +98,13 @@ export class LogsComponent implements OnInit {
             }
           }
           this.selectedLog = null;
-          if (this.default_log in this.logs_info) {
+          if (logParam !== undefined) {
+            if (logParam in this.logs_info) {
+              this.selectedLog = logParam;
+              this.fillTimeframe(true);
+            }
+          }
+          if (this.selectedLog == null && this.default_log in this.logs_info) {
             this.selectedLog = this.default_log;
             this.fillTimeframe(true);
           }

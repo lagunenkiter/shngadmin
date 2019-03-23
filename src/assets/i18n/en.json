@@ -306,6 +306,11 @@
     "HANDLER_TYPES": "Handler-Types",
     "LOGFILES": "Logfiles"
   },
+  "LOGGING": {
+    "CONFIG_FILE": "Configuration file",
+    "CONFIG_ERROR": "Configuration Error - Configuration data not saved!",
+    "CONFIG_ERROR_TEXT": "Error found in configuration file.\nInvalid format of configuration file. \n"
+  },
 
   "BUTTON": {
     "OK": "Ok",

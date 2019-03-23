@@ -1,5 +1,7 @@
 
 import { Component, OnInit } from '@angular/core';
+import {Router} from '@angular/router';
+
 import { LoggersType } from '../../common/models/loggers-info';
 import { LoggersApiService } from '../../common/services/loggers-api.service';
 import {LogsApiService} from '../../common/services/logs-api.service';
@@ -25,6 +27,7 @@ export class LoggerListComponent implements OnInit {
   levelDefault: string = 'WARNING';
 
   constructor(private dataService: LoggersApiService,
+              protected router: Router,
               private translate: TranslateService) {
   }
 

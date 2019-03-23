@@ -309,6 +309,11 @@
     "HANDLER_TYPES": "Handler-Type(s)",
     "LOGFILES": "Logfile(s)"
   },
+  "LOGGING": {
+    "CONFIG_FILE": "Konfigurationsdatei",
+    "CONFIG_ERROR": "Konfigurations-Fehler - Konfiguration nicht gespeichert!",
+    "CONFIG_ERROR_TEXT": "Fehler in der Konfigurationsdatei gefunden.\nUngültiges Format der Konfigurationsdatei.\n"
+  },
 
   "BUTTON": {
     "CLOSE": "Schließen",
@@ -361,6 +366,6 @@
   "CONFIGURATION": "Konfiguration",
   "RESTART FOR CHANGES": "Änderungen werden erst nach einem Neustart von SmartHomeNG wirksam",
 
-  "LINEBREAK": "Zeilenumbrusch"
+  "LINEBREAK": "Umbruch"
 
 }

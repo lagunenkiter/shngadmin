@@ -39,6 +39,7 @@ const appRoutes: Routes = [
   { path: 'threads', component: ThreadsComponent, canActivate: [AuthGuardService] },
   { path: 'logs', component: LogsComponent, canActivate: [AuthGuardService] },
   { path: 'logs/display', component: LogsComponent, canActivate: [AuthGuardService] },
+  { path: 'logs/display/:logname', component: LogsComponent, canActivate: [AuthGuardService] },
   { path: 'logs/logger-list', component: LoggerListComponent, canActivate: [AuthGuardService] },
   { path: 'logs/logging-configuration', component: LoggingConfigurationComponent, canActivate: [AuthGuardService] },
   { path: 'login', component: LoginComponent },
