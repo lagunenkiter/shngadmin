@@ -15,13 +15,21 @@ export class FilesApiService {
   constructor(private http: HttpClient) { }
 
 
-  readFile(filename) {
+  readFile(filetype, filename = '') {
+    console.log('FilesApiService.readFile()', {filename});
+
     const apiUrl = sessionStorage.getItem('apiUrl');
-    let url = apiUrl + 'files/' + filename + '/';
+    let url = apiUrl + 'files/' + filetype + '/';
 
     if (apiUrl.includes('localhost')) {
-      url += 'default.txt';
+      url += filename + '.txt';
+    } else {
+      if (filename !== '') {
+        url += '?filename=' + filename;
+      }
     }
+
+    console.log('FilesApiService.readFile()', {url})
 
     return this.http.get(url, { responseType: 'text' })
       .pipe(
@@ -31,25 +39,37 @@ export class FilesApiService {
         }),
         catchError((err: HttpErrorResponse) => {
           console.error({err});
-          console.error('FilesApiService (readFile): Could not read logfile ' + filename + ' - ' + err.error.error);
+          if (filename === '') {
+            console.error('FilesApiService (readFile): Could not read filetype \'' + filetype + '\' - error: ' + err.error.error);
+          } else {
+            console.error('FilesApiService (readFile): Could not read filetype \'' + filetype + '\', filename \'' + filename + '\' - error: ' + err.error.error);
+          }
 
-          return of('File not found!');
+          return of('');
         })
       );
   }
 
 
-  saveFile(filename, content) {
+  saveFile(filetype, filename = '', content = '') {
     // console.log('FilesApiService.saveFile');
 
     const apiUrl = sessionStorage.getItem('apiUrl');
-    let url = apiUrl + 'files/' + filename + '/';
+    let url = apiUrl + 'files/' + filetype + '/';
     if (apiUrl.includes('localhost')) {
-      url += 'default.txt';
+      url += filename + '.txt';
+    }
+
+    if (filename !== '') {
+      url += '?filename=' + filename;
     }
 
     if (apiUrl.includes('localhost')) {
-      console.warn('FilesApiService.saveFile', 'Cannot save file in dev environment\n', '- filename: ', filename);
+      if (filename === '') {
+        console.warn('FilesApiService.saveFile', 'Cannot save file in dev environment\n', '- filetype: ', filetype);
+      } else {
+        console.error('FilesApiService.saveFile: Cannot save file in dev environment filetype \'' + filetype + '\', filename \'' + filename + '\'');
+      }
 
       return this.http.get(url, { responseType: 'text' })
         .pipe(
@@ -84,6 +104,27 @@ export class FilesApiService {
 
   }
 
+
+  getfileList(filetype) {
+    console.log('FilesApiService.getfileList()', {filetype});
+
+    const apiUrl = sessionStorage.getItem('apiUrl');
+    let url = apiUrl + 'files/' + filetype + '/';
+    if (apiUrl.includes('localhost')) {
+      url += 'default.json';
+    }
+    return this.http.get(url)
+      .pipe(
+        map(response => {
+          const result = response;
+          return result;
+        }),
+        catchError((err: HttpErrorResponse) => {
+          console.error('FilesApiService.getfileList: Could not read file list' + ' - ' + err.error.error);
+          return of({});
+        })
+      );
+  }
 
 }
 

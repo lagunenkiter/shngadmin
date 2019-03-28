@@ -26,15 +26,20 @@ export class LoggingConfigurationComponent implements AfterViewChecked, OnInit {
   myTextarea = '';
   myTextareaOrig = '';
   cmOptions = {
+    indentWithTabs: false,
+    indentUnit: 4,
+    tabSize: 4,
+    extraKeys: {
+      'Tab': 'insertSoftTab',
+      'Shift-Tab': 'indentLess'
+    },
     lineNumbers: true,
     readOnly: false,
-    indentUnit: 4,
     lineSeparator: '\n',
     rulers: this.rulers,
     mode: 'yaml',
     lineWrapping: false,
     firstLineNumber: 1,
-    indentWithTabs: false,
     autorefresh: true,
     fixedGutter: true,
   };
@@ -65,7 +70,7 @@ export class LoggingConfigurationComponent implements AfterViewChecked, OnInit {
   ngAfterViewChecked() {
 
     const editor1 = this.codeEditor.codeMirror;
-    editor1.setSize('100%', '78vh');
+    editor1.setSize('93vw', '78vh');
     editor1.refresh();
   }
 
@@ -80,7 +85,7 @@ export class LoggingConfigurationComponent implements AfterViewChecked, OnInit {
           if (this.myTextOutput.startsWith('ERROR:')) {
             this.error_display = true;
           } else {
-            this.fileService.saveFile('logging', this.myTextarea)
+            this.fileService.saveFile('logging', '', this.myTextarea)
               .subscribe(
                 (response2) => {
                   this.myTextareaOrig = this.myTextarea;

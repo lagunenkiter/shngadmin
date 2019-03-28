@@ -6,6 +6,7 @@
     "ITEMS": "Items",
     "ITEM_TREE": "Item Baum",
     "ITEM_STRUCTS": "Struktur Templates",
+    "ITEM_CONFIGURATION": "Item Konfiguration",
     "LOGICS": "Logiken",
     "SCHEDULERS": "Scheduler",
     "PLUGINS": "Plugins",
@@ -195,6 +196,15 @@
     },
     "STRUCT_TEMPLATES": "Item-Struktur Templates"
   },
+  "ITEM_CONFIG": {
+    "CONFIG_FILE": "Item Konfigurationsdatei",
+    "FILE_NOT_FOUND": "Datei nicht gefunden!",
+    "FILETYPE_UNSUPPORTED": "Dateityp nicht unterstützt!",
+    "CONFIG_ERROR": "Konfigurations-Fehler - Konfiguration nicht gespeichert!",
+    "CONFIG_ERROR_TEXT": "Fehler in der Konfigurationsdatei gefunden.\nUngültiges Format der Konfigurationsdatei.\n",
+    "NAME_CONFIGURATION": "Dateinamen für die neue Konfigurationsdatei wählen",
+    "UNIQUE_NAME": "Eindeutiger Dateiname (ohne Erweiterung)"
+  },
   "LOGICS": {
     "USERLOGICS": "Nutzerlogiken",
     "SYSTEMLOGICS": "Systemlogiken",
@@ -319,6 +329,7 @@
     "CLOSE": "Schließen",
     "CHANGE": "Ändern",
     "SAVE": "Sichern",
+    "DISCARD": "Verwerfen",
     "ABORT": "Abbrechen",
     "ADD": "Hinzufügen",
     "UPDATE": "Aktualisieren",
@@ -332,7 +343,8 @@
     "SAVE_SETTINGS": "Einstellungen sichern",
     "CHECK": "Prüfen",
     "DOWNLOAD": "Herunterladen",
-    "CLEAR_FILTER": "Filter Löschen"
+    "CLEAR_FILTER": "Filter Löschen",
+    "NEW_DEFINITION_FILE": "Neue Definitionsdatei"
   },
 
   "ERROR": {

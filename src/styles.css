@@ -15,6 +15,19 @@
 */
 
 
+:root {
+  --shng-blue: #709cc2;
+  --shng-red: #c40808;
+  --shng-warning: #e3d304;
+
+  --shng-border: #d9d9d9;
+  --shng-secondary-button: #e0e0e0;
+  --shng-toggle-off: #a9a9a9;
+}
+/*
+  --shng-secondary-button2: #f5f5f5;
+*/
+
 
 textarea {
   white-space: pre;
@@ -25,6 +38,8 @@ textarea {
 
 /* for PrimeNG */
 
+.ui-state-highlight {
+  background-color: var(--shng-blue) !important; }
 
 
 /* TurboTable */
@@ -32,16 +47,16 @@ textarea {
 .ui-table .ui-table-thead > tr > th,
 .ui-table .ui-table-tfoot > tr > td {
   background-color: #ffffff !important;
-  border: 0px solid #d9d9d9 !important;
+  border: 0px solid var(--shng-border) !important;
   color: #1b1d1f !important; }
 
 .ui-table .ui-table-tbody > tr {
   background-color: #f0f0f0 !important;
   color: #222222 !important; }
 .ui-table .ui-table-tbody > tr > td {
-  border: 0px solid #D5D5D5 !important;
-  border-top: 1px solid #D5D5D5 !important;
-  border-bottom: 1px solid #D5D5D5 !important;
+  border: 0px solid var(--shng-border) !important;
+  border-top: 1px solid var(--shng-border) !important;
+  border-bottom: 1px solid var(--shng-border) !important;
   background-color: inherit; }
 
 .ui-table .ui-table-tbody > tr.ui-state-highlight {
@@ -56,30 +71,30 @@ textarea {
   background-color: #ffffff !important; }
 
 .ui-table .ui-sortable-column .ui-sortable-column-icon {
-  color: #709cc2 !important; }
+  color: var(--shng-blue) !important; }
 
 .ui-button.ui-state-active {
-  background-color: #709cc2 !important; }
+  background-color: var(--shng-blue) !important; }
 
 .ui-button.ui-state-passive {
   background-color: #444444 !important; }
 
 .btn-primary {
   font-weight: 900;
-  background-color: #709cc2 !important; }
+  background-color: var(--shng-blue) !important; }
 
 .ui-button-success {
   font-weight: 900;
-  background-color: #709cc2 !important; }
+  background-color: var(--shng-blue) !important; }
 
 .ui-button-secondary {
-  background-color: #f5f5f5 !important;
+  background-color: var(--shng-secondary-button) !important;
   border-color: #cccccc !important;
   color: #555555 !important;
 }
 
 .ui-button-danger {
-  background-color: #c40808 !important;
+  background-color: var(--shng-red) !important;
   border-color: #cccccc !important;
 }
 
@@ -90,10 +105,10 @@ textarea {
 }
 
 .ui-button-secondary.ui-state-focus {
-  background-color: red !important; }
+  background-color: var(--shng-red) !important; }
 
 ui-inputswitch {
-  color: #709cc2 !important; }
+  color: var(--shng-blue) !important; }
 
 
 
@@ -104,7 +119,7 @@ ui-inputswitch {
   background-color: #186ba0;
   color: #FFFFFF; }
 .ui-table .ui-table-tbody > tr.ui-contextmenu-selected {
-  background-color: #3ca1e2;
+  background-color: var(--shng-blue);
   color: #FFFFFF; }
 .ui-table .ui-sortable-column.ui-state-highlight .ui-sortable-column-icon {
   color: #FFFFFF; }
@@ -217,7 +232,7 @@ a.text-shng:focus, a.text-shng:hover {
 
 .btn-shng {
   color: #fff;
-  background-color: #709cc2;
+  background-color: var(--shng-blue);
   /* border-color: #2e6da4; */
 }
 .btn-shng:disabled,
@@ -331,8 +346,8 @@ a.text-shng:focus, a.text-shng:hover {
 
 .btn-shng-danger {
   color: #fff;
-  background-color: #cc5200;
-  border-color: #cc5200;
+  background-color: var(--shng-red);
+  border-color: var(--shng-red);
 }
 
 .btn-shng-danger:hover {

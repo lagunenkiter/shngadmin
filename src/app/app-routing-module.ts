@@ -5,6 +5,7 @@ import { SystemComponent } from './system/system.component';
 import { SystemConfigComponent } from './system/system-config/system-config.component';
 import { ServicesComponent } from './services/services.component';
 import { ItemsComponent } from './items/items.component';
+import { ItemConfigurationComponent } from './items/item-configuration/item-configuration.component';
 import { StructsComponent } from './items/structs/structs.component';
 import { LogicsComponent } from './logics/logics.component';
 import { SchedulersComponent } from './schedulers/schedulers.component';
@@ -30,6 +31,7 @@ const appRoutes: Routes = [
   { path: 'items', component: ItemsComponent, canActivate: [AuthGuardService] },
   { path: 'item_tree', component: ItemsComponent, canActivate: [AuthGuardService] },
   { path: 'items/structs', component: StructsComponent, canActivate: [AuthGuardService] },
+  { path: 'items/config', component: ItemConfigurationComponent, canActivate: [AuthGuardService] },
   { path: 'logics', component: LogicsComponent, canActivate: [AuthGuardService] },
   { path: 'schedulers', component: SchedulersComponent, canActivate: [AuthGuardService] },
   { path: 'plugins', component: PluginsComponent, canActivate: [AuthGuardService] },

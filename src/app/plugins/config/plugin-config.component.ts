@@ -271,7 +271,7 @@ export class PluginConfigComponent implements OnInit {
             'valid_list': vl,
             'valid_min': meta['parameters'][param]['valid_min'],
             'valid_max': meta['parameters'][param]['valid_max'],
-            'default': meta['parameters'][param]['default'],
+            'default': meta['parameters'][param]['q21_09Bad.txt'],
             'mandatory': meta['parameters'][param]['mandatory'],
             'value': conf[param],
             'desc': paramdesc

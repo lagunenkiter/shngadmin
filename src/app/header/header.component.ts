@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { isSuccess } from '@angular/http/src/http_utils';
 
 import { TranslateService } from '@ngx-translate/core';
-import { MenuItem } from 'primeng/api';
+// import { MenuItem } from 'primeng/api';
 
 import { ServerInfo } from '../common/models/server-info';
 import { ServerApiService } from '../common/services/server-api.service';
@@ -86,6 +86,10 @@ export class HeaderComponent implements OnInit {
           {
             label: this.translate.instant('MENU.ITEM_STRUCTS'),
             routerLink: ['/items/structs'],
+          },
+          {
+            label: this.translate.instant('MENU.ITEM_CONFIGURATION'),
+            routerLink: ['/items/config'],
           }
         ]
       },
@@ -196,6 +200,7 @@ export class HeaderComponent implements OnInit {
       this.items[2].label = this.translate.instant('MENU.ITEMS');
       this.items[2].items[0].label = this.translate.instant('MENU.ITEM_TREE');
       this.items[2].items[1].label = this.translate.instant('MENU.ITEM_STRUCTS');
+      this.items[2].items[2].label = this.translate.instant('MENU.ITEM_CONFIGURATION');
       this.items[3].label = this.translate.instant('MENU.LOGICS');
       this.items[4].label = this.translate.instant('MENU.SCHEDULERS');
       this.items[5].label = this.translate.instant('MENU.PLUGINS');

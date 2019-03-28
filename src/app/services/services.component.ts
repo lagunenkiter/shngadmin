@@ -77,30 +77,40 @@ export class ServicesComponent implements AfterViewChecked, OnInit {
   myEvalResult = '';
   myResultType = '';
   cmEvalOptions = {
+    indentWithTabs: false,
+    indentUnit: 4,
+    tabSize: 4,
+    extraKeys: {
+      'Tab': 'insertSoftTab',
+      'Shift-Tab': 'indentLess'
+    },
     lineNumbers: true,
     readOnly: false,
-    indentUnit: 4,
     lineSeparator: '\n',
     rulers: this.rulers,
     mode: 'python',
     lineWrapping: false,
     firstLineNumber: 1,
-    indentWithTabs: false,
     autorefresh: true,
     fixedGutter: true,
   };
 
   myEvalTextOutput = '';
   cmEvalOptionsOutput = {
+    indentWithTabs: false,
+    indentUnit: 4,
+    tabSize: 4,
+    extraKeys: {
+      'Tab': 'insertSoftTab',
+      'Shift-Tab': 'indentLess'
+    },
     lineNumbers: true,
     readOnly: false,
-    indentUnit: 4,
     lineSeparator: '\n',
     rulers: this.rulers,
     mode: 'python',
     lineWrapping: false,
     firstLineNumber: 1,
-    indentWithTabs: false,
     autorefresh: true,
     fixedGutter: true,
   };
@@ -113,30 +123,40 @@ export class ServicesComponent implements AfterViewChecked, OnInit {
 
   myTextarea = '';
   cmOptions = {
+    indentWithTabs: false,
+    indentUnit: 4,
+    tabSize: 4,
+    extraKeys: {
+      'Tab': 'insertSoftTab',
+      'Shift-Tab': 'indentLess'
+    },
     lineNumbers: true,
     readOnly: false,
-    indentUnit: 4,
     lineSeparator: '\n',
     rulers: this.rulers,
     mode: 'yaml',
     lineWrapping: false,
     firstLineNumber: 1,
-    indentWithTabs: false,
     autorefresh: true,
     fixedGutter: true,
   };
 
   myTextOutput = '';
   cmOptionsOutput = {
+    indentWithTabs: false,
+    indentUnit: 4,
+    tabSize: 4,
+    extraKeys: {
+      'Tab': 'insertSoftTab',
+      'Shift-Tab': 'indentLess'
+    },
     lineNumbers: true,
     readOnly: false,
-    indentUnit: 4,
     lineSeparator: '\n',
     rulers: this.rulers,
     mode: 'yaml',
     lineWrapping: false,
     firstLineNumber: 1,
-    indentWithTabs: false,
     autorefresh: true,
     fixedGutter: true,
   };

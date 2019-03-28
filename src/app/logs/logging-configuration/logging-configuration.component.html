@@ -1,14 +1,13 @@
 <div style="margin-left: 10px; margin-right: 10px; margin-top: 60px;">
 
   <div class="container-fluid" style="margin-top: 10px; margin-left: 10px; margin-right: 10px;">
-  </div>
 
   <table>
     <tbody>
       <tr>
-        <td style="min-width: 50%">
-          <div style="font-weight: normal; padding-top: 10px; padding-left: 10px; padding-right: 5px; width: 95%">
-            {{ 'LOGGING.CONFIG_FILE'|translate }} ../etc/logging.yaml
+        <td>
+          <div style="font-weight: normal; padding-top: 10px; padding-left: 10px; padding-right: 0px; width: 93vw">
+            {{ 'LOGGING.CONFIG_FILE'|translate }} <strong>../etc/logging.yaml</strong>
             <button pButton label="{{ 'BUTTON.SAVE'|translate }}" type="button" [disabled]="myTextarea === myTextareaOrig" icon="fa fa-check" style="margin-right: 0px;" (click)="saveConfig()" class="float-sm-right ui-button-success"></button>
           </div>
         </td>
@@ -28,6 +27,7 @@
       </tr>
     </tbody>
   </table>
+  </div>
 
 
 </div>

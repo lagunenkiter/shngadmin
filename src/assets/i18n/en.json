@@ -6,6 +6,7 @@
     "ITEMS": "Items",
     "ITEM_TREE": "Item Tree",
     "ITEM_STRUCTS": "Structure Templates",
+    "ITEM_CONFIGURATION": "Item Configuration",
     "LOGICS": "Logics",
     "SCHEDULERS": "Schedulers",
     "PLUGINS": "Plugins",
@@ -193,6 +194,15 @@
     },
     "STRUCT_TEMPLATES": "Item-Structure Templates"
   },
+  "ITEM_CONFIG": {
+    "CONFIG_FILE": "Item Configuration-File",
+    "FILE_NOT_FOUND": "File not found!",
+    "FILETYPE_UNSUPPORTED": "Filetype not supported!",
+    "CONFIG_ERROR": "Configuration Error - Configuration data not saved!",
+    "CONFIG_ERROR_TEXT": "Error found in configuration file.\nInvalid format of configuration file. \n",
+    "NAME_CONFIGURATION": "Select a name for the new configuration file",
+    "UNIQUE_NAME": "Unique filename (without extension)"
+  },
   "LOGICS": {
     "USERLOGICS": "User Logics",
     "SYSTEMLOGICS": "System Logics",
@@ -256,6 +266,7 @@
     "CLASSIC_NOT_CONFIGURABLE": "Classic plugins can't be configured here!",
 
     "NAME_CONFIGURATION": "Name the configuration of '{{selected_plugin}}' plugin and add to the configured plugins",
+    "UNIQUE_NAME": "Unique name",
     "DELETE_CONFIG": "Confirm delete configuration",
     "DELETE_CONFIG_TEXT": "Please confirm, that you want to delete the plugin configuration '{{config}}'",
 
@@ -317,6 +328,7 @@
     "CLOSE": "Close",
     "CHANGE": "Change",
     "SAVE": "Save",
+    "DISCARD": "Discard",
     "ABORT": "Abort",
     "ADD": "Add",
     "UPDATE": "Update",
@@ -330,7 +342,8 @@
     "SAVE_SETTINGS": "Save Settings",
     "CHECK": "Check",
     "DOWNLOAD": "Download",
-    "CLEAR_FILTER": "Clear Filter"
+    "CLEAR_FILTER": "Clear Filter",
+    "NEW_DEFINITION_FILE": "New Definition-File"
   },
 
   "ERROR": {

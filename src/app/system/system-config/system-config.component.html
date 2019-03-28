@@ -22,15 +22,15 @@
 
               <ng-container *ngIf="dialog_readonly === false && col.field === 'value'">
                 <ng-container *ngIf="rowData.valid_list.length > 0">
-                  <p-dropdown [options]="rowData.valid_list" [showClear]="true" placeholder="{{rowData.default}}" [(ngModel)]="rowData[col.field]" (ngModelChange)="rowData[col.field] = $event; check_values()"></p-dropdown>
+                  <p-dropdown [options]="rowData.valid_list" [showClear]="true" placeholder="{{rowData.q21_09Bad}}" [(ngModel)]="rowData[col.field]" (ngModelChange)="rowData[col.field] = $event; check_values()"></p-dropdown>
                 </ng-container>
 
                 <ng-container *ngIf="(['int','num','float','scene'].indexOf(rowData.type) > -1) && rowData.valid_list.length === 0">
-                  <input [(ngModel)]="rowData[col.field]" type="number" (ngModelChange)="check_values()" min="{{rowData.valid_min}}" max="{{rowData.valid_max}}" pInputText placeholder="{{rowData.default}}" pInputText name="{{col.field}}" [ngStyle]="{'width': col.iwidth}"/>
+                  <input [(ngModel)]="rowData[col.field]" type="number" (ngModelChange)="check_values()" min="{{rowData.valid_min}}" max="{{rowData.valid_max}}" pInputText placeholder="{{rowData.q21_09Bad}}" pInputText name="{{col.field}}" [ngStyle]="{'width': col.iwidth}"/>
                 </ng-container>
 
                 <ng-container *ngIf="rowData.type !== 'bool' && ['int','num','float','scene'].indexOf(rowData.type) === -1 && rowData.valid_list.length === 0">
-                  <input [(ngModel)]="rowData[col.field]" type="text" (ngModelChange)="check_values()" pInputText placeholder="{{rowData.default}}" name="{{col.field}}" [ngStyle]="{'width': col.iwidth}"/>
+                  <input [(ngModel)]="rowData[col.field]" type="text" (ngModelChange)="check_values()" pInputText placeholder="{{rowData.q21_09Bad}}" name="{{col.field}}" [ngStyle]="{'width': col.iwidth}"/>
                 </ng-container>
               </ng-container>
               <ng-container *ngIf="dialog_readonly === true || col.field !== 'value'">
@@ -61,15 +61,15 @@
 
               <ng-container *ngIf="dialog_readonly === false && col.field === 'value'">
                 <ng-container *ngIf="rowData.valid_list.length > 0">
-                  <p-dropdown [options]="rowData.valid_list" [showClear]="true" placeholder="{{rowData.default}}" [(ngModel)]="rowData[col.field]" (ngModelChange)="rowData[col.field] = $event; check_values()"></p-dropdown>
+                  <p-dropdown [options]="rowData.valid_list" [showClear]="true" placeholder="{{rowData.q21_09Bad}}" [(ngModel)]="rowData[col.field]" (ngModelChange)="rowData[col.field] = $event; check_values()"></p-dropdown>
                 </ng-container>
 
                 <ng-container *ngIf="(['int','num','float','scene'].indexOf(rowData.type) > -1) && rowData.valid_list.length === 0">
-                  <input [(ngModel)]="rowData[col.field]" (ngModelChange)="check_values()" type="number" min="{{rowData.valid_min}}" max="{{rowData.valid_max}}" pInputText placeholder="{{rowData.default}}" pInputText name="{{col.field}}" [ngStyle]="{'width': col.iwidth}"/>
+                  <input [(ngModel)]="rowData[col.field]" (ngModelChange)="check_values()" type="number" min="{{rowData.valid_min}}" max="{{rowData.valid_max}}" pInputText placeholder="{{rowData.q21_09Bad}}" pInputText name="{{col.field}}" [ngStyle]="{'width': col.iwidth}"/>
                 </ng-container>
 
                 <ng-container *ngIf="rowData.type !== 'bool' && ['int','num','float','scene', 'password'].indexOf(rowData.type) === -1 && rowData.valid_list.length === 0">
-                  <input [(ngModel)]="rowData[col.field]"(ngModelChange)="check_values()"  type="text" pInputText placeholder="{{rowData.default}}" name="{{col.field}}" [ngStyle]="{'width': col.iwidth}"/>
+                  <input [(ngModel)]="rowData[col.field]" (ngModelChange)="check_values()" type="text" pInputText placeholder="{{rowData.q21_09Bad}}" name="{{col.field}}" [ngStyle]="{'width': col.iwidth}"/>
                 </ng-container>
 
                 <ng-container *ngIf="rowData.type === 'password' && rowData[col.field] === null">
@@ -108,15 +108,15 @@
 
               <ng-container *ngIf="dialog_readonly === false && col.field === 'value'">
                 <ng-container *ngIf="rowData.valid_list.length > 0">
-                  <p-dropdown [options]="rowData.valid_list" [showClear]="true" placeholder="{{rowData.default}}" [(ngModel)]="rowData[col.field]" (ngModelChange)="rowData[col.field] = $event; check_values()"></p-dropdown>
+                  <p-dropdown [options]="rowData.valid_list" [showClear]="true" placeholder="{{rowData.q21_09Bad}}" [(ngModel)]="rowData[col.field]" (ngModelChange)="rowData[col.field] = $event; check_values()"></p-dropdown>
                 </ng-container>
 
                 <ng-container *ngIf="(['int','num','float','scene'].indexOf(rowData.type) > -1) && rowData.valid_list.length === 0">
-                  <input [(ngModel)]="rowData[col.field]" (ngModelChange)="check_values()" type="number" min="{{rowData.valid_min}}" max="{{rowData.valid_max}}" pInputText placeholder="{{rowData.default}}" pInputText name="{{col.field}}" [ngStyle]="{'width': col.iwidth}"/>
+                  <input [(ngModel)]="rowData[col.field]" (ngModelChange)="check_values()" type="number" min="{{rowData.valid_min}}" max="{{rowData.valid_max}}" pInputText placeholder="{{rowData.q21_09Bad}}" pInputText name="{{col.field}}" [ngStyle]="{'width': col.iwidth}"/>
                 </ng-container>
 
                 <ng-container *ngIf="rowData.type !== 'bool' && ['int','num','float','scene'].indexOf(rowData.type) === -1 && rowData.valid_list.length === 0">
-                  <input [(ngModel)]="rowData[col.field]" (ngModelChange)="check_values()" type="text" pInputText placeholder="{{rowData.default}}" name="{{col.field}}" [ngStyle]="{'width': col.iwidth}"/>
+                  <input [(ngModel)]="rowData[col.field]" (ngModelChange)="check_values()" type="text" pInputText placeholder="{{rowData.q21_09Bad}}" name="{{col.field}}" [ngStyle]="{'width': col.iwidth}"/>
                 </ng-container>
               </ng-container>
               <ng-container *ngIf="dialog_readonly === true || col.field !== 'value'">

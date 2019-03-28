@@ -1,0 +1,109 @@
+
+<div style="margin-left: 10px; margin-right: 10px; margin-top: 60px; width: 20%; float: left; border: 1px">
+  <div class="container-fluid" style="margin-top: 60px">
+    <button pButton label="{{ 'BUTTON.NEW_DEFINITION_FILE'|translate }}" type="button" [disabled]="!((myEditFilename === '') || (myTextarea === myTextareaOrig))" icon="far fa-file" style="margin-right: 0px;" (click)="newConfig()" class="float-sm-left ui-button-success"></button>
+    <br>
+    <br>
+
+    <i class="fa fa-sitemap" style="margin-left: 5px; color: #a2a2a2"></i>
+    <a style="margin-left: 5px; color: #727272">{{ 'Item-Definition Files' }}</a>
+
+    <p-listbox [options]="itemFiles" [(ngModel)]="selectedItemfile" [disabled]="!((myEditFilename === '') || (myTextarea === myTextareaOrig))" (onChange)="itemFileSelected()" optionLabel="label" [style]="{'min-width':'270px', 'max-width':'270px', 'width':'100%'}" [listStyle]="{'height':'67vh', 'min-height':'200px'}">
+    </p-listbox>
+  </div>
+
+</div>
+
+
+
+<div style="margin-left: 10px; margin-right: 10px; margin-top: 60px; width: 75%; float: right;">
+
+  <div class="container-fluid" style="margin-top: 10px; margin-left: 10px; margin-right: 10px; width: 75%;">
+
+  <table>
+    <tbody>
+    <tr>
+      <td style="min-width: 50%">
+        <div style="font-weight: normal; padding-top: 10px; padding-left: 10px; padding-right: 5px;">
+          <ng-container *ngIf="myEditFilename !== ''">
+            {{ 'ITEM_CONFIG.CONFIG_FILE'|translate }}: <strong>../items/{{ myEditFilename }}.yaml</strong>
+          </ng-container>
+          <button pButton label="{{ 'BUTTON.SAVE'|translate }}" type="button" [disabled]="(myEditFilename === '') || (myTextarea === myTextareaOrig)" icon="fa fa-check" style="margin-right: 0px;" (click)="saveConfig()" class="float-sm-right ui-button-success"></button>
+          <button pButton label="{{ 'BUTTON.DISCARD'|translate }}" type="button" [disabled]="(myEditFilename === '') || (myTextarea === myTextareaOrig)" icon="fa fa-check" style="margin-right: 10px;" (click)="discardConfig()" class="float-sm-right ui-button-secondary"></button>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div style="height: 100px; margin-top: 10px; padding-left: 10px; padding-right: 5px;">
+          <ngx-codemirror #codeeditor
+                          [options]="cmOptions"
+                          [(ngModel)]="myTextarea"
+                          [autoFocus]="true"
+          ></ngx-codemirror>
+          <a style="font-size: small">{{ 'RESTART FOR CHANGES'|translate }}</a>
+        </div>
+      </td>
+
+    </tr>
+    </tbody>
+  </table>
+  </div>
+
+
+</div>
+
+
+
+<!--
+  -- Dialog for setting the name of the new item configuration file
+  -->
+
+<p-dialog
+  header=""
+  [(visible)]="newconfig_display"
+  [modal]="true"
+  blockScroll="true"
+  [closable]="false"
+  [maximizable]="false"
+  [minY]="100"
+  [style]="{'minWidth':'600px', 'minHeight':'200px'}"
+>
+
+  <p-header>
+    {{'ITEM_CONFIG.NAME_CONFIGURATION'|translate}}
+  </p-header>
+
+  <br>
+  {{ 'ITEM_CONFIG.UNIQUE_NAME'|translate }}&nbsp;
+  <input [(ngModel)]="newFilename" type="text" (input)="checkInput();" pInputText placeholder="" [ngStyle]="{'width': 20}" autofocus/>
+
+  <br>
+  <br>
+  <p-footer>
+    <button pButton type="button" icon="pi pi-check" (click)="this.addFile()" [(disabled)]="!this.add_enabled" label="{{'BUTTON.ADD'|translate}}" class="ui-button-success" autofocus></button>
+    <button pButton type="button" icon="pi pi-times" (click)="newconfig_display=false" label="{{'BUTTON.ABORT'|translate}}" class="ui-button-secondary"></button>
+  </p-footer>
+</p-dialog>
+
+
+
+
+<!--
+  -- Confirm dialog vor configuration deletion
+  -->
+<p-dialog header="" [(visible)]="error_display" [closable]="false" [modal]="true" blockScroll="true">
+  <p-header>
+    {{'ITEM_CONFIG.CONFIG_ERROR'|translate}}
+  </p-header>
+  <br>
+  <pre>
+{{'ITEM_CONFIG.CONFIG_ERROR_TEXT'|translate}}
+
+    {{ myTextOutput }}
+  </pre>
+  <br>
+  <p-footer>
+    <button pButton type="button" (click)="error_display = false;" label="{{'BUTTON.CLOSE'|translate}}" class="ui-button-success"></button>
+  </p-footer>
+</p-dialog>

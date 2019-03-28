@@ -32,6 +32,7 @@ import { InputSwitchModule } from 'primeng/inputswitch';
 import { TabViewModule } from 'primeng/tabview';
 import { TriStateCheckboxModule } from 'primeng/tristatecheckbox';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { ListboxModule } from 'primeng/listbox';
 
 import { AppComponent } from './app.component';
 import { HttpLoaderFactory } from './app.component';
@@ -59,6 +60,7 @@ import { AuthService } from './common/services/auth.service';
 import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { SystemConfigComponent } from './system/system-config/system-config.component';
 import { StructsComponent } from './items/structs/structs.component';
+import { ItemConfigurationComponent } from './items/item-configuration/item-configuration.component';
 
 export function translateHttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -84,7 +86,8 @@ export function translateHttpLoaderFactory(http: HttpClient) {
     LoginComponent,
     NoAccessComponent,
     SystemConfigComponent,
-    StructsComponent
+    StructsComponent,
+    ItemConfigurationComponent
   ],
   imports: [
     BrowserModule,
@@ -121,6 +124,8 @@ export function translateHttpLoaderFactory(http: HttpClient) {
     TabViewModule,
     TriStateCheckboxModule,
     ProgressSpinnerModule,
+    ListboxModule,
+
     CodemirrorModule,
 
     TabsModule.forRoot(),

@@ -56,8 +56,8 @@
               </div>
               <div class="col shng_headline">
                 <button type="button" class="btn btn-shng btn-sm" style="margin-right: 5px" id="btn-clear-search" [disabled]="!treeIsFiltered" (click)="clearFilter($event, filter)"><fa-icon [icon]="faCircleNotch"></fa-icon> {{ 'ITEMS.RESET'|translate }}</button>
-                <button type="button" class="btn btn-shng btn-sm" style="margin-right: 5px" id="btn-expand-all" (click)="expandAll()"><fa-icon [icon]="faFolderOpen"></fa-icon>&nbsp;{{ 'ITEMS.EXPAND ALL'|translate }}</button>
-                <button type="button" class="btn btn-shng btn-sm" style="margin-right: 5px" id="btn-collapse-all" (click)="collapseAll()"><fa-icon [icon]="faFolder"></fa-icon> {{ 'ITEMS.REDUCE ALL'|translate }}</button>
+                <button type="button" class="btn btn-shng btn-sm" style="margin-right: 5px; background-color: var(--shng-secondary-button)" id="btn-expand-all" (click)="expandAll()"><fa-icon [icon]="faFolderOpen"></fa-icon>&nbsp;{{ 'ITEMS.EXPAND ALL'|translate }}</button>
+                <button type="button" class="btn btn-shng btn-sm" style="margin-right: 5px; background-color: var(--shng-secondary-button)" id="btn-collapse-all" (click)="collapseAll()"><fa-icon [icon]="faFolder"></fa-icon> {{ 'ITEMS.REDUCE ALL'|translate }}</button>
               </div>
             </div>
           </div>
@@ -98,12 +98,12 @@
             <div class="col" style="max-width: 50%;">
               <div class="card" >
                 <div class="card-header p-1 shng_heading">
-                  <button type="button" class="float-sm-right btn btn-shng btn-sm" style="margin-left: 5px" id="btn-reload" (click)="getDetails(itemdetails.path);"><fa-icon [icon]="faSync"></fa-icon> {{ 'ITEMS.RELOAD'|translate }}</button>
+                  <button type="button" class="float-sm-right btn btn-shng btn-sm" style="margin-left: 5px; background-color: var(--shng-secondary-button)" id="btn-reload" (click)="getDetails(itemdetails.path);"><fa-icon [icon]="faSync"></fa-icon> {{ 'ITEMS.RELOAD'|translate }}</button>
                   <ng-container *ngIf="monitoredItems.indexOf(itemdetails.path) === -1">
                     <button type="button" class="float-sm-right btn btn-shng btn-sm" style="margin-left: 5px" id="btn-monitor" [disabled]="(itemdetails.path === undefined)" (click)="monitorItem(itemdetails.path, true);"><fa-icon [icon]="faThumbtack"></fa-icon> {{ 'ITEMS.MONITOR'|translate }}</button>
                   </ng-container>
                   <ng-container *ngIf="monitoredItems.indexOf(itemdetails.path) !== -1">
-                    <button type="button" class="float-sm-right btn-shng-outline-secondary btn-sm" style="margin-left: 5px" id="btn-monitor" [disabled]="(itemdetails.path === undefined)" (click)="monitorItem(itemdetails.path, false);"><i style="color: #c40808;" class="far fa-trash-alt"></i> {{ 'ITEMS.MONITOR'|translate }}</button>
+                    <button type="button" class="float-sm-right btn-shng-outline-secondary btn-sm" style="margin-left: 5px;" id="btn-monitor" [disabled]="(itemdetails.path === undefined)" (click)="monitorItem(itemdetails.path, false);"><i style="color: #c40808;" class="far fa-trash-alt"></i> {{ 'ITEMS.MONITOR'|translate }}</button>
                   </ng-container>
                   <strong>{{ 'ITEMS.ITEM DETAILS'|translate }}</strong>
                 </div>
