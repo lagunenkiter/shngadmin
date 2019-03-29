@@ -99,6 +99,7 @@ export class ServicesApiService {
             return result;
           } else {
             console.log('ServicesApiService.CheckYamlText', 'fail: undefined result');
+            return '';
           }
         }),
         catchError((err: HttpErrorResponse) => {

@@ -22,7 +22,11 @@ export class FilesApiService {
     let url = apiUrl + 'files/' + filetype + '/';
 
     if (apiUrl.includes('localhost')) {
-      url += filename + '.txt';
+      if (filename === '') {
+        url += 'default' + '.txt';
+      } else {
+        url += filename + '.txt';
+      }
     } else {
       if (filename !== '') {
         url += '?filename=' + filename;
@@ -57,7 +61,11 @@ export class FilesApiService {
     const apiUrl = sessionStorage.getItem('apiUrl');
     let url = apiUrl + 'files/' + filetype + '/';
     if (apiUrl.includes('localhost')) {
-      url += filename + '.txt';
+      if (filename === '') {
+        url += 'default' + '.txt';
+      } else {
+        url += filename + '.txt';
+      }
     }
 
     if (filename !== '') {

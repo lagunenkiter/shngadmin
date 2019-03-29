@@ -11,22 +11,22 @@ import { TreeNode } from 'primeng/api';
 
 import { cloneDeep } from 'lodash';
 
-import { AppComponent } from '../app.component';
-import { OlddataService } from '../common/services/olddata.service';
-import { ItemTree } from '../common/models/item-tree';
-import { SharedService } from '../common/services/shared.service';
-import {ItemDetails} from '../common/models/item-details';
-import {ServerInfo} from '../common/models/server-info';
-import {ServerApiService} from '../common/services/server-api.service';
+import { AppComponent } from '../../app.component';
+import { OlddataService } from '../../common/services/olddata.service';
+import { ItemTree } from '../../common/models/item-tree';
+import { SharedService } from '../../common/services/shared.service';
+import {ItemDetails} from '../../common/models/item-details';
+import {ServerInfo} from '../../common/models/server-info';
+import {ServerApiService} from '../../common/services/server-api.service';
 
 
 @Component({
   selector: 'app-items',
-  templateUrl: './items.component.html',
-  styleUrls: ['./items.component.css'],
+  templateUrl: 'item-tree.component.html',
+  styleUrls: ['item-tree.component.css'],
   providers: [AppComponent]
 })
-export class ItemsComponent implements OnInit {
+export class ItemTreeComponent implements OnInit {
 
   faSearch = faSearch;
   faCircleNotch = faCircleNotch;
@@ -95,7 +95,7 @@ export class ItemsComponent implements OnInit {
 
 
   ngOnInit() {
-    console.log('ItemsComponent.ngOnInit:');
+    console.log('ItemTreeComponent.ngOnInit:');
 
     this.dataServiceServer.getServerinfo()
       .subscribe(
@@ -104,8 +104,8 @@ export class ItemsComponent implements OnInit {
         }
       );
 
-    window.addEventListener('resize', ItemsComponent.resizeItemTree, false);
-    ItemsComponent.resizeItemTree();
+    window.addEventListener('resize', ItemTreeComponent.resizeItemTree, false);
+    ItemTreeComponent.resizeItemTree();
   }
 
 
@@ -138,7 +138,7 @@ export class ItemsComponent implements OnInit {
 
   updateValue(item_path, item_value, item_type, item_oldvalue, dialog) {
 
-    console.log('ItemsComponent.updateValue:');
+    console.log('ItemTreeComponent.updateValue:');
 
     if (item_type === 'num' || item_type === 'scene') {
       if (isNaN(item_value.value as any)) {
@@ -198,7 +198,7 @@ monitorItem(path: string, monitorIt: boolean) {
 
 
 getDetails(path: string) {
-    console.log('ItemsComponent.getDetails: ' + path);
+    console.log('ItemTreeComponent.getDetails: ' + path);
     if ((path !== undefined)) {
       this.dataService.getItemDetails(path)
         .subscribe(

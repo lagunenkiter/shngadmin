@@ -6,7 +6,7 @@
     <br>
 
     <i class="fa fa-sitemap" style="margin-left: 5px; color: #a2a2a2"></i>
-    <a style="margin-left: 5px; color: #727272">{{ 'Item-Definition Files' }}</a>
+    <a style="margin-left: 5px; color: #727272">{{ 'ITEM_CONFIG.DEFINITION_FILES'|translate }}</a>
 
     <p-listbox [options]="itemFiles" [(ngModel)]="selectedItemfile" [disabled]="!((myEditFilename === '') || (myTextarea === myTextareaOrig))" (onChange)="itemFileSelected()" optionLabel="label" [style]="{'min-width':'270px', 'max-width':'270px', 'width':'100%'}" [listStyle]="{'height':'67vh', 'min-height':'200px'}">
     </p-listbox>

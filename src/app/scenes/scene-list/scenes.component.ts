@@ -6,11 +6,11 @@ import { TranslateService } from '@ngx-translate/core';
 import { MessageService } from 'primeng/api';
 
 
-import { TreeNode } from '../common/models/interfaces';
-import { ScenesApiService } from '../common/services/scenes-api.service';
-import {PlugininfoType} from '../common/models/plugin-info';
-import {SystemInfo} from '../common/models/system-info';
-import {SceneInfo} from '../common/models/scene-info';
+import { TreeNode } from '../../common/models/interfaces';
+import { ScenesApiService } from '../../common/services/scenes-api.service';
+import {PlugininfoType} from '../../common/models/plugin-info';
+import {SystemInfo} from '../../common/models/system-info';
+import {SceneInfo} from '../../common/models/scene-info';
 
 
 

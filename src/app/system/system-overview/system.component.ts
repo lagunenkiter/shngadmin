@@ -12,13 +12,13 @@ import { UIChart } from 'primeng/primeng';
 
 import * as $ from 'jquery';
 
-import { OlddataService } from '../common/services/olddata.service';
-import { SystemInfo } from '../common/models/system-info';
-import { PypiInfo } from '../common/models/pypi-info';
-import { WebsocketService } from '../common/services/websocket.service';
-import { WebsocketPluginService } from '../common/services/websocket-plugin.service';
-import { SharedService } from '../common/services/shared.service';
-import {ServerApiService} from '../common/services/server-api.service';
+import { OlddataService } from '../../common/services/olddata.service';
+import { SystemInfo } from '../../common/models/system-info';
+import { PypiInfo } from '../../common/models/pypi-info';
+import { WebsocketService } from '../../common/services/websocket.service';
+import { WebsocketPluginService } from '../../common/services/websocket-plugin.service';
+import { SharedService } from '../../common/services/shared.service';
+import {ServerApiService} from '../../common/services/server-api.service';
 
 
 @Component({

@@ -2,8 +2,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import {ActivatedRoute, convertToParamMap} from '@angular/router';
 
-import { LogsType, LogsInfoDict } from '../common/models/logfiles-info';
-import { LogsApiService } from '../common/services/logs-api.service';
+import { LogsType, LogsInfoDict } from '../../common/models/logfiles-info';
+import { LogsApiService } from '../../common/services/logs-api.service';
 import { TranslateService } from '@ngx-translate/core';
 
 import * as CodeMirror from 'codemirror';
@@ -16,12 +16,12 @@ interface DropDownEntry {
 
 @Component({
   selector: 'app-logs',
-  templateUrl: './logs.component.html',
-  styleUrls: ['./logs.component.css'],
+  templateUrl: './log-display.component.html',
+  styleUrls: ['./log-display.component.css'],
 //  styles: ['.CodeMirror { width: 100%; height: 50vh; }' ],
   encapsulation: ViewEncapsulation.None
 })
-export class LogsComponent implements OnInit {
+export class LogDisplayComponent implements OnInit {
 
   loglevels: DropDownEntry[] = [];
 
@@ -68,7 +68,7 @@ export class LogsComponent implements OnInit {
 
 
   ngOnInit() {
-    // console.log('LogsComponent.ngOnInit');
+    // console.log('LogDisplayComponent.ngOnInit');
 
     // test if component is called with a parameter and remove '.log' from the parameter
     let logParam = this.route.snapshot.paramMap['params']['logname'];

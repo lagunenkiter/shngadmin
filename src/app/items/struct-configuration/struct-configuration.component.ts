@@ -1,17 +1,19 @@
-import {Component, OnInit, AfterViewChecked, ViewChild} from '@angular/core';
+import { Component, OnInit, AfterViewChecked, ViewChild } from '@angular/core';
+
 import {FilesApiService} from '../../common/services/files-api.service';
-import {ServerInfo} from '../../common/models/server-info';
 import {ServicesApiService} from '../../common/services/services-api.service';
 
 @Component({
-  selector: 'app-logging-configuration',
-  templateUrl: './logging-configuration.component.html',
-  styleUrls: ['./logging-configuration.component.css']
+  selector: 'app-struct-configuration',
+  templateUrl: './struct-configuration.component.html',
+  styleUrls: ['./struct-configuration.component.css']
 })
-export class LoggingConfigurationComponent implements AfterViewChecked, OnInit {
+export class StructConfigurationComponent implements AfterViewChecked, OnInit {
 
   constructor(private fileService: FilesApiService,
               private dataService: ServicesApiService) { }
+
+
 
   // -----------------------------------------------------------------
   //  Vars for the codemirror components
@@ -52,12 +54,12 @@ export class LoggingConfigurationComponent implements AfterViewChecked, OnInit {
   ngOnInit() {
     // console.log('LoggingConfigurationComponent.ngOnInit');
 
-    this.myEditFilename = 'logging';
+    this.myEditFilename = 'struct';
     for (let i = 1; i <= 100; i++) {
       this.rulers.push({color: '#eee', column: i * 4, lineStyle: 'dashed'});
     }
 
-    this.fileService.readFile('logging')
+    this.fileService.readFile('structs')
       .subscribe(
         (response) => {
           this.myTextarea = response;
@@ -84,10 +86,10 @@ export class LoggingConfigurationComponent implements AfterViewChecked, OnInit {
       .subscribe(
         (response) => {
           this.myTextOutput = <any> response;
-          if (this.myTextOutput.startsWith('ERROR:')) {
+          if ((this.myTextarea !== '') && (this.myTextOutput.startsWith('ERROR:'))) {
             this.error_display = true;
           } else {
-            this.fileService.saveFile('logging', '', this.myTextarea)
+            this.fileService.saveFile('structs', '', this.myTextarea)
               .subscribe(
                 (response2) => {
                   this.myTextareaOrig = this.myTextarea;
@@ -101,5 +103,4 @@ export class LoggingConfigurationComponent implements AfterViewChecked, OnInit {
       );
 
   }
-
 }

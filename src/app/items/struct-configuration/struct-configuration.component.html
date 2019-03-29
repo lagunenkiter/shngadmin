@@ -2,12 +2,12 @@
 
   <div class="container-fluid" style="margin-top: 10px; margin-left: 10px; margin-right: 10px;">
 
-  <table>
-    <tbody>
+    <table>
+      <tbody>
       <tr>
         <td>
           <div style="font-weight: normal; padding-top: 10px; padding-left: 10px; padding-right: 0px; width: 93vw">
-            {{ 'LOGGING.CONFIG_FILE'|translate }}: <strong>../etc/{{ myEditFilename }}.yaml</strong>
+            {{ 'ITEMS.STRUCT_CONFIGFILE'|translate }}: <strong>../etc/{{ myEditFilename }}.yaml</strong>
             <button pButton label="{{ 'BUTTON.SAVE'|translate }}" type="button" [disabled]="myTextarea === myTextareaOrig" icon="fa fa-check" style="margin-right: 0px;" (click)="saveConfig()" class="float-sm-right ui-button-success"></button>
           </div>
         </td>
@@ -25,8 +25,8 @@
         </td>
 
       </tr>
-    </tbody>
-  </table>
+      </tbody>
+    </table>
   </div>
 
 
@@ -39,16 +39,17 @@
   -->
 <p-dialog header="" [(visible)]="error_display" [closable]="false" [modal]="true" blockScroll="true">
   <p-header>
-    {{'LOGGING.CONFIG_ERROR'|translate}}
+    {{'ITEMS.STRUCT_CONFIG_ERROR'|translate}}
   </p-header>
   <br>
   <pre>
-{{'LOGGING.CONFIG_ERROR_TEXT'|translate}}
+{{'ITEMS.STRUCT_CONFIG_ERROR_TEXT'|translate}}
 
-{{ myTextOutput }}
+    {{ myTextOutput }}
   </pre>
   <br>
   <p-footer>
     <button pButton type="button" (click)="error_display = false;" label="{{'BUTTON.CLOSE'|translate}}" class="ui-button-success"></button>
   </p-footer>
 </p-dialog>
+

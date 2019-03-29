@@ -36,15 +36,15 @@ import { ListboxModule } from 'primeng/listbox';
 
 import { AppComponent } from './app.component';
 import { HttpLoaderFactory } from './app.component';
-import { SystemComponent } from './system/system.component';
+import { SystemComponent } from './system/system-overview/system.component';
 import { ServicesComponent } from './services/services.component';
-import { ItemsComponent } from './items/items.component';
-import { LogicsComponent } from './logics/logics.component';
+import { ItemTreeComponent } from './items/item-tree/item-tree.component';
+import { LogicsListComponent } from './logics/logics-list/logics-list.component';
 import { SchedulersComponent } from './schedulers/schedulers.component';
-import { PluginsComponent } from './plugins/plugins.component';
-import { ScenesComponent } from './scenes/scenes.component';
+import { PluginsComponent } from './plugins/plugin-list/plugins.component';
+import { ScenesComponent } from './scenes/scene-list/scenes.component';
 import { ThreadsComponent } from './threads/threads.component';
-import { LogsComponent } from './logs/logs.component';
+import { LogDisplayComponent } from './logs/log-display/log-display.component';
 import { HeaderComponent } from './header/header.component';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing-module';
@@ -61,6 +61,8 @@ import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { SystemConfigComponent } from './system/system-config/system-config.component';
 import { StructsComponent } from './items/structs/structs.component';
 import { ItemConfigurationComponent } from './items/item-configuration/item-configuration.component';
+import { StructConfigurationComponent } from './items/struct-configuration/struct-configuration.component';
+import { SceneConfigurationComponent } from './scenes/scene-configuration/scene-configuration.component';
 
 export function translateHttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -71,13 +73,13 @@ export function translateHttpLoaderFactory(http: HttpClient) {
     AppComponent,
     SystemComponent,
     ServicesComponent,
-    ItemsComponent,
-    LogicsComponent,
+    ItemTreeComponent,
+    LogicsListComponent,
     SchedulersComponent,
     PluginsComponent,
     ScenesComponent,
     ThreadsComponent,
-    LogsComponent,
+    LogDisplayComponent,
     HeaderComponent,
     PluginConfigComponent,
     LoggerListComponent,
@@ -87,7 +89,9 @@ export function translateHttpLoaderFactory(http: HttpClient) {
     NoAccessComponent,
     SystemConfigComponent,
     StructsComponent,
-    ItemConfigurationComponent
+    ItemConfigurationComponent,
+    StructConfigurationComponent,
+    SceneConfigurationComponent
   ],
   imports: [
     BrowserModule,

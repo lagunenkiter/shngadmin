@@ -5,13 +5,16 @@
     "SERVICES": "Dienste",
     "ITEMS": "Items",
     "ITEM_TREE": "Item Baum",
-    "ITEM_STRUCTS": "Struktur Templates",
     "ITEM_CONFIGURATION": "Item Konfiguration",
+    "ITEM_STRUCTS": "Struktur Templates",
+    "ITEM_STRUCT_CONFIGURATION": "Struktur Konfigurationen",
     "LOGICS": "Logiken",
     "SCHEDULERS": "Scheduler",
     "PLUGINS": "Plugins",
     "PLUGINS_LIST": "Liste der Plugins",
     "SCENES": "Szenen",
+    "SCENE_LIST": "Szenen Liste",
+    "SCENE_CONFIGURATION": "Szenen Konfiguration",
     "THREADS": "Threads",
     "LOGS": "Logs",
     "LOGS_DISPLAY": "Logs Anzeigen",
@@ -194,9 +197,12 @@
       "NOT NUMERIC": "FEHLER: Der eingegebene Wert ist nicht numerisch!",
       "INVALID SCENE NUMBER": "FEHLER: Szenen Nummern müssen zwischen 0 und 63 liegen!"
     },
-    "STRUCT_TEMPLATES": "Item-Struktur Templates"
+
+    "STRUCT_TEMPLATES": "Item-Struktur Templates",
+    "STRUCT_CONFIGFILE": "Item-Struktur Konfiguration"
   },
   "ITEM_CONFIG": {
+    "DEFINITION_FILES": "Item Definitionsdateien",
     "CONFIG_FILE": "Item Konfigurationsdatei",
     "FILE_NOT_FOUND": "Datei nicht gefunden!",
     "FILETYPE_UNSUPPORTED": "Dateityp nicht unterstützt!",
@@ -344,7 +350,7 @@
     "CHECK": "Prüfen",
     "DOWNLOAD": "Herunterladen",
     "CLEAR_FILTER": "Filter Löschen",
-    "NEW_DEFINITION_FILE": "Neue Definitionsdatei"
+    "NEW_DEFINITION_FILE": "Neue Datei"
   },
 
   "ERROR": {

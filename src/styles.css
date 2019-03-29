@@ -18,8 +18,10 @@
 :root {
   --shng-blue: #709cc2;
   --shng-red: #c40808;
+  --shng-green: green;
   --shng-warning: #e3d304;
 
+  --shng-disabled: #bbb;
   --shng-border: #d9d9d9;
   --shng-secondary-button: #e0e0e0;
   --shng-toggle-off: #a9a9a9;

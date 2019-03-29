@@ -7,10 +7,10 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {faPlayCircle, faPauseCircle, faExclamationTriangle} from '@fortawesome/free-solid-svg-icons';
 
-import { PluginsApiService } from '../common/services/plugins-api.service';
-import { OlddataService } from '../common/services/olddata.service';
-import { SchedulerInfo } from '../common/models/scheduler-info';
-import { PlugininfoType } from '../common/models/plugin-info';
+import { PluginsApiService } from '../../common/services/plugins-api.service';
+import { OlddataService } from '../../common/services/olddata.service';
+import { SchedulerInfo } from '../../common/models/scheduler-info';
+import { PlugininfoType } from '../../common/models/plugin-info';
 
 @Component({
   selector: 'app-plugins',
