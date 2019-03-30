@@ -229,6 +229,11 @@
     "NEW_LOGICS": "New Logics (not loaded)",
     "NO_DATA": "No data available"
   },
+  "LOGIC_EDIT": {
+    "CODE": "Code",
+    "ATTRIBUTES": "Attributes",
+    "FILENAME": "Filename"
+  },
   "SCHEDULERS": {
     "ITEM SCHEDULERS": "Item Schedulers",
     "LOGIC SCHEDULERS": "Logic Schedulers",
@@ -395,6 +400,7 @@
 
   "CONFIGURATION": "Configuration",
   "RESTART FOR CHANGES": "Restart SmartHomeNG for changes to take effect",
+  "RESTART LOGIC FOR CHANGES": "Restart the logic for changes to take effect",
 
   "LINEBREAK": "Line Break"
 }

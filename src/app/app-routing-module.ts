@@ -21,6 +21,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuardService } from './common/services/auth-guard.service';
 import {SceneConfigurationComponent} from './scenes/scene-configuration/scene-configuration.component';
+import {LogicsEditComponent} from './logics/logics-edit/logics-edit.component';
 
 
 const appRoutes: Routes = [
@@ -36,6 +37,7 @@ const appRoutes: Routes = [
   { path: 'items/structs', component: StructsComponent, canActivate: [AuthGuardService] },
   { path: 'items/struct_config', component: StructConfigurationComponent, canActivate: [AuthGuardService] },
   { path: 'items', component: ItemTreeComponent, canActivate: [AuthGuardService] },
+  { path: 'logics/edit/:logicname', component: LogicsEditComponent, canActivate: [AuthGuardService] },
   { path: 'logics', component: LogicsListComponent, canActivate: [AuthGuardService] },
   { path: 'schedulers', component: SchedulersComponent, canActivate: [AuthGuardService] },
 

@@ -63,6 +63,7 @@ import { StructsComponent } from './items/structs/structs.component';
 import { ItemConfigurationComponent } from './items/item-configuration/item-configuration.component';
 import { StructConfigurationComponent } from './items/struct-configuration/struct-configuration.component';
 import { SceneConfigurationComponent } from './scenes/scene-configuration/scene-configuration.component';
+import { LogicsEditComponent } from './logics/logics-edit/logics-edit.component';
 
 export function translateHttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -91,7 +92,8 @@ export function translateHttpLoaderFactory(http: HttpClient) {
     StructsComponent,
     ItemConfigurationComponent,
     StructConfigurationComponent,
-    SceneConfigurationComponent
+    SceneConfigurationComponent,
+    LogicsEditComponent
   ],
   imports: [
     BrowserModule,

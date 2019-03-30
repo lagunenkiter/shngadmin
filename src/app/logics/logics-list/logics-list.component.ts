@@ -46,4 +46,14 @@ export class LogicsListComponent implements OnInit {
         }
       );
   }
+
+
+  baseName(str, withExtension = true) {
+    let base = str;
+    base = base.substring(base.lastIndexOf('/') + 1);
+    if (!withExtension && base.lastIndexOf('.') !== -1) {
+      base = base.substring(0, base.lastIndexOf('.'));
+    }
+    return base;
+  }
 }

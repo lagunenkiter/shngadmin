@@ -231,6 +231,11 @@
     "NEW_LOGICS": "Neue Logiken (nicht geladen)",
     "NO_DATA": "Keine Daten verfügbar"
   },
+  "LOGIC_EDIT": {
+    "CODE": "Code",
+    "ATTRIBUTES": "Attributes",
+    "FILENAME": "Dateiname"
+  },
   "SCHEDULERS": {
     "ITEM SCHEDULERS": "Item Scheduler",
     "LOGIC SCHEDULERS": "Logik Scheduler",
@@ -375,7 +380,7 @@
     "TAB": "Eine Ebene einrücken",
     "SHIFT-TAB": "Eine Ebene ausrücken",
     "F11": "Fullscreen Modus ein- bzw. ausschalten",
-    "ESC": "fullscreen Modus verlassen",
+    "ESC": "Fullscreen Modus verlassen",
     "CTRL-Q": "Zeile an der Cursorposition falten oder entfalten",
     "SHIFT-CTRL-Q": "Gesamtes Dokument entfalten"
   },
@@ -396,6 +401,7 @@
 
   "CONFIGURATION": "Konfiguration",
   "RESTART FOR CHANGES": "Änderungen werden erst nach einem Neustart von SmartHomeNG wirksam",
+  "RESTART LOGIC FOR CHANGES": "Änderungen werden erst nach einem Neustart der Logik wirksam",
 
   "LINEBREAK": "Umbruch"
 
