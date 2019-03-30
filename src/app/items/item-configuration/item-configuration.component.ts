@@ -45,8 +45,26 @@ export class ItemConfigurationComponent implements AfterViewChecked, OnInit {
     tabSize: 4,
     extraKeys: {
       'Tab': 'insertSoftTab',
-      'Shift-Tab': 'indentLess'
+      'Shift-Tab': 'indentLess',
+      'F11': function(cm) {
+        cm.setOption('fullScreen', !cm.getOption('fullScreen'));
+        // cm.getScrollerElement().style.maxHeight = 'none';
+      },
+      'Esc': function(cm, fullScreen) {
+        if (cm.getOption('fullScreen')) {
+          cm.setOption('fullScreen', false);
+        }
+      },
+      'Ctrl-Q': function(cm) {
+        cm.foldCode(cm.getCursor());
+      },
+      'Shift-Ctrl-Q': function(cm) {
+        for (let l = cm.firstLine(); l <= cm.lastLine(); ++l) {
+          cm.foldCode({line: l, ch: 0}, null, 'unfold');
+        }
+      }
     },
+    fullScreen: false,
     lineNumbers: true,
     readOnly: false,
     lineSeparator: '\n',
@@ -56,8 +74,11 @@ export class ItemConfigurationComponent implements AfterViewChecked, OnInit {
     firstLineNumber: 1,
     autorefresh: true,
     fixedGutter: true,
+    foldGutter: true,
+    gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter']
   };
 
+  editorHelp_display = false;
   error_display = false;
   myTextOutput = '';
   newconfig_display = false;
@@ -98,6 +119,17 @@ export class ItemConfigurationComponent implements AfterViewChecked, OnInit {
 
   }
 
+
+  ngAfterViewChecked() {
+
+    const editor1 = this.codeEditor.codeMirror;
+    if (editor1.getOption('fullScreen')) {
+      editor1.setSize('100vw', '100vh');
+    } else {
+      editor1.setSize('70vw', '78vh');
+    }
+    editor1.refresh();
+  }
 
 
   newConfig() {
@@ -186,21 +218,6 @@ export class ItemConfigurationComponent implements AfterViewChecked, OnInit {
           }
         }
       );
-  }
-
-
-  ngAfterViewChecked() {
-
-    if (this.codeEditor !== undefined) {
-      const editor1 = this.codeEditor.codeMirror;
-      editor1.setSize('70vw', '78vh');
-      editor1.refresh();
-    }
-  }
-
-
-  discardConfig() {
-    this.myTextarea = this.myTextareaOrig;
   }
 
 

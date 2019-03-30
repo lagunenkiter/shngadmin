@@ -23,7 +23,7 @@
 <!--
 <p-menubar [model]="items">
 -->
-<div id="example" style="position: relative; z-index: 11000;">
+<div id="example" style="position: relative; z-index: 10000;">
 <p-menubar class="fixednavbar" [model]="getMenuItems()">
   <img id="logo" routerLink="/system" src="assets/img/logo_long.png"/>
   <button pButton label="{{'BUTTON.LOGOUT'|translate}}" (click)="logout()" [disabled]="!(authService.isLoggedIn() && authService.loginRequired())" icon="fa fa-sign-out-alt" style="margin-left:.25em" class="ui-button-success"></button>

@@ -32,6 +32,7 @@ export interface ItemDetails {
   crontab: string;
   autotimer: string;
   threshold: string;
+  threshold_crossed: string;
   config: {};
   logics: string;
   triggers: string;

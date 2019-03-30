@@ -189,6 +189,10 @@
                           <tr><td class="py-1">{{'autotimer'|translate }}</td><td class="py-1">{{itemdetails.autotimer}}</td></tr>
                           <tr><td class="py-1">{{'threshold'|translate}}</td><td class="py-1">{{itemdetails.threshold}}</td></tr>
 
+                          <ng-container *ngIf="itemdetails.threshold_crossed !== ''">
+                            <tr><td class="py-1">{{'threshold crossed'|translate}}</td><td class="py-1">{{itemdetails.threshold_crossed}}</td></tr>
+                          </ng-container>
+
                           <ng-container *ngIf="JSON.stringify(itemdetails.config) !== '{}'">
                             <tr class="shng_heading"><th class="py-1" colspan="2" style="height: 45px; vertical-align: bottom">{{ 'ITEMS.PLUGIN SPECIFIC CONFIGURATION'|translate }}:</th></tr>
                             <ng-container *ngFor="let key of Object.keys(itemdetails.config)">

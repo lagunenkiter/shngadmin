@@ -1,12 +1,11 @@
 
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import {AfterViewChecked, Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {ActivatedRoute, convertToParamMap} from '@angular/router';
 
 import { LogsType, LogsInfoDict } from '../../common/models/logfiles-info';
 import { LogsApiService } from '../../common/services/logs-api.service';
 import { TranslateService } from '@ngx-translate/core';
 
-import * as CodeMirror from 'codemirror';
 import {$NBSP} from 'codelyzer/angular/styles/chars';
 
 interface DropDownEntry {
@@ -21,7 +20,9 @@ interface DropDownEntry {
 //  styles: ['.CodeMirror { width: 100%; height: 50vh; }' ],
   encapsulation: ViewEncapsulation.None
 })
-export class LogDisplayComponent implements OnInit {
+export class LogDisplayComponent implements AfterViewChecked, OnInit {
+
+  @ViewChild('codeeditor') private codeEditor;
 
   loglevels: DropDownEntry[] = [];
 
@@ -113,6 +114,20 @@ export class LogDisplayComponent implements OnInit {
         }
       );
   }
+
+
+  ngAfterViewChecked() {
+
+    const editor1 = this.codeEditor.codeMirror;
+    if (editor1.getOption('fullScreen')) {
+      editor1.setSize('100vw', '100vh');
+    } else {
+      editor1.setSize('97vw', '78vh');
+    }
+    editor1.refresh();
+  }
+
+
 
   fillTimeframe(useActual = false) {
     if (this.selectedLog === null) {

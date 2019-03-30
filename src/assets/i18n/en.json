@@ -336,6 +336,7 @@
     "SAVE": "Save",
     "DISCARD": "Discard",
     "ABORT": "Abort",
+    "HELP": "Help",
     "ADD": "Add",
     "UPDATE": "Update",
     "DELETE": "Delete",
@@ -364,6 +365,18 @@
     "INVALID_SIGNIN": "Invalid username and/or password",
     "EXPIRED_SIGNIN": "The previous login session has expired",
     "SIGN_IN": "Sign in"
+  },
+
+  "HELP": {
+    "EDITOR-KEYS": "Editor Keys",
+    "KEY": "Key",
+    "DESCRIPTION": "Description",
+    "TAB": "Indent one level",
+    "SHIFT-TAB": "Inindent one level",
+    "F11": "Switch fullscreen node on or off",
+    "ESC": "Leave fullscreen mode",
+    "CTRL-Q": "Fold or unfold the line the cursor is currently on",
+    "SHIFT-CTRL-Q": "Unfold the hole document"
   },
 
   "YES": "Yes",

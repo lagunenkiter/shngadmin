@@ -337,6 +337,7 @@
     "SAVE": "Sichern",
     "DISCARD": "Verwerfen",
     "ABORT": "Abbrechen",
+    "HELP": "Hilfe",
     "ADD": "Hinzufügen",
     "UPDATE": "Aktualisieren",
     "DELETE": "Löschen",
@@ -365,6 +366,18 @@
     "INVALID_SIGNIN": "Ungültiger Benutzername und/oder Passwort",
     "EXPIRED_SIGNIN": "Das bisherige Login ist abgelaufen",
     "SIGN_IN": "Anmelden"
+  },
+
+  "HELP": {
+    "EDITOR-KEYS": "Editor Tasten",
+    "KEY": "Taste",
+    "DESCRIPTION": "Beschreibung",
+    "TAB": "Eine Ebene einrücken",
+    "SHIFT-TAB": "Eine Ebene ausrücken",
+    "F11": "Fullscreen Modus ein- bzw. ausschalten",
+    "ESC": "fullscreen Modus verlassen",
+    "CTRL-Q": "Zeile an der Cursorposition falten oder entfalten",
+    "SHIFT-CTRL-Q": "Gesamtes Dokument entfalten"
   },
 
   "YES": "Ja",

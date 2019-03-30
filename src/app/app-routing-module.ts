@@ -48,11 +48,12 @@ const appRoutes: Routes = [
   { path: 'scenes', component: ScenesComponent, canActivate: [AuthGuardService] },
 
   { path: 'threads', component: ThreadsComponent, canActivate: [AuthGuardService] },
-  { path: 'logs', component: LogDisplayComponent, canActivate: [AuthGuardService] },
-  { path: 'logs/display', component: LogDisplayComponent, canActivate: [AuthGuardService] },
-  { path: 'logs/display/:logname', component: LogDisplayComponent, canActivate: [AuthGuardService] },
+
   { path: 'logs/logger-list', component: LoggerListComponent, canActivate: [AuthGuardService] },
   { path: 'logs/logging-configuration', component: LoggingConfigurationComponent, canActivate: [AuthGuardService] },
+  { path: 'logs/display/:logname', component: LogDisplayComponent, canActivate: [AuthGuardService] },
+  { path: 'logs/display', component: LogDisplayComponent, canActivate: [AuthGuardService] },
+  { path: 'logs', component: LogDisplayComponent, canActivate: [AuthGuardService] },
   { path: 'login', component: LoginComponent },
   { path: '**', component: NotFoundComponent },
 ];

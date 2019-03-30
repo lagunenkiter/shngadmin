@@ -1,16 +1,14 @@
 
-<div class="container-fluid navBorder" style="margin-top: 55px;">
+<div style="margin-left: 10px; margin-right: 10px; margin-top: 60px;">
   <h6>SmartHomeNG {{ 'LOGS.LOGFILE'|translate }}:
     <p-dropdown [style]="{'width':'300px'}" [options]="logs" [(ngModel)]="selectedLog" placeholder="{{ 'LOGS.SELECT_LOG'|translate }}" (onChange)="fillTimeframe()" [showClear]="true"></p-dropdown>
     &nbsp; {{ 'LOGS.TIMEFRAME'|translate }}:
     <p-dropdown [style]="{'width':'210px'}" [(options)]="files" [(ngModel)]="selectedFile" placeholder="{{ 'LOGS.SELECT_FILE'|translate }}" (onChange)="changedTimeframe()" [showClear]="true"></p-dropdown>
     &nbsp; &nbsp; <button pButton type="button" (click)="this.readLogfile()" [disabled]="(selectedLog === null) || (selectedFile === null)" label="{{'BUTTON.RELOAD_LOG'|translate}}" class="ui-button-success"></button>
   </h6>
-</div>
 
 
-<div class="container-fluid">
-  <div class="form-group" style="display:inline;">
+  <div class="form-group" style="display:inline; width: 98%">
     <div style="margin-top: 2px; float:left; font-size: 20px;">{{ 'LOGS.FILTER'|translate }}:</div>
     <input type="text" class="form-control form-control-sm" id="text_filter" pInputText [(ngModel)]="text_filter" style= "margin-top: 2px; margin-left: 10px; width: 395px; float:left;" (ngModelChange)="filterLogChunk()">
     <!--
@@ -34,25 +32,17 @@
     </ng-container>
 
   </div>
-<!--
-  <button type="button" class="btn btn-shng btn-sm" style="float:left; margin-left: 10px;" onclick="location.href='log_view.html?logfile={{ logfile }}&text_filter='+$('#text_filter').val()+'&log_level_filter='+$('#log_level_filter').val()">{{ _('Filter anwenden','button') }}</button>
-  <button id="linewrapping" type="button" class="btn btn-outline-secondary btn-sm" style="float:left; margin-left: 10px;">{{ _('Zeilenumbruch') }}</button>&nbsp;
-  <button type="button" title="{{ _('Neu Laden', 'button') }}" class="btn btn-shng btn-sm" style="float:left; margin-left: 10px;" onclick="location.href='log_view.html?logfile={{ logfile }}&text_filter='+$('#text_filter').val()+'&log_level_filter='+$('#log_level_filter').val()+'&page={{ current_page }}'"><i class="fas fa-sync" aria-hidden="true"></i></button>
-  <button type="button" title="{{ _('Nach unten scrollen', 'button') }}" class="btn btn-shng btn-sm" style="float:left; margin-left: 10px;" onclick="logCodeMirror.execCommand('goDocEnd');"><i class="fa fa-arrow-circle-down" aria-hidden="true"></i></button>
--->
-</div>
 
-<br style="clear:both;"/>
-
-<div style="width:100%; height:50vh">
-  <div style="width:100%; height:75vh">
-    <ngx-codemirror
-      [(ngModel)]="logfile_content"
-      [options]="cmOptions"
+  <div style="height: 100px; margin-left: 0px; margin-top: 10px; padding-left: 10px; padding-right: 5px;">
+    <ngx-codemirror #codeeditor
+                    [options]="cmOptions"
+                    [(ngModel)]="logfile_content"
+                    [autoFocus]="true"
     ></ngx-codemirror>
   </div>
-</div>
 
+
+</div>
 
 
 <!--

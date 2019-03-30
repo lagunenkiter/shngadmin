@@ -1,3 +1,4 @@
+
 import { Component, OnInit, AfterViewChecked, ViewChild } from '@angular/core';
 
 import {FilesApiService} from '../../common/services/files-api.service';
@@ -33,9 +34,30 @@ export class StructConfigurationComponent implements AfterViewChecked, OnInit {
     indentUnit: 4,
     tabSize: 4,
     extraKeys: {
+      'F1': function(cm) {
+        this.editorHelp_display = true;
+      },
       'Tab': 'insertSoftTab',
-      'Shift-Tab': 'indentLess'
+      'Shift-Tab': 'indentLess',
+      'F11': function(cm) {
+        cm.setOption('fullScreen', !cm.getOption('fullScreen'));
+        // cm.getScrollerElement().style.maxHeight = 'none';
+      },
+      'Esc': function(cm, fullScreen) {
+        if (cm.getOption('fullScreen')) {
+          cm.setOption('fullScreen', false);
+        }
+      },
+      'Ctrl-Q': function(cm) {
+        cm.foldCode(cm.getCursor());
+      },
+      'Shift-Ctrl-Q': function(cm) {
+          for (let l = cm.firstLine(); l <= cm.lastLine(); ++l) {
+            cm.foldCode({line: l, ch: 0}, null, 'unfold');
+          }
+      }
     },
+    fullScreen: false,
     lineNumbers: true,
     readOnly: false,
     lineSeparator: '\n',
@@ -45,8 +67,11 @@ export class StructConfigurationComponent implements AfterViewChecked, OnInit {
     firstLineNumber: 1,
     autorefresh: true,
     fixedGutter: true,
+    foldGutter: true,
+    gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter']
   };
 
+  editorHelp_display = false;
   error_display = false;
   myTextOutput = '';
 
@@ -74,7 +99,11 @@ export class StructConfigurationComponent implements AfterViewChecked, OnInit {
   ngAfterViewChecked() {
 
     const editor1 = this.codeEditor.codeMirror;
-    editor1.setSize('93vw', '78vh');
+    if (editor1.getOption('fullScreen')) {
+      editor1.setSize('100vw', '100vh');
+    } else {
+      editor1.setSize('93vw', '78vh');1
+    }
     editor1.refresh();
   }
 
