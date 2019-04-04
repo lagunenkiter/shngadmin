@@ -24,12 +24,15 @@
     <button pButton type="button" style="margin-top: 2px; margin-left: 2px" [disabled]="last_chunk" icon="fa fa-fast-forward" (click)="readLogfile(0)" class="ui-button-success"></button>
 
 
+<!--
     <ng-container *ngIf="cmOptions.lineWrapping === true">
       <button pButton label="{{ 'LINEBREAK'|translate }}" type="button" style="margin-right: 0px" icon="fa fa-check-square" (click)="cmOptions.lineWrapping = !cmOptions.lineWrapping" class="float-sm-right ui-button-success"></button>
     </ng-container>
     <ng-container *ngIf="cmOptions.lineWrapping === false">
       <button pButton label="{{ 'LINEBREAK'|translate }}" type="button" style="margin-right: 0px" icon="fa fa-square" (click)="cmOptions.lineWrapping = !cmOptions.lineWrapping" class="float-sm-right ui-button-success"></button>
     </ng-container>
+-->
+    <button pButton type="button" [disabled]="false" icon="fa fa-info" style="margin-right: 10px;" (click)="this.editorHelp_display = true;" class="float-sm-right ui-button-success"></button>
 
   </div>
 
@@ -124,4 +127,38 @@
 </script>
 -->
 
+
+<!--
+    -- Display help dialog
+  -->
+<p-dialog header="" [(visible)]="editorHelp_display" [closable]="true" [modal]="true" dynamic="true" blockScroll="true">
+  <p-header>
+    {{'HELP.EDITOR-KEYS'|translate}}
+  </p-header>
+  <br>
+  <table>
+    <thead>
+    <th><u>{{'HELP.KEY'|translate}}</u></th>
+    <th style="width: 20px;"></th>
+    <th><u>{{'HELP.DESCRIPTION'|translate}}</u></th>
+    </thead>
+    <tbody>
+    <!--
+    <tr><td>Tab</td>          <td></td> <td>{{'HELP.TAB'|translate}}</td></tr>
+    <tr><td>Shift-Tab</td>    <td></td> <td>{{'HELP.SHIFT-TAB'|translate}}</td></tr>
+    -->
+    <tr><td>F11</td>          <td></td> <td>{{'HELP.F11'|translate}}</td></tr>
+    <tr><td>Esc</td>          <td></td> <td>{{'HELP.ESC'|translate}}</td></tr>
+    <!--
+    <tr><td>Ctrl-Q</td>       <td></td> <td>{{'HELP.CTRL-Q'|translate}}</td></tr>
+    <tr><td>Shift-Ctrl-Q</td> <td></td> <td>{{'HELP.SHIFT-CTRL-Q'|translate}}</td></tr>
+    -->
+    <tr><td>Ctrl-W</td>       <td></td> <td>{{'HELP.CTRL-W'|translate}}</td></tr>
+    </tbody>
+  </table>
+  <br>
+  <p-footer>
+    <button pButton type="button" (click)="editorHelp_display = false;" label="{{'BUTTON.CLOSE'|translate}}" class="ui-button-success"></button>
+  </p-footer>
+</p-dialog>
 

@@ -552,8 +552,6 @@ export class PluginConfigComponent implements OnInit {
     this.delete_param = {'config': this.dialog_configname};
 
     this.confirmdelete_display = true;
-
-
   }
 
 

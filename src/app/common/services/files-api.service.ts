@@ -113,6 +113,46 @@ export class FilesApiService {
   }
 
 
+  deleteFile(filetype, filename = '') {
+    console.log('FilesApiService.deleteFile()', {filename});
+
+    const apiUrl = sessionStorage.getItem('apiUrl');
+    let url = apiUrl + 'files/' + filetype + '/';
+
+    if (apiUrl.includes('localhost')) {
+      if (filename === '') {
+        url += 'default' + '.txt';
+      } else {
+        url += filename + '.txt';
+      }
+    } else {
+      if (filename !== '') {
+        url += '?filename=' + filename;
+      }
+    }
+
+    console.log('FilesApiService.deleteFile()', {url})
+
+    return this.http.delete(url, { responseType: 'text' })
+      .pipe(
+        map(response => {
+          const result = response;
+          return result;
+        }),
+        catchError((err: HttpErrorResponse) => {
+          console.error({err});
+          if (filename === '') {
+            console.error('FilesApiService.deleteFile(): Could not delete filetype \'' + filetype + '\' - error: ' + err.error.error);
+          } else {
+            console.error('FilesApiService.deleteFile(): Could not delete filetype \'' + filetype + '\', filename \'' + filename + '\' - error: ' + err.error.error);
+          }
+
+          return of('');
+        })
+      );
+  }
+
+
   getfileList(filetype) {
     console.log('FilesApiService.getfileList()', {filetype});
 

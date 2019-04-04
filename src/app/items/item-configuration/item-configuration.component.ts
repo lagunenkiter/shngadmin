@@ -85,6 +85,8 @@ export class ItemConfigurationComponent implements AfterViewChecked, OnInit {
   newFilename = '';
   add_enabled = false;
 
+  confirmdelete_display: boolean = false;
+  delete_param: {};
 
   ngOnInit() {
     // console.log('LoggingConfigurationComponent.ngOnInit');
@@ -135,6 +137,40 @@ export class ItemConfigurationComponent implements AfterViewChecked, OnInit {
   newConfig() {
     this.newFilename = '';
     this.newconfig_display = true;
+  }
+
+
+  deleteConfig() {
+    this.delete_param = {'config': this.myEditFilename};
+    this.confirmdelete_display = true;
+  }
+
+
+  DeleteConfigConfirm() {
+    // console.log('ItemConfigurationComponent.DeleteConfigConfirm:');
+
+    // close confirm dialog
+    this.confirmdelete_display = false;
+
+    // delete on backend server
+    this.fileService.deleteFile('items', this.myEditFilename)
+      .subscribe(
+        (response: any) => {
+          if (response) {
+            // close configuration dialog
+            this.confirmdelete_display = false;
+            console.log('ItemConfigurationComponent.DeleteConfigConfirm(): call ngOnInit()');
+            this.ngOnInit();
+//            this.restart_core_button = true;
+
+          }
+        }
+      );
+
+    // alert('code for removal of plugin "' + this.dialog_configname + '" configurations is not yet implemented');
+
+
+    return true;
   }
 
 

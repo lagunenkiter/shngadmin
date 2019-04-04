@@ -48,17 +48,38 @@ export class LogDisplayComponent implements AfterViewChecked, OnInit {
   logfile_content = '';
 
   cmOptions = {
-    lineNumbers: true,
-    firstLineNumber: 1,
-    readOnly: true,
+    indentWithTabs: false,
     indentUnit: 4,
+    tabSize: 4,
+    extraKeys: {
+      'F11': function(cm) {
+        cm.setOption('fullScreen', !cm.getOption('fullScreen'));
+        // cm.getScrollerElement().style.maxHeight = 'none';
+      },
+      'Ctrl-W': function(cm) {
+        cm.setOption('lineWrapping', !cm.getOption('lineWrapping'));
+      },
+      'Esc': function(cm, fullScreen) {
+        if (cm.getOption('fullScreen')) {
+          cm.setOption('fullScreen', false);
+        }
+      }
+    },
+    fullScreen: false,
+    lineNumbers: true,
+    readOnly: false,
     lineSeparator: '\n',
+    // rulers: this.rulers,
     mode: 'ttcn',
     lineWrapping: false,
-//    firstLineNumber: firstLineNumber,
-    indentWithTabs: false
+    firstLineNumber: 1,
+    autorefresh: true,
+    fixedGutter: true,
+    foldGutter: true,
+    gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter']
   };
 
+  editorHelp_display = false;
   spinner_display: boolean = false;
 
 
@@ -81,11 +102,11 @@ export class LogDisplayComponent implements AfterViewChecked, OnInit {
     console.log({logParam});
 
     this.loglevels.push({label: 'ALL', value: 'ALL'});
-    this.loglevels.push({label: 'DEBUG', value: this.nbsp + 'DEBUG' + this.nbsp});
-    this.loglevels.push({label: 'INFO', value: this.nbsp + 'INFO' + this.nbsp});
-    this.loglevels.push({label: 'WARNING', value: this.nbsp + 'WARNING' + this.nbsp});
-    this.loglevels.push({label: 'ERROR', value: this.nbsp + 'ERROR' + this.nbsp});
-    this.loglevels.push({label: 'CRITICAL', value: this.nbsp + 'CRITICAL' + this.nbsp});
+    this.loglevels.push({label: 'DEBUG', value: ' DEBUG '});
+    this.loglevels.push({label: 'INFO', value: ' INFO '});
+    this.loglevels.push({label: 'WARNING', value: ' WARNING '});
+    this.loglevels.push({label: 'ERROR', value: ' ERROR '});
+    this.loglevels.push({label: 'CRITICAL', value: ' CRITICAL '});
 
     this.dataService.getLogs()
       .subscribe(
@@ -187,7 +208,8 @@ export class LogDisplayComponent implements AfterViewChecked, OnInit {
     this.logfile_content = '';
     this.cmOptions.lineNumbers = ((this.level_filter === 'ALL') && (this.text_filter === ''));
 
-    const filter = this.text_filter.replace(/ /g, this.nbsp);
+    // const filter = this.text_filter.replace(/ /g, this.nbsp);
+    const filter = this.text_filter;
     for (let i = 0; i < this.logfile_chunk['loglines'].length; i++) {
       if (this.level_filter === 'ALL' || this.logfile_chunk['loglines'][i].indexOf(this.level_filter) > -1) {
         if (filter === '' || this.logfile_chunk['loglines'][i].indexOf(filter) > -1) {
@@ -217,6 +239,20 @@ export class LogDisplayComponent implements AfterViewChecked, OnInit {
             this.chunk_no = this.logfile_chunk['chunk'];
             this.cmOptions.lineNumbers = true;
             this.cmOptions.firstLineNumber = this.logfile_chunk['lines'][0];
+            if (this.cmOptions.firstLineNumber !== undefined) {
+              for (let i = 0; i < this.logfile_chunk['loglines'].length; i++) {
+                let wrk2 = '';
+                for (let c = 0; c < this.logfile_chunk['loglines'][i].length; c++) {
+                  if (this.logfile_chunk['loglines'][i][c].charCodeAt(0) === 160) {
+                    wrk2 += ' ';
+                  } else {
+                    wrk2 += this.logfile_chunk['loglines'][i][c];
+                  }
+                }
+                this.logfile_chunk['loglines'][i] = wrk2;
+              }
+            }
+
             this.filterLogChunk();
             this.spinner_display = false;
           }

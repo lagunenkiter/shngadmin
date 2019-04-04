@@ -209,7 +209,9 @@
     "CONFIG_ERROR": "Konfigurations-Fehler - Konfiguration nicht gespeichert!",
     "CONFIG_ERROR_TEXT": "Fehler in der Konfigurationsdatei gefunden.\nUngültiges Format der Konfigurationsdatei.\n",
     "NAME_CONFIGURATION": "Dateinamen für die neue Konfigurationsdatei wählen",
-    "UNIQUE_NAME": "Eindeutiger Dateiname (ohne Erweiterung)"
+    "UNIQUE_NAME": "Eindeutiger Dateiname (ohne Erweiterung)",
+    "DELETE_CONFIG": "Löschen der Konfiguration bestätigen",
+    "DELETE_CONFIG_FILE": "Soll die Konfigurationsdatei '{{config}}' wirklich gelöscht werden?"
   },
   "LOGICS": {
     "USERLOGICS": "Nutzerlogiken",
@@ -340,6 +342,7 @@
     "CLOSE": "Schließen",
     "CHANGE": "Ändern",
     "SAVE": "Sichern",
+    "SAVE_LOAD": "Sichern & Laden",
     "DISCARD": "Verwerfen",
     "ABORT": "Abbrechen",
     "HELP": "Hilfe",
@@ -382,7 +385,8 @@
     "F11": "Fullscreen Modus ein- bzw. ausschalten",
     "ESC": "Fullscreen Modus verlassen",
     "CTRL-Q": "Zeile an der Cursorposition falten oder entfalten",
-    "SHIFT-CTRL-Q": "Gesamtes Dokument entfalten"
+    "SHIFT-CTRL-Q": "Gesamtes Dokument entfalten",
+    "CTRL-W": "Zeilen-Umbruch ein- und ausschalten"
   },
 
   "YES": "Ja",

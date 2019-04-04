@@ -207,7 +207,9 @@
     "CONFIG_ERROR": "Configuration Error - Configuration data not saved!",
     "CONFIG_ERROR_TEXT": "Error found in configuration file.\nInvalid format of configuration file. \n",
     "NAME_CONFIGURATION": "Select a name for the new configuration file",
-    "UNIQUE_NAME": "Unique filename (without extension)"
+    "UNIQUE_NAME": "Unique filename (without extension)",
+    "DELETE_CONFIG": "Confirm delete configuration",
+    "DELETE_CONFIG_FILE": "Please confirm, that you want to delete the item configuration file '{{config}}'"
   },
   "LOGICS": {
     "USERLOGICS": "User Logics",
@@ -339,6 +341,7 @@
     "CLOSE": "Close",
     "CHANGE": "Change",
     "SAVE": "Save",
+    "SAVE_LOAD": "Save & Load",
     "DISCARD": "Discard",
     "ABORT": "Abort",
     "HELP": "Help",
@@ -381,7 +384,8 @@
     "F11": "Switch fullscreen node on or off",
     "ESC": "Leave fullscreen mode",
     "CTRL-Q": "Fold or unfold the line the cursor is currently on",
-    "SHIFT-CTRL-Q": "Unfold the hole document"
+    "SHIFT-CTRL-Q": "Unfold the hole document",
+    "CTRL-W": "Toggle line wrapping"
   },
 
   "YES": "Yes",
