@@ -9,6 +9,7 @@ import {LogicsApiService} from '../../common/services/logics-api.service';
 import {LogicsinfoType} from '../../common/models/logics-info';
 import {OlddataService} from '../../common/services/olddata.service';
 import {Log} from '@angular/core/testing/src/logger';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-logics',
@@ -32,7 +33,11 @@ export class LogicsListComponent implements OnInit {
   delete_param: {};
 
 
-  constructor(private http: HttpClient, private dataService: LogicsApiService, private modalService: BsModalService) {
+  constructor(private http: HttpClient,
+              private dataService: LogicsApiService,
+              private modalService: BsModalService,
+              private router: Router,
+              private route: ActivatedRoute) {
     this.userlogics = [];
     this.systemlogics = [];
   }
@@ -97,43 +102,68 @@ export class LogicsListComponent implements OnInit {
 
 
   triggerLogic(logicName) {
-    console.log('triggerLogic', {logicName});
-    this.dataService.setLogicState(logicName, 'trigger');
+    // console.log('triggerLogic', {logicName});
+    this.dataService.setLogicState(logicName, 'trigger')
+      .subscribe(
+        (response) => {
+          this.getLogics();
+        }
+      );
   }
 
 
   reloadLogic(logicName) {
-    console.log('reloadLogic', {logicName});
-    this.dataService.setLogicState(logicName, 'reload');
-    this.getLogics();
+    // console.log('reloadLogic', {logicName});
+    this.dataService.setLogicState(logicName, 'reload')
+      .subscribe(
+        (response) => {
+          this.getLogics();
+        }
+      );
   }
 
 
   disableLogic(logicName) {
-    console.log('disableLogic', {logicName});
-    this.dataService.setLogicState(logicName, 'disable');
-    this.getLogics();
+    // console.log('disableLogic', {logicName});
+    this.dataService.setLogicState(logicName, 'disable')
+      .subscribe(
+        (response) => {
+          this.getLogics();
+        }
+      );
   }
 
 
   enableLogic(logicName) {
-    console.log('enableLogic', {logicName});
-    this.dataService.setLogicState(logicName, 'enable');
-    this.getLogics();
+    // console.log('enableLogic', {logicName});
+    this.dataService.setLogicState(logicName, 'enable')
+      .subscribe(
+        (response) => {
+          this.getLogics();
+        }
+      );
   }
 
 
   unloadLogic(logicName) {
-    console.log('unloadLogic', {logicName});
-    this.dataService.setLogicState(logicName, 'unload');
-    this.getLogics();
+    // console.log('unloadLogic', {logicName});
+    this.dataService.setLogicState(logicName, 'unload')
+      .subscribe(
+        (response) => {
+          this.getLogics();
+        }
+      );
   }
 
 
   loadLogic(logicName) {
-    console.log('loadLogic', {logicName});
-    this.dataService.setLogicState(logicName, 'load');
-    this.getLogics();
+    // console.log('loadLogic', {logicName});
+    this.dataService.setLogicState(logicName, 'load')
+      .subscribe(
+        (response) => {
+          this.getLogics();
+        }
+      );
   }
 
 
@@ -172,25 +202,36 @@ export class LogicsListComponent implements OnInit {
   createLogic() {
     console.warn('createLogic', this.newlogic_name, this.newlogic_filename);
     this.newlogic_display = false;
+    this.dataService.setLogicState(this.newlogic_name, 'create', this.newlogic_filename)
+      .subscribe(
+        (response) => {
+          this.getLogics();
+          this.router.navigate(['/logics/edit', this.newlogic_filename + '.py']);
+        }
+      );
   }
 
 
 
-  deleteLogic(logicName) {
-    console.log('deleteLogic', {logicName});
+  deleteLogic(logicName, fileName) {
+    // console.log('deleteLogic', {logicName});
 
     this.logicToDelete = logicName;
-    this.delete_param = {'config': this.logicToDelete};
+    this.delete_param = {'config': logicName, 'filename': fileName};
     this.confirmdelete_display = true;
   }
 
 
   deleteLogicConfirm() {
-    console.log('deleteLogicConfirm', this.logicToDelete);
-
+    // console.log('deleteLogicConfirm', this.logicToDelete);
     this.confirmdelete_display = false;
-    this.dataService.deleteLogic(this.logicToDelete);
-    this.getLogics();
+
+    this.dataService.setLogicState(this.logicToDelete, 'delete')
+      .subscribe(
+        (response) => {
+          this.getLogics();
+        }
+      );
   }
 
 

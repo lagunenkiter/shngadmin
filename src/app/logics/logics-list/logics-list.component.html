@@ -86,7 +86,7 @@
                       <button name="enable"  title="{{ 'LOGICS.ENABLE'|translate }}" class="btn btn-outline-dark btn-sm mr-1" (click)="enableLogic(logic.name);"><i class="fas fa-play"></i></button>
                     </ng-template>
                     <button name="unload" title="{{ 'LOGICS.UNLOAD'|translate }}" class="btn btn-outline-dark btn-sm mr-1" (click)="unloadLogic(logic.name);"><i class="fas fa-eject"></i></button>
-                    <button name="delete" title="{{ 'LOGICS.DELETE'|translate }}" class="btn btn-outline-danger btn-sm" (click)="deleteLogic(logic.name);"><i class="far fa-trash-alt" aria-hidden="true" style="color: var(--shng-red);"></i></button>
+                    <button name="delete" title="{{ 'LOGICS.DELETE'|translate }}" class="btn btn-outline-danger btn-sm" (click)="deleteLogic(logic.name, logic.filename);"><i class="far fa-trash-alt" aria-hidden="true" style="color: var(--shng-red);"></i></button>
                 </td>
               </tr>
               <div bsModal #details="bs-modal" class="modal fade" tabindex="1" role="dialog" aria-labelledby="dialog-sizes-name2">

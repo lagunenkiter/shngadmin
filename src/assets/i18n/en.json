@@ -231,7 +231,7 @@
     "NEW_LOGICS": "New Logics (not loaded)",
     "NO_DATA": "No data available",
     "DELETE_LOGIC": "Confirm delete logic",
-    "DELETE_LOGIC_TEXT": "Please confirm, that you want to delete the logic '{{config}}'",
+    "DELETE_LOGIC_TEXT": "Please confirm, that you want to delete the logic '{{config}}' and the corresponding code in '{{filename}}'",
     "CREATE_LOGIC": "Create Logic",
     "CREATE_LOGIC_TEXT": "Enter a unique name for the logic (must must not already exist) and a unique filename to store the logic code (withouth .py extension)"
   },

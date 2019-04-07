@@ -233,7 +233,7 @@
     "NEW_LOGICS": "Neue Logiken (nicht geladen)",
     "NO_DATA": "Keine Daten verfügbar",
     "DELETE_LOGIC": "Löschen der Logik bestätigen",
-    "DELETE_LOGIC_TEXT": "Soll die Logik '{{config}}' wirklich gelöscht werden?",
+    "DELETE_LOGIC_TEXT": "Soll die Logik '{{config}}' und der zugeghörige Code in '{{filename}}' wirklich gelöscht werden?",
     "CREATE_LOGIC": "Logik erstellen",
     "CREATE_LOGIC_TEXT": "Einen eindeutigen Namen für die Logik eingeben (darf nicht bereits existieren) und einen eindeutigen Dateinamen eingeben, unter dem der Logik-Code gespeichert werden soll (ohne .py Erweiterung)"
   },
