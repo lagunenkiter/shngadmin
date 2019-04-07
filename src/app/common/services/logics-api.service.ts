@@ -34,5 +34,24 @@ export class LogicsApiService {
       );
   }
 
+
+  setLogicState(logicName, action) {
+    // valid actions are: 'trigger', 'enable', 'disable', 'load', 'unload', 'reload'
+
+    action = action.toLowerCase();
+    console.warn('LogicsApiService.setLogicState', {logicName}, {action});
+  }
+
+
+  createLogic(logicName, filename) {
+
+    console.warn('LogicsApiService.createLogic', {logicName}, {filename});
+  }
+
+
+  deleteLogic(logicName) {
+
+    console.warn('LogicsApiService.deleteLogic', {logicName});
+  }
 }
 

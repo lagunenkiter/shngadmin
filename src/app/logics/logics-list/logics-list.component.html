@@ -13,7 +13,10 @@
           <th class="p-1" style="width: 150px; border-top: 0;">{{ 'LOGICS.CRONTAB'|translate }}</th>
           <th class="p-1" style="width: 120px; border-top: 0;">{{ 'LOGICS.WATCH_ITEMS'|translate }}</th>
           <th class="p-1" style="width: 250px; border-top: 0;">{{ 'LOGICS.FILENAME'|translate }}</th>
-          <th class="p-1" style="width: 260px; border-top: 0;">{{ 'LOGICS.ACTIONS'|translate }}</th>
+          <th class="p-1" style="width: 260px; border-top: 0;">
+            <button pButton type="button" style="margin-left: 0px; margin-top: 5px; font-size: medium;" id="btn-monitor" [disabled]="false" (click)="newLogic();" icon="fa fa-plus" label="{{ 'BUTTON.NEW_LOGIC'|translate }}" class="ui-button-success float-sm-left"></button>
+            {{ 'LOGICS.ACTIONS'|translate }}
+          </th>
         </tr>
         </thead>
         <tbody>
@@ -73,17 +76,17 @@
                 <td class="p-1">
                   <ng-container *ngIf="logic.enabled; then logicEnabledActions; else logicDisabledActions"></ng-container>
                     <ng-template #logicEnabledActions>
-                      <button name="trigger" title="{{ 'LOGICS.TRIGGER'|translate }}" class="btn btn-outline-dark btn-sm mr-1"><i class="fas fa-hand-pointer"></i></button>
-                      <button name="reload"  title="{{ 'LOGICS.RELOAD'|translate }}" class="btn btn-outline-dark btn-sm mr-1"><i class="fas fa-sync"></i></button>
-                      <button name="disable" title="{{ 'LOGICS.DISABLE'|translate }}" class="btn btn-outline-dark btn-sm mr-1"><i class="fas fa-pause"></i></button>
+                      <button name="trigger" title="{{ 'LOGICS.TRIGGER'|translate }}" class="btn btn-outline-dark btn-sm mr-1" (click)="triggerLogic(logic.name);"><i class="fas fa-hand-pointer"></i></button>
+                      <button name="reload"  title="{{ 'LOGICS.RELOAD'|translate }}" class="btn btn-outline-dark btn-sm mr-1" (click)="reloadLogic(logic.name);"><i class="fas fa-sync"></i></button>
+                      <button name="disable" title="{{ 'LOGICS.DISABLE'|translate }}" class="btn btn-outline-dark btn-sm mr-1" (click)="disableLogic(logic.name);"><i class="fas fa-pause"></i></button>
                     </ng-template>
                     <ng-template #logicDisabledActions>
                       <button disabled="true" name="trigger" title="{{ 'LOGICS.TRIGGER'|translate }}" class="btn btn-outline-dark btn-sm mr-1"><i class="fas fa-hand-pointer"></i></button>
-                      <button name="reload"  title="{{ 'LOGICS.RELOAD'|translate }}" class="btn btn-outline-dark btn-sm mr-1"><i class="fas fa-sync"></i></button>
-                      <button name="enable"  title="{{ 'LOGICS.ENABLE'|translate }}" class="btn btn-outline-dark btn-sm mr-1"><i class="fas fa-play"></i></button>
+                      <button name="reload"  title="{{ 'LOGICS.RELOAD'|translate }}" class="btn btn-outline-dark btn-sm mr-1" (click)="reloadLogic(logic.name);"><i class="fas fa-sync"></i></button>
+                      <button name="enable"  title="{{ 'LOGICS.ENABLE'|translate }}" class="btn btn-outline-dark btn-sm mr-1" (click)="enableLogic(logic.name);"><i class="fas fa-play"></i></button>
                     </ng-template>
-                    <button name="unload" title="{{ 'LOGICS.UNLOAD'|translate }}" class="btn btn-outline-dark btn-sm mr-1"><i class="fas fa-eject"></i></button>
-                    <button name="delete" title="{{ 'LOGICS.DELETE'|translate }}" class="btn btn-outline-danger btn-sm"><i class="far fa-trash-alt" aria-hidden="true" style="color: var(--shng-red);"></i></button>
+                    <button name="unload" title="{{ 'LOGICS.UNLOAD'|translate }}" class="btn btn-outline-dark btn-sm mr-1" (click)="unloadLogic(logic.name);"><i class="fas fa-eject"></i></button>
+                    <button name="delete" title="{{ 'LOGICS.DELETE'|translate }}" class="btn btn-outline-danger btn-sm" (click)="deleteLogic(logic.name);"><i class="far fa-trash-alt" aria-hidden="true" style="color: var(--shng-red);"></i></button>
                 </td>
               </tr>
               <div bsModal #details="bs-modal" class="modal fade" tabindex="1" role="dialog" aria-labelledby="dialog-sizes-name2">
@@ -146,9 +149,9 @@
               </td>
               <td class="p-1">
                 <ng-container *ngIf="logic.filename != ''">
-                  <button name="add" title="{{ 'LOGICS.ADD'|translate }}" type="submit" class="btn btn-outline-dark btn-sm mr-1"><i class="fas fa-plus"></i></button>
+                  <button name="add" title="{{ 'LOGICS.ADD'|translate }}" type="submit" class="btn btn-outline-dark btn-sm mr-1" (click)="loadLogic(logic.name);"><i class="fas fa-plus"></i></button>
                 </ng-container>
-                <button name="delete" title="{{ 'LOGICS.DELETE'|translate }}" class="btn btn-outline-danger btn-sm"><i class="far fa-trash-alt" aria-hidden="true" style="color: var(--shng-red);"></i></button>
+                <button name="delete" title="{{ 'LOGICS.DELETE'|translate }}" class="btn btn-outline-danger btn-sm" (click)="deleteLogic(logic.name);"><i class="far fa-trash-alt" aria-hidden="true" style="color: var(--shng-red);"></i></button>
               </td>
             </tr>
           </ng-container>
@@ -207,4 +210,68 @@
       </div>
     </tab>
   </tabset>
+
 </div>
+
+
+
+<!--
+  -- Confirm dialog vor configuration deletion
+  -->
+<p-dialog header="" [(visible)]="confirmdelete_display" [modal]="true" blockScroll="true">
+  <p-header>
+    {{'LOGICS.DELETE_LOGIC'|translate}}
+  </p-header>
+  <br>
+  {{'LOGICS.DELETE_LOGIC_TEXT'|translate:delete_param}}
+  <br>
+  <br>
+  <p-footer>
+    <button pButton type="button" icon="fa fa-trash-alt" (click)="deleteLogicConfirm()" label="{{'BUTTON.DELETE'|translate}}" class="ui-button-danger"></button>
+    <button pButton type="button" icon="fa fa-times" (click)="deleteLogicAbort()" label="{{'BUTTON.ABORT'|translate}}" class="ui-button-secondary"></button>
+  </p-footer>
+</p-dialog>
+
+
+
+<!--
+  -- Dialog for entering logic name and logic filename of a new logic
+  -->
+
+<p-dialog
+  header=""
+  [(visible)]="newlogic_display"
+  [modal]="true"
+  blockScroll="true"
+  [closable]="false"
+  [maximizable]="false"
+  [minY]="100"
+  [style]="{'width':'600px', 'minWidth':'600px', 'minHeight':'200px'}"
+>
+
+  <p-header>
+    {{'LOGICS.CREATE_LOGIC'|translate}}
+  </p-header>
+
+  {{'LOGICS.CREATE_LOGIC_TEXT'|translate}}
+    <br>
+  <br>
+    <label style="display: block;">
+      <span style="display: inline-block; width: 80px;">{{ 'LOGICS.LOGIC'|translate }}:</span>
+
+     <input [(ngModel)]="newlogic_name" id="nlog" type="text" (input)="checkNewLogicInput();" pInputText placeholder="" style="position: absolute; margin-left: 100px" [ngStyle]="{'width': 30}" autofocus/>
+    </label>
+
+  <label style="display: block;">
+    <span style="display: inline-block; width: 80px;">{{ 'LOGICS.FILENAME'|translate }}:</span>
+    <input [(ngModel)]="newlogic_filename" id="nfn" type="text" (input)="checkNewLogicInput();" pInputText placeholder="" style="position: absolute; margin-left: 100px" [ngStyle]="{'width': 30}" autofocus/>
+  </label>
+  <br>
+  <p-footer>
+    <button pButton type="button" icon="pi pi-check" (click)="this.createLogic()" [(disabled)]="!newlogic_add_enabled" label="{{'BUTTON.CREATE'|translate}}" class="ui-button-success" autofocus></button>
+    <button pButton type="button" icon="pi pi-times" (click)="newlogic_display=false" label="{{'BUTTON.ABORT'|translate}}" class="ui-button-secondary"></button>
+  </p-footer>
+</p-dialog>
+
+
+

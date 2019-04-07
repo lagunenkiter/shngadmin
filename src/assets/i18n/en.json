@@ -229,7 +229,11 @@
     "ADD": "Add",
     "RELOAD": "Reload",
     "NEW_LOGICS": "New Logics (not loaded)",
-    "NO_DATA": "No data available"
+    "NO_DATA": "No data available",
+    "DELETE_LOGIC": "Confirm delete logic",
+    "DELETE_LOGIC_TEXT": "Please confirm, that you want to delete the logic '{{config}}'",
+    "CREATE_LOGIC": "Create Logic",
+    "CREATE_LOGIC_TEXT": "Enter a unique name for the logic (must must not already exist) and a unique filename to store the logic code (withouth .py extension)"
   },
   "LOGIC_EDIT": {
     "CODE": "Code",
@@ -345,6 +349,7 @@
     "DISCARD": "Discard",
     "ABORT": "Abort",
     "HELP": "Help",
+    "CREATE": "Create",
     "ADD": "Add",
     "UPDATE": "Update",
     "DELETE": "Delete",
@@ -358,7 +363,8 @@
     "CHECK": "Check",
     "DOWNLOAD": "Download",
     "CLEAR_FILTER": "Clear Filter",
-    "NEW_DEFINITION_FILE": "New File"
+    "NEW_DEFINITION_FILE": "New File",
+    "NEW_LOGIC": "New Logic"
   },
 
   "ERROR": {

@@ -231,7 +231,11 @@
     "ADD": "Hinzufügen",
     "RELOAD": "Neu Laden",
     "NEW_LOGICS": "Neue Logiken (nicht geladen)",
-    "NO_DATA": "Keine Daten verfügbar"
+    "NO_DATA": "Keine Daten verfügbar",
+    "DELETE_LOGIC": "Löschen der Logik bestätigen",
+    "DELETE_LOGIC_TEXT": "Soll die Logik '{{config}}' wirklich gelöscht werden?",
+    "CREATE_LOGIC": "Logik erstellen",
+    "CREATE_LOGIC_TEXT": "Einen eindeutigen Namen für die Logik eingeben (darf nicht bereits existieren) und einen eindeutigen Dateinamen eingeben, unter dem der Logik-Code gespeichert werden soll (ohne .py Erweiterung)"
   },
   "LOGIC_EDIT": {
     "CODE": "Code",
@@ -346,6 +350,7 @@
     "DISCARD": "Verwerfen",
     "ABORT": "Abbrechen",
     "HELP": "Hilfe",
+    "CREATE": "Erstellen",
     "ADD": "Hinzufügen",
     "UPDATE": "Aktualisieren",
     "DELETE": "Löschen",
@@ -359,7 +364,8 @@
     "CHECK": "Prüfen",
     "DOWNLOAD": "Herunterladen",
     "CLEAR_FILTER": "Filter Löschen",
-    "NEW_DEFINITION_FILE": "Neue Datei"
+    "NEW_DEFINITION_FILE": "Neue Datei",
+    "NEW_LOGIC": "Neue Logik"
   },
 
   "ERROR": {

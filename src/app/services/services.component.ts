@@ -459,12 +459,18 @@ export class ServicesComponent implements AfterViewChecked, OnInit {
   }
 
   downloadBackup() {
+    const todayDate = new Date();
+    const dd = String(todayDate.getDate()).padStart(2, '0');
+    const mm = String(todayDate.getMonth() + 1).padStart(2, '0'); //January is 0!
+    const yyyy = todayDate.getFullYear();
+    const today = yyyy + '-' + mm + '-' + dd;
+
     this.backup_disabled = true;
     this.dataServiceServer.downloadConfigBackup()
       .subscribe(
         (response) => {
           const res = <any> response;
-          saveAs(res, 'shng_backup.zip');
+          saveAs(res, 'shng_config_backup_' + today + '.zip');
           this.show_backup_confirm = true;
           this.backup_disabled = false;
         }
