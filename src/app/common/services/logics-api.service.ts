@@ -38,7 +38,7 @@ export class LogicsApiService {
   setLogicState(logicName, action, filename = '') {
     // valid actions are: 'trigger', 'enable', 'disable', 'load', 'unload', 'reload', 'delete', 'create'
     action = action.toLowerCase();
-    console.warn('LogicsApiService.setLogicState', {logicName}, {action});
+    // console.warn('LogicsApiService.setLogicState', {logicName}, {action});
 
     const apiUrl = sessionStorage.getItem('apiUrl');
     let url = apiUrl + 'logics/' + logicName + '?action=' + action;

@@ -37,13 +37,97 @@
 
     </tab>
 
+
+
     <tab customClass="tab-shng" heading="{{ 'LOGIC_EDIT.ATTRIBUTES'|translate }}">
 
-      <h5 style="; margin-top: 10px; margin-left: 10px;">
-        <p style="color: var(--shng-blue)">
-          <strong>Yet to be implemented (for logic '{{myEditFilename}}')</strong>
-        </p>
-      </h5>
+      <div class="container-fluid" style="margin-top: 10px; margin-left: 10px; margin-right: 10px;">
+
+        <h5 hidden="true" style="; margin-top: 10px; margin-left: 10px;">
+          <p style="color: var(--shng-blue)">
+            <strong>Yet to be implemented (for logic '{{myEditFilename}}')</strong>
+          </p>
+        </h5>
+        <div style="margin-left: 10px; padding-bottom: 15px;">
+          <strong>Logik "Testlogik"</strong>
+          <button pButton label="{{ 'BUTTON.SAVE_LOAD'|translate }}" type="button" [disabled]="true" icon="fa fa-check" style="margin-right: 0px;" (click)="saveConfig()" class="float-sm-right ui-button-success"></button>
+          <button pButton label="{{ 'BUTTON.SAVE'|translate }}" type="button" [disabled]="myTextarea === myTextareaOrig" icon="fa fa-check" style="margin-right: 10px;" (click)="saveConfig()" class="float-sm-right ui-button-success"></button>
+          <button pButton label="{{ 'BUTTON.DISCARD'|translate }}" type="button" [disabled]="(myEditFilename === '') || (myTextarea === myTextareaOrig)" icon="fa fa-check" style="margin-right: 10px;" (click)="this.myTextarea = this.myTextareaOrig;" class="float-sm-right ui-button-secondary"></button>
+          <button pButton label="{{ 'BUTTON.HELP'|translate }}" type="button" [disabled]="false" icon="fa fa-info" style="margin-right: 10px;" (click)="editorHelp_display = true;" class="float-sm-right ui-button-success"></button>
+        </div>
+
+        <table id="1" class="table table-striped">
+          <tr>
+            <td width="15%">Status</td>
+            <td width="35%"><span style="color: var(--shng-green);  vertical-align: middle" class="fas fa-play-circle"></span> Aktiv</td>
+            <td width="15%"></td>
+            <td width="35%"></td>
+          </tr>
+          <tr>
+            <td>Letzte Ausführung</td>
+            <td>2019-04-09 18:01:13+0200</td>
+            <td>Nächste Ausführung</td>
+            <td>2019-04-09 18:16:13+0200</td>
+          </tr>
+
+          <tr><td colspan="4"></td></tr>
+          <tr>
+            <td><strong>Parameter</strong></td>
+            <td colspan="3"><strong>Wert</strong></td>
+          </tr>
+          <tr>
+            <td>Cycle</td>
+            <td colspan="3">
+              <input type="text" autocomplete="off" id="cycle" style="width: 200px; border: 1px solid #ddd;" name="cycle"/>
+            </td>
+          </tr>
+          <tr>
+            <td>Crontab(s)</td>
+            <td colspan="3">
+              <input type="text" autocomplete="off" id="crontab" style="width: 200px; border: 1px solid #ddd;" name="crontab"/>
+            </td>
+          </tr>
+          <tr>
+            <td>Watch Item(s)</td>
+            <td colspan="3">
+              <input type="text" autocomplete="off" id="watchitems" style="width: 97%; border: 1px solid #ddd;" name="watchitems"/>
+            </td>
+          </tr>
+        </table>
+
+       <div style="margin-left: 10px; padding-top: 20px; padding-bottom: 10px;"><strong>Plugin spezifische Logik Parameter</strong></div>
+        <table id="3" class="table table-striped">
+          <th width="15%">Parameter</th>
+          <th>Wert</th>
+          <th>Typ</th>
+          <th>Beschreibung</th>
+          <tr>
+            <td>visu_acl</td>
+            <td>
+              <input type="text" autocomplete="off" id="visu_acl" style="width: 200px; border: 1px solid #ddd;" name="visu_acl"/>
+            </td>
+            <td>bool</td>
+            <td>Logik darf durch Visu getriggert werden</td>
+          </tr>
+          <tr>
+            <td>test_acl</td>
+            <td>
+              <input type="text" autocomplete="off" id="test_acl" style="width: 200px; border: 1px solid #ddd;" name="test_acl"/>
+            </td>
+            <td>bool</td>
+            <td>Logik darf durch Test-Plugin getriggert werden</td>
+          </tr>
+          <tr>
+            <td>test2_acl</td>
+            <td>
+              <input type="text" autocomplete="off" id="test2_acl" style="width: 200px; border: 1px solid #ddd;" name="test2_acl"/>
+            </td>
+            <td>bool</td>
+            <td>Logik darf durch Plugin test2 getriggert werden</td>
+          </tr>
+        </table>
+
+      </div>
     </tab>
 
   </tabset>

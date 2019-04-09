@@ -9,11 +9,13 @@ import * as CodeMirror from 'codemirror';
   templateUrl: './logics-edit.component.html',
   styleUrls: ['./logics-edit.component.css']
 })
+
 export class LogicsEditComponent implements AfterViewChecked, OnInit {
 
 
   constructor(private route: ActivatedRoute,
               private fileService: FilesApiService) { }
+
 
 
   // -----------------------------------------------------------------
@@ -106,11 +108,15 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
       );
     this.getPluginDictionary();
     this.registerAutocompleteHelper('autocompleteHint', this.dict);
-    console.log(CodeMirror.hint);
+    // @ts-ignore
+    console.log(CodeMirror.hint.autocompleteHint);
+    // @ts-ignore
     CodeMirror.commands.autocomplete_shng = function(cm) {
+      // @ts-ignore
       CodeMirror.showHint(cm, CodeMirror.hint.autocompleteHint);
     };
   }
+
 
   registerAutocompleteHelper(name, curDict) {
     CodeMirror.registerHelper('hint', 'autocompleteHint', function(editor) {
@@ -153,6 +159,8 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
         return oCompletions;
       }
     });
+    // @ts-ignore
+    console.warn('registerAutocompleteHelper: CodeMirror.hint', CodeMirror.hint.autocompleteHint);
   }
 
   getPluginDictionary() {
@@ -178,8 +186,9 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
           event.keyCode !== 39 &&
           event.keyCode !== 40 &&
           event.keyCode !== 46)) {
-        CodeMirror.commands.autocomplete_shng(cm, null, {completeSingle: false});
-      };
+            // @ts-ignore
+            CodeMirror.commands.autocomplete_shng(cm, null, {completeSingle: false});
+          }
     });
   }
 

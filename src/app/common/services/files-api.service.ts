@@ -16,7 +16,7 @@ export class FilesApiService {
 
 
   readFile(filetype, filename = '') {
-    console.log('FilesApiService.readFile()', {filename});
+    // console.log('FilesApiService.readFile()', {filename});
 
     const apiUrl = sessionStorage.getItem('apiUrl');
     let url = apiUrl + 'files/' + filetype + '/';
@@ -32,8 +32,6 @@ export class FilesApiService {
         url += '?filename=' + filename;
       }
     }
-
-    console.log('FilesApiService.readFile()', {url})
 
     return this.http.get(url, { responseType: 'text' })
       .pipe(
@@ -131,7 +129,7 @@ export class FilesApiService {
       }
     }
 
-    console.log('FilesApiService.deleteFile()', {url})
+    console.log('FilesApiService.deleteFile()', {url});
 
     return this.http.delete(url, { responseType: 'text' })
       .pipe(
