@@ -2,6 +2,7 @@
 import {AfterViewChecked, Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {FilesApiService} from '../../common/services/files-api.service';
+import * as CodeMirror from 'codemirror';
 
 @Component({
   selector: 'app-logics-edit',
@@ -26,6 +27,7 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
   @ViewChild('codeeditor') private codeEditor;
 
   myEditFilename: string;
+  dict: {}[] = [];
   myTextarea = '';
   myTextareaOrig = '';
   cmOptions = {
@@ -47,6 +49,8 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
           cm.setOption('fullScreen', false);
         }
       },
+      'Ctrl-Space': 'autocomplete',
+      'Ctrl-I': 'autocomplete_item',
       'Ctrl-Q': function(cm) {
         cm.foldCode(cm.getCursor());
       },
@@ -83,7 +87,6 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
       }
     }
     this.myEditFilename = logicName;
-
     for (let i = 1; i <= 100; i++) {
       this.rulers.push({color: '#eee', column: i * 4, lineStyle: 'dashed'});
     }
@@ -101,11 +104,62 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
           this.myTextareaOrig = this.myTextarea;
         }
       );
+    this.getPluginDictionary();
+    this.registerAutocompleteHelper('autocompleteHint', this.dict);
+    console.log(CodeMirror.hint);
+    CodeMirror.commands.autocomplete_shng = function(cm) {
+      CodeMirror.showHint(cm, CodeMirror.hint.autocompleteHint);
+    };
+  }
 
+  registerAutocompleteHelper(name, curDict) {
+    CodeMirror.registerHelper('hint', 'autocompleteHint', function(editor) {
+      const cur = editor.getCursor();
+      const curLine = editor.getLine(cur.line);
+      let start = cur.ch;
+      let end = start;
+
+      const charexp =  /[\w\.$]+/;
+      while (end < curLine.length && charexp.test(curLine.charAt(end))) {
+        end++;
+      }
+      while (start && charexp.test(curLine.charAt(start - 1))) {
+        start--;
+      }
+      let curWord = start !== end && curLine.slice(start, end);
+      if (curWord.length > 1) {
+        curWord = curWord.trim();
+      }
+      const regex = new RegExp('^' + curWord, 'i');
+      if (curWord.length >= 3) {
+        const oCompletions = {
+          list: (!curWord ? [] : curDict.filter(function (item) {
+            return item['displayText'].match(regex);
+          })).sort(function(a, b) {
+            const nameA = a.text.toLowerCase();
+            const nameB = b.text.toLowerCase();
+            if (nameA < nameB) { // sort string ascending
+              return -1;
+            }
+            if (nameA > nameB) {
+              return 1;
+            }
+            return 0; // default return value (no sorting)
+          }),
+          from: CodeMirror.Pos(cur.line, start),
+          to: CodeMirror.Pos(cur.line, end)
+        };
+
+        return oCompletions;
+      }
+    });
+  }
+
+  getPluginDictionary() {
+    this.dict.push({ text: 'test', displayText: 'test'}, {text: 'test2', displayText: 'test2'});
   }
 
   ngAfterViewChecked() {
-
     const editor1 = this.codeEditor.codeMirror;
     if (editor1.getOption('fullScreen')) {
       editor1.setSize('100vw', '100vh');
@@ -113,6 +167,20 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
       editor1.setSize('93vw', '74vh');
     }
     editor1.refresh();
+    editor1.on('keyup', function (cm, event) {
+      if (!cm.state.completionActive && /*Enables keyboard navigation in autocomplete list*/
+        (event.keyCode !== 8 &&
+          event.keyCode !== 9 &&
+          event.keyCode !== 13 &&
+          event.keyCode !== 27 &&
+          event.keyCode !== 37 &&
+          event.keyCode !== 38 &&
+          event.keyCode !== 39 &&
+          event.keyCode !== 40 &&
+          event.keyCode !== 46)) {
+        CodeMirror.commands.autocomplete_shng(cm, null, {completeSingle: false});
+      };
+    });
   }
 
 
