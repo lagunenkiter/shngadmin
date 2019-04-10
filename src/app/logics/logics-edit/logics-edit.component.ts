@@ -32,11 +32,13 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
   //  Vars for the YAML syntax checker
   //
   @ViewChild('codeeditor') private codeEditor;
+  @ViewChild('watchitems') private codeEditorWatchItems;
   myEditFilename: string;
   autocomplete_list: {}[] = [];
   item_list: {}[] = [];
   myTextarea = '';
   myTextareaOrig = '';
+  cmOptionsWatchItems = {}
   cmOptions = {
     indentWithTabs: false,
     indentUnit: 4,
@@ -113,6 +115,8 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
         (response) => {
           const result = <any>response;
           for (let i = 0; i < result.length; i++) {
+            this.item_list.push({text: result[i], displayText: result[i]});
+            this.item_list.push({text: result[i], displayText: 'sh.' + result[i]});
             this.autocomplete_list.push({text: 'sh.' + result[i] + '()', displayText: 'sh.' + result[i] + '() | Item'});
           }
       }
@@ -132,16 +136,21 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
         }
       );
     this.registerAutocompleteHelper('autocompleteHint', this.autocomplete_list);
+    this.registerAutocompleteHelper('autocompleteWatchItemsHint', this.item_list);
     // @ts-ignore
     CodeMirror.commands.autocomplete_shng = function(cm) {
       // @ts-ignore
       CodeMirror.showHint(cm, CodeMirror.hint.autocompleteHint);
     };
+    // @ts-ignore
+    CodeMirror.commands.autocomplete_shng_watch_items = function(cm) {
+      // @ts-ignore
+      CodeMirror.showHint(cm, CodeMirror.hint.autocompleteWatchItemsHint);
+    };
   }
 
-
   registerAutocompleteHelper(name, curDict) {
-    CodeMirror.registerHelper('hint', 'autocompleteHint', function(editor) {
+    CodeMirror.registerHelper('hint', name, function(editor) {
       const cur = editor.getCursor();
       const curLine = editor.getLine(cur.line);
       let start = cur.ch;
@@ -185,6 +194,7 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
 
   ngAfterViewChecked() {
     const editor1 = this.codeEditor.codeMirror;
+    const editor2 = this.codeEditorWatchItems.codeMirror;
     if (editor1.getOption('fullScreen')) {
       editor1.setSize('100vw', '100vh');
     } else {
@@ -204,7 +214,22 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
           event.keyCode !== 46)) {
             // @ts-ignore
             CodeMirror.commands.autocomplete_shng(cm, null, {completeSingle: false});
-          }
+          };
+    });
+    editor2.on('keyup', function (cm, event) {
+      if (!cm.state.completionActive && /*Enables keyboard navigation in autocomplete list*/
+        (event.keyCode !== 8 &&
+          event.keyCode !== 9 &&
+          event.keyCode !== 13 &&
+          event.keyCode !== 27 &&
+          event.keyCode !== 37 &&
+          event.keyCode !== 38 &&
+          event.keyCode !== 39 &&
+          event.keyCode !== 40 &&
+          event.keyCode !== 46)) {
+            // @ts-ignore
+            CodeMirror.commands.autocomplete_shng_watch_items(cm, null, {completeSingle: false});
+          };
     });
   }
 

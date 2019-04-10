@@ -90,7 +90,11 @@
           <tr>
             <td>Watch Item(s)</td>
             <td colspan="3">
-              <input type="text" autocomplete="off" id="watchitems" style="width: 97%; border: 1px solid #ddd;" name="watchitems"/>
+              <ngx-codemirror #watchitems
+                              [options]="cmOptionsWatchItems"
+                              [(ngModel)]="myTextareaWatchItems"
+                              [autoFocus]="true"
+              ></ngx-codemirror>
             </td>
           </tr>
         </table>
