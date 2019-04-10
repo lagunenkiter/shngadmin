@@ -37,7 +37,12 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
   item_list: {}[] = [];
   myTextarea = '';
   myTextareaOrig = '';
-  cmOptionsWatchItems = {}
+  myTextareaWatchItems = '';
+  myTextareaWatchItemsOrig = '';
+  cmOptionsWatchItems = {
+    autorefresh: true,
+    lineWrapping: false
+  }
   cmOptions = {
     indentWithTabs: false,
     indentUnit: 4,
@@ -194,6 +199,7 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
   ngAfterViewChecked() {
     const editor1 = this.codeEditor.codeMirror;
     const editor2 = this.codeEditorWatchItems.codeMirror;
+    editor2.refresh();
     if (editor1.getOption('fullScreen')) {
       editor1.setSize('100vw', '100vh');
     } else {
