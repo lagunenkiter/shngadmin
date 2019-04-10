@@ -231,6 +231,21 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
             CodeMirror.commands.autocomplete_shng_watch_items(cm, null, {completeSingle: false});
           };
     });
+
+    /* prohibit new lines for watch items input field */
+    editor2.on('beforeChange', function(cm, changeObj) {console.log(changeObj);
+      const typedNewLine = changeObj.origin === '+input' && typeof changeObj.text === 'object' && changeObj.text.join('') === '';
+      if (typedNewLine) {
+        return changeObj.cancel();
+      }
+
+      const pastedNewLine = changeObj.origin === 'paste' && typeof changeObj.text === 'object' && changeObj.text.length > 1;
+      if (pastedNewLine) {
+        const newText = changeObj.text.join(' ');
+        return changeObj.update(null, null, [newText]);
+      }
+      return null;
+    });
   }
 
 
