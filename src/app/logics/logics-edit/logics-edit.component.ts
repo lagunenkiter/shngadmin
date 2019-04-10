@@ -3,6 +3,9 @@ import {AfterViewChecked, Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {FilesApiService} from '../../common/services/files-api.service';
 import * as CodeMirror from 'codemirror';
+import {PluginsApiService} from '../../common/services/plugins-api.service';
+import {PlugininfoType} from '../../common/models/plugin-info';
+import {ItemsApiService} from '../../common/services/items-api.service';
 
 @Component({
   selector: 'app-logics-edit',
@@ -14,7 +17,9 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
 
 
   constructor(private route: ActivatedRoute,
-              private fileService: FilesApiService) { }
+              private fileService: FilesApiService,
+              private pluginsapiService: PluginsApiService,
+              private itemsapiService: ItemsApiService) { }
 
 
 
@@ -27,9 +32,9 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
   //  Vars for the YAML syntax checker
   //
   @ViewChild('codeeditor') private codeEditor;
-
   myEditFilename: string;
-  dict: {}[] = [];
+  autocomplete_list: {}[] = [];
+  item_list: {}[] = [];
   myTextarea = '';
   myTextareaOrig = '';
   cmOptions = {
@@ -93,6 +98,28 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
       this.rulers.push({color: '#eee', column: i * 4, lineStyle: 'dashed'});
     }
 
+    this.pluginsapiService.getPluginsAPI()
+      .subscribe(
+        (response) => {
+          const result = <any>response;
+          for (let i = 0; i < result.length; i++) {
+            this.autocomplete_list.push({ text: 'sh.' + result[i], displayText: 'sh.' + result[i] + ' | Plugin'});
+          }
+          // this.pluginapi.sort(function (a, b) {return (a.pluginname + a.configname.toLowerCase() > b.pluginname + b.configname.
+          // toLowerCase()) ? 1 : ((b.pluginname + b.configname.toLowerCase() > a.pluginname + a.configname.toLowerCase()) ? -1 : 0); });
+        }
+      );
+
+    this.itemsapiService.getItemList()
+      .subscribe(
+        (response) => {
+          const result = <any>response;
+          for (let i = 0; i < result.length; i++) {
+            this.autocomplete_list.push({text: 'sh.' + result[i], displayText: 'sh.' + result[i] + '() | Item'});
+          }
+      }
+    );
+
     this.fileService.readFile('logics', this.myEditFilename)
       .subscribe(
         (response) => {
@@ -106,10 +133,7 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
           this.myTextareaOrig = this.myTextarea;
         }
       );
-    this.getPluginDictionary();
-    this.registerAutocompleteHelper('autocompleteHint', this.dict);
-    // @ts-ignore
-    console.log(CodeMirror.hint.autocompleteHint);
+    this.registerAutocompleteHelper('autocompleteHint', this.autocomplete_list);
     // @ts-ignore
     CodeMirror.commands.autocomplete_shng = function(cm) {
       // @ts-ignore
@@ -159,12 +183,6 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
         return oCompletions;
       }
     });
-    // @ts-ignore
-    console.warn('registerAutocompleteHelper: CodeMirror.hint', CodeMirror.hint.autocompleteHint);
-  }
-
-  getPluginDictionary() {
-    this.dict.push({ text: 'test', displayText: 'test'}, {text: 'test2', displayText: 'test2'});
   }
 
   ngAfterViewChecked() {

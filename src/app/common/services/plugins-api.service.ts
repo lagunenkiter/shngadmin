@@ -94,6 +94,33 @@ export class PluginsApiService {
 
   }
 
+  // ------------------------------------------------------------
+  //  Get configuration information about all configured plugins
+  //  - for plugins.component
+  //
+  getPluginsAPI() {
+    // console.log('PluginsApiService.getPluginsApi');
+
+    const apiUrl = sessionStorage.getItem('apiUrl');
+    let url = apiUrl + 'plugins/api/';
+    if (apiUrl.includes('localhost')) {
+      url += 'default.json';
+    }
+    return this.http.get(url)
+      .pipe(
+        map(response => {
+          const result = response;
+          return result;
+        }),
+        catchError((err: HttpErrorResponse) => {
+          console.error('PluginsApiService (getPluginsInfo): Could not read plugins data' + ' - ' + err.error.error);
+          return of({});
+        })
+      );
+
+  }
+
+
 
   // -----------------------------------------------------------
   //  Update config of one plugin in etc/plugin.yaml on backend
