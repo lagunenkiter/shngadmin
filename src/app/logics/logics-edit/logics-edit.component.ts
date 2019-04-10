@@ -105,8 +105,6 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
           for (let i = 0; i < result.length; i++) {
             this.autocomplete_list.push({ text: 'sh.' + result[i], displayText: 'sh.' + result[i] + ' | Plugin'});
           }
-          // this.pluginapi.sort(function (a, b) {return (a.pluginname + a.configname.toLowerCase() > b.pluginname + b.configname.
-          // toLowerCase()) ? 1 : ((b.pluginname + b.configname.toLowerCase() > a.pluginname + a.configname.toLowerCase()) ? -1 : 0); });
         }
       );
 
@@ -115,7 +113,7 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
         (response) => {
           const result = <any>response;
           for (let i = 0; i < result.length; i++) {
-            this.autocomplete_list.push({text: 'sh.' + result[i], displayText: 'sh.' + result[i] + '() | Item'});
+            this.autocomplete_list.push({text: 'sh.' + result[i] + '()', displayText: 'sh.' + result[i] + '() | Item'});
           }
       }
     );
