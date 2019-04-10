@@ -4,7 +4,6 @@ import {ActivatedRoute} from '@angular/router';
 import {FilesApiService} from '../../common/services/files-api.service';
 import * as CodeMirror from 'codemirror';
 import {PluginsApiService} from '../../common/services/plugins-api.service';
-import {PlugininfoType} from '../../common/models/plugin-info';
 import {ItemsApiService} from '../../common/services/items-api.service';
 
 @Component({
