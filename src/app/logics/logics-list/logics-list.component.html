@@ -1,7 +1,7 @@
 <div style="margin-left: 10px; margin-right: 10px; margin-top: 55px;">
   <tabset #staticTabs>
     <tab customClass="tab-shng" heading="{{ 'LOGICS.USERLOGICS'|translate }}">
-      <div style="margin-left: 10px; margin-right: 10px;">
+      <p style="margin-left: 10px; margin-right: 10px;">
         <p></p>
         <table id="1" class="table table-striped table-hover">
         <thead>
@@ -14,10 +14,13 @@
           <th class="p-1" style="width: 120px; border-top: 0;">{{ 'LOGICS.WATCH_ITEMS'|translate }}</th>
           <th class="p-1" style="width: 250px; border-top: 0;">{{ 'LOGICS.FILENAME'|translate }}</th>
           <th class="p-1" style="width: 260px; border-top: 0;">
-            <button pButton type="button" style="margin-left: 0px; margin-top: 5px; font-size: medium;" id="btn-monitor" [disabled]="false" (click)="newLogic();" icon="fa fa-plus" label="{{ 'BUTTON.NEW_LOGIC'|translate }}" class="ui-button-success float-sm-left"></button>
-            {{ 'LOGICS.ACTIONS'|translate }}
+            <div style="width: 200px">
+              <button pButton type="button" style="margin-left: 0px; margin-top: 5px; font-size: medium;" id="btn-monitor" [disabled]="false" (click)="newLogic();" icon="fa fa-plus" label="{{ 'BUTTON.NEW_LOGIC'|translate }}" class="ui-button-success float-sm-left"></button>
+              {{ 'LOGICS.ACTIONS'|translate }}
+            </div>
           </th>
         </tr>
+
         </thead>
         <tbody>
         <ng-container *ngIf="userlogics?.length > 0">
@@ -158,7 +161,6 @@
         </ng-container>
         </tbody>
       </table>
-      </div>
     </tab>
 
     <tab customClass="tab-shng" heading="{{ 'LOGICS.SYSTEMLOGICS'|translate }}">
