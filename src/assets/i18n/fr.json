@@ -79,8 +79,10 @@
   },
 
   "LOGS": {
+    "LOGFILE": "Fichier log",
     "FILTER": "Filtre",
-    "SCROLL_DOWN": "Défiler vers le bas"
+    "SCROLL_DOWN": "Défiler vers le bas",
+    "ACTUAL": "actuel"
   },
 
   "BUTTON": {
