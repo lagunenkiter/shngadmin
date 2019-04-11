@@ -22,7 +22,7 @@
     {{ chunk_no }}
     <button pButton type="button" style="margin-top: 2px; margin-left: 5px" [disabled]="last_chunk" icon="fa fa-step-forward" (click)="readLogfile(chunk_no + 1)" class="ui-button-success"></button>
     <button pButton type="button" style="margin-top: 2px; margin-left: 2px" [disabled]="last_chunk" icon="fa fa-fast-forward" (click)="readLogfile(0)" class="ui-button-success"></button>
-
+    <button pButton type="button" style="margin-top: 2px; margin-left: 10px;" title="{{ 'LOGS.SCROLL_DOWN'|translate }}" icon="fa fa-arrow-circle-down" (click)="scrollDown()" class="ui-button-success"></button>
 
 <!--
     <ng-container *ngIf="cmOptions.lineWrapping === true">

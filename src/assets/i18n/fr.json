@@ -79,6 +79,8 @@
   },
 
   "LOGS": {
+    "FILTER": "Filtre",
+    "SCROLL_DOWN": "Défiler vers le bas"
   },
 
   "BUTTON": {

@@ -313,7 +313,7 @@
   "LOGS": {
     "LOGFILE": "Log",
     "FILTER": "Filter",
-
+    "SCROLL_DOWN": "Nach unten scrollen",
     "SELECT_LOG": "Log auswählen",
     "TIMEFRAME": "Zeitrahmen",
     "SELECT_FILE": "Datei auswählen",

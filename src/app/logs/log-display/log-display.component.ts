@@ -219,6 +219,9 @@ export class LogDisplayComponent implements AfterViewChecked, OnInit {
     }
   }
 
+  scrollDown() {
+    this.codeEditor.codeMirror.execCommand('goDocEnd');
+  }
 
   readLogfile(chunk = 1) {
     // console.log('selectedFile:', this.selectedFile);
