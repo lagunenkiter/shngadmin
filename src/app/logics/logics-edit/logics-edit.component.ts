@@ -7,6 +7,7 @@ import {PluginsApiService} from '../../common/services/plugins-api.service';
 import {ItemsApiService} from '../../common/services/items-api.service';
 import {LogicsinfoType} from '../../common/models/logics-info';
 import {LogicsApiService} from '../../common/services/logics-api.service';
+import {LogicsWatchItem} from '../../common/models/logics-watch-item';
 
 @Component({
   selector: 'app-logics-edit',
@@ -17,8 +18,11 @@ import {LogicsApiService} from '../../common/services/logics-api.service';
 export class LogicsEditComponent implements AfterViewChecked, OnInit {
 
   logics: LogicsinfoType[];
-  logic: LogicsinfoType = <any>{};
   newlogics: LogicsinfoType[];
+  logic: LogicsinfoType = <any>{};
+  logicCycleOrig: string;
+  logicCrontabOrig: string;
+  logicWatchitemOrig: string;
 
 
   constructor(private route: ActivatedRoute,
@@ -45,11 +49,15 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
   myTextarea = '';
   myTextareaOrig = '';
   myTextareaWatchItems = '';
-  myTextareaWatchItemsOrig = '';
+
   cmOptionsWatchItems = {
     autorefresh: true,
-    lineWrapping: true
+    lineWrapping: true,
+    indentWithTabs: false,
+    indentUnit: 1,
+    tabSize: 1,
   };
+
   cmOptions = {
     indentWithTabs: false,
     indentUnit: 4,
@@ -166,6 +174,42 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
   }
 
 
+  listToString(list) {
+    let result = '';
+    for (let i = 0; i < list.length; i++) {
+      if (i > 0) {
+        result += ' | ';
+      }
+      result += list[i];
+    }
+    return result;
+  }
+
+
+  stringToList(str) {
+    let wrk = str.trim();
+    wrk =  wrk.replace(/,/g, ' ');
+    wrk =  wrk.replace(/\|/g, ' ');
+    wrk =  wrk.replace(/   /g, ' ');
+    while (wrk.indexOf('  ') !== -1) {
+      wrk =  wrk.replace(/  /g, ' ');
+    }
+    return <any>wrk.split(' ');
+  }
+
+
+  watchitemsFromList() {
+    this.myTextareaWatchItems = this.listToString(this.logic.watch_item_list);
+    return;
+  }
+
+
+  watchitemsToList() {
+    this.logic.watch_item_list = this.stringToList(this.myTextareaWatchItems);
+    return;
+  }
+
+
   getLogicInfo() {
     this.dataService.getLogics()
       .subscribe(
@@ -176,7 +220,6 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
             if (this.myEditFilename === logic.filename) {
               console.warn('LogicsEditComponent.getLogics()', {logic});
               this.logic = logic;
-              this.myTextareaWatchItems = this.logic.watch_item;
             }
           }
 
@@ -186,11 +229,52 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
             if (this.myEditFilename === newlogic.filename) {
               console.warn('LogicsEditComponent.getLogics()', {newlogic});
               this.logic = newlogic;
-              this.myTextareaWatchItems = this.logic.watch_item;
             }
           }
+          this.logicCycleOrig = this.logic.cycle;
+          this.logicCrontabOrig = this.logic.crontab;
+
+          this.watchitemsFromList();
+          this.logicWatchitemOrig = this.myTextareaWatchItems;
         }
       );
+  }
+
+
+  logicChanged() {
+    if (this.codeChanged()) {
+      return true;
+    }
+    if (this.parametersChanged()) {
+      return true;
+    }
+    return false;
+  }
+
+
+  codeChanged() {
+    if (this.myTextarea !== this.myTextareaOrig) {
+      return true;
+    }
+    return false;
+  }
+
+
+  parametersChanged() {
+    if (this.logic.cycle !== this.logicCycleOrig) {
+      if (!(this.logic.cycle === null && this.logicCycleOrig === '')) {
+        return true;
+      }
+    }
+    if (this.logic.crontab !== this.logicCrontabOrig) {
+      if (!(this.logic.crontab === null && this.logicCrontabOrig === '')) {
+        return true;
+      }
+    }
+    if (this.myTextareaWatchItems !== this.logicWatchitemOrig) {
+      return true;
+    }
+    return false;
   }
 
 
@@ -262,7 +346,7 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
     });
 
     const editor2 = this.codeEditorWatchItems.codeMirror;
-    editor2.setSize('82vw');
+    editor2.setSize('80vw');
     editor2.refresh();
     editor2.on('keyup', function (cm, event) {
       if (!cm.state.completionActive && /*Enables keyboard navigation in autocomplete list*/
@@ -281,7 +365,8 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
     });
 
     /* prohibit new lines for watch items input field */
-    editor2.on('beforeChange', function(cm, changeObj) {console.log(changeObj);
+    editor2.on('beforeChange', function(cm, changeObj) {
+      // console.log(changeObj);
       const typedNewLine = changeObj.origin === '+input' && typeof changeObj.text === 'object' && changeObj.text.join('') === '';
       if (typedNewLine) {
         return changeObj.cancel();
@@ -297,8 +382,8 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
   }
 
 
-  saveConfig() {
-    // console.log('LoggingConfigurationComponent.saveConfig');
+  saveCode() {
+    console.log('LoggingConfigurationComponent.saveCode');
 
     this.fileService.saveFile('logics', this.myEditFilename, this.myTextarea)
       .subscribe(
@@ -306,9 +391,40 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
           this.myTextareaOrig = this.myTextarea;
         }
       );
+  }
+
+
+  saveParameters() {
+    console.log('LoggingConfigurationComponent.saveParameters');
+
+    this.watchitemsToList();
+    console.warn('Hier fehlt noch das sichern der Parameter');
+
+
+    this.logicCycleOrig = this.logic.cycle;
+    this.logicCrontabOrig = this.logic.crontab;
+
+    this.watchitemsFromList();
+    this.logicWatchitemOrig = this.myTextareaWatchItems;
+  }
+
+
+  saveLogic(reload = false) {
+    if (this.codeChanged()) {
+      this.saveCode();
+    }
+    if (this.parametersChanged()) {
+      this.saveParameters();
+    }
 
     const editor = this.codeEditor.codeMirror;
     editor.refresh();
+
+    if (reload) {
+      console.warn('Hier fehlt noch der Reload der Logik');
+    }
   }
 
+
+  // avm.monitor.trigger1, avm.monitor.trigger2, avm.monitor.trigger3, avm.monitor.trigger4, avm.monitor.is_call_incoming
 }

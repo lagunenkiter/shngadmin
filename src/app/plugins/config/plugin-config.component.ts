@@ -184,6 +184,34 @@ export class PluginConfigComponent implements OnInit {
 
 
 
+  listToString(list) {
+    let result = '';
+    for (let i = 0; i < list.length; i++) {
+      if (i > 0) {
+        result += ' | ';
+      }
+      result += list[i];
+    }
+    return result;
+  }
+
+
+  stringToList(str) {
+    // let wrk = str.trim();
+    // wrk =  wrk.replace(/,/g, ' ');   // comma is no delimiter
+    // wrk =  wrk.replace(/\|/g, ' ');
+    // wrk =  wrk.replace(/   /g, ' ');
+    // while (wrk.indexOf('  ') !== -1) {
+    //   wrk =  wrk.replace(/  /g, ' ');
+    // }
+    const list = <any>str.split('|');
+    for (let i = 0; i < list.length; i++) {
+      list[i] = list[i].trim();
+    }
+    return list;
+  }
+
+
   // ---------------------------------------------------------
   // Handle the click event on the list of installed plugins
   //
@@ -292,6 +320,8 @@ export class PluginConfigComponent implements OnInit {
                 paramdata.value = (conf[param].toLowerCase() === 'true');
               }
             }
+          } else if (paramdata.type === 'list') {
+            paramdata.value = this.listToString(<string>conf[param]);
           } else {
             paramdata.value = <string>conf[param];
           }
@@ -411,6 +441,14 @@ export class PluginConfigComponent implements OnInit {
       // hide configuration dialog
       this.dialog_display = false;
 
+      // console.warn('plugin_config', this.pluginconflist.plugin_config[this.dialog_configname]);
+      for (const param of Object.keys(this.pluginconflist.plugin_config[this.dialog_configname]._meta.parameters)) {
+        // converting list parameters from string to list
+        if (this.pluginconflist.plugin_config[this.dialog_configname]._meta.parameters[param]['type'] === 'list') {
+          this.pluginconflist.plugin_config[this.dialog_configname][param] = this.stringToList(this.pluginconflist.plugin_config[this.dialog_configname][param]);
+        }
+      }
+
       if (this.plugin_enabled === false) {
         this.pluginconflist.plugin_config[this.dialog_configname]['plugin_enabled'] = false;
         this.rowclicked_foredit.enabled = 'false';
@@ -418,7 +456,7 @@ export class PluginConfigComponent implements OnInit {
         this.pluginconflist.plugin_config[this.dialog_configname]['plugin_enabled'] = true;
         this.rowclicked_foredit.enabled = 'true';
       }
-      this.rowclicked_foredit.instance = this.pluginconflist.plugin_config[this.dialog_configname]['instance']
+      this.rowclicked_foredit.instance = this.pluginconflist.plugin_config[this.dialog_configname]['instance'];
 
       // save configuration of the edited plugin to the backend to section <this.dialog_configname>
       // console.log('save configuration of "' + this.dialog_configname + '" to Backend');
@@ -496,10 +534,10 @@ export class PluginConfigComponent implements OnInit {
 
 
   selectPlugin(iplugin) {
-    console.warn({iplugin})
+    console.warn({iplugin});
     this.selected_plugin = iplugin;
     this.pluginconfig_name = '';
-    this.translate_params = {'selected_plugin': this.selected_plugin}
+    this.translate_params = {'selected_plugin': this.selected_plugin};
     this.add_enabled = false;
 
     this.setconfig_display = true;

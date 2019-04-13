@@ -46,7 +46,7 @@
             <ng-container *ngIf="col.field === 'plugin'">
               {{rowData[col.field].substr(1)}}
               <ng-container *ngIf="rowData[col.field].charAt(0) === '+'">
-                &nbsp; <fa-icon style="color: var(--shng-warning);" [icon]="faExclamationTriangle"></fa-icon>
+                &nbsp; <fa-icon style="color: var(--shng-warning);" title="{{'PLUGIN.DEPRECATED'|translate}}" [icon]="faExclamationTriangle"></fa-icon>
               </ng-container>
             </ng-container>
             <ng-container *ngIf="col.field !== 'plugin'">
@@ -107,7 +107,7 @@
       </tr>
       <tr>
         <td align="right">
-          <fa-icon style="color: var(--shng-warning);" [icon]="faExclamationTriangle"></fa-icon> &nbsp;
+          <fa-icon style="color: var(--shng-warning);" title="{{'PLUGIN.DEPRECATED'|translate}}" [icon]="faExclamationTriangle"></fa-icon> &nbsp;
         </td>
         <td colspan="3">
           <a style="width: 50%; padding:0px; background-color: #ffffff; border:0;"><strong>{{'PLUGIN.DEPRECATED'|translate}}:</strong></a>
@@ -280,7 +280,7 @@
                   <td style="padding-left: 15px;">
                     {{iplugin}}
                     <ng-container *ngIf="plugins_installed[iplugin].state && (plugins_installed[iplugin].state.toLowerCase() === 'deprecated')">
-                      &nbsp; <fa-icon style="color: var(--shng-warning);" [icon]="faExclamationTriangle"></fa-icon>
+                      &nbsp; <fa-icon style="color: var(--shng-warning);" title="{{'PLUGIN.DEPRECATED'|translate}}" [icon]="faExclamationTriangle"></fa-icon>
                     </ng-container>
                   </td>
                   <td>&nbsp; &nbsp;
