@@ -15,7 +15,6 @@
                 <button pButton label="{{ 'BUTTON.SAVE'|translate }}" type="button" [disabled]="myTextarea === myTextareaOrig" icon="fa fa-check" style="margin-right: 10px;" (click)="saveConfig()" class="float-sm-right ui-button-success"></button>
                 <button pButton label="{{ 'BUTTON.DISCARD'|translate }}" type="button" [disabled]="(myEditFilename === '') || (myTextarea === myTextareaOrig)" icon="fa fa-check" style="margin-right: 10px;" (click)="this.myTextarea = this.myTextareaOrig;" class="float-sm-right ui-button-secondary"></button>
                 <button pButton label="{{ 'BUTTON.HELP'|translate }}" type="button" [disabled]="false" icon="fa fa-info" style="margin-right: 10px;" (click)="editorHelp_display = true;" class="float-sm-right ui-button-success"></button>
-                <button pButton label="{{ 'BUTTON.LINE_WRAPPING'|translate }}" type="button" [disabled]="false" style="margin-right: 10px;" (click)="switchLineWrapping()" class="float-sm-right ui-button-success"></button>&nbsp;
               </div>
             </td>
           </tr>
@@ -158,6 +157,7 @@
     <tr><td>Shift-Tab</td>    <td></td> <td>{{'HELP.SHIFT-TAB'|translate}}</td></tr>
     <tr><td>F11</td>          <td></td> <td>{{'HELP.F11'|translate}}</td></tr>
     <tr><td>Esc</td>          <td></td> <td>{{'HELP.ESC'|translate}}</td></tr>
+    <tr><td>Ctrl-L</td>       <td></td> <td>{{'HELP.CTRL-L'|translate}}</td></tr>
     <tr><td>Ctrl-Q</td>       <td></td> <td>{{'HELP.CTRL-Q'|translate}}</td></tr>
     <tr><td>Shift-Ctrl-Q</td> <td></td> <td>{{'HELP.SHIFT-CTRL-Q'|translate}}</td></tr>
     </tbody>

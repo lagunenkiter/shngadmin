@@ -1,0 +1,13 @@
+
+.tab-shng > a{
+  border-bottom: none !important;
+  outline: 0 !important;
+  color:rgb(160, 160, 160);
+}
+
+
+.CodeMirror {
+  width:48vw;
+  height:70vh;
+}
+

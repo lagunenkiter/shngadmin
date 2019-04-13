@@ -303,6 +303,18 @@
     "ITEM": "Item",
     "VALUE": "Wert"
   },
+  "SCENE_CONFIG": {
+    "DEFINITION_FILES": "Szenen Definitionsdateien",
+    "CONFIG_FILE": "Szenen Konfigurationsdatei",
+    "FILE_NOT_FOUND": "Datei nicht gefunden!",
+    "FILETYPE_UNSUPPORTED": "Dateityp nicht unterstützt!",
+    "CONFIG_ERROR": "Konfigurations-Fehler - Konfiguration nicht gespeichert!",
+    "CONFIG_ERROR_TEXT": "Fehler in der Konfigurationsdatei gefunden.\nUngültiges Format der Konfigurationsdatei.\n",
+    "NAME_CONFIGURATION": "Dateinamen für die neue Konfigurationsdatei wählen",
+    "UNIQUE_NAME": "Eindeutiger Dateiname (ohne Erweiterung)",
+    "DELETE_CONFIG": "Löschen der Szene bestätigen",
+    "DELETE_CONFIG_FILE": "Soll die Szenen-Konfigurationsdatei '{{config}}' wirklich gelöscht werden?"
+  },
   "THREADS": {
     "THREAD": "Thread",
     "TOTAL": "gesamt",
@@ -366,6 +378,7 @@
     "CLEAR_FILTER": "Filter Löschen",
     "NEW_DEFINITION_FILE": "Neue Datei",
     "NEW_LOGIC": "Neue Logik",
+    "NEW_SCENE": "Neue Szene",
     "LINE_WRAPPING": "Zeilenumbruch"
   },
 
@@ -391,9 +404,9 @@
     "SHIFT-TAB": "Eine Ebene ausrücken",
     "F11": "Fullscreen Modus ein- bzw. ausschalten",
     "ESC": "Fullscreen Modus verlassen",
+    "CTRL-L": "Zeilen-Umbruch ein- und ausschalten",
     "CTRL-Q": "Zeile an der Cursorposition falten oder entfalten",
-    "SHIFT-CTRL-Q": "Gesamtes Dokument entfalten",
-    "CTRL-W": "Zeilen-Umbruch ein- und ausschalten"
+    "SHIFT-CTRL-Q": "Gesamtes Dokument entfalten"
   },
 
   "YES": "Ja",

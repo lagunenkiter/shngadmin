@@ -167,7 +167,7 @@ export class SystemComponent implements OnInit {
             }
           }
 
-          this.reqinfodisplay = {}
+          this.reqinfodisplay = {};
           for (let i = 0; i < this.pypiinfo.length; ++i) {
             this.reqinfodisplay[this.pypiinfo[i].name] = this.buildreqinfostring(this.pypiinfo[i]);
           }
@@ -191,16 +191,19 @@ export class SystemComponent implements OnInit {
     const hostip = sessionStorage.getItem('hostIp');
     if (hostip !== 'localhost') {
       filepath = '/admin' + filepath;
+      this.http.get(filepath, {responseType: 'text'})
+        .subscribe(
+          response => {
+            const message = response.toString();
+            $('#disclosuretext').text(message);
+          },
+          error => {
+            $('#disclosuretext').text( '\nERROR ' + error.status + ':\n\n    ' + error.url + '   ' + error.statusText);
+          });
+
+    } else {
+      $('#disclosuretext').text("\nYou are in develop mode: \n\nThe file '3dpartylicenses.txt' is created only in production mode. In develop mode the file does not exist.");
     }
-    this.http.get(filepath, {responseType: 'text'})
-      .subscribe(
-        response => {
-          const message = response.toString();
-          $('#disclosuretext').text(message);
-        },
-        error => {
-          $('#disclosuretext').text( '\nERROR ' + error.status + ':\n\n    ' + error.url + '   ' + error.statusText);
-        });
 
   }
 
@@ -449,13 +452,13 @@ export class SystemComponent implements OnInit {
 
     if (loadData === undefined) {
     } else {
-      console.log('setSystemloadData (callback)')
+      console.log('setSystemloadData (callback)');
       console.log(loadData);
       this.loadData = loadData;
 
       this.chartdataLoad.labels = [];
       this.chartdataLoad.datasets[0].data = [];
-      console.log('Datapoints: ' + String(loadData.length))
+      console.log('Datapoints: ' + String(loadData.length));
       for (let i = 0; i < loadData.length; i++) {
         this.chartdataLoad.datasets[0].data.push(loadData[i][1]);
       }

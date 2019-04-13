@@ -42,7 +42,7 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
   cmOptionsWatchItems = {
     autorefresh: true,
     lineWrapping: false
-  }
+  };
   cmOptions = {
     indentWithTabs: false,
     indentUnit: 4,
@@ -71,6 +71,9 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
         for (let l = cm.firstLine(); l <= cm.lastLine(); ++l) {
           cm.foldCode({line: l, ch: 0}, null, 'unfold');
         }
+      },
+      'Ctrl-L': function(cm) {
+        cm.setOption('lineWrapping', !cm.getOption('lineWrapping'));
       }
     },
     fullScreen: false,
@@ -153,11 +156,6 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
     };
   }
 
-  switchLineWrapping() {
-    const editor1 = this.codeEditor.codeMirror;
-    editor1.setOption('lineWrapping', !editor1.getOption('lineWrapping'));
-  }
-
   registerAutocompleteHelper(name, curDict) {
     CodeMirror.registerHelper('hint', name, function(editor) {
       const cur = editor.getCursor();
@@ -224,7 +222,7 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
           event.keyCode !== 46)) {
             // @ts-ignore
             CodeMirror.commands.autocomplete_shng(cm, null, {completeSingle: false});
-          };
+      }
     });
     editor2.on('keyup', function (cm, event) {
       if (!cm.state.completionActive && /*Enables keyboard navigation in autocomplete list*/
@@ -239,7 +237,7 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
           event.keyCode !== 46)) {
             // @ts-ignore
             CodeMirror.commands.autocomplete_shng_watch_items(cm, null, {completeSingle: false});
-          };
+      }
     });
 
     /* prohibit new lines for watch items input field */

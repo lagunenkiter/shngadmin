@@ -302,6 +302,18 @@
     "ITEM": "Item",
     "VALUE": "Value"
   },
+  "SCENE_CONFIG": {
+    "DEFINITION_FILES": "Scene-Definition Files",
+    "CONFIG_FILE": "Scene Configuration-File",
+    "FILE_NOT_FOUND": "File not found!",
+    "FILETYPE_UNSUPPORTED": "Filetype not supported!",
+    "CONFIG_ERROR": "Configuration Error - Configuration data not saved!",
+    "CONFIG_ERROR_TEXT": "Error found in configuration file.\nInvalid format of configuration file. \n",
+    "NAME_CONFIGURATION": "Select a name for the new configuration file",
+    "UNIQUE_NAME": "Unique filename (without extension)",
+    "DELETE_CONFIG": "Confirm delete scene",
+    "DELETE_CONFIG_FILE": "Please confirm, that you want to delete the scene configuration file '{{config}}'"
+  },
   "THREADS": {
     "THREAD": "Thread",
     "TOTAL": "total",
@@ -365,7 +377,7 @@
     "CLEAR_FILTER": "Clear Filter",
     "NEW_DEFINITION_FILE": "New File",
     "NEW_LOGIC": "New Logic",
-    "LINE_WRAPPING": "Line Wrapping"
+    "NEW_SCENE": "New Scene"
   },
 
   "ERROR": {
@@ -390,9 +402,9 @@
     "SHIFT-TAB": "Inindent one level",
     "F11": "Switch fullscreen node on or off",
     "ESC": "Leave fullscreen mode",
+    "CTRL-L": "Toggle line wrapping",
     "CTRL-Q": "Fold or unfold the line the cursor is currently on",
-    "SHIFT-CTRL-Q": "Unfold the hole document",
-    "CTRL-W": "Toggle line wrapping"
+    "SHIFT-CTRL-Q": "Unfold the hole document"
   },
 
   "YES": "Yes",

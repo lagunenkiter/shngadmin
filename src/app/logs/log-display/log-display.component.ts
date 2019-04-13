@@ -56,7 +56,7 @@ export class LogDisplayComponent implements AfterViewChecked, OnInit {
         cm.setOption('fullScreen', !cm.getOption('fullScreen'));
         // cm.getScrollerElement().style.maxHeight = 'none';
       },
-      'Ctrl-W': function(cm) {
+      'Ctrl-L': function(cm) {
         cm.setOption('lineWrapping', !cm.getOption('lineWrapping'));
       },
       'Esc': function(cm, fullScreen) {
