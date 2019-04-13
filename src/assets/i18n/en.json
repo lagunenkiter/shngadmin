@@ -364,7 +364,8 @@
     "DOWNLOAD": "Download",
     "CLEAR_FILTER": "Clear Filter",
     "NEW_DEFINITION_FILE": "New File",
-    "NEW_LOGIC": "New Logic"
+    "NEW_LOGIC": "New Logic",
+    "LINE_WRAPPING": "Line Wrapping"
   },
 
   "ERROR": {

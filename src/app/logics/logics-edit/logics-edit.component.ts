@@ -153,6 +153,11 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
     };
   }
 
+  switchLineWrapping() {
+    const editor1 = this.codeEditor.codeMirror;
+    editor1.setOption('lineWrapping', !editor1.getOption('lineWrapping'));
+  }
+
   registerAutocompleteHelper(name, curDict) {
     CodeMirror.registerHelper('hint', name, function(editor) {
       const cur = editor.getCursor();

@@ -365,7 +365,8 @@
     "DOWNLOAD": "Herunterladen",
     "CLEAR_FILTER": "Filter Löschen",
     "NEW_DEFINITION_FILE": "Neue Datei",
-    "NEW_LOGIC": "Neue Logik"
+    "NEW_LOGIC": "Neue Logik",
+    "LINE_WRAPPING": "Zeilenumbruch"
   },
 
   "ERROR": {

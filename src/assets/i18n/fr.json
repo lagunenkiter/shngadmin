@@ -96,7 +96,8 @@
     "ADD_PLUGIN": "ajouter extension",
     "RELOAD_LOG": "recharger le journal",
     "RESTART_SHNG": "redémarrer SmartHomeNG",
-    "SAVE_SETTINGS": "enregistrer les paramètres"
+    "SAVE_SETTINGS": "enregistrer les paramètres",
+    "LINE_WRAPPING": "Coupure de ligne"
   },
 
   "ERROR": {
