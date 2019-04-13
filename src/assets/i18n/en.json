@@ -237,8 +237,19 @@
   },
   "LOGIC_EDIT": {
     "CODE": "Code",
-    "ATTRIBUTES": "Attributes",
-    "FILENAME": "Filename"
+    "PARAMETERS": "Parameters",
+    "FILENAME": "Filename",
+    "LOGICNAME": "Logic",
+    "STATUS": "Status",
+    "ACTIVE": "Active",
+    "INACTIVE": "Inactive",
+    "LAST_EXEC": "Last Execution",
+    "NEXT_EXEC": "Next Execution",
+    "PLUGIN_SPECIFIC": "Plugin specific parameters",
+    "PARAMETER": "Parameter",
+    "VALUE": "Value",
+    "TYPE": "Type",
+    "DESCRIPTION": "Description"
   },
   "SCHEDULERS": {
     "ITEM SCHEDULERS": "Item Schedulers",

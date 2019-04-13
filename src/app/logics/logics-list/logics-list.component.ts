@@ -18,6 +18,7 @@ import {ActivatedRoute, Router} from '@angular/router';
   providers: [OlddataService]
 })
 export class LogicsListComponent implements OnInit {
+
   logics: LogicsinfoType[];
   userlogics: LogicsinfoType[];
   systemlogics: LogicsinfoType[];
@@ -46,26 +47,6 @@ export class LogicsListComponent implements OnInit {
   ngOnInit() {
     console.log('LogicsListComponent.ngOnInit');
     this.getLogics();
-/*
-    this.dataService.getLogics()
-      .subscribe(
-        (response) => {
-            this.logics = <LogicsinfoType[]>response['logics'];
-            this.logics.sort(function (a, b) {return (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0); });
-            this.userlogics = [];
-            this.systemlogics = [];
-            for (const logic of this.logics) {
-              if (logic.userlogic === true) {
-                this.userlogics.push(logic);
-              } else {
-                this.systemlogics.push(logic);
-              }
-            }
-            this.newlogics = <LogicsinfoType[]>response['logics_new'];
-            this.newlogics.sort(function (a, b) {return (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0); });
-        }
-      );
-*/
   }
 
 

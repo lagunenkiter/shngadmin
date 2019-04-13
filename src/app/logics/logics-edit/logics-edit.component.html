@@ -39,17 +39,14 @@
 
 
 
-    <tab customClass="tab-shng" heading="{{ 'LOGIC_EDIT.ATTRIBUTES'|translate }}">
+    <tab customClass="tab-shng" heading="{{ 'LOGIC_EDIT.PARAMETERS'|translate }}">
 
       <div class="container-fluid" style="margin-top: 10px; margin-left: 10px; margin-right: 10px;">
 
-        <h5 hidden="true" style="; margin-top: 10px; margin-left: 10px;">
-          <p style="color: var(--shng-blue)">
-            <strong>Yet to be implemented (for logic '{{myEditFilename}}')</strong>
-          </p>
-        </h5>
         <div style="margin-left: 10px; padding-bottom: 15px;">
-          <strong>Logik "Testlogik"</strong>
+          <ng-container *ngIf="logic">
+            {{ 'LOGIC_EDIT.LOGICNAME'|translate }}: <strong>{{ logic.name }}</strong>
+          </ng-container>
           <button pButton label="{{ 'BUTTON.SAVE_LOAD'|translate }}" type="button" [disabled]="true" icon="fa fa-check" style="margin-right: 0px;" (click)="saveConfig()" class="float-sm-right ui-button-success"></button>
           <button pButton label="{{ 'BUTTON.SAVE'|translate }}" type="button" [disabled]="myTextarea === myTextareaOrig" icon="fa fa-check" style="margin-right: 10px;" (click)="saveConfig()" class="float-sm-right ui-button-success"></button>
           <button pButton label="{{ 'BUTTON.DISCARD'|translate }}" type="button" [disabled]="(myEditFilename === '') || (myTextarea === myTextareaOrig)" icon="fa fa-check" style="margin-right: 10px;" (click)="this.myTextarea = this.myTextareaOrig;" class="float-sm-right ui-button-secondary"></button>
@@ -58,33 +55,46 @@
 
         <table id="1" class="table table-striped">
           <tr>
-            <td width="15%">Status</td>
-            <td width="35%"><span style="color: var(--shng-green);  vertical-align: middle" class="fas fa-play-circle"></span> Aktiv</td>
+            <td width="15%">{{ 'LOGIC_EDIT.STATUS'|translate }}</td>
+            <ng-container *ngIf="logic && logic.enabled">
+              <td width="35%"><span style="color: var(--shng-green);  vertical-align: middle" class="fas fa-play-circle"></span> {{ 'LOGIC_EDIT.ACTIVE'|translate }}</td>
+            </ng-container>
+            <ng-container *ngIf="logic && !logic.enabled">
+              <td width="35%"><span style="color: var(--shng-red);  vertical-align: middle" class="fas fa-play-circle"></span> {{ 'LOGIC_EDIT.INACTIVE'|translate }}</td>
+            </ng-container>
             <td width="15%"></td>
             <td width="35%"></td>
           </tr>
           <tr>
-            <td>Letzte Ausführung</td>
-            <td>2019-04-09 18:01:13+0200</td>
-            <td>Nächste Ausführung</td>
-            <td>2019-04-09 18:16:13+0200</td>
+            <td>{{ 'LOGIC_EDIT.LAST_EXEC'|translate }}</td>
+            <td>
+              <ng-container *ngIf="logic">
+                {{ logic.last_run }}
+              </ng-container>
+            </td>
+            <td>{{ 'LOGIC_EDIT.NEXT_EXEC'|translate }}</td>
+            <td>
+              <ng-container *ngIf="logic">
+                {{ logic.next_exec }}
+              </ng-container>
+            </td>
           </tr>
 
           <tr><td colspan="4"></td></tr>
           <tr>
-            <td><strong>Parameter</strong></td>
-            <td colspan="3"><strong>Wert</strong></td>
+            <td><strong>{{ 'LOGIC_EDIT.PARAMETER'|translate }}</strong></td>
+            <td colspan="3"><strong>{{ 'LOGIC_EDIT.VALUE'|translate }}</strong></td>
           </tr>
           <tr>
             <td>Cycle</td>
             <td colspan="3">
-              <input type="text" autocomplete="off" id="cycle" style="width: 200px; border: 1px solid #ddd;" name="cycle"/>
+              <input [(ngModel)]="logic.cycle" type="number" min="0" max="65535" pInputText placeholder="" pInputText name="cycle" style="width: 150px" [ngStyle]="{'width': 6}"/>
             </td>
           </tr>
           <tr>
             <td>Crontab(s)</td>
             <td colspan="3">
-              <input type="text" autocomplete="off" id="crontab" style="width: 200px; border: 1px solid #ddd;" name="crontab"/>
+              <input [(ngModel)]="logic.crontab" type="text" pInputText placeholder="" pInputText name="crontab" style="width: 400px" [ngStyle]="{'width': 50}"/>
             </td>
           </tr>
           <tr>
@@ -99,19 +109,19 @@
           </tr>
         </table>
 
-       <div style="margin-left: 10px; padding-top: 20px; padding-bottom: 10px;"><strong>Plugin spezifische Logik Parameter</strong></div>
+       <div style="margin-left: 10px; padding-top: 20px; padding-bottom: 10px;"><strong>{{ 'LOGIC_EDIT.PLUGIN_SPECIFIC'|translate }}</strong></div>
         <table id="3" class="table table-striped">
-          <th width="15%">Parameter</th>
-          <th>Wert</th>
-          <th>Typ</th>
-          <th>Beschreibung</th>
+          <th width="15%">{{ 'LOGIC_EDIT.PARAMETER'|translate }}</th>
+          <th>{{ 'LOGIC_EDIT.VALUE'|translate }}</th>
+          <th>{{ 'LOGIC_EDIT.TYPE'|translate }}</th>
+          <th>{{ 'LOGIC_EDIT.DESCRIPTION'|translate }}</th>
           <tr>
             <td>visu_acl</td>
             <td>
               <input type="text" autocomplete="off" id="visu_acl" style="width: 200px; border: 1px solid #ddd;" name="visu_acl"/>
             </td>
             <td>bool</td>
-            <td>Logik darf durch Visu getriggert werden</td>
+            <td>Logik darf durch Visu getriggert werden (Dummy)</td>
           </tr>
           <tr>
             <td>test_acl</td>
@@ -119,7 +129,7 @@
               <input type="text" autocomplete="off" id="test_acl" style="width: 200px; border: 1px solid #ddd;" name="test_acl"/>
             </td>
             <td>bool</td>
-            <td>Logik darf durch Test-Plugin getriggert werden</td>
+            <td>Logik darf durch Test-Plugin getriggert werden (Dummy)</td>
           </tr>
           <tr>
             <td>test2_acl</td>
@@ -127,7 +137,7 @@
               <input type="text" autocomplete="off" id="test2_acl" style="width: 200px; border: 1px solid #ddd;" name="test2_acl"/>
             </td>
             <td>bool</td>
-            <td>Logik darf durch Plugin test2 getriggert werden</td>
+            <td>Logik darf durch Plugin test2 getriggert werden (Dummy)</td>
           </tr>
         </table>
 

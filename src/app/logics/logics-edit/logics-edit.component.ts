@@ -5,6 +5,8 @@ import {FilesApiService} from '../../common/services/files-api.service';
 import * as CodeMirror from 'codemirror';
 import {PluginsApiService} from '../../common/services/plugins-api.service';
 import {ItemsApiService} from '../../common/services/items-api.service';
+import {LogicsinfoType} from '../../common/models/logics-info';
+import {LogicsApiService} from '../../common/services/logics-api.service';
 
 @Component({
   selector: 'app-logics-edit',
@@ -14,8 +16,13 @@ import {ItemsApiService} from '../../common/services/items-api.service';
 
 export class LogicsEditComponent implements AfterViewChecked, OnInit {
 
+  logics: LogicsinfoType[];
+  logic: LogicsinfoType = <any>{};
+  newlogics: LogicsinfoType[];
+
 
   constructor(private route: ActivatedRoute,
+              private dataService: LogicsApiService,
               private fileService: FilesApiService,
               private pluginsapiService: PluginsApiService,
               private itemsapiService: ItemsApiService) { }
@@ -41,7 +48,7 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
   myTextareaWatchItemsOrig = '';
   cmOptionsWatchItems = {
     autorefresh: true,
-    lineWrapping: false
+    lineWrapping: true
   };
   cmOptions = {
     indentWithTabs: false,
@@ -107,6 +114,8 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
       this.rulers.push({color: '#eee', column: i * 4, lineStyle: 'dashed'});
     }
 
+    this.getLogicInfo();
+
     this.pluginsapiService.getPluginsAPI()
       .subscribe(
         (response) => {
@@ -156,6 +165,35 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
     };
   }
 
+
+  getLogicInfo() {
+    this.dataService.getLogics()
+      .subscribe(
+        (response) => {
+          this.logics = <LogicsinfoType[]>response['logics'];
+          this.logics.sort(function (a, b) {return (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0); });
+          for (const logic of this.logics) {
+            if (this.myEditFilename === logic.filename) {
+              console.warn('LogicsEditComponent.getLogics()', {logic});
+              this.logic = logic;
+              this.myTextareaWatchItems = this.logic.watch_item;
+            }
+          }
+
+          this.newlogics = <LogicsinfoType[]>response['logics_new'];
+          this.newlogics.sort(function (a, b) {return (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0); });
+          for (const newlogic of this.newlogics) {
+            if (this.myEditFilename === newlogic.filename) {
+              console.warn('LogicsEditComponent.getLogics()', {newlogic});
+              this.logic = newlogic;
+              this.myTextareaWatchItems = this.logic.watch_item;
+            }
+          }
+        }
+      );
+  }
+
+
   registerAutocompleteHelper(name, curDict) {
     CodeMirror.registerHelper('hint', name, function(editor) {
       const cur = editor.getCursor();
@@ -201,8 +239,6 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
 
   ngAfterViewChecked() {
     const editor1 = this.codeEditor.codeMirror;
-    const editor2 = this.codeEditorWatchItems.codeMirror;
-    editor2.refresh();
     if (editor1.getOption('fullScreen')) {
       editor1.setSize('100vw', '100vh');
     } else {
@@ -224,6 +260,10 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
             CodeMirror.commands.autocomplete_shng(cm, null, {completeSingle: false});
       }
     });
+
+    const editor2 = this.codeEditorWatchItems.codeMirror;
+    editor2.setSize('82vw');
+    editor2.refresh();
     editor2.on('keyup', function (cm, event) {
       if (!cm.state.completionActive && /*Enables keyboard navigation in autocomplete list*/
         (event.keyCode !== 8 &&

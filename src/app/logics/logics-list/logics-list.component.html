@@ -70,8 +70,7 @@
                   <ng-template #blocklyLink></ng-template>
                   <ng-template #noBlocklyLink>
                     <!--
-                    <a class="text-shng" [routerLink]="['/logics/edit', this.baseName(fn)]">{{ this.baseName(fn) }}</a>
-                    <a class="text-shng" href="../backend/logics_view.html?file_path={{ logic.pathname }}&logicname={{ logic.name }}">{{ logic.filename }}</a>
+                    <a class="text-shng" [routerLink]="['/logics/edit', logic.filename]">{{ logic.filename }}</a>
                     -->
                     <a class="text-shng" [routerLink]="['/logics/edit', logic.filename]">{{ logic.filename }}</a>
                   </ng-template>
@@ -147,7 +146,10 @@
                 </ng-container>
                 <ng-template #blocklyLink></ng-template>
                 <ng-template #noBlocklyLink>
+                  <!--
                   <a class="text-shng" href="logics_view.html?file_path={{ logic.pathname }}&logicname={{ logic.name }}">{{ logic.filename }}</a>
+                  -->
+                  <a class="text-shng" [routerLink]="['/logics/edit', logic.filename]">{{ logic.filename }}</a>
                 </ng-template>
               </td>
               <td class="p-1">
