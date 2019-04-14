@@ -186,11 +186,13 @@ export class PluginConfigComponent implements OnInit {
 
   listToString(list) {
     let result = '';
-    for (let i = 0; i < list.length; i++) {
-      if (i > 0) {
-        result += ' | ';
+    if (list !== undefined) {
+      for (let i = 0; i < list.length; i++) {
+        if (i > 0) {
+          result += ' | ';
+        }
+        result += list[i];
       }
-      result += list[i];
     }
     return result;
   }
@@ -204,6 +206,9 @@ export class PluginConfigComponent implements OnInit {
     // while (wrk.indexOf('  ') !== -1) {
     //   wrk =  wrk.replace(/  /g, ' ');
     // }
+    if (str.trim() === '') {
+      return <any>[];
+    }
     const list = <any>str.split('|');
     for (let i = 0; i < list.length; i++) {
       list[i] = list[i].trim();
@@ -219,8 +224,7 @@ export class PluginConfigComponent implements OnInit {
   //    for the modal dialog
   //
   rowClicked(event, rowdata) {
-    // console.warn('rowClicked')
-    // console.log({rowdata})
+    // console.warn('rowClicked');
     this.dialog_configname = rowdata.confname;
     this.dialog_pluginname = rowdata.plugin;
     this.rowclicked_foredit = rowdata;
@@ -299,11 +303,14 @@ export class PluginConfigComponent implements OnInit {
             'valid_list': vl,
             'valid_min': meta['parameters'][param]['valid_min'],
             'valid_max': meta['parameters'][param]['valid_max'],
-            'default': meta['parameters'][param]['q21_09Bad.txt'],
+            'default': meta['parameters'][param]['default'],
             'mandatory': meta['parameters'][param]['mandatory'],
             'value': conf[param],
             'desc': paramdesc
           };
+          if (paramdata['type'] === 'list') {
+            paramdata['default'] = this.listToString(meta['parameters'][param]['default']);
+          }
           if (meta['parameters'][param]['hide'] && (['str', 'int'].indexOf(meta['parameters'][param]['type']) !== -1)) {
             paramdata['type'] = 'hide' + '-' + meta['parameters'][param]['type'];
           }
@@ -325,6 +332,7 @@ export class PluginConfigComponent implements OnInit {
           } else {
             paramdata.value = <string>conf[param];
           }
+          // console.log('2:', {paramdata});
 
           // add to the table of configured plugins
           this.parameters.push(paramdata);
@@ -346,6 +354,7 @@ export class PluginConfigComponent implements OnInit {
         this.parameters.push(paramdata);
       }
     }
+
 /*
     // find out, if instance parameter is defined
     let instance_defined = false;

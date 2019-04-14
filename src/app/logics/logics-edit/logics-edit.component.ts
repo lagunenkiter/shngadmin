@@ -188,6 +188,9 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
 
   stringToList(str) {
     let wrk = str.trim();
+    if (wrk === '') {
+      return <any>[];
+    }
     wrk =  wrk.replace(/,/g, ' ');
     wrk =  wrk.replace(/\|/g, ' ');
     wrk =  wrk.replace(/   /g, ' ');
@@ -195,18 +198,6 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
       wrk =  wrk.replace(/  /g, ' ');
     }
     return <any>wrk.split(' ');
-  }
-
-
-  watchitemsFromList() {
-    this.myTextareaWatchItems = this.listToString(this.logic.watch_item_list);
-    return;
-  }
-
-
-  watchitemsToList() {
-    this.logic.watch_item_list = this.stringToList(this.myTextareaWatchItems);
-    return;
   }
 
 
@@ -234,7 +225,8 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
           this.logicCycleOrig = this.logic.cycle;
           this.logicCrontabOrig = this.logic.crontab;
 
-          this.watchitemsFromList();
+          // this.watchitemsFromList();
+          this.myTextareaWatchItems = this.listToString(this.logic.watch_item_list);
           this.logicWatchitemOrig = this.myTextareaWatchItems;
         }
       );
@@ -382,49 +374,81 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
   }
 
 
-  saveCode() {
-    console.log('LoggingConfigurationComponent.saveCode');
+  saveCode(reload = false) {
+    // console.log('LoggingConfigurationComponent.saveCode');
 
     this.fileService.saveFile('logics', this.myEditFilename, this.myTextarea)
       .subscribe(
         (response) => {
+          // after saving the code, set Orig var to signal the editor shows "unchanged code"
           this.myTextareaOrig = this.myTextarea;
+
+          if (reload) {
+            this.reloadLogic(this.logic.name);
+          }
         }
       );
   }
 
 
-  saveParameters() {
-    console.log('LoggingConfigurationComponent.saveParameters');
+  saveParameters(reload) {
+    // console.log('LoggingConfigurationComponent.saveParameters');
 
-    this.watchitemsToList();
-    console.warn('Hier fehlt noch das sichern der Parameter');
+    // this.watchitemsToList();
+    this.logic.watch_item_list = this.stringToList(this.myTextareaWatchItems);
 
+    const params = {};
+    params['cycle'] = this.logic.cycle;
+    params['crontab'] = this.logic.crontab;
+    params['watch_item'] =  this.logic.watch_item_list;
 
-    this.logicCycleOrig = this.logic.cycle;
-    this.logicCrontabOrig = this.logic.crontab;
+    this.dataService.saveLogicParameters(this.logic.name, params)
+      .subscribe(
+        (response) => {
+          // after saving the parameters, set Orig vars to signal the editor shows "unchanged values"
+          this.logicCycleOrig = this.logic.cycle;
+          this.logicCrontabOrig = this.logic.crontab;
 
-    this.watchitemsFromList();
-    this.logicWatchitemOrig = this.myTextareaWatchItems;
+          // this.watchitemsFromList();
+          this.myTextareaWatchItems = this.listToString(this.logic.watch_item_list);
+          this.logicWatchitemOrig = this.myTextareaWatchItems;
+
+          if (reload) {
+            this.reloadLogic(this.logic.name);
+          }
+        }
+      );
+
   }
 
 
   saveLogic(reload = false) {
     if (this.codeChanged()) {
-      this.saveCode();
+      if (this.parametersChanged()) {
+        this.saveCode();
+      } else {
+        this.saveCode(reload);
+      }
     }
     if (this.parametersChanged()) {
-      this.saveParameters();
+      this.saveParameters(reload);
     }
 
     const editor = this.codeEditor.codeMirror;
     editor.refresh();
 
-    if (reload) {
-      console.warn('Hier fehlt noch der Reload der Logik');
-    }
   }
 
 
-  // avm.monitor.trigger1, avm.monitor.trigger2, avm.monitor.trigger3, avm.monitor.trigger4, avm.monitor.is_call_incoming
+  reloadLogic(logicName) {
+    // console.log('reloadLogic', {logicName});
+    this.dataService.setLogicState(logicName, 'reload')
+      .subscribe(
+        (response) => {
+          // this.getLogics();
+        }
+      );
+  }
+
+
 }

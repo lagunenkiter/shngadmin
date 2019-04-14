@@ -147,7 +147,7 @@ export class SystemConfigComponent implements OnInit {
           'valid_list': vl,
           'valid_min': meta['parameters'][param]['valid_min'],
           'valid_max': meta['parameters'][param]['valid_max'],
-          'default': meta['parameters'][param]['q21_09Bad.txt'],
+          'default': meta['parameters'][param]['default'],
           'mandatory': meta['parameters'][param]['mandatory'],
           'value': data[param],
           'desc': paramdesc
@@ -241,7 +241,7 @@ export class SystemConfigComponent implements OnInit {
             'valid_list': vl,
             'valid_min': meta['parameters'][param]['valid_min'],
             'valid_max': meta['parameters'][param]['valid_max'],
-            'default': meta['parameters'][param]['q21_09Bad.txt'],
+            'default': meta['parameters'][param]['default'],
             'mandatory': meta['parameters'][param]['mandatory'],
             'value': data[param],
             'desc': paramdesc};
@@ -314,7 +314,7 @@ export class SystemConfigComponent implements OnInit {
           'valid_list': vl,
           'valid_min': meta['parameters'][param]['valid_min'],
           'valid_max': meta['parameters'][param]['valid_max'],
-          'default': meta['parameters'][param]['q21_09Bad.txt'],
+          'default': meta['parameters'][param]['default'],
           'mandatory': meta['parameters'][param]['mandatory'],
           'value': data[param],
           'desc': paramdesc};

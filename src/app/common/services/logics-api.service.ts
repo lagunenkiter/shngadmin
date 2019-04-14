@@ -79,6 +79,47 @@ export class LogicsApiService {
   }
 
 
+  saveLogicParameters(logicName, paramObj) {
+    // paramObj is a dict containing the entries of the parameter section in etc/logic.yamls
+    // parameters to be deleted must be included with an empty string as value!
+    console.warn('LogicsApiService.saveLogicParameters', {logicName}, {paramObj});
+
+    const apiUrl = sessionStorage.getItem('apiUrl');
+    let url = apiUrl + 'logics/' + logicName + '?action=' + 'saveparameters';
+    if (apiUrl.includes('localhost')) {
+      console.warn('LogicsApiService.saveLogicParameters', 'Cannot simulate saving parameters in dev environment\n', '- logic', logicName, ', action', paramObj);
+      return of(true);
+    }
+
+    return this.http.put(url, JSON.stringify(paramObj))
+      .pipe(
+        map(response => {
+          const result = <any>response;
+
+          if (result) {
+            // console.log('LogicsApiService.setLogicState', '- config', config, '\nresult', {result});
+            if (result.result === 'ok') {
+              // console.log('LogicsApiService.setLogicState', 'success');
+              return true;
+            } else {
+              console.log('LogicsApiService.saveLogicParameters', 'fail');
+              alert('LogicsApiService.saveLogicParameters:\n' + result.result + '\n' + result.description);
+              return false;
+            }
+
+          } else {
+            console.log('LogicsApiService.setLogicState', 'fail: undefined result');
+          }
+        }),
+        catchError((err: HttpErrorResponse) => {
+          console.error('LogicsApiService.saveLogicParameters: Could not save logic parameters' + ' - ' + err.error.error);
+          return of({});
+        })
+      );
+
+  }
+
+
 }
 
 
