@@ -39,10 +39,12 @@
     "DATE": "Datum",
     "TIME": "Zeit",
     "UPTIME": "Betriebszeit",
+    "UPTIME_HOST": "Betriebszeit Host",
     "PROPERTY": "Eigenschaft",
     "STATE": "Status",
 
     "PACKAGE": "Paket",
+    "PYTHON_PACKAGE": "Python Paket",
     "INSTALLED VERSION": "Installierte Version",
     "MINIMUM VERSION": "Minimale Version",
     "MAXIMUM VERSION": "Maximale Version",

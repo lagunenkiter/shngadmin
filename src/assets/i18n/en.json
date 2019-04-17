@@ -39,10 +39,12 @@
     "DATE": "Date",
     "TIME": "Time",
     "UPTIME": "Uptime",
+    "UPTIME_HOST": "Uptime Host",
     "PROPERTY": "Property",
     "STATE": "State",
 
     "PACKAGE": "Package",
+    "PYTHON_PACKAGE": "Python Package",
     "INSTALLED VERSION": "Installed Version",
     "MINIMUM VERSION": "Minimum Version",
     "MAXIMUM VERSION": "Maximum Version",

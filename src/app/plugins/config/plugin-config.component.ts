@@ -186,12 +186,16 @@ export class PluginConfigComponent implements OnInit {
 
   listToString(list) {
     let result = '';
-    if (list !== undefined) {
-      for (let i = 0; i < list.length; i++) {
-        if (i > 0) {
-          result += ' | ';
+    if (typeof list === 'string') {
+      result = list;
+    } else {
+      if (list !== undefined) {
+        for (let i = 0; i < list.length; i++) {
+          if (i > 0) {
+            result += ' | ';
+          }
+          result += list[i];
         }
-        result += list[i];
       }
     }
     return result;
