@@ -47,6 +47,7 @@
     "VERS_OK_NOT_RECENT": "Version geeignet, neuere Version verfügbar.",
     "VERS_OK_MAX_NOT_RECENT": "Maximale geeignete Version, neuere Version ungeeignet.",
     "VERS_MISSING": "Installiertes Paket fehlt.",
+    "VERS_NOT_OK": "Version nicht geeignet.",
 
     "PACKAGE": "Paket",
     "PYTHON_PACKAGE": "Python Paket",
