@@ -85,6 +85,7 @@
     "MQTT_SUPPORT": "Broker für die MQTT Unterstützung",
     "NODE_RED_SUPPORT": "Node-RED Dienst",
     "PASSWORD_HASH": "Password-Hash erzeugen",
+    "SHOW_PASSWORD": "Passwort anzeigen",
     "INACTIVE": "Nicht aktiv",
 
     "EVAL CHECKER": "eval Syntax Prüfer",
@@ -308,7 +309,11 @@
     "MANDATORY_VALUE": "Die Angabe dieses Parameters ist zwingend erforderlich und er darf nicht leer gelassen werden",
     "INVALID_KNX_ADDRESS": "ist keine gültige KNX Gruppenadresse",
     "INVALID_MAC_ADDRESS": "ist keine gültige MAC Adresse",
-    "INVALID_IP_ADDRESS": "ist keine gültige IP Adresse"
+    "INVALID_IP_ADDRESS": "ist keine gültige IP Adresse",
+    "OPEN_WEBIF": "Webinterface öffnen",
+    "OPEN_CONFIGINFO": "Konfigurationsdokumentation öffnen",
+    "OPEN_DOC": "Plugin-Dokumentation öffnen",
+    "OPEN_SUPPORT_THREAD": "Support Thread aufrufen"
   },
   "SCENES": {
     "SCENE": "Szene",
@@ -392,7 +397,8 @@
     "NEW_DEFINITION_FILE": "Neue Datei",
     "NEW_LOGIC": "Neue Logik",
     "NEW_SCENE": "Neue Szene",
-    "LINE_WRAPPING": "Zeilenumbruch"
+    "LINE_WRAPPING": "Zeilenumbruch",
+    "TRIGGER": "Auslösen"
   },
 
   "ERROR": {

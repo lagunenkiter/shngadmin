@@ -72,20 +72,25 @@ export class SystemConfigComponent implements OnInit {
   ngOnInit() {
     console.log('SystemConfigComponent.ngOnInit');
 
-    this.dataService.getConfig()
+    this.dataServiceServer.getServerinfo()
       .subscribe(
         (response) => {
-          this.config = response;
-//          this.schedulerinfo.sort(function (a, b) {return (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)});
-          console.log('getConfig', {response});
-          this.fillDialodData();
+
+          this.dataService.getConfig()
+            .subscribe(
+              (configResponse) => {
+                this.config = configResponse;
+                // console.log({response}, {configResponse});
+                this.fillDialogData();
+              }
+            );
         }
       );
 
   }
 
 
-  fillDialodData() {
+  fillDialogData() {
     this.fillCommonDialogData();
     this.fillHttpDialogData();
     this.fillAdminDialogData();
@@ -110,7 +115,9 @@ export class SystemConfigComponent implements OnInit {
     const meta = this.config.common.meta;
     const data = this.config.common.data;
 
+    // console.log({data});
     for (const param in meta.parameters) {
+      // console.log({param}, data[param]);
       if (meta.parameters.hasOwnProperty(param)) {
 
         // fill valuelist
@@ -133,13 +140,7 @@ export class SystemConfigComponent implements OnInit {
         }
 
         // fill description with active language
-        let paramdesc = '';
-        if (meta['parameters'][param]['description'] !== undefined) {
-          paramdesc = meta['parameters'][param]['description'][this.lang];
-          if (paramdesc === '' || paramdesc === undefined) {
-            paramdesc = meta['parameters'][param]['description']['en'];
-          }
-        }
+        const paramdesc = this.shared.getDescription(meta['parameters'][param]['description']);
 
         const paramdata = {
           'name': param,
@@ -231,7 +232,10 @@ export class SystemConfigComponent implements OnInit {
           if (meta['parameters'][param]['description'] !== undefined) {
             paramdesc = meta['parameters'][param]['description'][this.lang];
             if (paramdesc === '' || paramdesc === undefined) {
-              paramdesc = meta['parameters'][param]['description']['en'];
+              paramdesc = meta['parameters'][param]['description'][this.shared.getFallbackLanguage()];
+              if (paramdesc === '' || paramdesc === undefined) {
+                paramdesc = meta['parameters'][param]['description'][this.shared.getFallbackLanguage(1)];
+              }
             }
           }
 
@@ -304,7 +308,10 @@ export class SystemConfigComponent implements OnInit {
         if (meta['parameters'][param]['description'] !== undefined) {
           paramdesc = meta['parameters'][param]['description'][this.lang];
           if (paramdesc === '' || paramdesc === undefined) {
-            paramdesc = meta['parameters'][param]['description']['en'];
+            paramdesc = meta['parameters'][param]['description'][this.shared.getFallbackLanguage()];
+            if (paramdesc === '' || paramdesc === undefined) {
+              paramdesc = meta['parameters'][param]['description'][this.shared.getFallbackLanguage(1)];
+            }
           }
         }
 
@@ -576,4 +583,5 @@ export class SystemConfigComponent implements OnInit {
       );
     this.restart_core_button = false;
   }
+
 }

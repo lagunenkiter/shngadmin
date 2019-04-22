@@ -59,6 +59,10 @@ export class OlddataService implements OnInit {
       console.warn('getconfigDefaultLanguage: is undefined! (en used)');
       return 'en';
     }
+    const result = sessionStorage.getItem('default_language');
+    if (result !== undefined) {
+      return result;
+    }
     return this.shng_serverinfo.default_language;
   }
 

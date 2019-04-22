@@ -35,16 +35,11 @@ export class AppComponent implements OnInit {
 
 //    translate.setDefaultLang('de');
 
+//    this.dataService.getServerBasicinfo()
     this.dataService.getServerBasicinfo()
       .subscribe(
         (response: ServerInfo) => {
           this.dataService.shng_serverinfo = response;
-          sessionStorage.setItem('default_language', this.dataService.shng_serverinfo.default_language);
-          // sessionStorage.setItem('client_ip', this.dataService.shng_serverinfo.client_ip);
-          // sessionStorage.setItem('tz', this.dataService.shng_serverinfo.tz);
-          // sessionStorage.setItem('tzname', this.dataService.shng_serverinfo.tzname);
-          // sessionStorage.setItem('itemtree_fullpath', this.dataService.shng_serverinfo.itemtree_fullpath.toString());
-          // sessionStorage.setItem('itemtree_searchstart', this.dataService.shng_serverinfo.itemtree_searchstart.toString());
 
           this.shared.setGuiLanguage();
         },

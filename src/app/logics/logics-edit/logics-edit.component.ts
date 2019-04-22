@@ -338,7 +338,7 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
     });
 
     const editor2 = this.codeEditorWatchItems.codeMirror;
-    editor2.setSize('80vw');
+    editor2.setSize('80vw', 'auto');
     editor2.refresh();
     editor2.on('keyup', function (cm, event) {
       if (!cm.state.completionActive && /*Enables keyboard navigation in autocomplete list*/
@@ -437,6 +437,17 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
     const editor = this.codeEditor.codeMirror;
     editor.refresh();
 
+  }
+
+
+  triggerLogic() {
+    // console.log('triggerLogic', {logicName});
+    this.dataService.setLogicState(this.logic.name, 'trigger')
+      .subscribe(
+        (response) => {
+          // this.getLogics();
+        }
+      );
   }
 
 

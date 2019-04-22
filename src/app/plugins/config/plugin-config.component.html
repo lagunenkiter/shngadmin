@@ -230,7 +230,7 @@
 
 
 <!-- ---------------------------------------------------------------------------------------
-  -- Dialog for selecting a plugin to add to the configured plugins
+  -- Ad Dialog: For selecting a plugin to add to the configured plugins
   -->
 
 <p-dialog
@@ -265,14 +265,14 @@
         -->
           <table class="table table-striped table-hover">
             <colgroup>
-              <col width="140px">
+              <col width="160px">
               <col width="25px">
               <col minwidth="400px">
             </colgroup>
             <thead>
-              <th>Plugin</th>
-              <th>Multi-Instance</th>
-              <th>Description</th>
+              <th>{{'PLUGIN.PLUGINNAME'|translate}}</th>
+              <th>{{'PLUGIN.MULTI INSTANCE'|translate}}</th>
+              <th>{{'PLUGIN.DESCRIPTION'|translate}}</th>
             </thead>
             <ng-container *ngFor="let iplugin of plugins_installed_list">
               <ng-container *ngIf="(plugins_installed[iplugin].type === plugintype) || (plugintype === 'unclassified' && plugintypes.indexOf(plugins_installed[iplugin].type) === -1 )">
@@ -290,7 +290,7 @@
 
                   </td>
                   <td>
-                    {{plugins_installed[iplugin].description}}
+                    {{plugins_installed[iplugin]['disp_description']}}
                   </td>
                 </tr>
               </ng-container>

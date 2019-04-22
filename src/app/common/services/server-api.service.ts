@@ -84,7 +84,11 @@ export class ServerApiService {
         map(response => {
           this.shng_serverinfo = <ServerInfo>response;
           const result = <ServerInfo>response;
-          sessionStorage.setItem('default_language', this.shng_serverinfo.default_language);
+          const lang = sessionStorage.getItem('default_language');
+          // console.warn({lang});
+          if (lang === undefined) {
+            sessionStorage.setItem('default_language', this.shng_serverinfo.default_language);
+          }
           sessionStorage.setItem('client_ip', this.shng_serverinfo.client_ip);
           // sessionStorage.setItem('tz', this.shng_serverinfo.tz);
           // sessionStorage.setItem('tzname', this.shng_serverinfo.tzname);
@@ -111,18 +115,23 @@ export class ServerApiService {
   }
 
   getServerinfo() {
+    console.log('ServerApiService.getServerinfo');
     const apiUrl = sessionStorage.getItem('apiUrl');
     let url = apiUrl + 'server/info/';
     if (apiUrl.includes('localhost')) {
       url += 'default.json';
     }
-    console.log('getServerinfo()');
     return this.http.get(url)
       .pipe(
         map(response => {
+          console.log('getServerinfo(): map');
           this.shng_serverinfo = <ServerInfo> response;
           const result = response;
-          sessionStorage.setItem('default_language', this.shng_serverinfo.default_language);
+          const lang = sessionStorage.getItem('default_language');
+          // console.warn({lang});
+          if (lang === undefined) {
+            sessionStorage.setItem('default_language', this.shng_serverinfo.default_language);
+          }
           sessionStorage.setItem('client_ip', this.shng_serverinfo.client_ip);
           sessionStorage.setItem('tz', this.shng_serverinfo.tz);
           sessionStorage.setItem('tzname', this.shng_serverinfo.tzname);
@@ -130,6 +139,9 @@ export class ServerApiService {
           sessionStorage.setItem('itemtree_searchstart', this.shng_serverinfo.itemtree_searchstart.toString());
           sessionStorage.setItem('core_branch', this.shng_serverinfo.core_branch);
           sessionStorage.setItem('plugins_branch', this.shng_serverinfo.plugins_branch);
+
+          sessionStorage.setItem('fallback_language_order', JSON.stringify(this.shng_serverinfo.fallback_language_order.split(',')));
+
           const hostip = sessionStorage.getItem('hostIp');
           if (hostip === 'localhost') {
             sessionStorage.setItem('wsHost', this.shng_serverinfo.websocket_host);

@@ -73,7 +73,7 @@
                 </td>
                 <td style="padding-top:13px;">
                   <input class="form-control" [(ngModel)]="pwd_clear" [type]="pwd_show ? 'text' : 'password'" id="plainpass" size="20" maxlength="50" style="width: 250px;"/>
-                  <input type="checkbox" [(ngModel)]="pwd_show" style="..." id="showtext"  onclick="this.pwd_show = true;"> {{ 'Passwort anzeigen' }}
+                  <input type="checkbox" [(ngModel)]="pwd_show" style="..." id="showtext"  onclick="this.pwd_show = true;"> {{ 'SERVICES.SHOW_PASSWORD'|translate }}
                 </td>
                 <td style="padding-top:22px;">
                   <button pButton type="button" icon="fa fa-toolbox" (click)="createPwdHash()" label="{{'BUTTON.CREATE_HASH'|translate}}" class="ui-button-success"></button>

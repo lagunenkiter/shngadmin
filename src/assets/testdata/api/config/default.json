@@ -5,6 +5,8 @@
       "lon": 10.0459898,
       "elev": 20,
       "tz": "Europe/Berlin",
+      "default_language": "de",
+      "fallback_language_order": "en,de",
       "deprecated_warnings": true,
       "use_conditional_triggers": true
     },
@@ -62,6 +64,18 @@
           "description": {
             "de": "Standard-Sprache der SmartHomeNG Installation",
             "en": "Default language of the SmartHomeNG installation"
+          }
+        },
+        "fallback_language_order": {
+          "type": "str",
+          "default": "en,de",
+          "valid_list": [
+            "en,de",
+            "de,en"
+          ],
+          "description": {
+            "de": "Reihenfolge der Sprachen in der Texte gesucht werden, wenn der Text in der gewählten Sprache nicht vorhanden ist",
+            "en": "Order of languages in which texts are searched, if the text is not available in the selected language"
           }
         },
         "assign_compatibility": {

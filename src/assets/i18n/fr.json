@@ -40,10 +40,13 @@
     "DATE": "Date",
     "TIME": "heure",
     "UPTIME": "Disponibilité",
+    "UPTIME_HOST": ">SYSTEM.UPTIME_HOST",
+
     "PROPERTY": "Propriété",
     "STATE": "Etat",
 
     "PACKAGE": "Paquet",
+    "PYTHON_PACKAGE": ">SYSTEM.PYTHON_PACKAGE",
     "INSTALLED VERSION": "Version installée",
     "MINIMUM VERSION": "Version minimale",
     "MAXIMUM VERSION": "Version maximale",
@@ -85,6 +88,7 @@
     "MQTT_SUPPORT": "Courtier pour le support MQTT",
     "NODE_RED_SUPPORT": "Service Node-RED",
     "PASSWORD_HASH": "Générer hachage de mot de passe",
+    "SHOW_PASSWORD": ">SERVICES.SHOW_PASSWORD",
     "INACTIVE": "Pas actif",
 
     "EVAL CHECKER": "Contrôleur de syntaxe 'eval'",
@@ -128,9 +132,9 @@
     "Stopping: Stopping threads": "Arrêter: Arrêt des tâches",
     "Stopped": "Arrêté",
 
-    "Restart clicked": "Neustart ausgelöst",
-    "not active": "Nicht aktiv",
-    "Running (dummy)": "Aktiv (dummy)"
+    "Restart clicked": ">SHNG_STATE.Restart clicked",
+    "not active": "Pas actif",
+    "Running (dummy)": "Actif (dummy)"
   },
 
   "SHNG_STATECODE": {
@@ -315,7 +319,11 @@
     "MANDATORY_VALUE": "Paramètre obligatoire, ne peut pas rester vide",
     "INVALID_KNX_ADDRESS": "n'est pas une adresse de groupe KNX valide",
     "INVALID_MAC_ADDRESS": "n'est pas une adresse MAC valide",
-    "INVALID_IP_ADDRESS": "n'est pas une adresse IP valide"
+    "INVALID_IP_ADDRESS": "n'est pas une adresse IP valide",
+    "OPEN_WEBIF": ">OPEN_WEBIF",
+    "OPEN_CONFIGINFO": ">OPEN_CONFIGINFO",
+    "OPEN_DOC": ">OPEN_DOC",
+    "OPEN_SUPPORT_THREAD": ">OPEN_SUPPORT_THREAD"
   },
 
   "SCENES": {
@@ -375,7 +383,7 @@
   "LOGGING": {
     "CONFIG_FILE": "Fichier de configuration",
     "CONFIG_ERROR": "Erreur de configuration - Configuration non enregistrée!",
-    "CONFIG_ERROR_TEXT": "Erreur trouvé dans fichier de configuration.\nFormat invalide du fichier de configuration.\n",
+    "CONFIG_ERROR_TEXT": "Erreur trouvé dans fichier de configuration.\nFormat invalide du fichier de configuration.\n"
   },
 
   "BUTTON": {
@@ -403,7 +411,8 @@
     "NEW_DEFINITION_FILE": "Nouveau fichier",
     "NEW_LOGIC": "Nouvelle logique",
     "NEW_SCENE": "Nouvelle scène",
-    "LINE_WRAPPING": "Renvoie à la ligne"
+    "LINE_WRAPPING": "Renvoie à la ligne",
+    "TRIGGER": ">BUTTON.TRIGGER"
   },
 
   "ERROR": {
@@ -448,8 +457,8 @@
   "False": "Faux",
 
   "CONFIGURATION": "Configuration",
-  "RESTART FOR CHANGES": "Änderungen werden erst nach einem Neustart von SmartHomeNG wirksam",
-  "RESTART LOGIC FOR CHANGES": "Änderungen werden erst nach einem Neustart der Logik wirksam",
+  "RESTART FOR CHANGES": ">RESTART FOR CHANGES",
+  "RESTART LOGIC FOR CHANGES": ">RESTART LOGIC FOR CHANGES",
 
   "LINEBREAK": "Saut de ligne"
 

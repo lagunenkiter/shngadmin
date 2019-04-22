@@ -66,5 +66,10 @@ export class PluginsComponent implements OnInit {
     this.modalRef = this.modalService.show(template, {animated: false});
     console.log('openModal: ' + parm);
   }
+
+  goToLink(url: string) {
+    window.open(url, '_blank');
+  }
+
 }
 

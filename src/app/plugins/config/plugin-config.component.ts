@@ -99,75 +99,76 @@ export class PluginConfigComponent implements OnInit {
               private router: Router) { }
 
 
-  ngOnInit() {
+ngOnInit() {
     // console.log('PluginConfigComponent.ngOnInit');
 
-    // this.translate.use(this.lang);
-    this.shared.setGuiLanguage();
-    this.lang = sessionStorage.getItem('default_language');
-
-
-    this.pluginsdataService.getPluginsConfig()
+    this.serverdataService.getServerinfo()
       .subscribe(
-        (response) => {
-          this.pluginconflist = <any>response;
-          // console.log(this.pluginconflist);
+        (serverdataResponse) => {
 
-          for (const plg in this.pluginconflist.plugin_config) {
-            if (this.pluginconflist.plugin_config.hasOwnProperty(plg) ) {
-              const confname = plg;
-              let plgname = this.pluginconflist.plugin_config[plg]['plugin_name'];
-              if (plgname === undefined) {
-                plgname = this.pluginconflist.plugin_config[plg]['class_path'];
-              }
-              const instance = this.pluginconflist.plugin_config[plg]['instance'];
+          this.shared.setGuiLanguage();
 
-              // get logo for plugin type
-              const meta = this.pluginconflist.plugin_config[confname]['_meta'];
+          this.pluginsdataService.getPluginsConfig()
+            .subscribe(
+              (response) => {
+                this.pluginconflist = <any>response;
+                // console.log(this.pluginconflist);
 
-              let deprecated = '-';
-              if (meta.plugin.state && meta.plugin.state.toLowerCase() === 'deprecated') {
-                deprecated = '+';
-              } else {
-                deprecated = '-';
-              }
-              const conf = {'confname': confname, 'instance': instance, 'plugin': deprecated + plgname, 'desc': '' };
+                for (const plg in this.pluginconflist.plugin_config) {
+                  if (this.pluginconflist.plugin_config.hasOwnProperty(plg) ) {
+                    const confname = plg;
+                    let plgname = this.pluginconflist.plugin_config[plg]['plugin_name'];
+                    if (plgname === undefined) {
+                      plgname = this.pluginconflist.plugin_config[plg]['class_path'];
+                    }
+                    const instance = this.pluginconflist.plugin_config[plg]['instance'];
 
-              let enabled = 'true';
-              if (this.pluginconflist.plugin_config[plg]['plugin_enabled'] === 'False') {
-                enabled = 'false';
-              }
-              // is plugin enabled?
-              conf['enabled'] = enabled;
+                    // get logo for plugin type
+                    const meta = this.pluginconflist.plugin_config[confname]['_meta'];
 
-              if (meta === undefined) {
-                conf['type'] = 'classic';
-              } else {
-                conf['type'] = meta.plugin.type;
-              }
+                    let deprecated = '-';
+                    if (meta.plugin.state && meta.plugin.state.toLowerCase() === 'deprecated') {
+                      deprecated = '+';
+                    } else {
+                      deprecated = '-';
+                    }
+                    const conf = {'confname': confname, 'instance': instance, 'plugin': deprecated + plgname, 'desc': '' };
 
-              // get description from plugin_config (faster)
-              let desc = this.pluginconflist.plugin_config[plg]['_description'];
-              if (conf['type'] === undefined || conf['type'] === 'classic') {
-                conf['type'] = 'classic';
-                desc = this.pluginconflist.plugin_config[plg]['_meta']['plugin']['description'];
-              }
-              if (desc !== undefined) {
-                // if a description is defined
-                conf['desc'] = desc[this.lang];
-                if (conf['desc'] === undefined) {
-                  // if description in selected language is undefined, use fallbak language
-                  conf['desc'] = desc[this.shared.getFallbackLanguage()];
+                    let enabled = 'true';
+                    if (this.pluginconflist.plugin_config[plg]['plugin_enabled'] === 'False') {
+                      enabled = 'false';
+                    }
+                    // is plugin enabled?
+                    conf['enabled'] = enabled;
+
+                    if (meta === undefined) {
+                      conf['type'] = 'classic';
+                    } else {
+                      conf['type'] = meta.plugin.type;
+                    }
+
+                    // get description from plugin_config (faster)
+                    let desc = this.pluginconflist.plugin_config[plg]['_description'];
+                    if (conf['type'] === undefined || conf['type'] === 'classic') {
+                      conf['type'] = 'classic';
+                      desc = this.pluginconflist.plugin_config[plg]['_meta']['plugin']['description'];
+                    }
+                    // get description (if defined)
+                    conf['desc'] = this.shared.getDescription(desc);
+
+                    // add to the table of configured plugins
+                    this.configuredplugins.push(conf);
+                  }
                 }
-              }
 
-              // add to the table of configured plugins
-              this.configuredplugins.push(conf);
-            }
-          }
+              }
+            );
 
         }
       );
+
+
+
 
 
     this.cols = [
@@ -248,9 +249,7 @@ export class PluginConfigComponent implements OnInit {
       desc = meta['plugin']['description'];
     }
     this.dialog_readonly = this.pluginconflist.readonly;
-    if (desc !== null && desc !== undefined) {
-      this.dialog_description = desc[this.lang];
-    }
+    this.dialog_description = this.shared.getDescription((desc));
 
     this.plugin_enabled = true;
     if (conf.plugin_enabled !== undefined) {
@@ -290,13 +289,7 @@ export class PluginConfigComponent implements OnInit {
           }
 
           // fill description with active language
-          let paramdesc = '';
-          if (meta['parameters'][param]['description'] !== undefined) {
-            paramdesc = meta['parameters'][param]['description'][this.lang];
-            if (paramdesc === '' || paramdesc === undefined) {
-              paramdesc = meta['parameters'][param]['description']['en'];
-            }
-          }
+          const paramdesc = this.shared.getDescription(meta['parameters'][param]['description']);
 
           const paramdescBlocks = [];
           paramdescBlocks.push(paramdesc);
@@ -537,6 +530,12 @@ export class PluginConfigComponent implements OnInit {
           this.spinner_display = false;
           this.add_display = true;
 
+          // select display language for plugin descriptions
+          for (let p in this.plugins_installed) {
+            if (p in this.plugins_installed) {
+              this.plugins_installed[p]['disp_description'] = this.shared.getDescription(this.plugins_installed[p].description);
+            }
+          }
           for (let i = 0; i < this.plugintypes.length; i++) {
             this.plugintypes_expanded[i] = false;
           }

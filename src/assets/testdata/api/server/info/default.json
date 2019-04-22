@@ -1,5 +1,6 @@
 {
   "default_language": "de",
+  "fallback_language_order": "en,de",
   "client_ip": "1.2.3.4",
   "itemtree_fullpath": false,
   "itemtree_searchstart": 2,

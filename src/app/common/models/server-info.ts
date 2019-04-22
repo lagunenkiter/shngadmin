@@ -4,6 +4,7 @@
 //
 export interface ServerInfo {
   default_language: string;
+  fallback_language_order: string;
   client_ip: string;
   itemtree_fullpath: boolean;
   itemtree_searchstart: number;

@@ -3,11 +3,16 @@ import { Injectable } from '@angular/core';
 
 import {TranslateService} from '@ngx-translate/core';
 import {OlddataService} from './olddata.service';
+import {ServerInfo} from '../models/server-info';
+import {ServerApiService} from './server-api.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SharedService {
+
+  fallback_language_order: string[];
+
 
   constructor(private translate: TranslateService,
               private dataService: OlddataService) { }
@@ -77,8 +82,8 @@ export class SharedService {
   displayDateTime(datetime) {
     if (datetime) {
       let datew = datetime.split(' ')[0];
-      datew = datew.split('-')
-      const date = datew[2] + '.' + datew[1] + '.' + datew[0]
+      datew = datew.split('-');
+      const date = datew[2] + '.' + datew[1] + '.' + datew[0];
       const time = datetime.split(' ')[1].split('.')[0];
 //      const tz = this.dataService.getconfig('tzname');
       const tz = sessionStorage.getItem('tzname');
@@ -238,7 +243,7 @@ export class SharedService {
       return {name: 'IE', version: (tem[1] || '')};
     }
     if (M[1] === 'Chrome') {
-      tem = ua.match(/\bOPR|Edge\/(\d+)/)
+      tem = ua.match(/\bOPR|Edge\/(\d+)/);
       if (tem != null)   {return {name: 'Opera', version: tem[1]}; }
     }
     M = M[2] ? [M[1], M[2]] : [navigator.appName, navigator.appVersion, '-?'];
@@ -269,10 +274,33 @@ export class SharedService {
   // getFallbackLanguage() returns the fallback language
   // (must be 'en' or 'de' (because only those translations
   // have to exist
-  getFallbackLanguage() {
-    return 'en';
+  getFallbackLanguage(index = 0) {
+    this.fallback_language_order = JSON.parse(sessionStorage.getItem('fallback_language_order'));
+    // console.log('SharedService.getFallbackLanguage: this.fallback_language_order set to', this.fallback_language_order);
+    if (this.fallback_language_order === null) {
+      const private_fallback_language_order = ['en', 'de', 'xx'];
+      console.warn('SharedService.getFallbackLanguage: private_fallback_language_order, set to', private_fallback_language_order);
+      return private_fallback_language_order[index];
+    }
+    return this.fallback_language_order[index];
+  }
+
+  // ---------------------------------------------------------
+  // getDescription(descriptionDict) returns the desciption
+  // (if neccesary in the fallback language)
+  getDescription(descriptionDict) {
+    let desc = '';
+    if (descriptionDict !== undefined && descriptionDict !== null) {
+      desc = descriptionDict[sessionStorage.getItem('default_language')];
+
+      if (desc === undefined || desc === '') {
+        // if description in selected language is undefined, use fallback language
+        desc = descriptionDict[this.getFallbackLanguage(0)];
+        if (desc === undefined || desc === null || desc === '') {
+          desc = descriptionDict[this.getFallbackLanguage(1)];
+        }
+      }
+    }
+    return desc;
   }
 }
-
-
-
