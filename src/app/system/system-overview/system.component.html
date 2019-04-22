@@ -173,7 +173,7 @@
               <td class="py-1">{{ pypipackage.pypi_version }}</td>
             </ng-container>
             <ng-container *ngIf="pypipackage.pypi_version_ok && !pypipackage.vers_recent">
-              <td class="py-1" style="color: green; font-weight: bold;">{{ pypipackage.pypi_version }} <i class="fa fa-check-circle"></i></td>
+              <td class="py-1" style="color: green; font-weight: bold;">{{ pypipackage.pypi_version }} <i title="{{ 'SYSTEM.VERS_OK_RECENT'|translate }}" class="fa fa-check-circle"></i></td>
             </ng-container>
             <ng-container *ngIf="!pypipackage.pypi_version_ok">
               <td class="py-1" style="color: red;">{{ pypipackage.pypi_version || 'SYSTEM.UNKNOWN'|translate }} <i title="{{ 'SYSTEM.VERS_NOT_OK'|translate }}" class="far fa-times-circle"></i></td>
@@ -232,7 +232,7 @@
               <!--        <td class="py-1">{{ reqinfodisplay[pypipackage.name] }}</td> -->
 
               <ng-container *ngIf="pypipackage.pypi_version_ok && (pypipackage.vers_recent)">
-                <td class="py-1">{{ pypipackage.pypi_version }} <i class="far fa-check-circle"></i></td>
+                <td class="py-1">{{ pypipackage.pypi_version }} <i title="{{ 'SYSTEM.VERS_OK_RECENT'|translate }}" class="far fa-check-circle"></i></td>
               </ng-container>
               <ng-container *ngIf="pypipackage.pypi_version_ok && !pypipackage.vers_recent">
                 <td class="py-1" style="color: green; font-weight: bold;">{{ pypipackage.pypi_version }}</td>
@@ -287,7 +287,7 @@
               <!--        <td class="py-1">{{ reqinfodisplay[pypipackage.name] }}</td> -->
 
               <ng-container *ngIf="pypipackage.pypi_version_ok && (pypipackage.vers_recent)">
-                <td class="py-1">{{ pypipackage.pypi_version }} <i class="far fa-check-circle"></i></td>
+                <td class="py-1">{{ pypipackage.pypi_version }} <i title="{{ 'SYSTEM.VERS_OK_RECENT'|translate }}" class="far fa-check-circle"></i></td>
               </ng-container>
               <ng-container *ngIf="pypipackage.pypi_version_ok && !pypipackage.vers_recent">
                 <td class="py-1" style="color: green; font-weight: bold;">{{ pypipackage.pypi_version }}</td>
