@@ -46,6 +46,7 @@
     "VERS_OK_RECENT": "Version ok and recent.",
     "VERS_OK_NOT_RECENT": "Version ok, newer version available.",
     "VERS_OK_MAX_NOT_RECENT": "Maximum version that is ok, newer version not ok.",
+    "VERS_MISSING": "Installed package missing.",
 
     "PACKAGE": "Package",
     "PYTHON_PACKAGE": "Python Package",
