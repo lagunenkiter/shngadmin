@@ -31,7 +31,7 @@
     "SHNG_VERSION": "Version de SmartHomeNG",
     "IN": "dans",
     "SHNG_PLG_VERSION": "Version des extensions",
-    "HOST": "hôte",
+    "HOST": "Hôte",
     "OS": "Système d'exploitation",
     "ARCHITECTURE": "architecture",
     "USER": "Utilisateur du SE",
@@ -40,13 +40,18 @@
     "DATE": "Date",
     "TIME": "heure",
     "UPTIME": "Disponibilité",
-    "UPTIME_HOST": ">SYSTEM.UPTIME_HOST",
-
+    "UPTIME_HOST": "Disponibilité de l'hôte",
     "PROPERTY": "Propriété",
     "STATE": "Etat",
 
+    "VERS_OK_RECENT": ">SYSTEM.VERS_OK_RECENT",
+    "VERS_OK_NOT_RECENT": ">SYSTEM.VERS_OK_NOT_RECENT",
+    "VERS_OK_MAX_NOT_RECENT": ">SYSTEM.",
+    "VERS_MISSING": ">SYSTEM.VERS_OK_MAX_NOT_RECENT",
+    "VERS_NOT_OK": ">SYSTEM.VERS_NOT_OK",
+
     "PACKAGE": "Paquet",
-    "PYTHON_PACKAGE": ">SYSTEM.PYTHON_PACKAGE",
+    "PYTHON_PACKAGE": "Paquet Python",
     "INSTALLED VERSION": "Version installée",
     "MINIMUM VERSION": "Version minimale",
     "MAXIMUM VERSION": "Version maximale",
@@ -88,8 +93,8 @@
     "MQTT_SUPPORT": "Courtier pour le support MQTT",
     "NODE_RED_SUPPORT": "Service Node-RED",
     "PASSWORD_HASH": "Générer hachage de mot de passe",
-    "SHOW_PASSWORD": ">SERVICES.SHOW_PASSWORD",
-    "INACTIVE": "Pas actif",
+    "SHOW_PASSWORD": "Afficher mot de passe",
+    "INACTIVE": "Inactif",
 
     "EVAL CHECKER": "Contrôleur de syntaxe 'eval'",
     "YAML CHECKER": "Contrôleur de syntaxe YAML",
@@ -132,8 +137,8 @@
     "Stopping: Stopping threads": "Arrêter: Arrêt des tâches",
     "Stopped": "Arrêté",
 
-    "Restart clicked": ">SHNG_STATE.Restart clicked",
-    "not active": "Pas actif",
+    "Restart clicked": "Redémarrage demandé",
+    "not active": "Inactif",
     "Running (dummy)": "Actif (dummy)"
   },
 
@@ -320,10 +325,10 @@
     "INVALID_KNX_ADDRESS": "n'est pas une adresse de groupe KNX valide",
     "INVALID_MAC_ADDRESS": "n'est pas une adresse MAC valide",
     "INVALID_IP_ADDRESS": "n'est pas une adresse IP valide",
-    "OPEN_WEBIF": ">OPEN_WEBIF",
-    "OPEN_CONFIGINFO": ">OPEN_CONFIGINFO",
-    "OPEN_DOC": ">OPEN_DOC",
-    "OPEN_SUPPORT_THREAD": ">OPEN_SUPPORT_THREAD"
+    "OPEN_WEBIF": "Ouvrir interface web",
+    "OPEN_CONFIGINFO": "Ouvrir documentation de configuration",
+    "OPEN_DOC": "Ouvrir documentation de l'extension",
+    "OPEN_SUPPORT_THREAD": "Ouvrir fil de support"
   },
 
   "SCENES": {
@@ -412,7 +417,7 @@
     "NEW_LOGIC": "Nouvelle logique",
     "NEW_SCENE": "Nouvelle scène",
     "LINE_WRAPPING": "Renvoie à la ligne",
-    "TRIGGER": ">BUTTON.TRIGGER"
+    "TRIGGER": "Déclencher"
   },
 
   "ERROR": {
@@ -457,8 +462,8 @@
   "False": "Faux",
 
   "CONFIGURATION": "Configuration",
-  "RESTART FOR CHANGES": ">RESTART FOR CHANGES",
-  "RESTART LOGIC FOR CHANGES": ">RESTART LOGIC FOR CHANGES",
+  "RESTART FOR CHANGES": "Les changements deviennent seulement actifs après un redémarrage de SmartHomeNG",
+  "RESTART LOGIC FOR CHANGES": "Les changements deviennent seulement actifs après un redémarrage de la logique",
 
   "LINEBREAK": "Saut de ligne"
 

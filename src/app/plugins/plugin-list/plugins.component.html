@@ -7,12 +7,12 @@
       <th style="width: 30px; border-top: 0"></th>
       <th style="width: 150px; border-top: 0">{{ 'PLUGIN.TYPE'|translate }}</th>
       <th style="width: 200px; border-top: 0">{{ 'PLUGIN.CONFIGNAME'|translate }}</th>
-      <th style="width: 250px; border-top: 0">{{ 'PLUGIN.PLUGINNAME'|translate }}</th>
+      <th style="width: 200px; border-top: 0">{{ 'PLUGIN.PLUGINNAME'|translate }}</th>
       <th style="width: 160px; border-top: 0">{{ 'PLUGIN.INSTANCE'|translate }}</th>
       <th style="width: 150px; border-top: 0">{{ 'PLUGIN.VERSION'|translate }}</th>
-      <th style="width: 120px; border-top: 0">{{ 'PLUGIN.MULTI  INSTANCE'|translate }}</th>
-      <th style="width: 40px;  border-top: 0;" >{{ 'PLUGIN.WEBIF'|translate }}</th>
-      <th style="width: 260px; border-top: 0;" >{{ 'PLUGIN.HELP'|translate }}</th>
+      <th style="width: 110px; border-top: 0">{{ 'PLUGIN.MULTI  INSTANCE'|translate }}</th>
+      <th style="width: 40px;  border-top: 0" >{{ 'PLUGIN.WEBIF'|translate }}</th>
+      <th style="width: 260px; border-top: 0" >{{ 'PLUGIN.HELP'|translate }}</th>
     </tr>
     </thead>
     <tbody>
@@ -93,7 +93,7 @@
               -->
             </ng-container>
             <ng-container *ngIf="plugin.metadata.documentation !== undefined && plugin.metadata.documentation !== ''">
-              <button name="webif" class="btn btn-outline-dark btn-sm mr-1" (click)="goToLink(plugin.metadata.documentation);"><i class="far fa-file-alt" aria-hidden="true" title="{{'PLUGIN.OPEN_DOC'|translate}}"></i></button>
+              <button name="webif" class="btn btn-outline-dark btn-sm mr-1" (click)="goToLink(plugin.metadata.documentation);"><i class="fas fa-book fa-lg" aria-hidden="true" title="{{'PLUGIN.OPEN_DOC'|translate}}"></i></button>
               <!--
               <a href="{{plugin.metadata.documentation}}" target="_blank">
                 <img src="assets/img/read-manual.svg" style="width: 35px; padding-right: 10px; cursor: pointer;"/>
@@ -101,7 +101,7 @@
               -->
             </ng-container>
             <ng-container *ngIf="plugin.metadata.support !== undefined && plugin.metadata.support !== ''">
-              <button name="webif" class="btn btn-outline-dark btn-sm mr-1" (click)="goToLink(plugin.metadata.support);"><i class="far fa-envelope" aria-hidden="true" title="{{'PLUGIN.OPEN_SUPPORT_THREAD'|translate}}"></i></button>
+              <button name="webif" class="btn btn-outline-dark btn-sm mr-1" (click)="goToLink(plugin.metadata.support);"><i class="fas fa-comment-dots fa-lg" aria-hidden="true" title="{{'PLUGIN.OPEN_SUPPORT_THREAD'|translate}}"></i></button>
               <!--
               <a href="{{plugin.metadata.support}}" target="_blank">
                 <img src="assets/img/forum_chat2.svg" style="width: 25px; cursor: pointer;"/>
