@@ -274,6 +274,8 @@
   },
   "PLUGIN": {
     "ADD": "Add Plugin",
+    "ENABLED": "Enabled",
+    "DISABLED": "Disabled",
     "TYPE": "Type",
     "CONFIGNAME": "Configname",
     "PLUGINNAME": "Plugin",

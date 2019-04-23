@@ -21,10 +21,10 @@
         <tr>
           <td class="py-1">
             <ng-container *ngIf="plugin.stopped === true">
-              <fa-icon style="color: red" [icon]="faPauseCircle"></fa-icon>
+              <fa-icon style="color: red" [icon]="faPauseCircle" title="{{ 'PLUGIN.DISABLED'|translate }}"></fa-icon>
             </ng-container>
             <ng-container *ngIf="plugin.stopped !== true">
-              <fa-icon style="color: green" [icon]="faPlayCircle"></fa-icon>
+              <fa-icon style="color: green" [icon]="faPlayCircle" title="{{ 'PLUGIN.ENABLED'|translate }}"></fa-icon>
             </ng-container>
           </td>
 
