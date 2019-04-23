@@ -92,22 +92,24 @@
                 </td>
               </tr>
               <div bsModal #details="bs-modal" class="modal fade" tabindex="1" role="dialog" aria-labelledby="dialog-sizes-name2">
-                <div class="modal-dialog modal-lg">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 id="dialog-sizes-name2" class="modal-title pull-left">
-                        {{ 'LOGICS.WATCH_ITEMS'|translate }}
-                      </h5>
-                      <button type="button" class="close pull-right" aria-label="Close" (click)="details.hide()">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-                      <div class="card" style="margin-bottom: 5px;">
-                        <div class="card-body p-1">
-                          <ng-container *ngFor="let watch_item of logic.watch_item_list">
-                          <div class="item-box m-1 p-1">{{ watch_item }}</div>
-                          </ng-container>
+                <div class="vertical-alignment-helper">
+                  <div class="modal-dialog modal-lg vertical-align-center">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 id="dialog-sizes-name2" class="modal-title pull-left">
+                          {{ 'LOGICS.WATCH_ITEMS'|translate }}
+                        </h5>
+                        <button type="button" class="close pull-right" aria-label="Close" (click)="details.hide()">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="card" style="margin-bottom: 5px;">
+                          <div class="card-body p-1">
+                            <ng-container *ngFor="let watch_item of logic.watch_item_list">
+                            <div class="item-box m-1 p-1">{{ watch_item }}</div>
+                            </ng-container>
+                          </div>
                         </div>
                       </div>
                     </div>
