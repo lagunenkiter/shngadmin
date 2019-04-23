@@ -227,7 +227,7 @@
                 <td class="py-1">{{ pypipackage.vers_req_max || '*' }}</td>
               </ng-container>
               <ng-container *ngIf="!pypipackage.pypi_version_ok && !pypipackage.vers_recent">
-                <td class="py-1" style="color: green; font-weight: bold;">{{ pypipackage.vers_req_max || '*' }} <i title="{{ 'SYSTEM.VERS_OK_MAX_NOT_RECENT'|translate }}" "class="fa fa-check-circle"></i></td>
+                <td class="py-1" style="color: green; font-weight: bold;">{{ pypipackage.vers_req_max || '*' }} <i title="{{ 'SYSTEM.VERS_OK_MAX_NOT_RECENT'|translate }}" class="fa fa-check-circle"></i></td>
               </ng-container>
               <!--        <td class="py-1">{{ reqinfodisplay[pypipackage.name] }}</td> -->
 
