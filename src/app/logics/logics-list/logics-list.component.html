@@ -29,14 +29,14 @@
               <tr>
                 <ng-container *ngIf="logic.enabled === true, then logicEnabled; else logicDisabled"></ng-container>
                 <ng-template #logicEnabled>
-                  <td class="p-1 pl-2"><span style="color: var(--shng-green);" class="fas fa-play-circle"></span></td>
+                  <td class="p-1 pl-2"><span style="color: var(--shng-green);" title="{{ 'LOGICS.ENABLED'|translate }}" class="fas fa-play-circle"></span></td>
                   <td class="p-1">{{ logic.name }}</td>
                   <td class="p-1">{{ logic.next_exec }}</td>
                   <td class="p-1">{{ logic.cycle }}</td>
                   <td class="p-1">{{ logic.crontab }}</td>
                 </ng-template>
                 <ng-template #logicDisabled>
-                  <td class="p-1 pl-2"><span style="color: var(--shng-red)" class="fas fa-pause-circle"></span></td>
+                  <td class="p-1 pl-2"><span style="color: var(--shng-red)" title="{{ 'LOGICS.DISABLED'|translate }}" class="fas fa-pause-circle"></span></td>
                   <td class="p-1">{{ logic.name }}</td>
                   <td class="p-1" style="color: var(--shng-disabled)">{{ logic.next_exec }}</td>
                   <td class="p-1" style="color: var(--shng-disabled)">{{ logic.cycle }}</td>
@@ -191,10 +191,10 @@
                   <td class="p-1 pl-2">
                     <ng-container *ngIf="logic.enabled === true, then logicEnabled; else logicDisabled"></ng-container>
                     <ng-template #logicEnabled>
-                      <span style="color: green;" class="fas fa-play-circle"></span>
+                      <span style="color: green;" title="{{ 'LOGICS.ENABLED'|translate }}" class="fas fa-play-circle"></span>
                     </ng-template>
                     <ng-template #logicDisabled>
-                      <span style="color: red" class="fas fa-pause-circle"></span>
+                      <span style="color: red" title="{{ 'LOGICS.DISABLED'|translate }}" class="fas fa-pause-circle"></span>
                     </ng-template>
                   </td>
                   <td class="p-1">{{ logic.name }}</td>
