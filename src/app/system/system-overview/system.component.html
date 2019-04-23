@@ -321,10 +321,10 @@
                 <td class="py-1">{{ pypipackage.vers_req_min || '*' }}</td>
 
                 <ng-container *ngIf="pypipackage.vers_ok && pypipackage.vers_recent">
-                  <td class="py-1" style="color: green; font-weight: bold;">{{ pypipackage.vers_installed }} <i class="fa fa-check-circle"></i></td>
+                  <td class="py-1" style="color: green; font-weight: bold;">{{ pypipackage.vers_installed }} <i title="{{ 'SYSTEM.VERS_OK_RECENT'|translate }}" class="fa fa-check-circle"></i></td>
                 </ng-container>
                 <ng-container *ngIf="pypipackage.vers_ok && !pypipackage.vers_recent">
-                  <td class="py-1">{{ pypipackage.vers_installed }} <i class="far fa-check-circle"></i></td>
+                  <td class="py-1">{{ pypipackage.vers_installed }} <i title="{{ 'SYSTEM.VERS_OK_NOT_RECENT'|translate }}" class="far fa-check-circle"></i></td>
                 </ng-container>
                 <ng-container *ngIf="!pypipackage.vers_ok && pypipackage.vers_installed === '-'">
                   <td class="py-1" style="color: red; font-weight: bold;">{{ 'SYSTEM.MISSING'|translate }} <i title="{{ 'SYSTEM.VERS_MISSING'|translate }}" class="fa fa-times-circle"></i></td>
