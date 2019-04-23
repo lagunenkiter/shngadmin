@@ -44,11 +44,11 @@
     "PROPERTY": "Propriété",
     "STATE": "Etat",
 
-    "VERS_OK_RECENT": ">SYSTEM.VERS_OK_RECENT",
-    "VERS_OK_NOT_RECENT": ">SYSTEM.VERS_OK_NOT_RECENT",
-    "VERS_OK_MAX_NOT_RECENT": ">SYSTEM.",
-    "VERS_MISSING": ">SYSTEM.VERS_OK_MAX_NOT_RECENT",
-    "VERS_NOT_OK": ">SYSTEM.VERS_NOT_OK",
+    "VERS_OK_RECENT": "Version actuelle et supportée",
+    "VERS_OK_NOT_RECENT": "Version supportée mais version plus récente disponible",
+    "VERS_OK_MAX_NOT_RECENT": "Version maximale encore supportée. Version plus récente disponible mais non supportée",
+    "VERS_MISSING": "Paquet manque",
+    "VERS_NOT_OK": "Version non supportée",
 
     "PACKAGE": "Paquet",
     "PYTHON_PACKAGE": "Paquet Python",
