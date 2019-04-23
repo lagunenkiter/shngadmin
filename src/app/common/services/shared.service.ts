@@ -266,7 +266,7 @@ export class SharedService {
       console.warn('SharedService.setGuiLanguage', 'language ' + sessionStorage.getItem('default_language') +
                    ' not installed, using ' + installed_languages[0] + ' instead');
       this.translate.use(installed_languages[0]);
-      sessionStorage.setItem('default_language', installed_languages[0]);
+      // sessionStorage.setItem('default_language', installed_languages[0]);
     }
   }
 

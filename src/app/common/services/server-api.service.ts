@@ -55,14 +55,12 @@ export class ServerApiService {
     }
 
 
-    // this language will be used as a fallback when a translation isn't found in the current language
-    translate.setDefaultLang(this.shared.getFallbackLanguage());
-
-
     this.getServerBasicinfo()
       .subscribe(
         (response: ServerInfo) => {
           this.shng_serverinfo = response;
+          // this language will be used as a fallback when a translation isn't found in the current language
+          // translate.setDefaultLang(this.shared.getFallbackLanguage());
         },
         (error) => {
           console.warn('DataService: getShngServerinfo():', {error});
@@ -84,10 +82,15 @@ export class ServerApiService {
         map(response => {
           this.shng_serverinfo = <ServerInfo>response;
           const result = <ServerInfo>response;
-          const lang = sessionStorage.getItem('default_language');
+          let lang = sessionStorage.getItem('default_language');
           // console.warn({lang});
-          if (lang === undefined) {
+          if (lang === null) {
             sessionStorage.setItem('default_language', this.shng_serverinfo.default_language);
+            const fallback = this.shng_serverinfo.fallback_language_order;
+            lang = sessionStorage.getItem('default_language');
+            this.translate.setDefaultLang(this.shared.getFallbackLanguage());
+            // console.log('getServerBasicinfo', {lang}, {fallback}, this.shared.getFallbackLanguage());
+            this.shared.setGuiLanguage();
           }
           sessionStorage.setItem('client_ip', this.shng_serverinfo.client_ip);
           // sessionStorage.setItem('tz', this.shng_serverinfo.tz);
@@ -124,14 +127,18 @@ export class ServerApiService {
     return this.http.get(url)
       .pipe(
         map(response => {
-          console.log('getServerinfo(): map');
+          // console.log('getServerinfo(): map');
           this.shng_serverinfo = <ServerInfo> response;
           const result = response;
-          const lang = sessionStorage.getItem('default_language');
+          let lang = sessionStorage.getItem('default_language');
           // console.warn({lang});
-          if (lang === undefined) {
+          const fallback = this.shng_serverinfo.fallback_language_order;
+          if (lang === null) {
             sessionStorage.setItem('default_language', this.shng_serverinfo.default_language);
+            lang = sessionStorage.getItem('default_language');
           }
+          this.translate.setDefaultLang(this.shared.getFallbackLanguage());
+          // console.log('getServerinfo', {lang}, {fallback});
           sessionStorage.setItem('client_ip', this.shng_serverinfo.client_ip);
           sessionStorage.setItem('tz', this.shng_serverinfo.tz);
           sessionStorage.setItem('tzname', this.shng_serverinfo.tzname);
