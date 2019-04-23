@@ -342,7 +342,7 @@
                 <!--        <td class="py-1">{{ reqinfodisplay[pypipackage.name] }}</td> -->
 
                 <ng-container *ngIf="pypipackage.pypi_version_ok && (pypipackage.vers_recent)">
-                  <td class="py-1">{{ pypipackage.pypi_version }} <i class="far fa-check-circle"></i></td>
+                  <td class="py-1">{{ pypipackage.pypi_version }} <i title="{{ 'SYSTEM.VERS_OK_RECENT'|translate }}" class="far fa-check-circle"></i></td>
                 </ng-container>
                 <ng-container *ngIf="pypipackage.pypi_version_ok && !pypipackage.vers_recent">
                   <td class="py-1" style="color: green; font-weight: bold;">{{ pypipackage.pypi_version }}</td>
