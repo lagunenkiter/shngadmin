@@ -67,7 +67,7 @@ export class LogDisplayComponent implements AfterViewChecked, OnInit {
     },
     fullScreen: false,
     lineNumbers: true,
-    readOnly: false,
+    readOnly: true,
     lineSeparator: '\n',
     // rulers: this.rulers,
     mode: 'ttcn',
