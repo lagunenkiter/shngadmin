@@ -15,14 +15,14 @@
     <button pButton label="{{ 'BUTTON.APPLY_FILTER'|translate }}" type="button" style="margin-top: 2px; margin-left: 12px; margin-right: 10px" icon="fa fa-filter" (click)="filterLogChunk()" class="float-sm-left ui-button-success"></button>
     -->
     <p-dropdown [style]="{'margin-left': '10px', 'width':'120px'}" [options]="loglevels" [(ngModel)]="level_filter" (onChange)="filterLogChunk()" [showClear]="false"></p-dropdown>
-    <button pButton label="{{ 'BUTTON.CLEAR_FILTER'|translate }}" type="button" style="margin-top: 2px; margin-left: 12px; margin-right: 10px" icon="fa fa-filter" (click)="text_filter = ''; level_filter = 'ALL'; filterLogChunk()" class="ui-button-success"></button>
+    <button pButton label="{{ 'BUTTON.CLEAR_FILTER'|translate }}" type="button" style="margin-top: 2px; margin-left: 12px; margin-right: 10px" icon="fa fa-info" (click)="text_filter = ''; level_filter = 'ALL'; filterLogChunk()" class="ui-button-success"></button>
 
-    <button pButton type="button" style="margin-top: 2px; margin-left: 31px" [disabled]="first_chunk" icon="fa fa-fast-backward" (click)="readLogfile(1)" class="ui-button-success"></button>
-    <button pButton type="button" style="margin-top: 2px; margin-left: 2px; margin-right: 5px" [disabled]="first_chunk" icon="fa fa-step-backward" (click)="readLogfile(chunk_no - 1)" class="ui-button-success"></button>
+    <button pButton type="button" style="margin-top: 2px; margin-left: 31px; width: 25px;" [disabled]="first_chunk" icon="fa fa-fast-backward" (click)="readLogfile(1)" class="ui-button-success"></button>
+    <button pButton type="button" style="margin-top: 2px; margin-left: 2px; margin-right: 5px;  width: 25px;" [disabled]="first_chunk" icon="fa fa-step-backward" (click)="readLogfile(chunk_no - 1)" class="ui-button-success"></button>
     {{ chunk_no }}
-    <button pButton type="button" style="margin-top: 2px; margin-left: 5px" [disabled]="last_chunk" icon="fa fa-step-forward" (click)="readLogfile(chunk_no + 1)" class="ui-button-success"></button>
-    <button pButton type="button" style="margin-top: 2px; margin-left: 2px" [disabled]="last_chunk" icon="fa fa-fast-forward" (click)="readLogfile(0)" class="ui-button-success"></button>
-    <button pButton type="button" style="margin-top: 2px; margin-left: 10px;" title="{{ 'LOGS.SCROLL_DOWN'|translate }}" icon="fa fa-arrow-circle-down" (click)="scrollDown()" class="ui-button-success"></button>
+    <button pButton type="button" style="margin-top: 2px; margin-left: 5px; width: 25px;" [disabled]="last_chunk" icon="fa fa-step-forward" (click)="readLogfile(chunk_no + 1)" class="ui-button-success"></button>
+    <button pButton type="button" style="margin-top: 2px; margin-left: 2px; width: 25px;" [disabled]="last_chunk" icon="fa fa-fast-forward" (click)="readLogfile(0)" class="ui-button-success"></button>
+    <button pButton type="button" style="margin-top: 2px; margin-left: 10px; width: 25px;" title="{{ 'LOGS.SCROLL_DOWN'|translate }}" icon="fa fa-arrow-circle-down" (click)="scrollDown()" class="ui-button-success"></button>
 
 <!--
     <ng-container *ngIf="cmOptions.lineWrapping === true">
@@ -32,7 +32,7 @@
       <button pButton label="{{ 'LINEBREAK'|translate }}" type="button" style="margin-right: 0px" icon="fa fa-square" (click)="cmOptions.lineWrapping = !cmOptions.lineWrapping" class="float-sm-right ui-button-success"></button>
     </ng-container>
 -->
-    <button pButton type="button" [disabled]="false" icon="fa fa-info" style="margin-right: 10px;" (click)="this.editorHelp_display = true;" class="float-sm-right ui-button-success"></button>
+    <button pButton type="button" [disabled]="false" icon="fa fa-info" style="margin-right: 10px; width: 25px;" (click)="this.editorHelp_display = true;" class="float-sm-right ui-button-success"></button>
 
   </div>
 
