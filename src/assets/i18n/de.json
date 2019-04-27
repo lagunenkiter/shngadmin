@@ -263,7 +263,7 @@
     "VALUE": "Wert",
     "TYPE": "Typ",
     "DESCRIPTION": "Beschreibung",
-    "ADD_ITEM": "Item hinzufügen",
+    "ADD_ITEM": "Item hinzufügen"
   },
   "SCHEDULERS": {
     "ITEM SCHEDULERS": "Item Scheduler",
