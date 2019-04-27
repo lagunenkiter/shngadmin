@@ -143,7 +143,7 @@ export class LogDisplayComponent implements AfterViewChecked, OnInit {
     if (editor1.getOption('fullScreen')) {
       editor1.setSize('100vw', '100vh');
     } else {
-      editor1.setSize('97vw', '78vh');
+      editor1.setSize('97vw', '86vh');
     }
     editor1.refresh();
   }
