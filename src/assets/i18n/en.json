@@ -261,7 +261,8 @@
     "VALUE": "Value",
     "TYPE": "Type",
     "DESCRIPTION": "Description",
-    "ADD_ITEM": "Add item"
+    "ADD_ITEM": "Add item",
+    "ITEM_INVALID": "Item invalid or already added, please check your input!"
   },
   "SCHEDULERS": {
     "ITEM SCHEDULERS": "Item Schedulers",

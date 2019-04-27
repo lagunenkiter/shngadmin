@@ -263,7 +263,8 @@
     "VALUE": "Wert",
     "TYPE": "Typ",
     "DESCRIPTION": "Beschreibung",
-    "ADD_ITEM": "Item hinzufügen"
+    "ADD_ITEM": "Item hinzufügen",
+    "ITEM_INVALID": "Item ungültig oder bereits in der Liste vorhanden, bitte Eingabe prüfen!"
   },
   "SCHEDULERS": {
     "ITEM SCHEDULERS": "Item Scheduler",

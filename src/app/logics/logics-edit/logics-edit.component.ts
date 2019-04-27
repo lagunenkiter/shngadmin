@@ -20,6 +20,7 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
   logics: LogicsinfoType[];
   newlogics: LogicsinfoType[];
   logic: LogicsinfoType = <any>{};
+  wrongWatchItem: boolean;
   logicCycleOrig: string;
   logicCrontabOrig: string;
   logicWatchitemOrig: string;
@@ -121,7 +122,7 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
     for (let i = 1; i <= 100; i++) {
       this.rulers.push({color: '#eee', column: i * 4, lineStyle: 'dashed'});
     }
-
+    this.wrongWatchItem = false;
     this.getLogicInfo();
 
     this.pluginsapiService.getPluginsAPI()
@@ -338,15 +339,19 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
         for (const j of this.logic.watch_item_list) {
           if (<any>j === this.myTextareaWatchItems) {
             console.log('Item already in list!');
+            this.wrongWatchItem = true;
             return;
           }
         }
         console.log('Adding item to list: ' + this.myTextareaWatchItems);
         this.logic.watch_item_list.push(<any>this.myTextareaWatchItems);
         this.myTextareaWatchItems = '';
+        this.wrongWatchItem = false;
         return;
       }
     }
+    console.log('Item does not exist');
+    this.wrongWatchItem = true;
   }
 
   ngAfterViewChecked() {
@@ -394,9 +399,7 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
 
     /* prohibit new lines, spaces and tabs for watch items input field */
     editor2.on('beforeChange', function(cm, changeObj) {
-      console.log(changeObj);
       const typedNewLine = changeObj.origin === '+input' && typeof changeObj.text === 'object' && changeObj.text.join('') === '';
-      console.log(changeObj.text[0]);
       const typedSpaceorTab = (changeObj.origin === '+input' || changeObj.origin === 'paste') && (!/^[a-z0-9\.]+$/i.
         test(changeObj.text[0]));
       if (typedNewLine || typedSpaceorTab) {

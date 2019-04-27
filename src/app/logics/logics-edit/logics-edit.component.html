@@ -109,6 +109,9 @@
                   <br style="clear:both;"/>
                 </ng-container>
               </ng-container>
+              <alert *ngIf="this.wrongWatchItem" type="danger" [dismissible]="true" (onClosed)="this.wrongWatchItem = false">
+                {{ 'LOGIC_EDIT.ITEM_INVALID'|translate }}
+              </alert>
               <div>
                 <div style="float:left;">
                 <ngx-codemirror #watchitems
