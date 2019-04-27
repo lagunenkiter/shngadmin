@@ -387,16 +387,19 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
           event.keyCode !== 39 &&
           event.keyCode !== 40 &&
           event.keyCode !== 46)) {
-            // @ts-ignore
-            CodeMirror.commands.autocomplete_shng_watch_items(cm, null, {completeSingle: false});
+        // @ts-ignore
+        CodeMirror.commands.autocomplete_shng_watch_items(cm, null, {completeSingle: false});
       }
     });
 
-    /* prohibit new lines for watch items input field */
+    /* prohibit new lines, spaces and tabs for watch items input field */
     editor2.on('beforeChange', function(cm, changeObj) {
-      // console.log(changeObj);
+      console.log(changeObj);
       const typedNewLine = changeObj.origin === '+input' && typeof changeObj.text === 'object' && changeObj.text.join('') === '';
-      if (typedNewLine) {
+      console.log(changeObj.text[0]);
+      const typedSpaceorTab = (changeObj.origin === '+input' || changeObj.origin === 'paste') && (!/^[a-z0-9\.]+$/i.
+        test(changeObj.text[0]));
+      if (typedNewLine || typedSpaceorTab) {
         return changeObj.cancel();
       }
 
@@ -412,7 +415,6 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
 
   saveCode(reload = false) {
     // console.log('LoggingConfigurationComponent.saveCode');
-
     this.fileService.saveFile('logics', this.myEditFilename, this.myTextarea)
       .subscribe(
         (response) => {
@@ -446,8 +448,6 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
           this.logicCrontabOrig = this.logic.crontab;
 
           // this.watchitemsFromList();
-          // this.myTextareaWatchItems = this.listToString(this.logic.watch_item_list);
-          // this.logicWatchitemOrig = this.myTextareaWatchItems;
           this.logicWatchitemOrig = this.listToString(this.logic.watch_item_list);
 
           if (reload) {
