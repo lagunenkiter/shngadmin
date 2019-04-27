@@ -329,7 +329,7 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
     return;
   }
 
-  addItem(event) {
+  addItem() {
     console.log('Trying to remove item ' + this.myTextareaWatchItems);
     for (const i of this.item_list) {
       if (i['text'] === this.myTextareaWatchItems) {
