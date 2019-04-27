@@ -354,13 +354,6 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
     this.wrongWatchItem = true;
   }
 
-  discardChanges() {
-    console.log('Discarding changes!');
-    this.myTextarea = this.myTextareaOrig;
-    console.log('setting back watch items');
-    this.logic.watch_item_list = this.stringToList(this.logicWatchitemOrig);
-  }
-
   ngAfterViewChecked() {
     const editor1 = this.codeEditor.codeMirror;
     if (editor1.getOption('fullScreen')) {
@@ -438,6 +431,11 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
       );
   }
 
+  discardChanges() {
+    this.myTextarea = this.myTextareaOrig;
+    this.logic.crontab = this.logicCrontabOrig;
+    this.logic.watch_item_list = this.stringToList(this.logicWatchitemOrig);
+  }
 
   saveParameters(reload) {
     // console.log('LoggingConfigurationComponent.saveParameters');
