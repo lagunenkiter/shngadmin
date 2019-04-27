@@ -381,7 +381,7 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
     const editor2 = this.codeEditorWatchItems.codeMirror;
     editor2.setSize('50vw', 'auto');
     editor2.refresh();
-    editor2.on('keyup', function (cm, event) {
+    editor2.on('keyup', function (cm, event, component = this) {
       if (!cm.state.completionActive && /*Enables keyboard navigation in autocomplete list*/
         (event.keyCode !== 8 &&
           event.keyCode !== 9 &&

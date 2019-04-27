@@ -114,7 +114,7 @@
               </alert>
               <div>
                 <div style="float:left;">
-                <ngx-codemirror #watchitems
+                <ngx-codemirror #watchitems (keyup.enter)="addItem()"
                               [options]="cmOptionsWatchItems"
                               [(ngModel)]="myTextareaWatchItems"
                               [autoFocus]="false"
