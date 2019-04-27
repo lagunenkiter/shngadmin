@@ -50,7 +50,7 @@
           </ng-container>
           <button pButton label="{{ 'BUTTON.SAVE_LOAD'|translate }}" type="button" [disabled]="!logicChanged()" icon="fa fa-check" style="margin-right: 0px;" (click)="saveLogic(true)" class="float-sm-right ui-button-success"></button>
           <button pButton label="{{ 'BUTTON.SAVE'|translate }}" type="button" [disabled]="!logicChanged()" icon="fa fa-check" style="margin-right: 10px;" (click)="saveLogic()" class="float-sm-right ui-button-success"></button>
-          <button pButton label="{{ 'BUTTON.DISCARD'|translate }}" type="button" [disabled]="(myEditFilename === '') || (!logicChanged())" icon="fa fa-times" style="margin-right: 10px;" (click)="this.myTextarea = this.myTextareaOrig;" class="float-sm-right ui-button-secondary"></button>
+          <button pButton label="{{ 'BUTTON.DISCARD'|translate }}" type="button" [disabled]="(myEditFilename === '') || (!logicChanged())" icon="fa fa-times" style="margin-right: 10px;" (click)="discardChanges();" class="float-sm-right ui-button-secondary"></button>
           <button pButton label="{{ 'BUTTON.HELP'|translate }}" type="button" [disabled]="false" icon="fa fa-info" style="margin-right: 10px;" (click)="editorHelp_display = true;" class="float-sm-right ui-button-success"></button>
         </div>
 
@@ -99,7 +99,7 @@
             </td>
           </tr>
           <tr>
-            <td>Watch Item(s)</td>
+            <td>Watch Item(s)<ng-container *ngIf='this.logic.watch_item_list!==undefined'>: {{ this.logic.watch_item_list.length }}</ng-container></td>
             <td colspan="3">
               <ng-container *ngIf='this.logic.watch_item_list!==undefined'>
                 <ng-container *ngFor="let watch_item of this.logic.watch_item_list">
