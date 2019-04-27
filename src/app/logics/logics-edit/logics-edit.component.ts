@@ -433,6 +433,7 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
 
   discardChanges() {
     this.myTextarea = this.myTextareaOrig;
+    this.logic.cycle = this.logicCycleOrig;
     this.logic.crontab = this.logicCrontabOrig;
     this.logic.watch_item_list = this.stringToList(this.logicWatchitemOrig);
   }
