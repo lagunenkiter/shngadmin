@@ -267,8 +267,8 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
       if (this.listToString(this.logic.watch_item_list) !== this.logicWatchitemOrig) {
         return true;
       }
-      return false;
     }
+    return false;
   }
 
 
