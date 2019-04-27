@@ -277,8 +277,8 @@
   "PLUGIN": {
     "INTERFACE": "Interface Plugin",
     "SYSTEM": "System Plugin",
-    "WEB": "Web Plugin",
-    "PROTOCOL": "Protocal Plugin",
+    "WEB": "Web/Cloud Plugin",
+    "PROTOCOL": "Protokoll Plugin",
     "GATEWAY": "Gateway Plugin",
     "CLASSIC": "Classic Plugin",
 
