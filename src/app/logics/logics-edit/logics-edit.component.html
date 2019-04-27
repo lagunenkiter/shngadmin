@@ -101,12 +101,12 @@
           <tr>
             <td>Watch Item(s)</td>
             <td colspan="3">
-              <div id="watchItemContainer">
-                <ng-container *ngFor="let watch_item of this.logic.watch_item_list">
-                 <button pButton label="{{watch_item}}" type="button" icon="fa fa-times" (click)="removeItem(watch_item)" class="float-sm-left ui-button-secondary mr-2 mb-2"></button>
-                </ng-container>
-              </div>
-              <br style="clear:both;"/>
+              <ng-container *ngFor="let watch_item of this.logic.watch_item_list">
+                <button pButton label="{{watch_item}}" type="button" icon="fa fa-times" (click)="removeItem(watch_item)" class="float-sm-left ui-button-secondary mr-2 mb-2"></button>
+              </ng-container>
+              <ng-container *ngIf="this.logic.watch_item_list.length > 0">
+                <br style="clear:both;"/>
+              </ng-container>
               <div>
                 <div style="float:left;">
                 <ngx-codemirror #watchitems

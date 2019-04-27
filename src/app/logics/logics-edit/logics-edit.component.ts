@@ -227,7 +227,7 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
 
           // this.watchitemsFromList();
           // this.myTextareaWatchItems = this.listToString(this.logic.watch_item_list);
-          this.logicWatchitemOrig = this.myTextareaWatchItems;
+          this.logicWatchitemOrig = this.listToString(this.logic.watch_item_list);
         }
       );
   }
