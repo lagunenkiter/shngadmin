@@ -260,7 +260,8 @@
     "PARAMETER": "Parameter",
     "VALUE": "Value",
     "TYPE": "Type",
-    "DESCRIPTION": "Description"
+    "DESCRIPTION": "Description",
+    "ADD_ITEM": "Add item"
   },
   "SCHEDULERS": {
     "ITEM SCHEDULERS": "Item Schedulers",

@@ -262,7 +262,8 @@
     "PARAMETER": "Parameter",
     "VALUE": "Wert",
     "TYPE": "Typ",
-    "DESCRIPTION": "Beschreibung"
+    "DESCRIPTION": "Beschreibung",
+    "ADD_ITEM": "Item hinzufügen",
   },
   "SCHEDULERS": {
     "ITEM SCHEDULERS": "Item Scheduler",

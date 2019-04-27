@@ -226,7 +226,7 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
           this.logicCrontabOrig = this.logic.crontab;
 
           // this.watchitemsFromList();
-          this.myTextareaWatchItems = this.listToString(this.logic.watch_item_list);
+          // this.myTextareaWatchItems = this.listToString(this.logic.watch_item_list);
           this.logicWatchitemOrig = this.myTextareaWatchItems;
         }
       );
@@ -313,6 +313,39 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
     });
   }
 
+  removeItem(itemName) {
+    console.log('Trying to remove item ' + itemName);
+    for (const j of this.logic.watch_item_list) {
+      if (<any>j === this.myTextareaWatchItems) {
+        let index = this.logic.watch_item_list.indexOf(j)
+        if (index > -1) {
+          console.log('Removing item ' + j);
+          this.logic.watch_item_list.splice(index, 1);
+          return;
+        }
+      }
+    }
+    console.log('Item not in list!');
+    return;
+  }
+
+  addItem(event) {
+    console.log('Trying to remove item ' + this.myTextareaWatchItems);
+    for (const i of this.item_list) {
+      if (i['text'] === this.myTextareaWatchItems) {
+        for (const j of this.logic.watch_item_list) {
+          if (<any>j === this.myTextareaWatchItems) {
+            console.log('Item already in list!');
+            return;
+          }
+        }
+        console.log('Adding item to list: ' + this.myTextareaWatchItems);
+        this.logic.watch_item_list.push(<any>this.myTextareaWatchItems);
+        return;
+      }
+    }
+  }
+
   ngAfterViewChecked() {
     const editor1 = this.codeEditor.codeMirror;
     if (editor1.getOption('fullScreen')) {
@@ -338,7 +371,7 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
     });
 
     const editor2 = this.codeEditorWatchItems.codeMirror;
-    editor2.setSize('80vw', 'auto');
+    editor2.setSize('50vw', 'auto');
     editor2.refresh();
     editor2.on('keyup', function (cm, event) {
       if (!cm.state.completionActive && /*Enables keyboard navigation in autocomplete list*/
@@ -395,7 +428,7 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
     // console.log('LoggingConfigurationComponent.saveParameters');
 
     // this.watchitemsToList();
-    this.logic.watch_item_list = this.stringToList(this.myTextareaWatchItems);
+    // this.logic.watch_item_list = this.stringToList(this.myTextareaWatchItems);
 
     const params = {};
     params['cycle'] = this.logic.cycle;
