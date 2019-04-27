@@ -122,7 +122,9 @@ textarea {
 ui-inputswitch {
   color: var(--shng-blue) !important; }
 
-
+.fa-icon-grey {
+  color: #888888;
+}
 
 /* TurboTable */
 

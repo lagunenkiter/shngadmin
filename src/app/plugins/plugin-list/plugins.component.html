@@ -85,7 +85,7 @@
 
           <td class="py-1">
             <ng-container *ngIf="plugin.smartplugin === true">
-              <button name="webif" class="btn btn-outline-dark btn-sm mr-1" (click)="goToLink('https://www.smarthomeng.de/user/plugins_doc/config/'+plugin.pluginname+'.html');"><i class="fas fa-info" aria-hidden="true" title="{{'PLUGIN.OPEN_CONFIGINFO'|translate}}"></i></button>
+              <button name="webif" class="btn btn-outline-dark btn-sm mr-1" (click)="goToLink('https://www.smarthomeng.de/user/plugins_doc/config/'+plugin.pluginname+'.html');"><i class="fas fa-info fa-icon-grey" aria-hidden="true" title="{{'PLUGIN.OPEN_CONFIGINFO'|translate}}"></i></button>
               <!--
               <a href="https://www.smarthomeng.de/user/plugins_doc/config/{{plugin.pluginname}}.html" target="_blank">
                 <img src="assets/img/info-button.svg" style="width: 35px; padding-right: 10px; cursor: pointer;"/>
@@ -93,7 +93,7 @@
               -->
             </ng-container>
             <ng-container *ngIf="plugin.metadata.documentation !== undefined && plugin.metadata.documentation !== ''">
-              <button name="webif" class="btn btn-outline-dark btn-sm mr-1" (click)="goToLink(plugin.metadata.documentation);"><i class="fas fa-book fa-lg" aria-hidden="true" title="{{'PLUGIN.OPEN_DOC'|translate}}"></i></button>
+              <button name="webif" class="btn btn-outline-dark btn-sm mr-1" (click)="goToLink(plugin.metadata.documentation);"><i class="fas fa-book fa-lg fa-icon-grey" aria-hidden="true" title="{{'PLUGIN.OPEN_DOC'|translate}}"></i></button>
               <!--
               <a href="{{plugin.metadata.documentation}}" target="_blank">
                 <img src="assets/img/read-manual.svg" style="width: 35px; padding-right: 10px; cursor: pointer;"/>
@@ -101,7 +101,7 @@
               -->
             </ng-container>
             <ng-container *ngIf="plugin.metadata.support !== undefined && plugin.metadata.support !== ''">
-              <button name="webif" class="btn btn-outline-dark btn-sm mr-1" (click)="goToLink(plugin.metadata.support);"><i class="fas fa-comment-dots fa-lg" aria-hidden="true" title="{{'PLUGIN.OPEN_SUPPORT_THREAD'|translate}}"></i></button>
+              <button name="webif" class="btn btn-outline-dark btn-sm mr-1" (click)="goToLink(plugin.metadata.support);"><i class="fas fa-comment-dots fa-lg fa-icon-grey" aria-hidden="true" title="{{'PLUGIN.OPEN_SUPPORT_THREAD'|translate}}"></i></button>
               <!--
               <a href="{{plugin.metadata.support}}" target="_blank">
                 <img src="assets/img/forum_chat2.svg" style="width: 25px; cursor: pointer;"/>
