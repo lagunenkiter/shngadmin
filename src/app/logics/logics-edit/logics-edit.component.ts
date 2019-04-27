@@ -318,7 +318,7 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
   removeItem(itemName) {
     console.log('Trying to remove item ' + itemName);
     for (const j of this.logic.watch_item_list) {
-      if (<any>j === this.myTextareaWatchItems) {
+      if (<any>j === itemName) {
         let index = this.logic.watch_item_list.indexOf(j)
         if (index > -1) {
           console.log('Removing item ' + j);
