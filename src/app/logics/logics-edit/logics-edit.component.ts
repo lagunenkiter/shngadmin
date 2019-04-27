@@ -332,7 +332,7 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
   }
 
   addItem() {
-    console.log('Trying to remove item ' + this.myTextareaWatchItems);
+    console.log('Trying to add item ' + this.myTextareaWatchItems);
     for (const i of this.item_list) {
       if (i['text'] === this.myTextareaWatchItems) {
         for (const j of this.logic.watch_item_list) {
@@ -343,6 +343,7 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
         }
         console.log('Adding item to list: ' + this.myTextareaWatchItems);
         this.logic.watch_item_list.push(<any>this.myTextareaWatchItems);
+        this.myTextareaWatchItems = '';
         return;
       }
     }
@@ -445,8 +446,9 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
           this.logicCrontabOrig = this.logic.crontab;
 
           // this.watchitemsFromList();
-          this.myTextareaWatchItems = this.listToString(this.logic.watch_item_list);
-          this.logicWatchitemOrig = this.myTextareaWatchItems;
+          // this.myTextareaWatchItems = this.listToString(this.logic.watch_item_list);
+          // this.logicWatchitemOrig = this.myTextareaWatchItems;
+          this.logicWatchitemOrig = this.listToString(this.logic.watch_item_list);
 
           if (reload) {
             this.reloadLogic(this.logic.name);
