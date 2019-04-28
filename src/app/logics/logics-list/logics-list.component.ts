@@ -198,7 +198,6 @@ export class LogicsListComponent implements OnInit {
     // console.log('deleteLogic', {logicName});
 
     this.logicToDelete = logicName;
-    console.log(fileName);
     this.delete_param = {'config': logicName, 'filename': fileName};
     this.confirmdelete_display = true;
   }
