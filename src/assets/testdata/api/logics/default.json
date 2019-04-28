@@ -834,7 +834,8 @@
       "enabled":true,
       "last_run":"",
       "watch_item_list":[
-
+        "avm",
+        "avm.dect"
       ],
       "pathname":"/python/smarthome/logics/test.py",
       "logictype":"Python",

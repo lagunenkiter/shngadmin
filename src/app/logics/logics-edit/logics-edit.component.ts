@@ -23,7 +23,7 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
   wrongWatchItem: boolean;
   logicCycleOrig: string;
   logicCrontabOrig: string;
-  logicWatchitemOrig: string;
+  logicWatchitemOrig: LogicsWatchItem[];
 
 
   constructor(private route: ActivatedRoute,
@@ -228,7 +228,7 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
 
           // this.watchitemsFromList();
           // this.myTextareaWatchItems = this.listToString(this.logic.watch_item_list);
-          this.logicWatchitemOrig = this.listToString(this.logic.watch_item_list);
+          this.logicWatchitemOrig = Array.from(this.logic.watch_item_list);
         }
       );
   }
@@ -265,9 +265,15 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
       }
     }
     if (typeof(this.logic.watch_item_list) !== 'undefined') {
-      if (this.listToString(this.logic.watch_item_list) !== this.logicWatchitemOrig) {
-        return true;
+      let allIdenticalFlag = true;
+      console.log('Starting to compare lists: ' + this.logicWatchitemOrig.length + ' vs ' + this.logic.watch_item_list.length);
+      for (const watchItemOrig of this.logicWatchitemOrig) {
+        if (!this.logic.watch_item_list.includes(watchItemOrig)) {
+          console.log('Item ' + watchItemOrig + 'not in array');
+          allIdenticalFlag = false;
+        }
       }
+      return !allIdenticalFlag;
     }
     return false;
   }
@@ -320,7 +326,7 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
     console.log('Trying to remove item ' + itemName);
     for (const j of this.logic.watch_item_list) {
       if (<any>j === itemName) {
-        let index = this.logic.watch_item_list.indexOf(j)
+        const index = this.logic.watch_item_list.indexOf(j)
         if (index > -1) {
           console.log('Removing item ' + j);
           this.logic.watch_item_list.splice(index, 1);
@@ -435,7 +441,7 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
     this.myTextarea = this.myTextareaOrig;
     this.logic.cycle = this.logicCycleOrig;
     this.logic.crontab = this.logicCrontabOrig;
-    this.logic.watch_item_list = this.stringToList(this.logicWatchitemOrig);
+    this.logic.watch_item_list = Array.from(this.logicWatchitemOrig);
   }
 
   saveParameters(reload) {
@@ -457,7 +463,7 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
           this.logicCrontabOrig = this.logic.crontab;
 
           // this.watchitemsFromList();
-          this.logicWatchitemOrig = this.listToString(this.logic.watch_item_list);
+          this.logicWatchitemOrig = this.logic.watch_item_list;
 
           if (reload) {
             this.reloadLogic(this.logic.name);
