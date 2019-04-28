@@ -262,7 +262,8 @@
     "TYPE": "Type",
     "DESCRIPTION": "Description",
     "ADD_ITEM": "Add item",
-    "ITEM_INVALID": "Item invalid or already added, please check your input!"
+    "ITEM_INVALID": "Item invalid or already added, please check your input!",
+    "AUTOCOMPLETE": "An autocomplete box is shown after entering the first 3 characters - Navigate with ARROW keys, TAB: Add to input field, ENTER: Add as watch item."
   },
   "SCHEDULERS": {
     "ITEM SCHEDULERS": "Item Schedulers",

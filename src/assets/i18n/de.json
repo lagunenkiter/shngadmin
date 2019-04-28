@@ -264,7 +264,8 @@
     "TYPE": "Typ",
     "DESCRIPTION": "Beschreibung",
     "ADD_ITEM": "Item hinzufügen",
-    "ITEM_INVALID": "Item ungültig oder bereits in der Liste vorhanden, bitte Eingabe prüfen!"
+    "ITEM_INVALID": "Item ungültig oder bereits in der Liste vorhanden, bitte Eingabe prüfen!",
+    "AUTOCOMPLETE": "Eine Hilfe mit Vorschlägen zur Autovervollständigung taucht nach den ersten 3 Zeichen auf - Mit den Pfeiltasten navigieren, TAB: Im Eingabefeld ergänzen, ENTER: Als Item Hinzufügen."
   },
   "SCHEDULERS": {
     "ITEM SCHEDULERS": "Item Scheduler",
