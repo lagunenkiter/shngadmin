@@ -406,7 +406,7 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
     /* prohibit new lines, spaces and tabs for watch items input field */
     editor2.on('beforeChange', function(cm, changeObj) {
       const typedNewLine = changeObj.origin === '+input' && typeof changeObj.text === 'object' && changeObj.text.join('') === '';
-      const typedSpaceorTab = (changeObj.origin === '+input' || changeObj.origin === 'paste') && (!/^[a-z0-9\.]+$/i.
+      const typedSpaceorTab = (changeObj.origin === '+input' || changeObj.origin === 'paste') && (!/^[a-z0-9\.\_\-]+$/i.
         test(changeObj.text[0]));
       if (typedNewLine || typedSpaceorTab) {
         return changeObj.cancel();
