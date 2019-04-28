@@ -214,7 +214,6 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
               this.logic = logic;
             }
           }
-
           this.newlogics = <LogicsinfoType[]>response['logics_new'];
           this.newlogics.sort(function (a, b) {return (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0); });
           for (const newlogic of this.newlogics) {
@@ -225,9 +224,6 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
           }
           this.logicCycleOrig = this.logic.cycle;
           this.logicCrontabOrig = this.logic.crontab;
-
-          // this.watchitemsFromList();
-          // this.myTextareaWatchItems = this.listToString(this.logic.watch_item_list);
           this.logicWatchitemOrig = Array.from(this.logic.watch_item_list);
         }
       );
@@ -266,10 +262,8 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
     }
     if (typeof(this.logic.watch_item_list) !== 'undefined') {
       let allIdenticalFlag = true;
-      console.log('Starting to compare lists: ' + this.logicWatchitemOrig.length + ' vs ' + this.logic.watch_item_list.length);
       for (const watchItemOrig of this.logicWatchitemOrig) {
         if (!this.logic.watch_item_list.includes(watchItemOrig)) {
-          console.log('Item ' + watchItemOrig + 'not in array');
           allIdenticalFlag = false;
         }
       }
@@ -453,7 +447,7 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
     const params = {};
     params['cycle'] = this.logic.cycle;
     params['crontab'] = this.logic.crontab;
-    params['watch_item'] =  this.logic.watch_item_list;
+    params['watch_item'] =  this.listToString(this.logic.watch_item_list);
 
     this.dataService.saveLogicParameters(this.logic.name, params)
       .subscribe(
@@ -463,7 +457,7 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
           this.logicCrontabOrig = this.logic.crontab;
 
           // this.watchitemsFromList();
-          this.logicWatchitemOrig = this.logic.watch_item_list;
+          this.logicWatchitemOrig = Array.from(this.logic.watch_item_list);
 
           if (reload) {
             this.reloadLogic(this.logic.name);
@@ -512,6 +506,4 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
         }
       );
   }
-
-
 }
