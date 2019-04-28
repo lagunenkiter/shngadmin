@@ -101,11 +101,14 @@
           <tr>
             <td>Watch Item(s)<ng-container *ngIf='this.logic.watch_item_list!==undefined'>: {{ this.logic.watch_item_list.length }}</ng-container></td>
             <td colspan="3">
-              <ng-container *ngIf='this.logic.watch_item_list!==undefined'>
+              <ng-container *ngIf='this.logic.watch_item_list!==undefined && this.logicWatchitemRemoved!==undefined'>
                 <ng-container *ngFor="let watch_item of this.logic.watch_item_list">
                   <button pButton label="{{watch_item}}" type="button" icon="fa fa-times" (click)="removeItem(watch_item)" class="float-sm-left ui-button-secondary mr-2 mb-2"></button>
                 </ng-container>
-                <ng-container *ngIf="this.logic.watch_item_list.length > 0">
+                <ng-container *ngFor="let watch_item of this.logicWatchitemRemoved">
+                  <button pButton label="{{watch_item}}" type="button" [disabled]="true" (click)="addItemWithName(watch_item)" class="float-sm-left ui-button-danger mr-2 mb-2" style="text-decoration: line-through;"></button>
+                </ng-container>
+                <ng-container *ngIf="this.logic.watch_item_list.length > 0 || this.logicWatchitemRemoved.length > 0">
                   <br style="clear:both;"/>
                 </ng-container>
               </ng-container>

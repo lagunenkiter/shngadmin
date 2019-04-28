@@ -24,7 +24,7 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
   logicCycleOrig: string;
   logicCrontabOrig: string;
   logicWatchitemOrig: LogicsWatchItem[];
-
+  logicWatchitemRemoved: LogicsWatchItem[];
 
   constructor(private route: ActivatedRoute,
               private dataService: LogicsApiService,
@@ -53,7 +53,7 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
 
   cmOptionsWatchItems = {
     autorefresh: true,
-    lineWrapping: true,
+    lineWrapping: false,
     indentWithTabs: false,
     indentUnit: 1,
     tabSize: 1,
@@ -224,6 +224,7 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
           }
           this.logicCycleOrig = this.logic.cycle;
           this.logicCrontabOrig = this.logic.crontab;
+          this.logicWatchitemRemoved = [];
           this.logicWatchitemOrig = Array.from(this.logic.watch_item_list);
         }
       );
@@ -317,40 +318,54 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
   }
 
   removeItem(itemName) {
-    console.log('Trying to remove item ' + itemName);
     for (const j of this.logic.watch_item_list) {
       if (<any>j === itemName) {
         const index = this.logic.watch_item_list.indexOf(j)
         if (index > -1) {
-          console.log('Removing item ' + j);
           this.logic.watch_item_list.splice(index, 1);
+          console.log(this.logicWatchitemRemoved);
+          this.logicWatchitemRemoved.push(j);
           return;
         }
       }
     }
-    console.log('Item not in list!');
+    return;
+  }
+
+  removeItemFromRemovedList(itemName) {
+    for (const j of this.logicWatchitemRemoved) {
+      if (<any>j === itemName) {
+        const index = this.logicWatchitemRemoved.indexOf(j)
+        if (index > -1) {
+          this.logicWatchitemRemoved.splice(index, 1);
+          return;
+        }
+      }
+    }
     return;
   }
 
   addItem() {
     console.log('Trying to add item ' + this.myTextareaWatchItems);
+    this.addItemWithName(this.myTextareaWatchItems);
+    this.myTextareaWatchItems = '';
+  }
+
+  addItemWithName(itemName) {
     for (const i of this.item_list) {
-      if (i['text'] === this.myTextareaWatchItems) {
+      if (i['text'] === itemName) {
         for (const j of this.logic.watch_item_list) {
-          if (<any>j === this.myTextareaWatchItems) {
-            console.log('Item already in list!');
+          if (<any>j === itemName) {
             this.wrongWatchItem = true;
             return;
           }
         }
-        console.log('Adding item to list: ' + this.myTextareaWatchItems);
-        this.logic.watch_item_list.push(<any>this.myTextareaWatchItems);
-        this.myTextareaWatchItems = '';
+        this.logic.watch_item_list.push(<any>itemName);
+        this.removeItemFromRemovedList(itemName);
         this.wrongWatchItem = false;
         return;
       }
     }
-    console.log('Item does not exist');
     this.wrongWatchItem = true;
   }
 
@@ -395,6 +410,9 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
         // @ts-ignore
         CodeMirror.commands.autocomplete_shng_watch_items(cm, null, {completeSingle: false});
       }
+      if (event.keyCode === 13) {
+        console.log(editor2.state);
+      }
     });
 
     /* prohibit new lines, spaces and tabs for watch items input field */
@@ -404,12 +422,6 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
         test(changeObj.text[0]));
       if (typedNewLine || typedSpaceorTab) {
         return changeObj.cancel();
-      }
-
-      const pastedNewLine = changeObj.origin === 'paste' && typeof changeObj.text === 'object' && changeObj.text.length > 1;
-      if (pastedNewLine) {
-        const newText = changeObj.text.join(' ');
-        return changeObj.update(null, null, [newText]);
       }
       return null;
     });
@@ -435,6 +447,7 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
     this.myTextarea = this.myTextareaOrig;
     this.logic.cycle = this.logicCycleOrig;
     this.logic.crontab = this.logicCrontabOrig;
+    this.logicWatchitemRemoved = [];
     this.logic.watch_item_list = Array.from(this.logicWatchitemOrig);
   }
 
