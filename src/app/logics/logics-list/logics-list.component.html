@@ -273,12 +273,12 @@
     <input [(ngModel)]="newlogic_filename" id="nfn" type="text" (input)="checkNewLogicInput();" pInputText placeholder="" style="position: absolute; margin-left: 100px" [ngStyle]="{'width': 30}" autofocus/>
   </label>
   <br>
-  <alert *ngIf="this.wrongNewLogicName" type="danger" [dismissible]="true" (onClosed)="this.wrongNewLogicName = false" class="mt-2" >
+  <alert *ngIf="this.wrongNewLogicName" type="danger" [dismissible]="true" (onClosed)="this.wrongNewLogicName=''" class="mt-2" >
     {{ this.wrongNewLogicName|translate }}
   </alert>
   <p-footer>
-    <button pButton type="button" icon="pi pi-check" (click)="this.createLogic()" [(disabled)]="!newlogic_add_enabled" label="{{'BUTTON.CREATE'|translate}}" class="ui-button-success" autofocus></button>
-    <button pButton type="button" icon="pi pi-times" (click)="newlogic_display=false" label="{{'BUTTON.ABORT'|translate}}" class="ui-button-secondary"></button>
+    <button pButton type="button" icon="pi pi-check" (click)="this.wrongNewLogicName=''; this.createLogic()" [(disabled)]="!newlogic_add_enabled" label="{{'BUTTON.CREATE'|translate}}" class="ui-button-success" autofocus></button>
+    <button pButton type="button" icon="pi pi-times" (click)="this.wrongNewLogicName=''; newlogic_display=false" label="{{'BUTTON.ABORT'|translate}}" class="ui-button-secondary"></button>
   </p-footer>
 </p-dialog>
 
