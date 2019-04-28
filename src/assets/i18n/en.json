@@ -244,7 +244,10 @@
     "DELETE_LOGIC": "Confirm delete logic",
     "DELETE_LOGIC_TEXT": "Please confirm, that you want to delete the logic '{{config}}' and the corresponding code in '{{filename}}'",
     "CREATE_LOGIC": "Create Logic",
-    "CREATE_LOGIC_TEXT": "Enter a unique name for the logic (must must not already exist) and a unique filename to store the logic code (withouth .py extension)"
+    "CREATE_LOGIC_TEXT": "Enter a unique name for the logic (must must not already exist) and a unique filename to store the logic code (withouth .py extension)",
+    "INVALID_NAME": "The name of the logic must not start with a number.",
+    "NAME_ALREADY_EXISTS": "A logic with this name already exists.",
+    "FILENAME_ALREADY_EXISTS": "A logic with this filename already exists."
   },
   "LOGIC_EDIT": {
     "CODE": "Code",

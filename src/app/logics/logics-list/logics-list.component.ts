@@ -28,7 +28,7 @@ export class LogicsListComponent implements OnInit {
   newlogic_name: string = '';
   newlogic_filename: string = '';
   newlogic_add_enabled: boolean = true;
-
+  wrongNewLogicName: string = '';
   confirmdelete_display: boolean = false;
   logicToDelete: string = '';
   delete_param: {};
@@ -159,13 +159,16 @@ export class LogicsListComponent implements OnInit {
 
   checkNewLogicInput() {
     this.newlogic_add_enabled = true;
-    if (this.newlogic_name === '' || this.newlogic_filename === '') {
-      this.newlogic_add_enabled = false;
-      return;
-    }
 
     if (this.newlogic_name.match(/^\d/)) {
       this.newlogic_add_enabled = false;
+      this.wrongNewLogicName = 'LOGICS.INVALID_NAME';
+      return;
+    }
+
+    if (this.newlogic_name === '' || this.newlogic_filename === '') {
+      this.newlogic_add_enabled = false;
+      this.wrongNewLogicName = '';
       return;
     }
 
@@ -173,6 +176,8 @@ export class LogicsListComponent implements OnInit {
       // console.log({i}, this.logics[i].name);
       if (this.newlogic_name === this.logics[i].name) {
         this.newlogic_add_enabled = false;
+        this.wrongNewLogicName = 'LOGICS.NAME_ALREADY_EXISTS';
+        return;
       }
     }
 
@@ -180,8 +185,11 @@ export class LogicsListComponent implements OnInit {
       // console.log({i}, this.baseName(this.logics[i].pathname, false));
       if (this.newlogic_filename === this.baseName(this.logics[i].pathname, false)) {
         this.newlogic_add_enabled = false;
+        this.wrongNewLogicName = 'LOGICS.FILENAME_ALREADY_EXISTS';
+        return;
       }
     }
+    this.wrongNewLogicName = '';
   }
 
 

@@ -246,7 +246,10 @@
     "DELETE_LOGIC": "Löschen der Logik bestätigen",
     "DELETE_LOGIC_TEXT": "Soll die Logik '{{config}}' und der zugeghörige Code in '{{filename}}' wirklich gelöscht werden?",
     "CREATE_LOGIC": "Logik erstellen",
-    "CREATE_LOGIC_TEXT": "Einen eindeutigen Namen für die Logik eingeben (darf nicht bereits existieren) und einen eindeutigen Dateinamen eingeben, unter dem der Logik-Code gespeichert werden soll (ohne .py Erweiterung)"
+    "CREATE_LOGIC_TEXT": "Einen eindeutigen Namen für die Logik eingeben (darf nicht bereits existieren) und einen eindeutigen Dateinamen eingeben, unter dem der Logik-Code gespeichert werden soll (ohne .py Erweiterung)",
+    "INVALID_NAME": "Der Name der Logik darf nicht mit einer Zahl beginnen.",
+    "NAME_ALREADY_EXISTS": "Eine Logik mit diesem Namen existiert bereits.",
+    "FILENAME_ALREADY_EXISTS": "Eine Logik mit diesem Dateinamen existiert bereits."
   },
   "LOGIC_EDIT": {
     "CODE": "Code",
