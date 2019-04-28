@@ -265,9 +265,9 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
         if (!this.logic.watch_item_list.includes(watchItemOrig)) {
           allIdenticalFlag = false;
         }
-        if (this.logic.watch_item_list.length > this.logicWatchitemOrig.length) {
-          allIdenticalFlag = false;
-        }
+      }
+      if (this.logic.watch_item_list.length > this.logicWatchitemOrig.length) {
+        allIdenticalFlag = false;
       }
       return !allIdenticalFlag;
     }
@@ -456,7 +456,7 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
           this.logicCrontabOrig = this.logic.crontab;
 
           // this.watchitemsFromList();
-          this.logicWatchitemOrig = this.logic.watch_item_list;
+          this.logicWatchitemOrig = Array.from(this.logic.watch_item_list);
 
           if (reload) {
             this.reloadLogic(this.logic.name);
