@@ -11,10 +11,10 @@
             <td>
               <div style="font-weight: normal; padding-top: 10px; padding-left: 10px; padding-right: 5px">
                 <ng-container *ngIf="logic && logic.enabled">
-                  <span style="color: var(--shng-green);" class="fas fa-play-circle"></span>
+                  <span style="color: var(--shng-green);" class="fas fa-play-circle" title="{{ 'LOGIC_EDIT.ACTIVE'|translate }}"></span>
                 </ng-container>
                 <ng-container *ngIf="logic && !logic.enabled">
-                  <span style="color: var(--shng-red);" class="fas fa-play-circle"></span>
+                  <span style="color: var(--shng-red);" class="fas fa-play-circle" title="{{ 'LOGIC_EDIT.INACTIVE'|translate }}"></span>
                 </ng-container>
                 {{ 'LOGIC_EDIT.FILENAME'|translate }}: <strong>../logics/{{ myEditFilename }}</strong>
                 <button pButton label="{{ 'BUTTON.SAVE_LOAD'|translate }}" type="button" [disabled]="!this.logicChanged" icon="fa fa-check" style="margin-right: 0px;" (click)="saveLogic(true)" class="float-sm-right ui-button-success"></button>
