@@ -166,12 +166,12 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
     // @ts-ignore
     CodeMirror.commands.autocomplete_shng = function(cm) {
       // @ts-ignore
-      CodeMirror.showHint(cm, CodeMirror.hint.autocompleteHint);
+      CodeMirror.showHint(cm, CodeMirror.hint.autocompleteHint, {'completeSingle': false});
     };
     // @ts-ignore
     CodeMirror.commands.autocomplete_shng_watch_items = function(cm) {
       // @ts-ignore
-      CodeMirror.showHint(cm, CodeMirror.hint.autocompleteWatchItemsHint);
+      CodeMirror.showHint(cm, CodeMirror.hint.autocompleteWatchItemsHint, {'completeSingle': false});
     };
   }
 
@@ -296,8 +296,6 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
       if (curWord.length > 1) {
         curWord = curWord.trim();
       }
-      console.log('START ' + start + ' END ' + end);
-      console.log(curWord);
       const regex = new RegExp('^' + curWord, 'i');
       console.log(curWord);
       if (curWord.length >= 3) {
@@ -318,7 +316,7 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
           from: CodeMirror.Pos(cur.line, start),
           to: CodeMirror.Pos(cur.line, end)
         };
-
+        console.log(oCompletions);
         return oCompletions;
       }
     });
@@ -393,8 +391,7 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
     const editor1 = this.codeEditor.codeMirror;
     console.log('keyup 1 ' + event.keyCode);
     if (!editor1.state.completionActive && /*Enables keyboard navigation in autocomplete list*/
-      (event.keyCode !== 8 &&
-        event.keyCode !== 9 &&
+      ( event.keyCode !== 9 &&
         event.keyCode !== 13 &&
         event.keyCode !== 27 &&
         event.keyCode !== 37 &&
@@ -403,7 +400,7 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
         event.keyCode !== 40 &&
         event.keyCode !== 46)) {
       // @ts-ignore
-      CodeMirror.commands.autocomplete_shng(editor1, null, {completeSingle: false});
+      CodeMirror.commands.autocomplete_shng(editor1);
     }
   }
 
@@ -411,8 +408,7 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
     const editor2 = this.codeEditorWatchItems.codeMirror;
     console.log('keyup 2 ' + event.keyCode);
     if ((!editor2.state.completionActive && /*Enables keyboard navigation in autocomplete list*/
-      ( event.keyCode !== 8 &&
-        event.keyCode !== 9 &&
+      ( event.keyCode !== 9 &&
         event.keyCode !== 13 &&
         event.keyCode !== 27 &&
         event.keyCode !== 37 &&
@@ -421,7 +417,7 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
         event.keyCode !== 40 &&
         event.keyCode !== 46))) {  // && event.keyCode !== 8 && event.keyCode !== 17 && event.keyCode !== 86)
       // @ts-ignore
-      CodeMirror.commands.autocomplete_shng_watch_items(editor2, null, {completeSingle: false});
+      CodeMirror.commands.autocomplete_shng_watch_items(editor2);
     }
   }
 
