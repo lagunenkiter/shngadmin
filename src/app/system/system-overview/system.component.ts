@@ -134,9 +134,12 @@ export class SystemComponent implements OnInit {
           this.pypiinfo = response;
           this.loading = false;
 
-          // count if documentation requirements exist
+          // count if plugin requirements exist
           this.plugincount = 0;
           for (let i = 0; i < this.pypiinfo.length; ++i) {
+            if (this.pypiinfo[i].name === 'ruamel.yaml') {
+              console.log(this.pypiinfo[i]);
+            }
             if (this.pypiinfo[i].is_required_for_plugins === true) {
               this.plugincount++;
             }

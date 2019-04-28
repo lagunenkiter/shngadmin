@@ -94,6 +94,34 @@ export class PluginsApiService {
 
   }
 
+
+  // ------------------------------------------------------------
+  //  Get configuration information about logic parameters of
+  //  all configured plugins for logic editor
+  //
+  getPluginsLogicParameters() {
+    // console.log('PluginsApiService.getPluginsInfo');
+
+    const apiUrl = sessionStorage.getItem('apiUrl');
+    let url = apiUrl + 'plugins/logicparams/';
+    if (apiUrl.includes('localhost')) {
+      url += 'default.json';
+    }
+    return this.http.get(url)
+      .pipe(
+        map(response => {
+          const result = response;
+          return result;
+        }),
+        catchError((err: HttpErrorResponse) => {
+          console.error('PluginsApiService (getPluginsLogicParameters): Could not read plugins data' + ' - ' + err.error.error);
+          return of({});
+        })
+      );
+
+  }
+
+
   // ------------------------------------------------------------
   //  Get configuration information about all configured plugins
   //  - for plugins.component
