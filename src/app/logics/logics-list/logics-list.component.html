@@ -158,7 +158,7 @@
                 <ng-container *ngIf="logic.filename != ''">
                   <button name="add" title="{{ 'LOGICS.ADD'|translate }}" type="submit" class="btn btn-outline-dark btn-sm mr-1" (click)="loadLogic(logic.name);"><i class="fas fa-plus"></i></button>
                 </ng-container>
-                <button name="delete" title="{{ 'LOGICS.DELETE'|translate }}" class="btn btn-outline-danger btn-sm" (click)="deleteLogic(logic.name);"><i class="far fa-trash-alt" aria-hidden="true" style="color: var(--shng-red);"></i></button>
+                <button name="delete" title="{{ 'LOGICS.DELETE'|translate }}" class="btn btn-outline-danger btn-sm" (click)="deleteLogic(logic.name, logic.filename);"><i class="far fa-trash-alt" aria-hidden="true" style="color: var(--shng-red);"></i></button>
               </td>
             </tr>
           </ng-container>
