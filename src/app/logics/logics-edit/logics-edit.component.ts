@@ -330,6 +330,7 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
         if (index > -1) {
           console.log('Removing item ' + j);
           this.logic.watch_item_list.splice(index, 1);
+          this.logicChanged = this.hasLogicChanged();
           return;
         }
       }
@@ -437,6 +438,7 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
     this.logic.cycle = this.logicCycleOrig;
     this.logic.crontab = this.logicCrontabOrig;
     this.logic.watch_item_list = Array.from(this.logicWatchitemOrig);
+    this.logicChanged = this.hasLogicChanged();
   }
 
   saveParameters(reload) {
@@ -459,6 +461,7 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
 
           // this.watchitemsFromList();
           this.logicWatchitemOrig = Array.from(this.logic.watch_item_list);
+          this.logicChanged = this.hasLogicChanged();
 
           if (reload) {
             this.reloadLogic(this.logic.name);
