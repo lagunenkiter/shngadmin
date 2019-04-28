@@ -142,7 +142,7 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
           const result = <any>response;
           for (let i = 0; i < result.length; i++) {
             this.item_list.push({text: result[i], displayText: result[i]});
-            this.item_list.push({text: 'sh.' + result[i], displayText: 'sh.' + result[i]});
+            this.item_list.push({text: result[i], displayText: 'sh.' + result[i]});
             this.autocomplete_list.push({text: 'sh.' + result[i] + '()', displayText: 'sh.' + result[i] + '() | Item'});
           }
       }
@@ -232,7 +232,6 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
 
 
   hasLogicChanged() {
-    console.log('logic Changed?');
     if (this.codeChanged()) {
       return true;
     }
@@ -297,7 +296,6 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
         curWord = curWord.trim();
       }
       const regex = new RegExp('^' + curWord, 'i');
-      console.log(curWord);
       if (curWord.length >= 3) {
         const oCompletions = {
           list: (!curWord ? [] : curDict.filter(function (item) {
@@ -316,41 +314,34 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
           from: CodeMirror.Pos(cur.line, start),
           to: CodeMirror.Pos(cur.line, end)
         };
-        console.log(oCompletions);
         return oCompletions;
       }
     });
   }
 
   removeItem(itemName) {
-    console.log('Trying to remove item ' + itemName);
     for (const j of this.logic.watch_item_list) {
       if (<any>j === itemName) {
         const index = this.logic.watch_item_list.indexOf(j)
         if (index > -1) {
-          console.log('Removing item ' + j);
           this.logic.watch_item_list.splice(index, 1);
           this.logicChanged = this.hasLogicChanged();
           return;
         }
       }
     }
-    console.log('Item not in list!');
     return;
   }
 
   addItem() {
-    console.log('Trying to add item ' + this.myTextareaWatchItems);
     for (const i of this.item_list) {
       if (i['text'] === this.myTextareaWatchItems) {
         for (const j of this.logic.watch_item_list) {
           if (<any>j === this.myTextareaWatchItems) {
-            console.log('Item already in list!');
             this.wrongWatchItem = true;
             return;
           }
         }
-        console.log('Adding item to list: ' + this.myTextareaWatchItems);
         this.logic.watch_item_list.push(<any>this.myTextareaWatchItems);
         this.myTextareaWatchItems = '';
         this.wrongWatchItem = false;
@@ -358,7 +349,6 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
         return;
       }
     }
-    console.log('Item does not exist');
     this.wrongWatchItem = true;
   }
 
@@ -389,7 +379,6 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
   logicsCodeKeyUp(event) {
     this.logicChanged = this.hasLogicChanged();
     const editor1 = this.codeEditor.codeMirror;
-    console.log('keyup 1 ' + event.keyCode);
     if (!editor1.state.completionActive && /*Enables keyboard navigation in autocomplete list*/
       ( event.keyCode !== 9 &&
         event.keyCode !== 13 &&
@@ -406,7 +395,6 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
 
   watchItemKeyUp(event) {
     const editor2 = this.codeEditorWatchItems.codeMirror;
-    console.log('keyup 2 ' + event.keyCode);
     if ((!editor2.state.completionActive && /*Enables keyboard navigation in autocomplete list*/
       ( event.keyCode !== 9 &&
         event.keyCode !== 13 &&
