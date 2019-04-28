@@ -22,7 +22,7 @@
           <tr>
             <td>
               <div style="margin-top: 10px; padding-left: 10px; padding-right: 5px">
-                <ngx-codemirror #codeeditor (keyup)="this.logicChanged = hasLogicChanged()"
+                <ngx-codemirror #codeeditor (keyup)="logicsCodeKeyUp($event)"
                                 [options]="cmOptions"
                                 [(ngModel)]="myTextarea"
                                 [autoFocus]="true"
@@ -114,7 +114,8 @@
               </alert>
               <div>
                 <div style="float:left;">
-                <ngx-codemirror #watchitems (keyup.enter)="addItem()"
+                <ngx-codemirror #watchitems (keyup)="watchItemKeyUp($event)"
+                              (keyup.enter)="addItem()"
                               [options]="cmOptionsWatchItems"
                               [(ngModel)]="myTextareaWatchItems"
                               [autoFocus]="false"

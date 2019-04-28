@@ -142,7 +142,7 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
           const result = <any>response;
           for (let i = 0; i < result.length; i++) {
             this.item_list.push({text: result[i], displayText: result[i]});
-           // this.item_list.push({text: 'sh.' + result[i], displayText: 'sh.' + result[i]});
+            this.item_list.push({text: 'sh.' + result[i], displayText: 'sh.' + result[i]});
             this.autocomplete_list.push({text: 'sh.' + result[i] + '()', displayText: 'sh.' + result[i] + '() | Item'});
           }
       }
@@ -285,7 +285,7 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
       let start = cur.ch;
       let end = start;
 
-      const charexp =  /[\w\.$]+/;
+      const charexp =  /[\w\.\w$]+/;
       while (end < curLine.length && charexp.test(curLine.charAt(end))) {
         end++;
       }
@@ -296,6 +296,8 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
       if (curWord.length > 1) {
         curWord = curWord.trim();
       }
+      console.log('START ' + start + ' END ' + end);
+      console.log(curWord);
       const regex = new RegExp('^' + curWord, 'i');
       console.log(curWord);
       if (curWord.length >= 3) {
@@ -370,51 +372,57 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
       editor1.setSize('93vw', '74vh');
     }
     editor1.refresh();
-    editor1.on('keyup', function (cm, event) {
-      if (!cm.state.completionActive && /*Enables keyboard navigation in autocomplete list*/
-        (event.keyCode !== 8 &&
-          event.keyCode !== 9 &&
-          event.keyCode !== 13 &&
-          event.keyCode !== 27 &&
-          event.keyCode !== 37 &&
-          event.keyCode !== 38 &&
-          event.keyCode !== 39 &&
-          event.keyCode !== 40 &&
-          event.keyCode !== 46)) {
-            // @ts-ignore
-            CodeMirror.commands.autocomplete_shng(cm, null, {completeSingle: false});
-      }
-    });
 
     const editor2 = this.codeEditorWatchItems.codeMirror;
     editor2.setSize('50vw', 'auto');
     editor2.refresh();
-    editor2.on('keyup', function (cm, event, component = this) {
-      if (!cm.state.completionActive && /*Enables keyboard navigation in autocomplete list*/
-        (event.keyCode !== 8 &&
-          event.keyCode !== 9 &&
-          event.keyCode !== 13 &&
-          event.keyCode !== 27 &&
-          event.keyCode !== 37 &&
-          event.keyCode !== 38 &&
-          event.keyCode !== 39 &&
-          event.keyCode !== 40 &&
-          event.keyCode !== 46)) {
-        // @ts-ignore
-        CodeMirror.commands.autocomplete_shng_watch_items(cm, null, {completeSingle: false});
-      }
-    });
-
     /* prohibit new lines, spaces and tabs for watch items input field */
     editor2.on('beforeChange', function(cm, changeObj) {
       const typedNewLine = changeObj.origin === '+input' && typeof changeObj.text === 'object' && changeObj.text.join('') === '';
       const typedSpaceorTab = (changeObj.origin === '+input' || changeObj.origin === 'paste') && (!/^[a-z0-9\.\_\-]+$/i.
-        test(changeObj.text[0]));
+      test(changeObj.text[0]));
       if (typedNewLine || typedSpaceorTab) {
         return changeObj.cancel();
       }
       return null;
     });
+  }
+
+  logicsCodeKeyUp(event) {
+    this.logicChanged = this.hasLogicChanged();
+    const editor1 = this.codeEditor.codeMirror;
+    console.log('keyup 1 ' + event.keyCode);
+    if (!editor1.state.completionActive && /*Enables keyboard navigation in autocomplete list*/
+      (event.keyCode !== 8 &&
+        event.keyCode !== 9 &&
+        event.keyCode !== 13 &&
+        event.keyCode !== 27 &&
+        event.keyCode !== 37 &&
+        event.keyCode !== 38 &&
+        event.keyCode !== 39 &&
+        event.keyCode !== 40 &&
+        event.keyCode !== 46)) {
+      // @ts-ignore
+      CodeMirror.commands.autocomplete_shng(editor1, null, {completeSingle: false});
+    }
+  }
+
+  watchItemKeyUp(event) {
+    const editor2 = this.codeEditorWatchItems.codeMirror;
+    console.log('keyup 2 ' + event.keyCode);
+    if ((!editor2.state.completionActive && /*Enables keyboard navigation in autocomplete list*/
+      ( event.keyCode !== 8 &&
+        event.keyCode !== 9 &&
+        event.keyCode !== 13 &&
+        event.keyCode !== 27 &&
+        event.keyCode !== 37 &&
+        event.keyCode !== 38 &&
+        event.keyCode !== 39 &&
+        event.keyCode !== 40 &&
+        event.keyCode !== 46))) {  // && event.keyCode !== 8 && event.keyCode !== 17 && event.keyCode !== 86)
+      // @ts-ignore
+      CodeMirror.commands.autocomplete_shng_watch_items(editor2, null, {completeSingle: false});
+    }
   }
 
 
