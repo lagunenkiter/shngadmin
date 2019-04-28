@@ -21,6 +21,7 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
   newlogics: LogicsinfoType[];
   logic: LogicsinfoType = <any>{};
   wrongWatchItem: boolean;
+  logicChanged: boolean;
   logicCycleOrig: string;
   logicCrontabOrig: string;
   logicWatchitemOrig: LogicsWatchItem[];
@@ -122,6 +123,7 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
       this.rulers.push({color: '#eee', column: i * 4, lineStyle: 'dashed'});
     }
     this.wrongWatchItem = false;
+    this.logicChanged = false;
     this.getLogicInfo();
 
     this.pluginsapiService.getPluginsAPI()
@@ -140,7 +142,7 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
           const result = <any>response;
           for (let i = 0; i < result.length; i++) {
             this.item_list.push({text: result[i], displayText: result[i]});
-            this.item_list.push({text: result[i], displayText: 'sh.' + result[i]});
+           // this.item_list.push({text: 'sh.' + result[i], displayText: 'sh.' + result[i]});
             this.autocomplete_list.push({text: 'sh.' + result[i] + '()', displayText: 'sh.' + result[i] + '() | Item'});
           }
       }
@@ -229,7 +231,8 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
   }
 
 
-  logicChanged() {
+  hasLogicChanged() {
+    console.log('logic Changed?');
     if (this.codeChanged()) {
       return true;
     }
@@ -294,6 +297,7 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
         curWord = curWord.trim();
       }
       const regex = new RegExp('^' + curWord, 'i');
+      console.log(curWord);
       if (curWord.length >= 3) {
         const oCompletions = {
           list: (!curWord ? [] : curDict.filter(function (item) {
@@ -349,6 +353,7 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
         this.logic.watch_item_list.push(<any>this.myTextareaWatchItems);
         this.myTextareaWatchItems = '';
         this.wrongWatchItem = false;
+        this.logicChanged = this.hasLogicChanged();
         return;
       }
     }
@@ -396,9 +401,6 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
           event.keyCode !== 46)) {
         // @ts-ignore
         CodeMirror.commands.autocomplete_shng_watch_items(cm, null, {completeSingle: false});
-      }
-      if (event.keyCode === 13) {
-        console.log(editor2.state);
       }
     });
 
