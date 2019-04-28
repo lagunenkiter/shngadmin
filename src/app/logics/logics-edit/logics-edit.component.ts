@@ -24,7 +24,6 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
   logicCycleOrig: string;
   logicCrontabOrig: string;
   logicWatchitemOrig: LogicsWatchItem[];
-  logicWatchitemRemoved: LogicsWatchItem[];
 
   constructor(private route: ActivatedRoute,
               private dataService: LogicsApiService,
@@ -224,7 +223,6 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
           }
           this.logicCycleOrig = this.logic.cycle;
           this.logicCrontabOrig = this.logic.crontab;
-          this.logicWatchitemRemoved = [];
           this.logicWatchitemOrig = Array.from(this.logic.watch_item_list);
         }
       );
@@ -265,6 +263,9 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
       let allIdenticalFlag = true;
       for (const watchItemOrig of this.logicWatchitemOrig) {
         if (!this.logic.watch_item_list.includes(watchItemOrig)) {
+          allIdenticalFlag = false;
+        }
+        if (this.logic.watch_item_list.length > this.logicWatchitemOrig.length) {
           allIdenticalFlag = false;
         }
       }
@@ -318,54 +319,40 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
   }
 
   removeItem(itemName) {
+    console.log('Trying to remove item ' + itemName);
     for (const j of this.logic.watch_item_list) {
       if (<any>j === itemName) {
         const index = this.logic.watch_item_list.indexOf(j)
         if (index > -1) {
+          console.log('Removing item ' + j);
           this.logic.watch_item_list.splice(index, 1);
-          console.log(this.logicWatchitemRemoved);
-          this.logicWatchitemRemoved.push(j);
           return;
         }
       }
     }
-    return;
-  }
-
-  removeItemFromRemovedList(itemName) {
-    for (const j of this.logicWatchitemRemoved) {
-      if (<any>j === itemName) {
-        const index = this.logicWatchitemRemoved.indexOf(j)
-        if (index > -1) {
-          this.logicWatchitemRemoved.splice(index, 1);
-          return;
-        }
-      }
-    }
+    console.log('Item not in list!');
     return;
   }
 
   addItem() {
     console.log('Trying to add item ' + this.myTextareaWatchItems);
-    this.addItemWithName(this.myTextareaWatchItems);
-    this.myTextareaWatchItems = '';
-  }
-
-  addItemWithName(itemName) {
     for (const i of this.item_list) {
-      if (i['text'] === itemName) {
+      if (i['text'] === this.myTextareaWatchItems) {
         for (const j of this.logic.watch_item_list) {
-          if (<any>j === itemName) {
+          if (<any>j === this.myTextareaWatchItems) {
+            console.log('Item already in list!');
             this.wrongWatchItem = true;
             return;
           }
         }
-        this.logic.watch_item_list.push(<any>itemName);
-        this.removeItemFromRemovedList(itemName);
+        console.log('Adding item to list: ' + this.myTextareaWatchItems);
+        this.logic.watch_item_list.push(<any>this.myTextareaWatchItems);
+        this.myTextareaWatchItems = '';
         this.wrongWatchItem = false;
         return;
       }
     }
+    console.log('Item does not exist');
     this.wrongWatchItem = true;
   }
 
@@ -447,7 +434,6 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
     this.myTextarea = this.myTextareaOrig;
     this.logic.cycle = this.logicCycleOrig;
     this.logic.crontab = this.logicCrontabOrig;
-    this.logicWatchitemRemoved = [];
     this.logic.watch_item_list = Array.from(this.logicWatchitemOrig);
   }
 
