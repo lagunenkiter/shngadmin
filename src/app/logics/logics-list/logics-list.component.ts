@@ -164,6 +164,11 @@ export class LogicsListComponent implements OnInit {
       return;
     }
 
+    if (this.newlogic_name.match(/^\d/)) {
+      this.newlogic_add_enabled = false;
+      return;
+    }
+
     for (let i = 0; i < this.logics.length; i++) {
       // console.log({i}, this.logics[i].name);
       if (this.newlogic_name === this.logics[i].name) {
