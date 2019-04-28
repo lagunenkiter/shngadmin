@@ -417,7 +417,7 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
         (response) => {
           // after saving the code, set Orig var to signal the editor shows "unchanged code"
           this.myTextareaOrig = this.myTextarea;
-
+          this.logicChanged = this.hasLogicChanged();
           if (reload) {
             this.reloadLogic(this.logic.name);
           }
