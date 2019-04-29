@@ -395,6 +395,7 @@
   },
 
   "BUTTON": {
+    "OK": "Ok",
     "CLOSE": "Schließen",
     "CHANGE": "Ändern",
     "SAVE": "Sichern",
