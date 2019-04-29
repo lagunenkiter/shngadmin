@@ -121,6 +121,9 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
   ngOnInit() {
 
     const logic = this.route.snapshot.paramMap['params']['logicname'].split('|');
+    if (logic.length === 1) {
+      logic.push('');
+    }
     this.myEditFilename = logic[1].trim();
     this.myLogicName = logic[0].trim();
     // console.log('LogicsEditComponent.ngOnInit()', {logic});
