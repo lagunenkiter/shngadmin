@@ -2350,7 +2350,7 @@
         "en": "A couple of widgets for smartVISU v2.8"
       }
     },
-    "willy_tel": {
+    "wlan_repeater_1750_garage": {
       "plugin_name": "avm",
       "password": "417592",
       "host": "10.0.0.4",
