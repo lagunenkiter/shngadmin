@@ -5,7 +5,7 @@ import {LogicsWatchItem} from './logics-watch-item';
 // Datatype for <shng-server>:<port>/api/logics
 //
 export interface LogicsinfoType {
-  crontab: string;
+  crontab: any;
   cycle: string;
   enabled: boolean;
   filename: string;

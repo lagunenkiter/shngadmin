@@ -267,8 +267,7 @@
     "TYPE": "Typ",
     "DESCRIPTION": "Beschreibung",
     "ADD_ITEM": "Item hinzufügen",
-    "ITEM_INVALID": "Item ungültig oder bereits in der Liste vorhanden, bitte Eingabe prüfen!",
-    "AUTOCOMPLETE": "Eine Hilfe mit Vorschlägen zur Autovervollständigung taucht nach den ersten 3 Zeichen auf - Mit den Pfeiltasten navigieren, TAB: Im Eingabefeld ergänzen, ENTER: Als Item Hinzufügen."
+    "ITEM_INVALID": "Item ungültig oder bereits in der Liste vorhanden, bitte Eingabe prüfen!"
   },
   "SCHEDULERS": {
     "ITEM SCHEDULERS": "Item Scheduler",
@@ -439,16 +438,24 @@
   },
 
   "HELP": {
+    "KEY_UP": "Pfeil aufwärts",
+    "KEY_DOWN": "Pfeil abwärts",
     "EDITOR-KEYS": "Editor Tasten",
     "KEY": "Taste",
     "DESCRIPTION": "Beschreibung",
+    "UP": "In der Itemliste navigieren",
+    "DOWN": "In der Itemliste navigieren",
     "TAB": "Eine Ebene einrücken",
+    "WATCHITEM_TAB": "Im Eingabefeld ergänzen",
+    "WATCHITEM_ENTER": "Als Watch-Item Hinzufügen",
     "SHIFT-TAB": "Eine Ebene ausrücken",
     "F11": "Fullscreen Modus ein- bzw. ausschalten",
     "ESC": "Fullscreen Modus verlassen",
     "CTRL-L": "Zeilen-Umbruch ein- und ausschalten",
     "CTRL-Q": "Zeile an der Cursorposition falten oder entfalten",
-    "SHIFT-CTRL-Q": "Gesamtes Dokument entfalten"
+    "SHIFT-CTRL-Q": "Gesamtes Dokument entfalten",
+    "CRONTAB": "Wenn mehrere Einträge als Liste eingegeben werden sollen, so sind die Einträge durch ein | Zeichen zu trennen.",
+    "AUTOCOMPLETE": "Eine Liste mit Vorschlägen zur Autovervollständigung wird nach Eingabe der ersten 3 Zeichen angezeigt."
   },
 
   "YES": "Ja",

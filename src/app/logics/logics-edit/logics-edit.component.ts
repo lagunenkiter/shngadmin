@@ -114,6 +114,7 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
   };
 
   editorHelp_display = false;
+  parameterHelp_display = false;
   error_display = false;
 
 
@@ -338,6 +339,9 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
           if (this.logic.crontab === undefined) {
             this.logic.crontab = null;
           }
+          console.log('typeof this.logic.crontab', typeof this.logic.crontab, this.logic.crontab);
+          this.logic.crontab = this.listToString(this.logic.crontab);
+          console.log('typeof this.logic.crontab', typeof this.logic.crontab, this.logic.crontab);
 
           if (this.myEditFilename === '') {
             if (this.logic.filename !== null && this.logic.filename !== undefined && this.logic.filename !== '') {
@@ -369,7 +373,7 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
               this.logicWatchitemOrig = Array.from(this.logic.watch_item);
             } else {
               this.logicWatchitemOrig = Array.from(this.logic.watch_item);
-              console.log('this.logic.watch_item', this.logic.watch_item);
+              // console.log('this.logic.watch_item', this.logic.watch_item);
             }
           } else {
             this.logic.watch_item = [];
@@ -402,26 +406,26 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
   parametersChanged() {
     if (this.logic.cycle !== this.logicCycleOrig) {
       if (!(this.logic.cycle === null && this.logicCycleOrig === '')) {
-        console.log('parametersChanged:', 'cycle', this.logic.cycle, ':' + this.logicCycleOrig + ':');
+        // console.log('parametersChanged:', 'cycle', this.logic.cycle, ':' + this.logicCycleOrig + ':');
         return true;
       }
     }
     if (this.logic.crontab !== this.logicCrontabOrig) {
       if (!(this.logic.crontab === null && this.logicCrontabOrig === '')) {
-        console.log('parametersChanged:', 'crontab');
+        // console.log('parametersChanged:', 'crontab');
         return true;
       }
     }
 
     for (let i = 0; i < this.parameters.length; i++) {
       if (this.parameters[i].value !== this.parameters[i].value_orig) {
-        console.log('parametersChanged:', this.parameters[i].name, this.parameters[i].value, ':' + this.parameters[i].value_orig + ':');
+        // console.log('parametersChanged:', this.parameters[i].name, this.parameters[i].value, ':' + this.parameters[i].value_orig + ':');
         return true;
       }
     }
 
     if (typeof(this.logic.watch_item) !== 'undefined') {
-      console.log(this.logicWatchitemOrig, this.logic.watch_item);
+      // console.log(this.logicWatchitemOrig, this.logic.watch_item);
       let allIdenticalFlag = true;
       for (const watchItemOrig of this.logicWatchitemOrig) {
         if (!this.logic.watch_item.includes(watchItemOrig)) {
@@ -430,7 +434,7 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
         }
       }
       if (this.logic.watch_item.length !== this.logicWatchitemOrig.length) {
-        console.log('parametersChanged', 'length changed');
+        // console.log('parametersChanged', 'length changed');
         allIdenticalFlag = false;
       }
       return !allIdenticalFlag;

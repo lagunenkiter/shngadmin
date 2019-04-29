@@ -57,7 +57,7 @@
           <button pButton label="{{ 'BUTTON.SAVE_LOAD'|translate }}" type="button" [disabled]="!this.logicChanged" icon="fa fa-check" style="margin-right: 0px;" (click)="saveLogic(true)" class="float-sm-right ui-button-success"></button>
           <button pButton label="{{ 'BUTTON.SAVE'|translate }}" type="button" [disabled]="!this.logicChanged" icon="fa fa-check" style="margin-right: 10px;" (click)="saveLogic()" class="float-sm-right ui-button-success"></button>
           <button pButton label="{{ 'BUTTON.DISCARD'|translate }}" type="button" [disabled]="(myEditFilename === '') || (!this.logicChanged)" icon="fa fa-times" style="margin-right: 10px;" (click)="discardChanges();" class="float-sm-right ui-button-secondary"></button>
-          <button pButton label="{{ 'BUTTON.HELP'|translate }}" type="button" [disabled]="false" icon="fa fa-info" style="margin-right: 10px;" (click)="editorHelp_display = true;" class="float-sm-right ui-button-success"></button>
+          <button pButton label="{{ 'BUTTON.HELP'|translate }}" type="button" [disabled]="false" icon="fa fa-info" style="margin-right: 10px;" (click)="parameterHelp_display = true;" class="float-sm-right ui-button-success"></button>
         </div>
 
         <table id="1" class="table table-striped">
@@ -131,9 +131,6 @@
                   <button pButton label="{{'LOGIC_EDIT.ADD_ITEM'|translate }}" class="ui-button-success" (click)="addItem()"></button>
                 </div>
                 <br style="clear:both;"/>
-                <div class="mt-2">
-                  <span style="font-size: small">{{ 'LOGIC_EDIT.AUTOCOMPLETE'|translate }}</span>
-                </div>
               </div>
             </td>
           </tr>
@@ -232,6 +229,38 @@
   <br>
   <p-footer>
     <button pButton type="button" (click)="editorHelp_display = false;" label="{{'BUTTON.CLOSE'|translate}}" class="ui-button-success"></button>
+  </p-footer>
+</p-dialog>
+
+
+<!--
+    -- Display help dialog
+  -->
+<p-dialog header="" [(visible)]="parameterHelp_display" [closable]="true" [modal]="true" [style]="{'max-width':'600px'}" dynamic="true" blockScroll="true">
+  <p-header>
+    {{ 'BUTTON.HELP'|translate }} {{ 'LOGIC_EDIT.PARAMETERS'|translate }}
+  </p-header>
+  <br>
+  <strong>Crontab(s)</strong>: {{ 'HELP.CRONTAB'|translate }}
+  <br><br>
+  <strong>Watch Item(s)</strong>: {{ 'HELP.AUTOCOMPLETE'|translate }}
+  <br><br>
+  <table>
+    <thead>
+    <th><u>{{'HELP.KEY'|translate}}</u></th>
+    <th style="width: 20px;"></th>
+    <th><u>{{'HELP.DESCRIPTION'|translate}}</u></th>
+    </thead>
+    <tbody>
+    <tr><td>Tab</td>          <td></td> <td>{{'HELP.WATCHITEM_TAB'|translate}}</td></tr>
+    <tr><td>{{'HELP.KEY_UP'|translate}}</td>       <td></td> <td>{{'HELP.UP'|translate}}</td></tr>
+    <tr><td>{{'HELP.KEY_DOWN'|translate}}</td>       <td></td> <td>{{'HELP.DOWN'|translate}}</td></tr>
+    <tr><td>Enter</td> <td></td> <td>{{'HELP.WATCHITEM_ENTER'|translate}}</td></tr>
+    </tbody>
+  </table>
+  <br>
+  <p-footer>
+    <button pButton type="button" (click)="parameterHelp_display = false;" label="{{'BUTTON.CLOSE'|translate}}" class="ui-button-success"></button>
   </p-footer>
 </p-dialog>
 
