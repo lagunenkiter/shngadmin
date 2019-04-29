@@ -8,6 +8,7 @@ import {ItemsApiService} from '../../common/services/items-api.service';
 import {LogicsinfoType} from '../../common/models/logics-info';
 import {LogicsApiService} from '../../common/services/logics-api.service';
 import {LogicsWatchItem} from '../../common/models/logics-watch-item';
+import {SharedService} from '../../common/services/shared.service';
 
 @Component({
   selector: 'app-logics-edit',
@@ -26,10 +27,15 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
   logicCrontabOrig: string;
   logicWatchitemOrig: LogicsWatchItem[];
 
+  parameters: any[] = [];
+  parameter_cols: any[];
+  pluginParameters: {} = {};
+
   constructor(private route: ActivatedRoute,
               private dataService: LogicsApiService,
               private fileService: FilesApiService,
               private pluginsapiService: PluginsApiService,
+              private shared: SharedService,
               private itemsapiService: ItemsApiService) { }
 
 
@@ -45,6 +51,7 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
   @ViewChild('codeeditor') private codeEditor;
   @ViewChild('watchitems') private codeEditorWatchItems;
   myEditFilename: string;
+  myLogicName: string;
   autocomplete_list: {}[] = [];
   item_list: {}[] = [];
   myTextarea = '';
@@ -112,19 +119,26 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
 
   ngOnInit() {
 
-    let logicName = this.route.snapshot.paramMap['params']['logicname'];
-    if (logicName !== undefined) {
-      if (logicName.endsWith('.log')) {
-        logicName = logicName.slice(0, -4);
-      }
-    }
-    this.myEditFilename = logicName;
+    const logic = this.route.snapshot.paramMap['params']['logicname'].split('|');
+    this.myEditFilename = logic[1].trim();
+    this.myLogicName = logic[0].trim();
+    // console.log('LogicsEditComponent.ngOnInit()', {logic});
+
+    // let logicName = this.route.snapshot.paramMap['params']['logicname'];
+    // if (logicName !== undefined) {
+    //   if (logicName.endsWith('.log')) {
+    //     logicName = logicName.slice(0, -4);
+    //   }
+    // }
+
+    // this.myEditFilename = logicName;
     for (let i = 1; i <= 100; i++) {
       this.rulers.push({color: '#eee', column: i * 4, lineStyle: 'dashed'});
     }
     this.wrongWatchItem = false;
     this.logicChanged = false;
-    this.getLogicInfo();
+
+    this.getLogicInfo(this.myLogicName);
 
     this.pluginsapiService.getPluginsAPI()
       .subscribe(
@@ -148,19 +162,6 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
       }
     );
 
-    this.fileService.readFile('logics', this.myEditFilename)
-      .subscribe(
-        (response) => {
-          this.myTextarea = response;
-          console.log('ngOnInit', 'read', {response});
-          const editor = this.codeEditor.codeMirror;
-          editor.setOption('lineSeparator', '\n');
-          if (this.myTextarea.indexOf('\r\n') >= 0) {
-            editor.setOption('lineSeparator', '\r\n');
-          }
-          this.myTextareaOrig = this.myTextarea;
-        }
-      );
     this.registerAutocompleteHelper('autocompleteHint', this.autocomplete_list);
     this.registerAutocompleteHelper('autocompleteWatchItemsHint', this.item_list);
     // @ts-ignore
@@ -176,56 +177,204 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
   }
 
 
+  getPluginParameterDefinitions() {
+
+    // console.warn('getPluginParameterDefinitions', this.logic);
+    this.parameter_cols = [
+      { field: 'name',  sfield: 'confname',   header: 'PLUGIN.PARAMETER',   width: '150px', iwidth: '146px' },
+      { field: 'value', sfield: 'paramvalue', header: 'PLUGIN.VALUE',       width: '200px', iwidth: '196px' },
+      { field: 'type',  sfield: 'conftype',   header: 'PLUGIN.TYPE',        width: '100px', iwidth:  '96px' },
+      { field: 'desc',  sfield: '',           header: 'PLUGIN.DESCRIPTION', width: '',      iwidth: '' }
+    ];
+
+    this.pluginsapiService.getPluginsLogicParameters()
+      .subscribe(
+        (response) => {
+          this.pluginParameters = <any>response;
+          // console.log('ngOnInit: pluginParameters', this.pluginParameters);
+
+          for (const param in this.pluginParameters) {
+            if (param in this.pluginParameters) {
+              const paramdef = this.pluginParameters[param];
+
+              const vl = [];
+              if (paramdef['valid_list'] !== undefined) {
+                for (let i = 0; i < paramdef['valid_list'].length; i++) {
+                  const wrk = {label: String(paramdef['valid_list'][i]), value: paramdef['valid_list'][i]};
+                  vl.push(wrk);
+                }
+              }
+
+              // generate a valid_list for bool parameters
+              if (paramdef['type'] === 'bool') {
+                if (vl.length === 0) {
+                  let wrk = {};
+                  wrk = {label: 'true', value: true};
+                  vl.push(wrk);
+                  wrk = {label: 'false', value: false};
+                  vl.push(wrk);
+                }
+              }
+
+              // fill description with active language
+              const paramdesc = this.shared.getDescription(paramdef['description']);
+
+              let val = null;
+              val = this.logic[param];
+              // console.log({param}, {val});
+              if (val === undefined || val === null) {
+                val = null;
+              }
+              if (paramdef['type'] === 'list') {
+                val = this.listToString(val);
+              }
+
+              const paramdata = {
+                'name': param,
+                'type': paramdef['type'],
+                'valid_list': vl,
+                'valid_min': paramdef['valid_min'],
+                'valid_max': paramdef['valid_max'],
+                'default': paramdef['default'],
+                'mandatory': paramdef['mandatory'],
+                'value': val,
+                'value_orig': val,
+                'desc': paramdesc
+              };
+
+              if (paramdata['type'] === 'list') {
+                // console.log({paramdef});
+                if (paramdef['default'] !== undefined) {
+                  paramdata['default'] = this.listToString(paramdef['default']);
+                }
+              }
+              if (paramdef['hide'] && (['str', 'int'].indexOf(paramdef['type']) !== -1)) {
+                paramdata['type'] = 'hide' + '-' + paramdef['type'];
+              }
+
+              if (paramdata.type === 'bool') {
+                if (val === undefined) {
+                  paramdata.value = null;
+                } else if (typeof val === 'boolean') {
+                  paramdata.value = val;
+                } else {
+                  if (val === null) {
+                    paramdata.value = null;
+                  } else {
+                    paramdata.value = (val.toLowerCase() === 'true');
+                  }
+                }
+              } else if (paramdata.type === 'list') {
+                paramdata.value = this.listToString(<string>val);
+              } else {
+                paramdata.value = <string>val;
+              }
+
+              // add to the table of configured plugins
+              this.parameters.push(paramdata);
+            }
+          }
+        }
+      );
+
+  }
+
+
   listToString(list) {
     let result = '';
-    for (let i = 0; i < list.length; i++) {
-      if (i > 0) {
-        result += ' | ';
+    if (list === null) {
+      result = null;
+    } else if (typeof list === 'string') {
+      result = list;
+    } else {
+      if (list !== undefined) {
+        for (let i = 0; i < list.length; i++) {
+          if (i > 0) {
+            result += ' | ';
+          }
+          result += list[i];
+        }
       }
-      result += list[i];
     }
     return result;
   }
 
 
   stringToList(str) {
-    let wrk = str.trim();
-    if (wrk === '') {
+    // let wrk = str.trim();
+    // wrk =  wrk.replace(/,/g, ' ');   // comma is no delimiter
+    // wrk =  wrk.replace(/\|/g, ' ');
+    // wrk =  wrk.replace(/   /g, ' ');
+    // while (wrk.indexOf('  ') !== -1) {
+    //   wrk =  wrk.replace(/  /g, ' ');
+    // }
+    if (str === null) {
+      return <any>[];
+    } else if (str.trim() === '') {
       return <any>[];
     }
-    wrk =  wrk.replace(/,/g, ' ');
-    wrk =  wrk.replace(/\|/g, ' ');
-    wrk =  wrk.replace(/   /g, ' ');
-    while (wrk.indexOf('  ') !== -1) {
-      wrk =  wrk.replace(/  /g, ' ');
+    const list = <any>str.split('|');
+    for (let i = 0; i < list.length; i++) {
+      list[i] = list[i].trim();
     }
-    return <any>wrk.split(' ');
+    return list;
   }
 
 
-  getLogicInfo() {
-    this.dataService.getLogics()
+  getLogicInfo(logicname) {
+    // console.warn({logicname});
+    this.dataService.getLogic(logicname)
       .subscribe(
         (response) => {
-          this.logics = <LogicsinfoType[]>response['logics'];
-          this.logics.sort(function (a, b) {return (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0); });
-          for (const logic of this.logics) {
-            if (this.myEditFilename === logic.filename) {
-              console.warn('LogicsEditComponent.getLogics()', {logic});
-              this.logic = logic;
+          this.logic = <any>response;
+          // console.warn('LogicsEditComponent.getLogicInfo() this.logic', this.logic);
+
+          if (this.logic.enabled === undefined) {
+            this.logic.enabled = true;
+          }
+          if (this.logic.cycle === undefined) {
+            this.logic.cycle = null;
+          }
+          if (this.logic.crontab === undefined) {
+            this.logic.crontab = null;
+          }
+
+          if (this.myEditFilename === '') {
+            if (this.logic.filename !== null && this.logic.filename !== undefined && this.logic.filename !== '') {
+              this.myEditFilename = this.logic.filename;
             }
           }
-          this.newlogics = <LogicsinfoType[]>response['logics_new'];
-          this.newlogics.sort(function (a, b) {return (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0); });
-          for (const newlogic of this.newlogics) {
-            if (this.myEditFilename === newlogic.filename) {
-              console.warn('LogicsEditComponent.getLogics()', {newlogic});
-              this.logic = newlogic;
-            }
-          }
+
+          this.fileService.readFile('logics', this.myEditFilename)
+            .subscribe(
+              (responseFile) => {
+                this.myTextarea = responseFile;
+                // console.log('ngOnInit', 'read', {responseFile});
+                const editor = this.codeEditor.codeMirror;
+                editor.setOption('lineSeparator', '\n');
+                if (this.myTextarea.indexOf('\r\n') >= 0) {
+                  editor.setOption('lineSeparator', '\r\n');
+                }
+                this.myTextareaOrig = this.myTextarea;
+              }
+            );
+
+          this.getPluginParameterDefinitions();
+
           this.logicCycleOrig = this.logic.cycle;
           this.logicCrontabOrig = this.logic.crontab;
-          this.logicWatchitemOrig = Array.from(this.logic.watch_item_list);
+          this.logicWatchitemOrig = [];
+          if (this.logic.watch_item !== undefined) {
+            if (typeof (this.logic.watch_item) === 'string') {
+              this.logicWatchitemOrig = Array.from(this.logic.watch_item);
+            } else {
+              this.logicWatchitemOrig = Array.from(this.logic.watch_item);
+              console.log('this.logic.watch_item', this.logic.watch_item);
+            }
+          } else {
+            this.logic.watch_item = [];
+            this.logicWatchitemOrig = [];
+          }
         }
       );
   }
@@ -253,26 +402,40 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
   parametersChanged() {
     if (this.logic.cycle !== this.logicCycleOrig) {
       if (!(this.logic.cycle === null && this.logicCycleOrig === '')) {
+        console.log('parametersChanged:', 'cycle', this.logic.cycle, ':' + this.logicCycleOrig + ':');
         return true;
       }
     }
     if (this.logic.crontab !== this.logicCrontabOrig) {
       if (!(this.logic.crontab === null && this.logicCrontabOrig === '')) {
+        console.log('parametersChanged:', 'crontab');
         return true;
       }
     }
-    if (typeof(this.logic.watch_item_list) !== 'undefined') {
+
+    for (let i = 0; i < this.parameters.length; i++) {
+      if (this.parameters[i].value !== this.parameters[i].value_orig) {
+        console.log('parametersChanged:', this.parameters[i].name, this.parameters[i].value, ':' + this.parameters[i].value_orig + ':');
+        return true;
+      }
+    }
+
+    if (typeof(this.logic.watch_item) !== 'undefined') {
+      console.log(this.logicWatchitemOrig, this.logic.watch_item);
       let allIdenticalFlag = true;
       for (const watchItemOrig of this.logicWatchitemOrig) {
-        if (!this.logic.watch_item_list.includes(watchItemOrig)) {
+        if (!this.logic.watch_item.includes(watchItemOrig)) {
+          console.log('parametersChanged', {watchItemOrig});
           allIdenticalFlag = false;
         }
       }
-      if (this.logic.watch_item_list.length > this.logicWatchitemOrig.length) {
+      if (this.logic.watch_item.length !== this.logicWatchitemOrig.length) {
+        console.log('parametersChanged', 'length changed');
         allIdenticalFlag = false;
       }
       return !allIdenticalFlag;
     }
+
     return false;
   }
 
@@ -320,11 +483,11 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
   }
 
   removeItem(itemName) {
-    for (const j of this.logic.watch_item_list) {
+    for (const j of this.logic.watch_item) {
       if (<any>j === itemName) {
-        const index = this.logic.watch_item_list.indexOf(j)
+        const index = this.logic.watch_item.indexOf(j);
         if (index > -1) {
-          this.logic.watch_item_list.splice(index, 1);
+          this.logic.watch_item.splice(index, 1);
           this.logicChanged = this.hasLogicChanged();
           return;
         }
@@ -336,13 +499,13 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
   addItem() {
     for (const i of this.item_list) {
       if (i['text'] === this.myTextareaWatchItems) {
-        for (const j of this.logic.watch_item_list) {
+        for (const j of this.logic.watch_item) {
           if (<any>j === this.myTextareaWatchItems) {
             this.wrongWatchItem = true;
             return;
           }
         }
-        this.logic.watch_item_list.push(<any>this.myTextareaWatchItems);
+        this.logic.watch_item.push(<any>this.myTextareaWatchItems);
         this.myTextareaWatchItems = '';
         this.wrongWatchItem = false;
         this.logicChanged = this.hasLogicChanged();
@@ -429,22 +592,47 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
     this.myTextarea = this.myTextareaOrig;
     this.logic.cycle = this.logicCycleOrig;
     this.logic.crontab = this.logicCrontabOrig;
-    this.logic.watch_item_list = Array.from(this.logicWatchitemOrig);
+    this.logic.watch_item = Array.from(this.logicWatchitemOrig);
+    for (let i = 0; i < this.parameters.length; i++) {
+      this.parameters[i].value = this.parameters[i].value_orig;
+    }
+
     this.logicChanged = this.hasLogicChanged();
   }
 
   saveParameters(reload) {
     // console.log('LoggingConfigurationComponent.saveParameters');
 
-    // this.watchitemsToList();
-    // this.logic.watch_item_list = this.stringToList(this.myTextareaWatchItems);
-
     const params = {};
-    params['cycle'] = this.logic.cycle;
-    params['crontab'] = this.logic.crontab;
-    params['watch_item'] = this.logic.watch_item_list;
 
-    this.dataService.saveLogicParameters(this.logic.name, params)
+    if (!(parseInt(this.logic.cycle, 10) > 0)) {
+      this.logic.cycle = null;
+    }
+    params['cycle'] = this.logic.cycle;
+    params['crontab'] = this.stringToList(this.logic.crontab);
+    this.logic.crontab = this.listToString(params['crontab']);
+
+    params['watch_item'] = this.logic.watch_item;
+    this.logicWatchitemOrig = Array.from(this.logic.watch_item);
+
+    for (const param in this.pluginParameters) {
+      if (param in this.pluginParameters) {
+        params[param] = null;
+        for (let i = 0; i < this.parameters.length; i++) {
+          if (this.parameters[i].name === param) {
+            if (this.parameters[i].type === 'list') {
+              params[param] = this.stringToList(this.parameters[i].value);
+              this.parameters[i].value = this.listToString(params[param]);
+            } else {
+              params[param] = this.parameters[i].value;
+            }
+            this.parameters[i].value_orig = this.parameters[i].value;
+          }
+        }
+      }
+    }
+
+    this.dataService.saveLogicParameters(this.myLogicName, params)
       .subscribe(
         (response) => {
           // after saving the parameters, set Orig vars to signal the editor shows "unchanged values"
@@ -452,7 +640,7 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
           this.logicCrontabOrig = this.logic.crontab;
 
           // this.watchitemsFromList();
-          this.logicWatchitemOrig = Array.from(this.logic.watch_item_list);
+          // ? this.logicWatchitemOrig = Array.from(this.logic.watch_item_list);
           this.logicChanged = this.hasLogicChanged();
 
           if (reload) {

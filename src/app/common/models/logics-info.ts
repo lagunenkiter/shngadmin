@@ -16,6 +16,5 @@ export interface LogicsinfoType {
   pathname: string;
   userlogic: boolean;
   visu_acl: string;
-  watch_item: string;
-  watch_item_list: LogicsWatchItem[];
+  watch_item: LogicsWatchItem[];
 }

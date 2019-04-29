@@ -28,7 +28,27 @@ export class LogicsApiService {
           return result;
         }),
         catchError((err: HttpErrorResponse) => {
-          console.error('LogicsApiService (getLogics): Could not read logics data' + ' - ' + err.error.error);
+          console.error('LogicsApiService.getLogics(): Could not read logics data' + ' - ' + err.error.error);
+          return of({});
+        })
+      );
+  }
+
+
+  getLogic(logicname) {
+    const apiUrl = sessionStorage.getItem('apiUrl');
+    let url = apiUrl + 'logics/' + logicname;
+    if (apiUrl.includes('localhost')) {
+      url += '.json';
+    }
+    return this.http.get(url)
+      .pipe(
+        map(response => {
+          const result = response;
+          return result;
+        }),
+        catchError((err: HttpErrorResponse) => {
+          console.error('LogicsApiService.getLogic(' + logicname + '): Could not read logics data' + ' - ' + err.error.error);
           return of({});
         })
       );
@@ -82,10 +102,10 @@ export class LogicsApiService {
   saveLogicParameters(logicName, paramObj) {
     // paramObj is a dict containing the entries of the parameter section in etc/logic.yamls
     // parameters to be deleted must be included with an empty string as value!
-    console.warn('LogicsApiService.saveLogicParameters', {logicName}, {paramObj});
+    // console.warn('LogicsApiService.saveLogicParameters', {logicName}, {paramObj});
 
     const apiUrl = sessionStorage.getItem('apiUrl');
-    let url = apiUrl + 'logics/' + logicName + '?action=' + 'saveparameters';
+    const url = apiUrl + 'logics/' + logicName + '?action=' + 'saveparameters';
     if (apiUrl.includes('localhost')) {
       console.warn('LogicsApiService.saveLogicParameters', 'Cannot simulate saving parameters in dev environment\n', '- logic', logicName, ', action', paramObj);
       return of(true);

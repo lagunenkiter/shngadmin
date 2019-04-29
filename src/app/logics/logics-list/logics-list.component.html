@@ -72,7 +72,7 @@
                     <!--
                     <a class="text-shng" [routerLink]="['/logics/edit', logic.filename]">{{ logic.filename }}</a>
                     -->
-                    <a class="text-shng" [routerLink]="['/logics/edit', logic.filename]">{{ logic.filename }}</a>
+                    <a class="text-shng" [routerLink]="['/logics/edit', logic.name + '|' + logic.filename]">{{ logic.filename }}</a>
                   </ng-template>
                 </td>
                 <td class="p-1">

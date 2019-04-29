@@ -17,17 +17,18 @@
     {
       "enabled":true,
       "last_run":"2019-01-15 05:00:00+0100",
-      "watch_item_list":[
-
-      ],
       "pathname":"/python/smarthome/logics/automatic_gate_control_day.py",
       "logictype":"Python",
       "crontab":"0 6 * 0,1,2,3,4",
       "cycle":"",
       "name":"AutomaticGateControlLogicDay",
       "visu_acl":"",
+      "knx_listen":"1/2/3",
       "next_exec":"2019-01-16 05:00:00+0100",
-      "watch_item":"",
+      "watch_item_list":[
+        "avm.monitor.newest.event"
+      ],
+      "watch_item":"avm.monitor.newest.event",
       "userlogic":true,
       "filename":"automatic_gate_control_day.py"
     },

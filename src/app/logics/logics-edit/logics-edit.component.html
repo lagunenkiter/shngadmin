@@ -69,8 +69,8 @@
             <ng-container *ngIf="logic && !logic.enabled">
               <td width="35%"><span style="color: var(--shng-red);  vertical-align: middle" class="fas fa-play-circle"></span> {{ 'LOGIC_EDIT.INACTIVE'|translate }}</td>
             </ng-container>
-            <td width="15%"></td>
-            <td width="35%"></td>
+            <td width="20%"></td>
+            <td width="30%"></td>
           </tr>
           <tr>
             <td>{{ 'LOGIC_EDIT.LAST_EXEC'|translate }}</td>
@@ -95,7 +95,7 @@
           <tr>
             <td>Cycle</td>
             <td colspan="3">
-              <input [(ngModel)]="logic.cycle" (keyup)="this.logicChanged = hasLogicChanged()" type="number" min="0" max="65535" pInputText placeholder="" pInputText name="cycle" style="width: 150px" [ngStyle]="{'width': 6}"/>
+              <input [(ngModel)]="logic.cycle" (keyup)="this.logicChanged = hasLogicChanged()" type="number" min="1" max="65535" pInputText placeholder="" pInputText name="cycle" style="width: 150px" [ngStyle]="{'width': 6}"/>
             </td>
           </tr>
           <tr>
@@ -105,13 +105,13 @@
             </td>
           </tr>
           <tr>
-            <td>Watch Item(s)<ng-container *ngIf='this.logic.watch_item_list!==undefined'>: {{ this.logic.watch_item_list.length }}</ng-container></td>
+            <td>Watch Item(s)<ng-container *ngIf='this.logic.watch_item!==undefined'>: {{ this.logic.watch_item.length }}</ng-container></td>
             <td colspan="3">
-              <ng-container *ngIf='this.logic.watch_item_list!==undefined'>
-                <ng-container *ngFor="let watch_item of this.logic.watch_item_list">
+              <ng-container *ngIf='this.logic.watch_item!==undefined'>
+                <ng-container *ngFor="let watch_item of this.logic.watch_item">
                   <button pButton label="{{watch_item}}" type="button" icon="fa fa-times" (click)="removeItem(watch_item)" class="float-sm-left ui-button-secondary mr-2 mb-2"></button>
                 </ng-container>
-                <ng-container *ngIf="this.logic.watch_item_list.length > 0">
+                <ng-container *ngIf="this.logic.watch_item.length > 0">
                   <br style="clear:both;"/>
                 </ng-container>
               </ng-container>
@@ -139,43 +139,64 @@
           </tr>
         </table>
 
-        <h5 style="; margin-top: 10px; margin-left: 10px;">
-          <p style="color: var(--shng-blue)">
-            <strong>Plugin specific parameters have yet to be implemented</strong>
-          </p>
-        </h5>
-
         <div style="margin-left: 10px; padding-top: 20px; padding-bottom: 10px;"><strong>{{ 'LOGIC_EDIT.PLUGIN_SPECIFIC'|translate }}</strong></div>
-        <table id="3" class="table table-striped">
-          <th width="15%">{{ 'LOGIC_EDIT.PARAMETER'|translate }}</th>
-          <th>{{ 'LOGIC_EDIT.VALUE'|translate }}</th>
-          <th>{{ 'LOGIC_EDIT.TYPE'|translate }}</th>
-          <th>{{ 'LOGIC_EDIT.DESCRIPTION'|translate }}</th>
-          <tr>
-            <td>visu_acl</td>
-            <td>
-              <input type="text" autocomplete="off" id="visu_acl" style="width: 200px; border: 1px solid #ddd;" name="visu_acl"/>
-            </td>
-            <td>bool</td>
-            <td>Logik darf durch Visu getriggert werden (Dummy)</td>
-          </tr>
-          <tr>
-            <td>test_acl</td>
-            <td>
-              <input type="text" autocomplete="off" id="test_acl" style="width: 200px; border: 1px solid #ddd;" name="test_acl"/>
-            </td>
-            <td>bool</td>
-            <td>Logik darf durch Test-Plugin getriggert werden (Dummy)</td>
-          </tr>
-          <tr>
-            <td>test2_acl</td>
-            <td>
-              <input type="text" autocomplete="off" id="test2_acl" style="width: 200px; border: 1px solid #ddd;" name="test2_acl"/>
-            </td>
-            <td>bool</td>
-            <td>Logik darf durch Plugin test2 getriggert werden (Dummy)</td>
-          </tr>
-        </table>
+
+        <p-table [columns]="parameter_cols" [value]="parameters" selectionMode="single">
+          <ng-template pTemplate="header" let-columns>
+            <tr>
+              <th *ngFor="let col of columns" [pSortableColumn]="col.field" [ngStyle]="{'width': col.width}">
+                {{col.header|translate}}
+                <p-sortIcon *ngIf="col.field !== ''" [field]="col.field" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-rowData let-columns="columns">
+            <tr>
+              <td *ngFor="let col of columns">
+
+                <ng-container *ngIf="col.field === 'value'">
+                  <ng-container *ngIf="rowData.valid_list.length > 0">
+                    <p-dropdown [options]="rowData.valid_list" (onChange)="this.logicChanged = hasLogicChanged()" [showClear]="true" placeholder="{{rowData.default}}" [(ngModel)]="rowData[col.field]" (ngModelChange)="rowData[col.field] = $event"></p-dropdown>
+                  </ng-container>
+
+                  <ng-container *ngIf="(['int','num','float','scene'].indexOf(rowData.type) > -1) && rowData.valid_list.length === 0">
+                    <input [(ngModel)]="rowData[col.field]" (keyup)="this.logicChanged = hasLogicChanged()" type="number" min="{{rowData.valid_min}}" max="{{rowData.valid_max}}" pInputText placeholder="{{rowData.default}}" pInputText name="{{col.field}}" [ngStyle]="{'width': col.iwidth}"/>
+                  </ng-container>
+
+                  <ng-container *ngIf="rowData.type === 'hide-int' && rowData.valid_list.length === 0">
+                    <input [(ngModel)]="rowData[col.field]" (keyup)="this.logicChanged = hasLogicChanged()" type="number" min="{{rowData.valid_min}}" max="{{rowData.valid_max}}" pInputText placeholder="{{rowData.default}}" pInputText name="{{col.field}}" [ngStyle]="{'width': col.iwidth}"/>
+                  </ng-container>
+                  <ng-container *ngIf="rowData.type === 'hide-str' && rowData.valid_list.length === 0">
+                    <input [(ngModel)]="rowData[col.field]" (keyup)="this.logicChanged = hasLogicChanged()" type="password" pInputText placeholder="{{rowData.default}}" name="{{col.field}}" [ngStyle]="{'width': col.iwidth}"/>
+                  </ng-container>
+
+                  <ng-container *ngIf="rowData.type !== 'bool' && ['int','num','float','scene','hide-str', 'hide-int'].indexOf(rowData.type) === -1 && rowData.valid_list.length === 0">
+                    <input [(ngModel)]="rowData[col.field]" (keyup)="this.logicChanged = hasLogicChanged()" type="text" pInputText placeholder="{{rowData.default}}" name="{{col.field}}" [ngStyle]="{'width': col.iwidth}"/>
+                  </ng-container>
+                </ng-container>
+
+                <ng-container *ngIf="col.field !== 'value'">
+                  <ng-container *ngIf="col.field !== 'desc'">
+                    {{rowData[col.field]}}
+                  </ng-container>
+                  <ng-container *ngIf="col.field === 'desc'">
+                    <ng-container *ngFor="let bl of rowData[col.field].split('\n')">
+                      {{ bl }}<br>
+                    </ng-container>
+                  </ng-container>
+                  <!--
+                                <ng-container *ngIf="typeof rowData[col.field]  !== 'string'">
+                                  <ng-container *ngFor="let bl of col.field">
+                                    {{ bl }}}
+                                  </ng-container>
+                                </ng-container>
+                  -->
+                </ng-container>
+              </td>
+            </tr>
+          </ng-template>
+
+        </p-table>
 
       </div>
     </tab>
