@@ -10,7 +10,7 @@
       <button pButton type="button" style="margin-left: 0px; margin-top: 5px; font-size: medium;" id="btn-monitor" [disabled]="false" (click)="addPluginDialog();" icon="fa fa-plus" label="{{ 'BUTTON.ADD_PLUGIN'|translate }}" class="ui-button-success float-sm-right"></button>
     </h3>
   </div>
-  <p-table [columns]="cols" [value]="configuredplugins" selectionMode="single">
+  <p-table [columns]="cols" [value]="configuredplugins" selectionMode="single" autoLayout="true">
     <ng-template pTemplate="header" let-columns>
       <tr>
         <th *ngFor="let col of columns" [pSortableColumn]="col.field" [ngStyle]="{'width': col.width}">

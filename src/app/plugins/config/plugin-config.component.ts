@@ -172,11 +172,11 @@ ngOnInit() {
 
 
     this.cols = [
-      { field: 'enabled',  sfield: '',         header: '',                   width:  '30px' },
-      { field: 'confname', sfield: 'confname', header: 'PLUGIN.CONFIGNAME',  width: '220px' },
-      { field: 'plugin',   sfield: 'plugin',   header: 'PLUGIN.PLUGINNAME',  width: '200px' },
-      { field: 'instance', sfield: 'instance', header: 'PLUGIN.INSTANCE',    width: '220px' },
-      { field: 'desc',     sfield: '',         header: 'PLUGIN.DESCRIPTION', width: '' }
+      { field: 'enabled',  sfield: '',         header: '' },
+      { field: 'confname', sfield: 'confname', header: 'PLUGIN.CONFIGNAME'},
+      { field: 'plugin',   sfield: 'plugin',   header: 'PLUGIN.PLUGINNAME'},
+      { field: 'instance', sfield: 'instance', header: 'PLUGIN.INSTANCE'},
+      { field: 'desc',     sfield: '',         header: 'PLUGIN.DESCRIPTION'}
       ];
 
     this.configuredplugins = [];
