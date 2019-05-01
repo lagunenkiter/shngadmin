@@ -144,11 +144,14 @@ export class WebsocketPluginService implements OnInit {
 
 
   connect() {
+    const hostip = sessionStorage.getItem('hostip');
     const wsHost = sessionStorage.getItem('wsHost');
     const wsPort = sessionStorage.getItem('wsPort');
     const plugin_url = 'ws://' + wsHost + ':' + wsPort;
 
-    console.log({plugin_url}, '\nFür mockup Environment in \n\'testdata/serverinfo/default.json\' anpassen');
+    if (hostip === 'localhost') {
+      console.log({plugin_url}, '\nFür mockup Environment in \n\'testdata/serverinfo/default.json\' anpassen');
+    }
     this.wsService = new WebsocketService();
     this.subject = this.wsService.connect(plugin_url);
     this.subject.subscribe(msg => {
@@ -177,6 +180,12 @@ export class WebsocketPluginService implements OnInit {
         this.firstMsgSent = true;
       });
     }
+  }
+
+
+  disconnect() {
+    this.subject.unsubscribe();
+    this.wsService.close();
   }
 
 

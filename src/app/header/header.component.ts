@@ -41,7 +41,8 @@ export class HeaderComponent implements OnInit {
 
 
   ngOnInit() {
-    // console.log('HeaderComponent.ngOnInit:');
+    // console.log('HeaderComponent.ngOnInit');
+
     const credentials = {'username': '', 'password': ''};
     // console.log('signIn', {credentials});
     this.authService.login(credentials)
@@ -55,7 +56,7 @@ export class HeaderComponent implements OnInit {
 
 
   buildMenu() {
-
+    // console.log('HeaderComponent.buildMenu');
     this.items = [
       {
         label: this.translate.instant('MENU.SYSTEM'),
@@ -190,11 +191,16 @@ export class HeaderComponent implements OnInit {
 
 
   getMenuItems() {
+    // console.log('HeaderComponent.getMenuItems');
 
     this.translate.use(sessionStorage.getItem('default_language'));
 
     const isLoggedIn = this.authService.isLoggedIn();
     if (this.items) {
+      if (this.items[0].visible && !isLoggedIn) {
+        // console.log('HeaderComponent.getMenuItems: Just logged out');
+        this.router.navigate(['/login']);
+      }
       this.items[0].visible = isLoggedIn;
       this.items[1].visible = isLoggedIn;
       this.items[2].visible = isLoggedIn;

@@ -1,5 +1,5 @@
 
-import { Component, OnInit, ViewChildren, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChildren, EventEmitter } from '@angular/core';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
@@ -27,7 +27,7 @@ import {ServerApiService} from '../../common/services/server-api.service';
   styleUrls: ['./system.component.css'],
   providers: [ WebsocketService, WebsocketPluginService ]
 })
-export class SystemComponent implements OnInit {
+export class SystemComponent implements OnDestroy, OnInit {
 
   faCheckCircle = faCheckCircle;
 
@@ -103,6 +103,11 @@ export class SystemComponent implements OnInit {
   }
 
 
+  ngOnDestroy(): void {
+    this.websocketPluginService.disconnect();
+  }
+
+
   initSystemInfo() {
 
     // ---------------------------------------------
@@ -137,9 +142,9 @@ export class SystemComponent implements OnInit {
           // count if plugin requirements exist
           this.plugincount = 0;
           for (let i = 0; i < this.pypiinfo.length; ++i) {
-            if (this.pypiinfo[i].name === 'ruamel.yaml') {
-              console.log(this.pypiinfo[i]);
-            }
+            // if (this.pypiinfo[i].name === 'ruamel.yaml') {
+            //   console.log(this.pypiinfo[i]);
+            // }
             if (this.pypiinfo[i].is_required_for_plugins === true) {
               this.plugincount++;
             }

@@ -202,7 +202,7 @@ export class ServicesComponent implements AfterViewChecked, OnInit {
 
 
   ngOnInit() {
-    console.log('ServicesComponent.ngOnInit');
+    // console.log('ServicesComponent.ngOnInit');
 
     for (let i = 1; i <= 100; i++) {
       this.rulers.push({color: '#eee', column: i * 4, lineStyle: 'dashed'});
@@ -308,7 +308,7 @@ export class ServicesComponent implements AfterViewChecked, OnInit {
 
 
   createPwdHash() {
-    console.log('createPwdHash')
+    console.log('createPwdHash');
     this.pwd_hash = sha512(this.pwd_clear);
   }
 
@@ -333,7 +333,7 @@ export class ServicesComponent implements AfterViewChecked, OnInit {
 
 
   checkEval() {
-    const evalData = {'expression': this.myEvalTextarea, 'relative_to': this.myRelativeTo}
+    const evalData = {'expression': this.myEvalTextarea, 'relative_to': this.myRelativeTo};
     this.dataService.CheckEvalData(evalData)
       .subscribe(
         (response) => {

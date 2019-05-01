@@ -22,7 +22,7 @@ export class ThreadsComponent implements OnInit {
   constructor(private dataService: ThreadsApiService) { }
 
   ngOnInit() {
-    console.log('ThreadsComponent.ngOnInit');
+    // console.log('ThreadsComponent.ngOnInit');
 
     this.dataService.getThreads()
       .subscribe(

@@ -31,7 +31,7 @@ export class ServerApiService {
               private shared: SharedService,
               @Inject('BASE_URL') baseUrl: string) {
 
-    console.log('ServerApiService.constructor:');
+    // console.log('ServerApiService.constructor:');
 
     this.baseUrl = baseUrl;
 
@@ -118,7 +118,7 @@ export class ServerApiService {
   }
 
   getServerinfo() {
-    console.log('ServerApiService.getServerinfo');
+    // console.log('ServerApiService.getServerinfo');
     const apiUrl = sessionStorage.getItem('apiUrl');
     let url = apiUrl + 'server/info/';
     if (apiUrl.includes('localhost')) {

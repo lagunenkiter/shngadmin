@@ -70,7 +70,7 @@ export class SystemConfigComponent implements OnInit {
 
 
   ngOnInit() {
-    console.log('SystemConfigComponent.ngOnInit');
+    // console.log('SystemConfigComponent.ngOnInit');
 
     this.dataServiceServer.getServerinfo()
       .subscribe(
@@ -428,7 +428,7 @@ export class SystemConfigComponent implements OnInit {
     let error_found = false;
     let error_text = '';
 
-    console.log('check_value_restrictions', {parameter});
+    // console.log('check_value_restrictions', {parameter});
 
     if (parameter['value'] === undefined) { parameter['value'] = null; }
 

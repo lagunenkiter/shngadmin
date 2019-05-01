@@ -27,6 +27,7 @@ export class WebsocketService {
     this.ws = new WebSocket(url);
     const observable = Observable.create(
       (obs: Observer<any>) => {
+        console.warn('Websocket connection to ' + url + ' created.');
         this.ws.onmessage = obs.next.bind(obs);
         this.ws.onerror = obs.error.bind(obs);
         this.ws.onclose = obs.complete.bind(obs);
