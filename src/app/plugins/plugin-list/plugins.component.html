@@ -111,7 +111,6 @@
           </td>
         </tr>
 
-
         <!------------------------------------------>
         <!--   Modal dialog with plugin details   -->
         <!------------------------------------------>
@@ -119,7 +118,7 @@
         <div bsModal #details="bs-modal" class="modal fade" tabindex="1" role="dialog" aria-labelledby="dialog-sizes-name2">
           <div class="vertical-alignment-helper">
           <div class="modal-dialog modal-lg vertical-align-center">
-            <div class="modal-content">
+            <div class="modal-content" style="min-width: 900px;">
               <div class="modal-header">
 <!--
                 <h5 id="dialog-sizes-name2" class="modal-title pull-left">{{'PLUGIN.DETAILS OF CONFIGURATION'|translate}} '<strong>{{ plugin.configname }}</strong>' ({{'PLUGIN.PLUGIN'|translate}} '<strong>{{ plugin.pluginname }}</strong>')</h5>
@@ -134,7 +133,7 @@
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              <div class="modal-body">
+              <div class="modal-body" style="min-width: 900px;">
                 <ng-container *ngIf="plugin.metadata.state && plugin.metadata.state.toLowerCase() === 'deprecated'">
                   <fa-icon style="color: var(--shng-warning);" [icon]="faExclamationTriangle"></fa-icon>
                   <a style="width: 50%; padding:0px; background-color: #ffffff; border:0;"><strong>&nbsp; {{'PLUGIN.DEPRECATED'|translate}}:</strong></a>
