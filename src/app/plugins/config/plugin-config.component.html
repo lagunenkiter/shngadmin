@@ -14,7 +14,7 @@
   <p-table [columns]="cols" [value]="configuredplugins" selectionMode="single" autoLayout="true">
     <ng-template pTemplate="header" let-columns>
       <tr>
-        <th *ngFor="let col of columns" [pSortableColumn]="col.field" [ngStyle]="{'width': col.width}">
+        <th *ngFor="let col of columns" [pSortableColumn]="col.field" [ngStyle]="{'width': col.width, 'min-width': col.min_width}">
           {{col.header|translate}}
           <p-sortIcon *ngIf="col.field !== ''" [field]="col.field" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
         </th>
