@@ -42,3 +42,13 @@ Cypress.Commands.add('removeWatchItem', (itemPath) => {
   cy.contains(itemPath).click();
   cy.contains(itemPath).should('not.exist');
 })
+
+Cypress.Commands.add('navigateLogics', () => {
+  cy.wait(1000);
+  cy.contains('Logiken').click();
+  cy.wait(1000);
+  cy.contains('wind.py').click();
+  cy.wait(1000);
+  cy.contains('Parameter').click();
+  cy.wait(1000);
+})

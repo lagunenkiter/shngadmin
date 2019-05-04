@@ -6,15 +6,9 @@ context('Actions', () => {
     const pass = '1234';
     cy.login(user, pass);
   })
-  describe('Logics: Watch Item Test', () => {
-    it('navigates to logics parameters and enters watch item', () => {
-      cy.wait(1000);
-      cy.contains('Logiken').click();
-      cy.wait(1000);
-      cy.contains('wind.py').click();
-      cy.wait(1000);
-      cy.contains('Parameter').click();
-      cy.wait(1000);
+  describe('Logics: Add Watch Item Test', () => {
+    it('navigates to logics parameters and enters/removes watch item', () => {
+      cy.navigateLogics();
       cy.addWatchItem('sh.avm');
       cy.removeWatchItem('sh.avm');
 
@@ -23,6 +17,13 @@ context('Actions', () => {
 
       cy.addWatchItem('avm');
       cy.removeWatchItem('avm');
+    })
+
+    it('navigates to logics parameters and enters watch item twice', () => {
+      cy.navigateLogics();
+      cy.addWatchItem('sh.avm');
+      cy.addWatchItem('sh.avm');
+      cy.contains('Item ungültig oder bereits in der Liste vorhanden, bitte Eingabe prüfen!');
     })
   })
 });
