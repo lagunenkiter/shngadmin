@@ -30,6 +30,7 @@
               <div style="margin-top: 10px; padding-left: 10px; padding-right: 5px">
                 <ngx-codemirror #codeeditor (keyup)="logicsCodeKeyUp($event)"
                                 [options]="cmOptions"
+                                name="cmLogics"
                                 [(ngModel)]="myTextarea"
                                 [autoFocus]="true"
                 ></ngx-codemirror>
@@ -122,6 +123,7 @@
                 <div style="float:left;">
                 <ngx-codemirror #watchitems (keyup)="watchItemKeyUp($event)"
                               (keyup.enter)="addItem()"
+                              name="cmWatchItems"
                               [options]="cmOptionsWatchItems"
                               [(ngModel)]="myTextareaWatchItems"
                               [autoFocus]="false"
