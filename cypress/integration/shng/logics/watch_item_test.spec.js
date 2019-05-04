@@ -22,10 +22,9 @@ context('Actions', () => {
       cy.removeWatchItem('avm');
     })
 
-    it('navigates to logics parameters and removes invalid watch item', () => {
+    it('navigates to logics parameters and enters invalid watch item', () => {
       cy.addWatchItem('asdfasfasf');
       cy.contains('Item ungültig oder bereits in der Liste vorhanden, bitte Eingabe prüfen!');
-      cy.contains('asdfasfasf').should('not.exist');
     })
 
     it('navigates to logics parameters and enters watch item sh.avm twice', () => {
