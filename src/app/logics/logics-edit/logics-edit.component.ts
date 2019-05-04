@@ -531,6 +531,9 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
           this.wrongWatchItem = true;
           return;
         }
+      } else {
+        this.wrongWatchItem = true;
+        return;
       }
     }
     this.logic.watch_item.push(<any>this.myTextareaWatchItems);
