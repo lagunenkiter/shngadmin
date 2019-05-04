@@ -25,8 +25,20 @@
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
 Cypress.Commands.add('login', (user, pass) => {
+  cy.clearCookies()
   cy.visit('http://localhost:4200/');
   cy.get('#inputUsername').type(user);
   cy.get('#inputPassword').type(pass);
   cy.contains('Anmelden').click();
+})
+
+Cypress.Commands.add('addWatchItem', (itemPath) => {
+  var cm = cy.get('.CodeMirror textarea').eq(1);
+  cm.type(itemPath, { force: true });
+  cy.contains('Item hinzufügen').click();
+})
+
+Cypress.Commands.add('removeWatchItem', (itemPath) => {
+  cy.contains(itemPath).click();
+  cy.contains(itemPath).should('not.exist');
 })
