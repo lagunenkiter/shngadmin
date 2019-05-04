@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "extract": "ngx-translate-extract --input ./src --output ./src/assets/i18n/template-{de,en,fr}.json --clean --format namespaced-json",
-    "e2e": "cypress open"
+    "cypress": "cypress open"
   },
   "private": true,
   "dependencies": {

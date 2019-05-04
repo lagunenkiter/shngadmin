@@ -32,6 +32,7 @@ context('Actions', () => {
     })
 
     it('navigates to logics parameters and enters watch item twice', () => {
+      // items with same name cannot be entered twice, an error message appears
       cy.addWatchItem('avm');
       cy.addWatchItem('avm');
       cy.contains('Item ungültig oder bereits in der Liste vorhanden, bitte Eingabe prüfen!');
