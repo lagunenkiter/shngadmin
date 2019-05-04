@@ -1,0 +1,260 @@
+2019-05-04  07:00:03 DEBUG    plugins.avm      _update_tam      Accessing TAM response cache for action GetMessageList!
+2019-05-04  07:00:03 DEBUG    plugins.avm      _update_tam      Accessing TAM response cache for action GetInfo!
+2019-05-04  07:00:03 DEBUG    plugins.avm      _update_wan_ip_connection Accessing TAM response cache for action GetStatusInfo!
+2019-05-04  07:00:03 DEBUG    plugins.avm      _update_wan_ip_connection Accessing TAM response cache for action GetStatusInfo!
+2019-05-04  07:00:03 DEBUG    plugins.avm      _update_wan_ip_connection Accessing TAM response cache for action GetStatusInfo!
+2019-05-04  07:00:04 DEBUG    plugins.avm      _update_wan_dsl_interface_config Accessing TAM response cache for action GetInfo!
+2019-05-04  07:00:04 DEBUG    plugins.avm      _update_wlan_config Accessing TAM response cache for action GetInfo!
+2019-05-04  07:00:04 DEBUG    plugins.avm      _update_wan_common_interface_configuration Accessing TAM response cache for action GetAddonInfos!
+2019-05-04  07:00:04 DEBUG    plugins.avm      _update_wan_common_interface_configuration Accessing TAM response cache for action GetAddonInfos!
+2019-05-04  07:00:04 DEBUG    plugins.avm      _update_wan_common_interface_configuration Accessing TAM response cache for action GetAddonInfos!
+2019-05-04  07:00:05 DEBUG    plugins.avm      _update_wlan_config Accessing TAM response cache for action GetInfo!
+2019-05-04  07:00:06 DEBUG    plugins.avm      _update_wlan_config Accessing TAM response cache for action GetInfo!
+2019-05-04  07:00:09 DEBUG    plugins.avm      connect          MonitoringService: Connect called while listen active
+2019-05-04  07:07:02 DEBUG    plugins.avm      _update_loop     Starting update loop for instance wlan_repeater_1750_galerie
+2019-05-04  07:07:02 DEBUG    plugins.avm      _update_loop     Starting update loop for instance fritzbox_7490
+2019-05-04  07:07:02 DEBUG    plugins.avm      _update_loop     Starting update loop for instance fritzbox_7590
+2019-05-04  07:07:02 DEBUG    plugins.avm      _update_loop     Starting update loop for instance wlan_repeater_1750_garage
+2019-05-04  07:07:02 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:07:02 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:07:02 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:07:02 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:07:02 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:07:02 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:07:02 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:07:02 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:07:02 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:07:02 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:07:02 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:07:02 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:07:02 DEBUG    plugins.avm      _update_wlan_config Accessing TAM response cache for action GetInfo!
+2019-05-04  07:07:02 DEBUG    plugins.avm      _update_wlan_config Accessing TAM response cache for action GetInfo!
+2019-05-04  07:07:02 DEBUG    plugins.avm      _update_wlan_config Accessing TAM response cache for action GetInfo!
+2019-05-04  07:07:03 DEBUG    plugins.avm      _update_tam      Accessing TAM response cache for action GetMessageList!
+2019-05-04  07:07:03 DEBUG    plugins.avm      _update_tam      Accessing TAM response cache for action GetMessageList!
+2019-05-04  07:07:03 DEBUG    plugins.avm      _update_tam      Accessing TAM response cache for action GetInfo!
+2019-05-04  07:07:03 DEBUG    plugins.avm      _update_wan_ip_connection Accessing TAM response cache for action GetStatusInfo!
+2019-05-04  07:07:03 DEBUG    plugins.avm      _update_wan_ip_connection Accessing TAM response cache for action GetStatusInfo!
+2019-05-04  07:07:03 DEBUG    plugins.avm      _update_wan_ip_connection Accessing TAM response cache for action GetStatusInfo!
+2019-05-04  07:07:03 DEBUG    plugins.avm      _update_wan_dsl_interface_config Accessing TAM response cache for action GetInfo!
+2019-05-04  07:07:04 DEBUG    plugins.avm      _update_wlan_config Accessing TAM response cache for action GetInfo!
+2019-05-04  07:07:04 DEBUG    plugins.avm      _update_wan_common_interface_configuration Accessing TAM response cache for action GetAddonInfos!
+2019-05-04  07:07:04 DEBUG    plugins.avm      _update_wan_common_interface_configuration Accessing TAM response cache for action GetAddonInfos!
+2019-05-04  07:07:04 DEBUG    plugins.avm      _update_wan_common_interface_configuration Accessing TAM response cache for action GetAddonInfos!
+2019-05-04  07:07:05 DEBUG    plugins.avm      _update_wlan_config Accessing TAM response cache for action GetInfo!
+2019-05-04  07:07:06 DEBUG    plugins.avm      _update_wlan_config Accessing TAM response cache for action GetInfo!
+2019-05-04  07:07:09 DEBUG    plugins.avm      connect          MonitoringService: Connect called while listen active
+2019-05-04  07:14:02 DEBUG    plugins.avm      _update_loop     Starting update loop for instance wlan_repeater_1750_galerie
+2019-05-04  07:14:02 DEBUG    plugins.avm      _update_loop     Starting update loop for instance fritzbox_7490
+2019-05-04  07:14:02 DEBUG    plugins.avm      _update_loop     Starting update loop for instance fritzbox_7590
+2019-05-04  07:14:02 DEBUG    plugins.avm      _update_loop     Starting update loop for instance wlan_repeater_1750_garage
+2019-05-04  07:14:02 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:14:02 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:14:02 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:14:02 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:14:02 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:14:02 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:14:03 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:14:03 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:14:03 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:14:03 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:14:03 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:14:03 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:14:03 DEBUG    plugins.avm      _update_wlan_config Accessing TAM response cache for action GetInfo!
+2019-05-04  07:14:03 DEBUG    plugins.avm      _update_wlan_config Accessing TAM response cache for action GetInfo!
+2019-05-04  07:14:03 DEBUG    plugins.avm      _update_wlan_config Accessing TAM response cache for action GetInfo!
+2019-05-04  07:14:03 DEBUG    plugins.avm      _update_tam      Accessing TAM response cache for action GetMessageList!
+2019-05-04  07:14:03 DEBUG    plugins.avm      _update_tam      Accessing TAM response cache for action GetMessageList!
+2019-05-04  07:14:03 DEBUG    plugins.avm      _update_tam      Accessing TAM response cache for action GetInfo!
+2019-05-04  07:14:03 DEBUG    plugins.avm      _update_wan_ip_connection Accessing TAM response cache for action GetStatusInfo!
+2019-05-04  07:14:03 DEBUG    plugins.avm      _update_wan_ip_connection Accessing TAM response cache for action GetStatusInfo!
+2019-05-04  07:14:03 DEBUG    plugins.avm      _update_wan_ip_connection Accessing TAM response cache for action GetStatusInfo!
+2019-05-04  07:14:04 DEBUG    plugins.avm      _update_wlan_config Accessing TAM response cache for action GetInfo!
+2019-05-04  07:14:04 DEBUG    plugins.avm      _update_wan_dsl_interface_config Accessing TAM response cache for action GetInfo!
+2019-05-04  07:14:04 DEBUG    plugins.avm      _update_wan_common_interface_configuration Accessing TAM response cache for action GetAddonInfos!
+2019-05-04  07:14:04 DEBUG    plugins.avm      _update_wan_common_interface_configuration Accessing TAM response cache for action GetAddonInfos!
+2019-05-04  07:14:04 DEBUG    plugins.avm      _update_wan_common_interface_configuration Accessing TAM response cache for action GetAddonInfos!
+2019-05-04  07:14:05 DEBUG    plugins.avm      _update_wlan_config Accessing TAM response cache for action GetInfo!
+2019-05-04  07:14:06 DEBUG    plugins.avm      _update_wlan_config Accessing TAM response cache for action GetInfo!
+2019-05-04  07:14:09 DEBUG    plugins.avm      connect          MonitoringService: Connect called while listen active
+2019-05-04  07:21:02 DEBUG    plugins.avm      _update_loop     Starting update loop for instance wlan_repeater_1750_galerie
+2019-05-04  07:21:02 DEBUG    plugins.avm      _update_loop     Starting update loop for instance fritzbox_7490
+2019-05-04  07:21:02 DEBUG    plugins.avm      _update_loop     Starting update loop for instance fritzbox_7590
+2019-05-04  07:21:02 DEBUG    plugins.avm      _update_loop     Starting update loop for instance wlan_repeater_1750_garage
+2019-05-04  07:21:02 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:21:02 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:21:02 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:21:02 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:21:02 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:21:02 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:21:02 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:21:02 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:21:02 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:21:02 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:21:02 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:21:02 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:21:02 DEBUG    plugins.avm      _update_wlan_config Accessing TAM response cache for action GetInfo!
+2019-05-04  07:21:02 DEBUG    plugins.avm      _update_wlan_config Accessing TAM response cache for action GetInfo!
+2019-05-04  07:21:03 DEBUG    plugins.avm      _update_wlan_config Accessing TAM response cache for action GetInfo!
+2019-05-04  07:21:03 DEBUG    plugins.avm      _update_tam      Accessing TAM response cache for action GetMessageList!
+2019-05-04  07:21:03 DEBUG    plugins.avm      _update_tam      Accessing TAM response cache for action GetMessageList!
+2019-05-04  07:21:03 DEBUG    plugins.avm      _update_tam      Accessing TAM response cache for action GetInfo!
+2019-05-04  07:21:03 DEBUG    plugins.avm      _update_wan_ip_connection Accessing TAM response cache for action GetStatusInfo!
+2019-05-04  07:21:03 DEBUG    plugins.avm      _update_wan_ip_connection Accessing TAM response cache for action GetStatusInfo!
+2019-05-04  07:21:03 DEBUG    plugins.avm      _update_wan_ip_connection Accessing TAM response cache for action GetStatusInfo!
+2019-05-04  07:21:04 DEBUG    plugins.avm      _update_wan_dsl_interface_config Accessing TAM response cache for action GetInfo!
+2019-05-04  07:21:04 DEBUG    plugins.avm      _update_wlan_config Accessing TAM response cache for action GetInfo!
+2019-05-04  07:21:04 DEBUG    plugins.avm      _update_wan_common_interface_configuration Accessing TAM response cache for action GetAddonInfos!
+2019-05-04  07:21:05 DEBUG    plugins.avm      _update_wan_common_interface_configuration Accessing TAM response cache for action GetAddonInfos!
+2019-05-04  07:21:05 DEBUG    plugins.avm      _update_wan_common_interface_configuration Accessing TAM response cache for action GetAddonInfos!
+2019-05-04  07:21:05 DEBUG    plugins.avm      _update_wlan_config Accessing TAM response cache for action GetInfo!
+2019-05-04  07:21:07 DEBUG    plugins.avm      _update_wlan_config Accessing TAM response cache for action GetInfo!
+2019-05-04  07:21:10 DEBUG    plugins.avm      connect          MonitoringService: Connect called while listen active
+2019-05-04  07:28:02 DEBUG    plugins.avm      _update_loop     Starting update loop for instance wlan_repeater_1750_galerie
+2019-05-04  07:28:02 DEBUG    plugins.avm      _update_loop     Starting update loop for instance fritzbox_7490
+2019-05-04  07:28:02 DEBUG    plugins.avm      _update_loop     Starting update loop for instance fritzbox_7590
+2019-05-04  07:28:02 DEBUG    plugins.avm      _update_loop     Starting update loop for instance wlan_repeater_1750_garage
+2019-05-04  07:28:02 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:28:02 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:28:02 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:28:02 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:28:02 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:28:02 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:28:02 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:28:02 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:28:02 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:28:02 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:28:02 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:28:02 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:28:02 DEBUG    plugins.avm      _update_wlan_config Accessing TAM response cache for action GetInfo!
+2019-05-04  07:28:02 DEBUG    plugins.avm      _update_wlan_config Accessing TAM response cache for action GetInfo!
+2019-05-04  07:28:02 DEBUG    plugins.avm      _update_wlan_config Accessing TAM response cache for action GetInfo!
+2019-05-04  07:28:03 DEBUG    plugins.avm      _update_tam      Accessing TAM response cache for action GetMessageList!
+2019-05-04  07:28:03 DEBUG    plugins.avm      _update_tam      Accessing TAM response cache for action GetMessageList!
+2019-05-04  07:28:03 DEBUG    plugins.avm      _update_tam      Accessing TAM response cache for action GetInfo!
+2019-05-04  07:28:03 DEBUG    plugins.avm      _update_wan_ip_connection Accessing TAM response cache for action GetStatusInfo!
+2019-05-04  07:28:03 DEBUG    plugins.avm      _update_wan_ip_connection Accessing TAM response cache for action GetStatusInfo!
+2019-05-04  07:28:03 DEBUG    plugins.avm      _update_wan_ip_connection Accessing TAM response cache for action GetStatusInfo!
+2019-05-04  07:28:03 DEBUG    plugins.avm      _update_wlan_config Accessing TAM response cache for action GetInfo!
+2019-05-04  07:28:04 DEBUG    plugins.avm      _update_wan_dsl_interface_config Accessing TAM response cache for action GetInfo!
+2019-05-04  07:28:04 DEBUG    plugins.avm      _update_wan_common_interface_configuration Accessing TAM response cache for action GetAddonInfos!
+2019-05-04  07:28:04 DEBUG    plugins.avm      _update_wan_common_interface_configuration Accessing TAM response cache for action GetAddonInfos!
+2019-05-04  07:28:04 DEBUG    plugins.avm      _update_wan_common_interface_configuration Accessing TAM response cache for action GetAddonInfos!
+2019-05-04  07:28:05 DEBUG    plugins.avm      _update_wlan_config Accessing TAM response cache for action GetInfo!
+2019-05-04  07:28:07 DEBUG    plugins.avm      _update_wlan_config Accessing TAM response cache for action GetInfo!
+2019-05-04  07:28:10 DEBUG    plugins.avm      connect          MonitoringService: Connect called while listen active
+2019-05-04  07:35:02 DEBUG    plugins.avm      _update_loop     Starting update loop for instance wlan_repeater_1750_galerie
+2019-05-04  07:35:02 DEBUG    plugins.avm      _update_loop     Starting update loop for instance fritzbox_7490
+2019-05-04  07:35:02 DEBUG    plugins.avm      _update_loop     Starting update loop for instance fritzbox_7590
+2019-05-04  07:35:02 DEBUG    plugins.avm      _update_loop     Starting update loop for instance wlan_repeater_1750_garage
+2019-05-04  07:35:02 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:35:02 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:35:02 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:35:02 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:35:03 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:35:03 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:35:03 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:35:03 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:35:03 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:35:03 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:35:03 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:35:03 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:35:03 DEBUG    plugins.avm      _update_wlan_config Accessing TAM response cache for action GetInfo!
+2019-05-04  07:35:03 DEBUG    plugins.avm      _update_wlan_config Accessing TAM response cache for action GetInfo!
+2019-05-04  07:35:03 DEBUG    plugins.avm      _update_wlan_config Accessing TAM response cache for action GetInfo!
+2019-05-04  07:35:03 DEBUG    plugins.avm      _update_tam      Accessing TAM response cache for action GetMessageList!
+2019-05-04  07:35:03 DEBUG    plugins.avm      _update_tam      Accessing TAM response cache for action GetMessageList!
+2019-05-04  07:35:03 DEBUG    plugins.avm      _update_tam      Accessing TAM response cache for action GetInfo!
+2019-05-04  07:35:03 DEBUG    plugins.avm      _update_wan_ip_connection Accessing TAM response cache for action GetStatusInfo!
+2019-05-04  07:35:03 DEBUG    plugins.avm      _update_wan_ip_connection Accessing TAM response cache for action GetStatusInfo!
+2019-05-04  07:35:03 DEBUG    plugins.avm      _update_wan_ip_connection Accessing TAM response cache for action GetStatusInfo!
+2019-05-04  07:35:04 DEBUG    plugins.avm      _update_wlan_config Accessing TAM response cache for action GetInfo!
+2019-05-04  07:35:04 DEBUG    plugins.avm      _update_wan_dsl_interface_config Accessing TAM response cache for action GetInfo!
+2019-05-04  07:35:04 DEBUG    plugins.avm      _update_wan_common_interface_configuration Accessing TAM response cache for action GetAddonInfos!
+2019-05-04  07:35:05 DEBUG    plugins.avm      _update_wan_common_interface_configuration Accessing TAM response cache for action GetAddonInfos!
+2019-05-04  07:35:05 DEBUG    plugins.avm      _update_wan_common_interface_configuration Accessing TAM response cache for action GetAddonInfos!
+2019-05-04  07:35:05 DEBUG    plugins.avm      _update_wlan_config Accessing TAM response cache for action GetInfo!
+2019-05-04  07:35:07 DEBUG    plugins.avm      _update_wlan_config Accessing TAM response cache for action GetInfo!
+2019-05-04  07:35:10 DEBUG    plugins.avm      connect          MonitoringService: Connect called while listen active
+2019-05-04  07:42:02 DEBUG    plugins.avm      _update_loop     Starting update loop for instance wlan_repeater_1750_galerie
+2019-05-04  07:42:02 DEBUG    plugins.avm      _update_loop     Starting update loop for instance fritzbox_7490
+2019-05-04  07:42:02 DEBUG    plugins.avm      _update_loop     Starting update loop for instance fritzbox_7590
+2019-05-04  07:42:02 DEBUG    plugins.avm      _update_loop     Starting update loop for instance wlan_repeater_1750_garage
+2019-05-04  07:42:02 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:42:02 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:42:02 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:42:02 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:42:02 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:42:02 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:42:02 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:42:02 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:42:02 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:42:02 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:42:02 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:42:02 DEBUG    plugins.avm      _update_fritz_device_info Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:42:03 DEBUG    plugins.avm      _update_wlan_config Accessing TAM response cache for action GetInfo!
+2019-05-04  07:42:03 DEBUG    plugins.avm      _update_wlan_config Accessing TAM response cache for action GetInfo!
+2019-05-04  07:42:03 DEBUG    plugins.avm      _update_wlan_config Accessing TAM response cache for action GetInfo!
+2019-05-04  07:42:03 DEBUG    plugins.avm      _update_tam      Accessing TAM response cache for action GetMessageList!
+2019-05-04  07:42:03 DEBUG    plugins.avm      _update_tam      Accessing TAM response cache for action GetMessageList!
+2019-05-04  07:42:03 DEBUG    plugins.avm      _update_tam      Accessing TAM response cache for action GetInfo!
+2019-05-04  07:42:03 DEBUG    plugins.avm      _update_wan_ip_connection Accessing TAM response cache for action GetStatusInfo!
+2019-05-04  07:42:03 DEBUG    plugins.avm      _update_wan_ip_connection Accessing TAM response cache for action GetStatusInfo!
+2019-05-04  07:42:03 DEBUG    plugins.avm      _update_wan_ip_connection Accessing TAM response cache for action GetStatusInfo!
+2019-05-04  07:42:04 DEBUG    plugins.avm      _update_wan_dsl_interface_config Accessing TAM response cache for action GetInfo!
+2019-05-04  07:42:04 DEBUG    plugins.avm      _update_wlan_config Accessing TAM response cache for action GetInfo!
+2019-05-04  07:42:04 DEBUG    plugins.avm      _update_wan_common_interface_configuration Accessing TAM response cache for action GetAddonInfos!
+2019-05-04  07:42:05 DEBUG    plugins.avm      _update_wan_common_interface_configuration Accessing TAM response cache for action GetAddonInfos!
+2019-05-04  07:42:05 DEBUG    plugins.avm      _update_wan_common_interface_configuration Accessing TAM response cache for action GetAddonInfos!
+2019-05-04  07:42:05 DEBUG    plugins.avm      _update_wlan_config Accessing TAM response cache for action GetInfo!
+2019-05-04  07:42:07 DEBUG    plugins.avm      _update_wlan_config Accessing TAM response cache for action GetInfo!
+2019-05-04  07:42:10 DEBUG    plugins.avm      connect          MonitoringService: Connect called while listen active
+2019-05-04  07:48:57 DEBUG    plugins.avm      scheduler_remove scheduler_remove: name = plugins.avm_fritzbox_7490.update
+2019-05-04  07:48:57 DEBUG    plugins.avm      disconnect       MonitoringService: disconnecting
+2019-05-04  07:48:57 DEBUG    plugins.avm      scheduler_remove scheduler_remove: name = plugins.avm_fritzbox_7590.update
+2019-05-04  07:48:57 DEBUG    plugins.avm      _listen          Data Received from CallMonitor:
+2019-05-04  07:48:57 DEBUG    plugins.avm      scheduler_remove scheduler_remove: name = plugins.avm_wlan_repeater_1750_garage.update
+2019-05-04  07:48:57 DEBUG    plugins.avm      scheduler_remove scheduler_remove: name = plugins.avm_wlan_repeater_1750_galerie.update
+2019-05-04  07:49:11 INFO     plugins.avm      __init__         fritzbox_7490@: Init AVM Plugin
+2019-05-04  07:49:11 INFO     plugins.avm      __init__         fritzbox_7590@: Init AVM Plugin
+2019-05-04  07:49:11 DEBUG    plugins.avm      __init__         starting monitoring service
+2019-05-04  07:49:11 DEBUG    plugins.avm      connect          MonitoringService: connection established
+2019-05-04  07:49:12 INFO     plugins.avm      __init__         wlan_repeater_1750_garage@: Init AVM Plugin
+2019-05-04  07:49:12 INFO     plugins.avm      __init__         wlan_repeater_1750_galerie@: Init AVM Plugin
+2019-05-04  07:49:28 DEBUG    plugins.avm      scheduler_add    fritzbox_7490@: scheduler_add: name = plugins.avm_fritzbox_7490.update, parameters: cycle=420, prio=5, offset=2
+2019-05-04  07:49:28 DEBUG    plugins.avm      scheduler_add    fritzbox_7590@: scheduler_add: name = plugins.avm_fritzbox_7590.update, parameters: cycle=420, prio=5, offset=2
+2019-05-04  07:49:28 DEBUG    plugins.avm      scheduler_add    wlan_repeater_1750_garage@: scheduler_add: name = plugins.avm_wlan_repeater_1750_garage.update, parameters: cycle=420, prio=5, offset=2
+2019-05-04  07:49:28 DEBUG    plugins.avm      scheduler_add    wlan_repeater_1750_galerie@: scheduler_add: name = plugins.avm_wlan_repeater_1750_galerie.update, parameters: cycle=420, prio=5, offset=2
+2019-05-04  07:49:36 DEBUG    plugins.avm      _update_loop     wlan_repeater_1750_garage@: Starting update loop for instance wlan_repeater_1750_garage
+2019-05-04  07:49:36 DEBUG    plugins.avm      _update_loop     fritzbox_7490@: Starting update loop for instance fritzbox_7490
+2019-05-04  07:49:37 DEBUG    plugins.avm      _update_fritz_device_info wlan_repeater_1750_garage@: Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:49:37 DEBUG    plugins.avm      _update_fritz_device_info wlan_repeater_1750_garage@: Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:49:37 DEBUG    plugins.avm      _update_fritz_device_info wlan_repeater_1750_garage@: Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:49:37 DEBUG    plugins.avm      _update_fritz_device_info fritzbox_7490@: Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:49:37 DEBUG    plugins.avm      _update_fritz_device_info fritzbox_7490@: Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:49:37 DEBUG    plugins.avm      _update_fritz_device_info fritzbox_7490@: Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:49:38 DEBUG    plugins.avm      _update_wlan_config wlan_repeater_1750_garage@: Accessing TAM response cache for action GetInfo!
+2019-05-04  07:49:38 DEBUG    plugins.avm      _update_wlan_config fritzbox_7490@: Accessing TAM response cache for action GetInfo!
+2019-05-04  07:49:39 DEBUG    plugins.avm      _update_wlan_config fritzbox_7490@: Accessing TAM response cache for action GetInfo!
+2019-05-04  07:50:00 DEBUG    plugins.avm      _update_loop     wlan_repeater_1750_galerie@: Starting update loop for instance wlan_repeater_1750_galerie
+2019-05-04  07:50:00 DEBUG    plugins.avm      _update_loop     fritzbox_7590@: Starting update loop for instance fritzbox_7590
+2019-05-04  07:50:00 DEBUG    plugins.avm      _update_fritz_device_info wlan_repeater_1750_galerie@: Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:50:00 DEBUG    plugins.avm      _update_fritz_device_info wlan_repeater_1750_galerie@: Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:50:00 DEBUG    plugins.avm      _update_fritz_device_info wlan_repeater_1750_galerie@: Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:50:00 DEBUG    plugins.avm      _update_fritz_device_info fritzbox_7590@: Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:50:00 DEBUG    plugins.avm      _update_fritz_device_info fritzbox_7590@: Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:50:00 DEBUG    plugins.avm      _update_fritz_device_info fritzbox_7590@: Accessing DeviceInfo response cache for action GetInfo!
+2019-05-04  07:50:01 DEBUG    plugins.avm      _update_tam      fritzbox_7590@: Accessing TAM response cache for action GetMessageList!
+2019-05-04  07:50:01 DEBUG    plugins.avm      _update_tam      fritzbox_7590@: Accessing TAM response cache for action GetMessageList!
+2019-05-04  07:50:01 DEBUG    plugins.avm      _update_tam      fritzbox_7590@: Accessing TAM response cache for action GetInfo!
+2019-05-04  07:50:01 DEBUG    plugins.avm      _update_wan_ip_connection fritzbox_7590@: Accessing TAM response cache for action GetStatusInfo!
+2019-05-04  07:50:01 DEBUG    plugins.avm      _update_wan_ip_connection fritzbox_7590@: Accessing TAM response cache for action GetStatusInfo!
+2019-05-04  07:50:01 DEBUG    plugins.avm      _update_wan_ip_connection fritzbox_7590@: Accessing TAM response cache for action GetStatusInfo!
+2019-05-04  07:50:01 DEBUG    plugins.avm      _update_wlan_config wlan_repeater_1750_galerie@: Accessing TAM response cache for action GetInfo!
+2019-05-04  07:50:02 DEBUG    plugins.avm      _update_wan_dsl_interface_config fritzbox_7590@: Accessing TAM response cache for action GetInfo!
+2019-05-04  07:50:02 DEBUG    plugins.avm      _update_wan_common_interface_configuration fritzbox_7590@: Accessing TAM response cache for action GetAddonInfos!
+2019-05-04  07:50:03 DEBUG    plugins.avm      _update_wan_common_interface_configuration fritzbox_7590@: Accessing TAM response cache for action GetAddonInfos!
+2019-05-04  07:50:03 DEBUG    plugins.avm      _update_wan_common_interface_configuration fritzbox_7590@: Accessing TAM response cache for action GetAddonInfos!
+2019-05-04  07:50:04 DEBUG    plugins.avm      _update_wlan_config fritzbox_7590@: Accessing TAM response cache for action GetInfo!
+2019-05-04  07:50:05 DEBUG    plugins.avm      _update_wlan_config fritzbox_7590@: Accessing TAM response cache for action GetInfo!
+2019-05-04  07:50:08 DEBUG    plugins.avm      connect          MonitoringService: Connect called while listen active
