@@ -3,7 +3,7 @@
   "filesize": 4254.1,
   "chunk": 3,
   "chunksize": 1000,
-  "lastchunk": false,
+  "lastchunk": true,
   "lines": [
     1,
     1000
