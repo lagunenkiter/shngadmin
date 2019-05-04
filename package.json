@@ -2,7 +2,8 @@
   "name": "shngadmin",
   "version": "0.0.0",
   "scripts": {
-    "extract": "ngx-translate-extract --input ./src --output ./src/assets/i18n/template-{de,en,fr}.json --clean --format namespaced-json"
+    "extract": "ngx-translate-extract --input ./src --output ./src/assets/i18n/template-{de,en,fr}.json --clean --format namespaced-json",
+    "e2e": "cypress open"
   },
   "private": true,
   "dependencies": {
@@ -32,6 +33,7 @@
     "chart.js": "^2.7.3",
     "codemirror": "^5.43.0",
     "core-js": "^3.0.1",
+    "cypress": "^3.2.0",
     "file-saver": "^2.0.1",
     "jquery": "^3.4.1",
     "js-sha512": "^0.8.0",
