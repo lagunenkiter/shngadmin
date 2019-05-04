@@ -42,6 +42,7 @@ context('Actions', () => {
       cy.addWatchItem('avm');
       cy.addWatchItem('avm');
       cy.contains('Item ungültig oder bereits in der Liste vorhanden, bitte Eingabe prüfen!');
+      cy.get('button#avm').should('have.length', 1);
     })
   })
 });
