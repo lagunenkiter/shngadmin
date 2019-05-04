@@ -54,7 +54,7 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
   myEditFilename: string;
   myLogicName: string;
   autocomplete_list: {}[] = [];
-  item_list: {}[] = [];
+  full_autocomplete_list: {}[] = [];
   valid_item_list: {}[] = [];
   myTextarea = '';
   myTextareaOrig = '';
@@ -162,8 +162,8 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
         (response) => {
           const result = <any>response;
           for (let i = 0; i < result.length; i++) {
-            this.item_list.push({text: result[i], displayText: result[i]});
-            this.item_list.push({text: result[i], displayText: 'sh.' + result[i]});
+            this.full_autocomplete_list.push({text: result[i], displayText: result[i]});
+            this.full_autocomplete_list.push({text: result[i], displayText: 'sh.' + result[i]});
             this.valid_item_list.push(result[i]);
             this.autocomplete_list.push({text: 'sh.' + result[i] + '()', displayText: 'sh.' + result[i] + '() | Item'});
           }
@@ -171,7 +171,7 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
     );
 
     this.registerAutocompleteHelper('autocompleteHint', this.autocomplete_list);
-    this.registerAutocompleteHelper('autocompleteWatchItemsHint', this.item_list);
+    this.registerAutocompleteHelper('autocompleteWatchItemsHint', this.full_autocomplete_list);
     // @ts-ignore
     CodeMirror.commands.autocomplete_shng = function(cm) {
       // @ts-ignore
