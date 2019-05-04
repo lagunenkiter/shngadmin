@@ -110,7 +110,7 @@
             <td colspan="3">
               <ng-container *ngIf='this.logic.watch_item!==undefined'>
                 <ng-container *ngFor="let watch_item of this.logic.watch_item">
-                  <button pButton label="{{watch_item}}" type="button" icon="fa fa-times" (click)="removeItem(watch_item)" class="float-sm-left ui-button-secondary mr-2 mb-2"></button>
+                  <button pButton label="{{watch_item}}" type="button" id="{{watch_item}}" icon="fa fa-times" (click)="removeItem(watch_item)" class="float-sm-left ui-button-secondary mr-2 mb-2"></button>
                 </ng-container>
                 <ng-container *ngIf="this.logic.watch_item.length > 0">
                   <br style="clear:both;"/>

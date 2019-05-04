@@ -10,21 +10,22 @@ context('Actions', () => {
   describe('Logics: Add Watch Item Test', () => {
     it('navigates to logics parameters and enters/removes valid watch item', () => {
       cy.addWatchItem('sh.avm');
-      cy.contains('sh.avm').should('be.visible');
+      cy.get('button#sh\\.avm').should('be.visible');
       cy.removeWatchItem('sh.avm');
 
       cy.addWatchItem('sh.sh.avm');
-      cy.contains('sh.avm').should('be.visible');
+      cy.get('button#sh\\.avm').should('be.visible');
       cy.removeWatchItem('sh.avm');
 
       cy.addWatchItem('avm');
-      cy.contains('avm').should('be.visible');
+      cy.get('button#avm').should('be.visible');
       cy.removeWatchItem('avm');
     })
 
     it('navigates to logics parameters and enters invalid watch item', () => {
       cy.addWatchItem('asdfasfasf');
       cy.contains('Item ungültig oder bereits in der Liste vorhanden, bitte Eingabe prüfen!');
+      cy.get('button#asdfasfasf').should('not.exist');
     })
 
     it('navigates to logics parameters and enters watch item sh.avm twice', () => {
@@ -32,8 +33,8 @@ context('Actions', () => {
       // gets parsed away and item avm is added
       cy.addWatchItem('sh.avm');
       cy.addWatchItem('sh.avm');
-      cy.contains('sh.avm').should('be.visible');
-      cy.contains('avm').should('be.visible');
+      cy.get('button#sh\\.avm').should('be.visible');
+      cy.get('button#avm').should('be.visible');
     })
 
     it('navigates to logics parameters and enters watch item twice', () => {
