@@ -8,7 +8,7 @@ context('Actions', () => {
     cy.navigateLogics();
   })
   describe('Logics: Add Watch Item Test', () => {
-    it('navigates to logics parameters and enters/removes watch item', () => {
+    it('navigates to logics parameters and enters/removes valid watch item', () => {
       cy.addWatchItem('sh.avm');
       cy.contains('sh.avm').should('be.visible');
       cy.removeWatchItem('sh.avm');
@@ -20,6 +20,12 @@ context('Actions', () => {
       cy.addWatchItem('avm');
       cy.contains('avm').should('be.visible');
       cy.removeWatchItem('avm');
+    })
+
+    it('navigates to logics parameters and removes invalid watch item', () => {
+      cy.addWatchItem('asdfasfasf');
+      cy.contains('Item ungültig oder bereits in der Liste vorhanden, bitte Eingabe prüfen!');
+      cy.contains('asdfasfasf').should('not.exist');
     })
 
     it('navigates to logics parameters and enters watch item sh.avm twice', () => {
