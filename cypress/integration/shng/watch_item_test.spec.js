@@ -10,13 +10,25 @@ context('Actions', () => {
   describe('Logics: Add Watch Item Test', () => {
     it('navigates to logics parameters and enters/removes watch item', () => {
       cy.addWatchItem('sh.avm');
+      cy.contains('sh.avm').should('be.visible');
       cy.removeWatchItem('sh.avm');
 
       cy.addWatchItem('sh.sh.avm');
+      cy.contains('sh.avm').should('be.visible');
       cy.removeWatchItem('sh.avm');
 
       cy.addWatchItem('avm');
+      cy.contains('avm').should('be.visible');
       cy.removeWatchItem('avm');
+    })
+
+    it('navigates to logics parameters and enters watch item sh.avm twice', () => {
+      // in this case an item with sh.avm and avm exist. as sh.avm is entered first, on the second entry the sh. prefix
+      // gets parsed away and item avm is added
+      cy.addWatchItem('sh.avm');
+      cy.addWatchItem('sh.avm');
+      cy.contains('sh.avm').should('be.visible');
+      cy.contains('avm').should('be.visible');
     })
 
     it('navigates to logics parameters and enters watch item twice', () => {
