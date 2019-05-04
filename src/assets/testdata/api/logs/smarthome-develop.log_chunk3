@@ -5,8 +5,8 @@
   "chunksize": 1000,
   "lastchunk": true,
   "lines": [
-    1,
-    1000
+    2001,
+    3000
   ],
   "loglines": [
     "2019-03-17  00:11:09 INFO     logics.mysunmoon    Mondaufgang um 13:24:46 bei Azimuth 55.7 und Monduntergang um 04:59:00 bei Azimuth 305.6\n",
