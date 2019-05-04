@@ -1253,6 +1253,7 @@
   "plants.sensor_office.moisture",
   "plants.sensor_office.name",
   "plants.sensor_office.temperature",
+  "sh.avm",
   "sma",
   "sma.inverter",
   "sma.inverter.Daily_Yield_in_Wh",

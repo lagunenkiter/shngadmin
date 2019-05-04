@@ -9,6 +9,7 @@ import {LogicsinfoType} from '../../common/models/logics-info';
 import {LogicsApiService} from '../../common/services/logics-api.service';
 import {LogicsWatchItem} from '../../common/models/logics-watch-item';
 import {SharedService} from '../../common/services/shared.service';
+import {RegExpTokenFn} from 'ngx-bootstrap/chronos/parse/regex';
 
 @Component({
   selector: 'app-logics-edit',
@@ -54,12 +55,14 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
   myLogicName: string;
   autocomplete_list: {}[] = [];
   item_list: {}[] = [];
+  valid_item_list: {}[] = [];
   myTextarea = '';
   myTextareaOrig = '';
   myTextareaWatchItems = '';
 
   cmOptionsWatchItems = {
     autorefresh: true,
+
     lineWrapping: false,
     indentWithTabs: false,
     indentUnit: 1,
@@ -161,6 +164,7 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
           for (let i = 0; i < result.length; i++) {
             this.item_list.push({text: result[i], displayText: result[i]});
             this.item_list.push({text: result[i], displayText: 'sh.' + result[i]});
+            this.valid_item_list.push(result[i]);
             this.autocomplete_list.push({text: 'sh.' + result[i] + '()', displayText: 'sh.' + result[i] + '() | Item'});
           }
       }
@@ -503,23 +507,37 @@ export class LogicsEditComponent implements AfterViewChecked, OnInit {
     return;
   }
 
-  addItem() {
-    for (const i of this.item_list) {
-      if (i['text'] === this.myTextareaWatchItems) {
+  checkItemWithValidItems() {
+    for (const i of this.valid_item_list) {
+      if (i === this.myTextareaWatchItems) {
+        // check if item is already in watch item list
         for (const j of this.logic.watch_item) {
           if (<any>j === this.myTextareaWatchItems) {
-            this.wrongWatchItem = true;
-            return;
+            return false;
           }
         }
-        this.logic.watch_item.push(<any>this.myTextareaWatchItems);
-        this.myTextareaWatchItems = '';
-        this.wrongWatchItem = false;
-        this.logicChanged = this.hasLogicChanged();
-        return;
+        return true;
       }
     }
-    this.wrongWatchItem = true;
+  }
+
+  addItem() {
+    // check if item is from overall item list and not in watch item list
+    // the loop also regards items with a path that starts with "sh." (itemname sh!)
+    if (!this.checkItemWithValidItems()) {
+      if (this.myTextareaWatchItems.startsWith('sh.')) {
+        this.myTextareaWatchItems = this.myTextareaWatchItems.substr(3);
+        if (!this.checkItemWithValidItems()) {
+          this.wrongWatchItem = true;
+          return;
+        }
+      }
+    }
+    this.logic.watch_item.push(<any>this.myTextareaWatchItems);
+    this.myTextareaWatchItems = '';
+    this.wrongWatchItem = false;
+    this.logicChanged = this.hasLogicChanged();
+    return;
   }
 
   ngAfterViewChecked() {
