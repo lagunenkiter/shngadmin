@@ -29,7 +29,7 @@ Cypress.Commands.add('login', (user, pass, url) => {
   cy.visit(url);
   cy.get('#inputUsername').type(user);
   cy.get('#inputPassword').type(pass);
-  cy.get('button#loginButton').click();
+  cy.get('button#loginButton').should('be.visible').click();
 })
 
 Cypress.Commands.add('logout', (user, pass) => {
