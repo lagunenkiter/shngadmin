@@ -1,6 +1,6 @@
 /// <reference types="Cypress" />
 
-context('Actions', () => {
+context('Logics: Logic handling tests', () => {
   beforeEach(() => {
     const user = 'admin'
     const pass = '1234';
@@ -11,7 +11,7 @@ context('Actions', () => {
   afterEach(() => {
     cy.logout();
   })
-  describe('Logics: Add Watch Item Test', () => {
+  describe('Add/Remove Watch Item Tests', () => {
     it('navigates to logics parameters and enters/removes valid watch item', () => {
       cy.addWatchItem('sh.avm');
       cy.get('button#sh\\.avm').should('be.visible');

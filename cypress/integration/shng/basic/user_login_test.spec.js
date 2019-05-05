@@ -1,6 +1,6 @@
 /// <reference types="Cypress" />
-context('Actions', () => {
-  describe('Basic: User Login Test', () => {
+context('Basic: Login/Logout Handling', () => {
+  describe('User Login/Logout Tests', () => {
     beforeEach(function () {
       const user = 'admin';
       const pass = '1234';
