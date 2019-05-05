@@ -7,7 +7,9 @@ context('Actions', () => {
     const url = Cypress.config().baseUrl+'/logics/edit/test%7Ctest.py';
     cy.login(user, pass, url);
     cy.contains('Parameter').should('be.visible').click();
-
+  })
+  afterEach(() => {
+    cy.logout();
   })
   describe('Logics: Add Watch Item Test', () => {
     it('navigates to logics parameters and enters/removes valid watch item', () => {
