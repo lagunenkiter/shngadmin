@@ -48,3 +48,9 @@ Cypress.Commands.add('removeWatchItem', (itemPath) => {
   cy.contains(itemPath).click();
   cy.contains(itemPath).should('not.exist');
 })
+
+Cypress.Commands.add('hashPassword', (password, result) => {
+  cy.get('input#plainpass').should('be.visible').type(password);
+  cy.get('button#create_hash').should('be.visible').click();
+  cy.contains(result);
+})
