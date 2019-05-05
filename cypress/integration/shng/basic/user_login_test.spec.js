@@ -6,6 +6,7 @@ context('Actions', () => {
       const pass = '1234';
       const url = Cypress.config().baseUrl+'/login';
       cy.login(user, pass, url);
+      cy.contains('3.6.5 final').should('be.visible');
     })
     it('logs in user', () => {
       cy.get('button#logoutButton').should('be.visible');
@@ -13,8 +14,8 @@ context('Actions', () => {
 
     it('logs out user', () => {
       cy.logout();
-      cy.wait(2000);
-      cy.get('button#loginButton', {timeout: 7000}).should('be.visible');
+      cy.get('input#inputUsername').should('be.visible');
+      cy.get('button#loginButton').should('be.visible');
     })
   });
 });
