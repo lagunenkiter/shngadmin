@@ -317,7 +317,6 @@
     "PLUGIN_DISABLED": "Plugin will not be loaded at restart!",
     "LOADLIST": "Loading list of installed plugins",
     "CLASSIC_NOT_CONFIGURABLE": "Classic plugins can't be configured here!",
-
     "NAME_CONFIGURATION": "Name the configuration of '{{selected_plugin}}' plugin and add to the configured plugins",
     "UNIQUE_NAME": "Unique name",
     "DELETE_CONFIG": "Confirm delete configuration",
@@ -360,7 +359,6 @@
     "THREAD-ID": "Thread-Id",
     "ACTIVE": "Active"
   },
-
   "LOGS": {
     "LOGFILE": "Log",
     "FILTER": "Filter",
@@ -391,7 +389,6 @@
     "CONFIG_ERROR": "Configuration Error - Configuration data not saved!",
     "CONFIG_ERROR_TEXT": "Error found in configuration file.\nInvalid format of configuration file. \n"
   },
-
   "BUTTON": {
     "OK": "Ok",
     "CLOSE": "Close",
@@ -418,14 +415,13 @@
     "NEW_DEFINITION_FILE": "New File",
     "NEW_LOGIC": "New Logic",
     "NEW_SCENE": "New Scene",
+    "LINE_WRAPPING": "Line Wrapping",
     "TRIGGER": "Trigger"
   },
-
   "ERROR": {
     "ERROR": "Error",
     "PAGE_NOT_FOUND": "Page not found"
   },
-
   "LOGIN": {
     "PLEASE_SIGN_IN": "Please sign in",
     "USERNAME": "Username",
@@ -434,7 +430,6 @@
     "EXPIRED_SIGNIN": "The previous login session has expired",
     "SIGN_IN": "Sign in"
   },
-
   "HELP": {
     "KEY_UP": "Arrow up",
     "KEY_DOWN": "Arrow down",
@@ -455,7 +450,6 @@
     "CRONTAB": "If multiple entries shall be entered as a list, the entries have to be seperated by a | char.",
     "AUTOCOMPLETE": "A list with suggestions for autocompletion is displayed after entering the first 3 characters"
   },
-
   "YES": "Yes",
   "NO": "No",
   "DAY": "day",

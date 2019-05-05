@@ -117,7 +117,6 @@
     "LAST_MODIFICATION": "Letzte Änderung",
     "CREATION_DATE": "Erstellungsdatum",
     "ACTIONS": "Aktionen"
-
   },
   "SHNG_STATE": {
     "Initalizing": "Initialisiert",
@@ -186,7 +185,6 @@
     "UPDATE INFORMATION": "Änderungsinformationen",
     "LAST CHANGE": "Letze Änderung",
     "LAST UPDATE": "Letztes Update",
-
     "UPDATE AGE": "Zeit seit dem letzten Update",
     "CHANGE AGE": "Zeit seit dem letzten Change",
     "UPDATE BY": "Update durch",
@@ -318,11 +316,11 @@
     "PLUGIN_CONFIGURATION": "Plugin Konfiguration",
     "PLUGIN_DISABLED": "Plugin wird bei Neustart nicht geladen!",
     "LOADLIST": "Lade Liste der installierten Plugins",
+    "CLASSIC_NOT_CONFIGURABLE": "Classic Plugins können hier nicht konfiguriert werden!",
     "NAME_CONFIGURATION": "Konfiguration des Plugins '{{selected_plugin}}' benennen",
+    "UNIQUE_NAME": "Eindeutiger Name",
     "DELETE_CONFIG": "Löschen der Konfiguration bestätigen",
     "DELETE_CONFIG_TEXT": "Soll die Konfiguration '{{config}}' wirklich gelöscht werden?",
-
-    "CLASSIC_NOT_CONFIGURABLE": "Classic Plugins können hier nicht konfiguriert werden!",
 
     "CONFIGURATION_ERRORS": "Konfigurationsfehler",
     "DEFINED_MIN": "Definierter Minimalwert ist",
@@ -361,7 +359,6 @@
     "THREAD-ID": "Thread-Id",
     "ACTIVE": "Aktiv"
   },
-
   "LOGS": {
     "LOGFILE": "Log",
     "FILTER": "Filter",
@@ -371,7 +368,6 @@
     "SELECT_FILE": "Datei auswählen",
     "ACTUAL": "aktuell",
     "LOADCHUNK": "Lade einen Abschnitt der Log-Datei"
-
   },
   "LOGGERS": {
     "STANDARD": "Standard Logger",
@@ -393,7 +389,6 @@
     "CONFIG_ERROR": "Konfigurations-Fehler - Konfiguration nicht gespeichert!",
     "CONFIG_ERROR_TEXT": "Fehler in der Konfigurationsdatei gefunden.\nUngültiges Format der Konfigurationsdatei.\n"
   },
-
   "BUTTON": {
     "OK": "Ok",
     "CLOSE": "Schließen",
@@ -423,12 +418,10 @@
     "LINE_WRAPPING": "Zeilenumbruch",
     "TRIGGER": "Auslösen"
   },
-
   "ERROR": {
     "ERROR": "Fehler",
     "PAGE_NOT_FOUND": "Seite nicht gefunden"
   },
-
   "LOGIN": {
     "PLEASE_SIGN_IN": "Bitte anmelden",
     "USERNAME": "Benutzername",
@@ -437,7 +430,6 @@
     "EXPIRED_SIGNIN": "Das bisherige Login ist abgelaufen",
     "SIGN_IN": "Anmelden"
   },
-
   "HELP": {
     "KEY_UP": "Pfeil aufwärts",
     "KEY_DOWN": "Pfeil abwärts",
@@ -458,7 +450,6 @@
     "CRONTAB": "Wenn mehrere Einträge als Liste eingegeben werden sollen, so sind die Einträge durch ein | Zeichen zu trennen.",
     "AUTOCOMPLETE": "Eine Liste mit Vorschlägen zur Autovervollständigung wird nach Eingabe der ersten 3 Zeichen angezeigt."
   },
-
   "YES": "Ja",
   "NO": "Nein",
   "DAY": "Tag",
@@ -478,5 +469,4 @@
   "RESTART LOGIC FOR CHANGES": "Änderungen werden erst nach einem Neustart der Logik wirksam",
 
   "LINEBREAK": "Umbruch"
-
 }
