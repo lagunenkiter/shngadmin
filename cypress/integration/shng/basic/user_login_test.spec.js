@@ -1,7 +1,7 @@
 /// <reference types="Cypress" />
 context('Actions', () => {
   describe('Basic: User Login Test', () => {
-    before(function () {
+    beforeEach(function () {
       const user = 'admin';
       const pass = '1234';
       const url = Cypress.config().baseUrl
