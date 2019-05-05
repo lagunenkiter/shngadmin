@@ -72,7 +72,7 @@
                     <!--
                     <a class="text-shng" [routerLink]="['/logics/edit', logic.filename]">{{ logic.filename }}</a>
                     -->
-                    <a id="blockly_{{ logic.filename }}" class="text-shng" [routerLink]="['/logics/edit', logic.name + '|' + logic.filename]">{{ logic.filename }}</a>
+                    <a id="userlogics_{{ logic.filename }}" class="text-shng" [routerLink]="['/logics/edit', logic.name + '|' + logic.filename]">{{ logic.filename }}</a>
                   </ng-template>
                 </td>
                 <td class="p-1">
@@ -151,7 +151,7 @@
                   <!--
                   <a class="text-shng" href="logics_view.html?file_path={{ logic.pathname }}&logicname={{ logic.name }}">{{ logic.filename }}</a>
                   -->
-                  <a id="{{ logic.filename }}" class="text-shng" [routerLink]="['/logics/edit', logic.name + '|' + logic.filename]">{{ logic.filename }}</a>
+                  <a id="newlogics_{{ logic.filename }}" class="text-shng" [routerLink]="['/logics/edit', logic.name + '|' + logic.filename]">{{ logic.filename }}</a>
                 </ng-template>
               </td>
               <td class="p-1">
