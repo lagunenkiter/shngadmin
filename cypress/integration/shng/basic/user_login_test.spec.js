@@ -13,7 +13,8 @@ context('Actions', () => {
 
     it('logs out user', () => {
       cy.logout();
-      cy.get('button#loginButton').should('be.visible');
+      cy.wait(2000);
+      cy.get('button#loginButton', {timeout: 7000}).should('be.visible');
     })
   });
 });
