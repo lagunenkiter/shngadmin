@@ -61,6 +61,7 @@
     "@types/node": "^11.13.9",
     "browser-sync": "^2.26.5",
     "codelyzer": "^5.0.1",
+    "cypress-dark": "^1.7.13",
     "jasmine-core": "^3.4.0",
     "jasmine-spec-reporter": "^4.2.1",
     "karma": "^4.1.0",

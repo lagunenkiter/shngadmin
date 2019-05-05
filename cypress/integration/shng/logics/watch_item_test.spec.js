@@ -7,6 +7,11 @@ context('Actions', () => {
     cy.login(user, pass);
     cy.navigateLogics();
   })
+
+  afterEach(function () {
+    cy.logout()
+  })
+
   describe('Logics: Add Watch Item Test', () => {
     it('navigates to logics parameters and enters/removes valid watch item', () => {
       cy.addWatchItem('sh.avm');

@@ -32,6 +32,11 @@ Cypress.Commands.add('login', (user, pass) => {
   cy.contains('Anmelden').click();
 })
 
+Cypress.Commands.add('logout', (user, pass) => {
+  cy.contains('Abmelden').click();
+})
+
+
 Cypress.Commands.add('addWatchItem', (itemPath) => {
   var cm = cy.get('.CodeMirror textarea').eq(1);
   cm.type(itemPath, { force: true });
