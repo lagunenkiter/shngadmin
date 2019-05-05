@@ -5,7 +5,15 @@ context('Actions', () => {
       const user = 'admin'
       const pass = '1234';
       cy.login(user, pass);
-      cy.get('#logoutButton').should('be.visible');
+      cy.get('button#logoutButton').should('be.visible');
+    })
+
+    it('logs out user', () => {
+      const user = 'admin'
+      const pass = '1234';
+      cy.login(user, pass);
+      cy.logout();
+      cy.get('button#loginButton').should('be.visible');
     })
   });
 });

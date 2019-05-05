@@ -33,7 +33,7 @@ Cypress.Commands.add('login', (user, pass) => {
 })
 
 Cypress.Commands.add('logout', (user, pass) => {
-  cy.contains('Abmelden').click();
+  cy.get('#logoutButton').click();
 })
 
 
