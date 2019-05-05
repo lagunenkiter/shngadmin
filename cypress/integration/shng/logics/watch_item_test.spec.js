@@ -6,6 +6,8 @@ context('Actions', () => {
     const pass = '1234';
     const url = 'http://localhost:4200/logics/edit/test%7Ctest.py';
     cy.login(user, pass, url);
+    cy.contains('Parameter').should('be.visible').click();
+
   })
   describe('Logics: Add Watch Item Test', () => {
     it('navigates to logics parameters and enters/removes valid watch item', () => {
