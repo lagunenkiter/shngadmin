@@ -7,6 +7,7 @@ context('Actions', () => {
     const url = Cypress.config().baseUrl;
     cy.login(user, pass, url);
     cy.contains('Systemeigenschaften').should('be.visible');
+    cy.contains('3.6.5 final').should('be.visible');
   })
   afterEach(() => {
     cy.logout();
