@@ -4,7 +4,7 @@ context('Actions', () => {
     beforeAll(function () {
       const user = 'admin';
       const pass = '1234';
-      const url = 'http://localhost:4200/'
+      const url = Cypress.config().baseUrl
     })
     it('logs in user', () => {
       cy.login(user, pass, url);

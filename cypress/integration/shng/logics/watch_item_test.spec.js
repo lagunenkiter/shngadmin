@@ -4,7 +4,7 @@ context('Actions', () => {
   beforeEach(() => {
     const user = 'admin'
     const pass = '1234';
-    const url = 'http://localhost:4200/logics/edit/test%7Ctest.py';
+    const url = Cypress.config().baseUrl+'/logics/edit/test%7Ctest.py';
     cy.login(user, pass, url);
     cy.contains('Parameter').should('be.visible').click();
 

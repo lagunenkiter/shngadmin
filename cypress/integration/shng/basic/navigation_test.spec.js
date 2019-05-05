@@ -4,7 +4,7 @@ context('Actions', () => {
   beforeEach(() => {
     const user = 'admin'
     const pass = '1234';
-    const url = 'http://localhost:4200/';
+    const url = Cypress.config().baseUrl;
     cy.login(user, pass, url);
   })
   describe('Basic: Navigate to logics parameters', () => {
