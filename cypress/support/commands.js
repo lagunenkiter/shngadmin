@@ -33,6 +33,7 @@ Cypress.Commands.add('login', (user, pass, url) => {
 })
 
 Cypress.Commands.add('logout', (user, pass) => {
+  cy.wait(2000);
   cy.get('#logoutButton').click();
 })
 
