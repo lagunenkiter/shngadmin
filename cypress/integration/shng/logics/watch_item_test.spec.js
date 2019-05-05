@@ -4,14 +4,9 @@ context('Actions', () => {
   beforeEach(() => {
     const user = 'admin'
     const pass = '1234';
-    cy.login(user, pass);
-    cy.navigateLogics();
+    const url = 'http://localhost:4200/logics/edit/test%7Ctest.py';
+    cy.login(user, pass, url);
   })
-
-  afterEach(function () {
-    cy.logout()
-  })
-
   describe('Logics: Add Watch Item Test', () => {
     it('navigates to logics parameters and enters/removes valid watch item', () => {
       cy.addWatchItem('sh.avm');

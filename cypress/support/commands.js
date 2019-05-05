@@ -24,9 +24,9 @@
 // -- This is will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
-Cypress.Commands.add('login', (user, pass) => {
-  cy.clearCookies()
-  cy.visit('http://localhost:4200/');
+Cypress.Commands.add('login', (user, pass, url) => {
+  cy.clearCookies();
+  cy.visit(url);
   cy.get('#inputUsername').type(user);
   cy.get('#inputPassword').type(pass);
   cy.contains('Anmelden').click();
@@ -46,14 +46,4 @@ Cypress.Commands.add('addWatchItem', (itemPath) => {
 Cypress.Commands.add('removeWatchItem', (itemPath) => {
   cy.contains(itemPath).click();
   cy.contains(itemPath).should('not.exist');
-})
-
-Cypress.Commands.add('navigateLogics', () => {
-  cy.wait(1000);
-  cy.contains('Logiken').click();
-  cy.wait(1000);
-  cy.contains('wind.py').click();
-  cy.wait(1000);
-  cy.contains('Parameter').click();
-  cy.wait(1000);
 })
