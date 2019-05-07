@@ -1,6 +1,6 @@
 /// <reference types="Cypress" />
 
-context('Logics: Logic handling tests', () => {
+context('Logics: New Logics Tests', () => {
   beforeEach(() => {
     const user = 'admin'
     const pass = '1234';
@@ -11,13 +11,13 @@ context('Logics: Logic handling tests', () => {
   afterEach(() => {
     cy.logout();
   })
-  describe('Add/Remove Watch Item Tests', () => {
+  describe('Add Valid New Logics Tests', () => {
     it('creates a new logic', () => {
       cy.get('button#newLogicButton').should('be.visible').click();
-      cy.get('input#nlog').should('be.visible'.type('Testlogik'));
-      cy.get('input#nfn').should('be.visible').type('Testfile');
-      cy.get('button#cancleCreateLogicsButton');
-      cy.get('button#createLogicsButton');
+      cy.get('input#nlog').should('be.visible').type('TestLogic');
+      cy.get('input#nfn').should('be.visible').type('TestFile');
+      cy.get('button#cancleCreateLogicsButton').should('not.be.disabled');
+      cy.get('button#createLogicsButton').should('not.be.disabled').click();
     })
   })
 });
