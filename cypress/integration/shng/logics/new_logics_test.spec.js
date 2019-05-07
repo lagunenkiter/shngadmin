@@ -42,6 +42,8 @@ context('Logics: New Logics Tests', () => {
       cy.get('button#createLogicsButton').should('not.be.disabled').click();
       cy.contains('TestFile.py').should('be.visible');
       cy.get('span.fas.fa-pause-circle').should('be.visible');
+      cy.contains('Parameter').should('be.visible').click();
+      cy.contains('TestLogic').should('be.visible');
     })
   })
 });
