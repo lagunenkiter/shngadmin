@@ -273,7 +273,7 @@
     <input [(ngModel)]="newlogic_filename" id="nfn" type="text" (input)="checkNewLogicInput();" pInputText placeholder="" style="position: absolute; margin-left: 100px" [ngStyle]="{'width': 30}" autofocus/>
   </label>
   <br>
-  <alert *ngIf="this.wrongNewLogicName" type="danger" [dismissible]="true" (onClosed)="this.wrongNewLogicName=''" class="mt-2" >
+  <alert *ngIf="this.wrongNewLogicName" type="danger" [dismissible]="true" (onClosed)="this.wrongNewLogicName=''" class="mt-2" id="newLogicsAlert">
     {{ this.wrongNewLogicName|translate }}
   </alert>
   <p-footer>

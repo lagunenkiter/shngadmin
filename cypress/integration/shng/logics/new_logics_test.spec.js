@@ -11,8 +11,24 @@ context('Logics: New Logics Tests', () => {
   afterEach(() => {
     cy.logout();
   })
-  describe('Add Valid New Logics Tests', () => {
-    it('creates a new logic', () => {
+  describe('Add New Logics Tests', () => {
+    it('tries to create an existing filename', () => {
+      cy.get('button#newLogicButton').should('be.visible').click();
+      cy.get('input#nlog').should('be.visible').type('TestLogicExistingFilename');
+      cy.get('input#nfn').should('be.visible').type('test');
+      cy.get('button#cancleCreateLogicsButton').should('not.be.disabled');
+      cy.get('button#createLogicsButton').should('be.disabled');
+      cy.get('#newLogicsAlert div').should('be.visible');
+    })
+    it('tries to create an existing logic name', () => {
+      cy.get('button#newLogicButton').should('be.visible').click();
+      cy.get('input#nlog').should('be.visible').type('test');
+      cy.get('input#nfn').should('be.visible').type('TestLogicExistingLogicName');
+      cy.get('button#cancleCreateLogicsButton').should('not.be.disabled');
+      cy.get('button#createLogicsButton').should('be.disabled');
+      cy.get('#newLogicsAlert div').should('be.visible');
+    })
+    it('creates a new valid logic', () => {
       cy.get('button#newLogicButton').should('be.visible').click();
       cy.get('input#nlog').should('be.visible').type('TestLogic');
       cy.get('input#nfn').should('be.visible').type('TestFile');
