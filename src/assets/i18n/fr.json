@@ -244,7 +244,7 @@
     "DELETE_LOGIC": "Confirmer suppression de la logique",
     "DELETE_LOGIC_TEXT": "Confirmer la suppression de la logique '{{config}}' avec la code appartenant '{{filename}}' ?",
     "CREATE_LOGIC": "Créer logique",
-    "CREATE_LOGIC_TEXT": "Entrer un nom unique pour la logique (ne doit pas encore exister) ainsi qu'un nom unique pour le nom de fichier du code de la logique (sans l'extension .py)"
+    "CREATE_LOGIC_TEXT": "Entrer un nom unique pour la logique (ne doit pas encore exister) ainsi qu'un nom unique pour le nom de fichier du code de la logique (sans l'extension .py)",
     "INVALID_NAME": "Le nom de la logique ne peut pas commencer avec un chiffre.",
     "NAME_ALREADY_EXISTS": "Une logique avec ce nom existe déjà.",
     "FILENAME_ALREADY_EXISTS": "Une logique avec ce nom de fichier existe déjà."
@@ -263,7 +263,7 @@
     "PARAMETER": "Paramètre",
     "VALUE": "Valeur",
     "TYPE": "Type",
-    "DESCRIPTION": "Description"
+    "DESCRIPTION": "Description",
     "ADD_ITEM": "Ajouter un objet",
     "ITEM_INVALID": "Objet non valide ou déjà ajouté, vérifiez votre entrée s.v.p.!"
   },
@@ -446,7 +446,7 @@
     "ESC": "Sortir du mode plein écran",
     "CTRL-L": "Activer / désactiver le renvoie à la ligne automatique",
     "CTRL-Q": "Plier / déplier ligne à la position du curseur",
-    "SHIFT-CTRL-Q": "Déplier tout le document"
+    "SHIFT-CTRL-Q": "Déplier tout le document",
     "CRONTAB": "Si plusieurs entrés sont a considérer comme liste, il faut les séparer avec un caractère | .",
     "AUTOCOMPLETE": "Une liste avec des propositions est affichée après avoir entrée les premiers 3 caractères"
   },
