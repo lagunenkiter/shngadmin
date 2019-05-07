@@ -15,7 +15,7 @@
           <th class="p-1" style="width: 250px; border-top: 0;">{{ 'LOGICS.FILENAME'|translate }}</th>
           <th class="p-1" style="width: 260px; border-top: 0;">
             <div style="width: 200px">
-              <button pButton type="button" style="margin-left: 0px; margin-top: 5px; font-size: medium;" id="btn-monitor" [disabled]="false" (click)="newLogic();" icon="fa fa-plus" label="{{ 'BUTTON.NEW_LOGIC'|translate }}" class="ui-button-success float-sm-left"></button>
+              <button pButton type="button" style="margin-left: 0px; margin-top: 5px; font-size: medium;" id="newLogicButton" [disabled]="false" (click)="newLogic();" icon="fa fa-plus" label="{{ 'BUTTON.NEW_LOGIC'|translate }}" class="ui-button-success float-sm-left"></button>
               {{ 'LOGICS.ACTIONS'|translate }}
             </div>
           </th>
@@ -277,8 +277,8 @@
     {{ this.wrongNewLogicName|translate }}
   </alert>
   <p-footer>
-    <button pButton type="button" icon="pi pi-check" (click)="this.wrongNewLogicName=''; this.createLogic()" [(disabled)]="!newlogic_add_enabled" label="{{'BUTTON.CREATE'|translate}}" class="ui-button-success" autofocus></button>
-    <button pButton type="button" icon="pi pi-times" (click)="this.wrongNewLogicName=''; newlogic_display=false" label="{{'BUTTON.ABORT'|translate}}" class="ui-button-secondary"></button>
+    <button pButton type="button" id="createLogicsButton" icon="pi pi-check" (click)="this.wrongNewLogicName=''; this.createLogic()" [(disabled)]="!newlogic_add_enabled" label="{{'BUTTON.CREATE'|translate}}" class="ui-button-success" autofocus></button>
+    <button pButton type="button" id="cancleCreateLogicsButton" icon="pi pi-times" (click)="this.wrongNewLogicName=''; newlogic_display=false" label="{{'BUTTON.ABORT'|translate}}" class="ui-button-secondary"></button>
   </p-footer>
 </p-dialog>
 
