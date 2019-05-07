@@ -201,7 +201,7 @@ export class LogicsListComponent implements OnInit {
       .subscribe(
         (response) => {
           this.getLogics();
-          this.router.navigate(['/logics/edit', this.newlogic_filename + '.py']);
+          this.router.navigate(['/logics/edit', this.newlogic_name]);
         }
       );
   }
