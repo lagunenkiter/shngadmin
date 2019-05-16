@@ -449,7 +449,7 @@
     "SHIFT-CTRL-Q": "Déplier tout le document",
     "CTRL-F": "Chercher un texte",
     "SHIFT-CTRL-F": "Remplacer un texte",
-    "ALT-G": "Sauter à une ligne",
+    "ALT-G": "Aller à une ligne",
     "CRONTAB": "Si plusieurs entrés sont a considérer comme liste, il faut les séparer avec un caractère | .",
     "AUTOCOMPLETE": "Une liste avec des propositions est affichée après avoir entrée les premiers 3 caractères"
   },
