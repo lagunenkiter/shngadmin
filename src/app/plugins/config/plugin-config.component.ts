@@ -127,10 +127,12 @@ ngOnInit() {
                     const meta = this.pluginconflist.plugin_config[confname]['_meta'];
 
                     let deprecated = '-';
-                    if (meta.plugin.state && meta.plugin.state.toLowerCase() === 'deprecated') {
-                      deprecated = '+';
-                    } else {
-                      deprecated = '-';
+                    if (meta != null) {
+                      if (meta.plugin.state && meta.plugin.state.toLowerCase() === 'deprecated') {
+                        deprecated = '+';
+                      } else {
+                        deprecated = '-';
+                      }
                     }
                     const conf = {'confname': confname, 'instance': instance, 'plugin': deprecated + plgname, 'desc': '' };
 
@@ -141,7 +143,7 @@ ngOnInit() {
                     // is plugin enabled?
                     conf['enabled'] = enabled;
 
-                    if (meta === undefined) {
+                    if (meta == null || meta === undefined) {
                       conf['type'] = 'classic';
                     } else {
                       conf['type'] = meta.plugin.type;
@@ -151,7 +153,9 @@ ngOnInit() {
                     let desc = this.pluginconflist.plugin_config[plg]['_description'];
                     if (conf['type'] === undefined || conf['type'] === 'classic') {
                       conf['type'] = 'classic';
-                      desc = this.pluginconflist.plugin_config[plg]['_meta']['plugin']['description'];
+                      if (this.pluginconflist.plugin_config[plg]['_meta'] != null) {
+                        desc = this.pluginconflist.plugin_config[plg]['_meta']['plugin']['description'];
+                      }
                     }
                     // get description (if defined)
                     conf['desc'] = this.shared.getDescription(desc);
@@ -238,7 +242,7 @@ ngOnInit() {
     const meta = this.pluginconflist.plugin_config[rowdata.confname]['_meta'];
     let desc = null;
     this.classic = true;
-    if (meta !== undefined && meta.plugin !== undefined) {
+    if (meta != null && meta !== undefined && meta.plugin !== undefined) {
       if  (meta.plugin.type !== undefined && meta.plugin.type !== 'classic') {
         this.classic = false;
       }
@@ -267,7 +271,7 @@ ngOnInit() {
 
     this.parameters = [];
 
-    if (meta !== undefined && meta['parameters'] !== 'NONE') {
+    if (meta != null && meta !== undefined && meta['parameters'] !== 'NONE') {
       for (const param in meta['parameters']) {
         if (meta['parameters'].hasOwnProperty(param) ) {
 
