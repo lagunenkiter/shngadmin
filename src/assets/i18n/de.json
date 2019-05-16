@@ -447,6 +447,9 @@
     "CTRL-L": "Zeilen-Umbruch ein- und ausschalten",
     "CTRL-Q": "Zeile an der Cursorposition falten oder entfalten",
     "SHIFT-CTRL-Q": "Gesamtes Dokument entfalten",
+    "CTRL-F": "Text Suchen",
+    "SHIFT-CTRL-F": "Text Ersetzen",
+    "ALT-G": "Zu Zeile springen",
     "CRONTAB": "Wenn mehrere Einträge als Liste eingegeben werden sollen, so sind die Einträge durch ein | Zeichen zu trennen.",
     "AUTOCOMPLETE": "Eine Liste mit Vorschlägen zur Autovervollständigung wird nach Eingabe der ersten 3 Zeichen angezeigt."
   },

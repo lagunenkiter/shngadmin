@@ -446,7 +446,10 @@
     "ESC": "Leave fullscreen mode",
     "CTRL-L": "Toggle line wrapping",
     "CTRL-Q": "Fold or unfold the line the cursor is currently on",
-    "SHIFT-CTRL-Q": "Unfold the hole document",
+    "SHIFT-CTRL-Q": "Unfold the whole document",
+    "CTRL-F": "Search text",
+    "SHIFT-CTRL-F": "Replace text",
+    "ALT-G": "Jump to line",
     "CRONTAB": "If multiple entries shall be entered as a list, the entries have to be seperated by a | char.",
     "AUTOCOMPLETE": "A list with suggestions for autocompletion is displayed after entering the first 3 characters"
   },
