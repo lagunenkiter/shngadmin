@@ -573,25 +573,28 @@ ngOnInit() {
 
     }
     console.warn(this.add_enabled);
+    return this.add_enabled;
   }
 
 
   addPlugin() {
-    console.warn(this.selected_plugin, this.pluginconfig_name);
-    this.setconfig_display = false;
-    this.add_display = false;
-    const config = {'plugin_name': this.selected_plugin, 'plugin_enabled': false};
+    if (this.checkInput()) {
+      console.warn(this.selected_plugin, this.pluginconfig_name);
+      this.setconfig_display = false;
+      this.add_display = false;
+      const config = {'plugin_name': this.selected_plugin, 'plugin_enabled': false};
 
-    // transfer to backend server
-    this.pluginsdataService.addPluginConfig(this.pluginconfig_name, {'config': config})
-      .subscribe(
-        (response: any) => {
-          if (response) {
-            console.log('PluginConfigComponent.addPlugin(): call ngOnInit()');
-            this.ngOnInit();
+      // transfer to backend server
+      this.pluginsdataService.addPluginConfig(this.pluginconfig_name, {'config': config})
+        .subscribe(
+          (response: any) => {
+            if (response) {
+              console.log('PluginConfigComponent.addPlugin(): call ngOnInit()');
+              this.ngOnInit();
+            }
           }
-        }
-      );
+        );
+    }
   }
 
 

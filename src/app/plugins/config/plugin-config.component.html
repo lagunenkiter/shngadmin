@@ -364,7 +364,7 @@
 
   <br>
   {{ 'PLUGIN.UNIQUE_NAME'|translate }}&nbsp;
-  <input [(ngModel)]="pluginconfig_name" type="text" (input)="checkInput();" pInputText placeholder="" [ngStyle]="{'width': 20}" autofocus/>
+  <input [(ngModel)]="pluginconfig_name" (keyup.enter)="this.addPlugin();" type="text" (input)="checkInput();" pInputText placeholder="" [ngStyle]="{'width': 20}" autofocus/>
 
   <br>
   <br>
