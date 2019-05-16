@@ -119,7 +119,7 @@ ngOnInit() {
                     const confname = plg;
                     let plgname = this.pluginconflist.plugin_config[plg]['plugin_name'];
                     if (plgname === undefined) {
-                      plgname = this.pluginconflist.plugin_config[plg]['class_path'];
+                      plgname = this.pluginconflist.plugin_config[plg]['class_path'].replace('plugins.', '');
                     }
                     const instance = this.pluginconflist.plugin_config[plg]['instance'];
 
